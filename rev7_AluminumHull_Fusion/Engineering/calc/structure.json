@@ -1,0 +1,1672 @@
+{
+ "loads": {
+  "thrust": 430.0,
+  "thrust_design": 537.5,
+  "torque_peak_lbft": 83.0,
+  "belt_Te": 662.3105632298002,
+  "belt_hub": 993.4658448447003,
+  "prop_rpm": 2600.0,
+  "gyro_lbin": 2695.486496780043,
+  "yaw_rate": 1.5,
+  "I_prop": 0.55,
+  "nz": 3.0,
+  "ny": 1.0,
+  "v_slip_static": 80.85736367299788,
+  "v_slip_speed": 97.55278903985902,
+  "q_rudder": 11.310415692877552,
+  "rudder_N": 69.46480304708963,
+  "hinge_M": 320.92739007755404,
+  "rod_F": 160.46369503877705,
+  "mesh_aft": 93.20550286728812,
+  "mesh_fwd": 71.1864008912356,
+  "mesh_K": 0.23928885703547914
+ },
+ "req": {
+  "member": 1.65,
+  "conn": 2.0
+ },
+ "materials": {
+  "al6061": {
+   "name": "6061-T6",
+   "E": 10100000.0,
+   "Fy": 35000,
+   "Fu": 38000,
+   "Fyw": 15000,
+   "Fuw": 24000
+  },
+  "al5052": {
+   "name": "5052-H32",
+   "E": 10200000.0,
+   "Fy": 23000,
+   "Fu": 31000,
+   "Fyw": 9500,
+   "Fuw": 25000
+  },
+  "steel": {
+   "name": "steel tube (A513 Type 1 min.)",
+   "E": 29000000.0,
+   "Fy": 32000,
+   "Fu": 45000,
+   "Fyw": 32000,
+   "Fuw": 45000
+  },
+  "emt": {
+   "name": "EMT (ANSI C80.3, assumed 30 ksi)",
+   "E": 29000000.0,
+   "Fy": 30000,
+   "Fu": 42000,
+   "Fyw": 30000,
+   "Fuw": 42000
+  }
+ },
+ "tower": {
+  "checks": [
+   {
+    "item": "A-frame legs (aft), worst end (welded, pinned feet)",
+    "demand": 1764.1735629520363,
+    "capacity": 15000,
+    "fos": 8.502564778773875,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "T2 full power, hard turn (gyro -)"
+   },
+   {
+    "item": "A-frame legs (aft) buckling (K 1, L 38.6 in)",
+    "demand": 337.3307148488613,
+    "capacity": 25527.429516251443,
+    "fos": 75.6747855815289,
+    "req": 1.65,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "crossbar (aft), worst end (welded, pinned feet)",
+    "demand": 1696.562690565194,
+    "capacity": 15000,
+    "fos": 8.841406264217026,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "T2 full power, hard turn (gyro -)"
+   },
+   {
+    "item": "A-frame legs (fwd), worst end (welded, pinned feet)",
+    "demand": 3546.7669834337516,
+    "capacity": 15000,
+    "fos": 4.229203686078629,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "T2 full power, hard turn (gyro -)"
+   },
+   {
+    "item": "A-frame legs (fwd) buckling (K 1, L 38.6 in)",
+    "demand": 247.5849183878705,
+    "capacity": 25527.429516251443,
+    "fos": 103.10575330061003,
+    "req": 1.65,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "crossbar (fwd, tie struts), worst end (welded, pinned feet)",
+    "demand": 9821.891387153648,
+    "capacity": 15000,
+    "fos": 1.5272007609062912,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "T2 full power, hard turn (gyro -)"
+   },
+   {
+    "item": "Brace buckling (pinned, L 45.1 in, KL/r 80)",
+    "demand": 501.63665392993477,
+    "capacity": 10691.22694689392,
+    "fos": 21.312690895165723,
+    "req": 1.65,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Brace at the welded tongues (HAZ)",
+    "demand": 729.6533148071778,
+    "capacity": 15000,
+    "fos": 20.557708291867325,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "A-frame aft foot bolts (2 x 3/8 SS): T 259 lb, V 25 lb per bolt",
+    "demand": 259.28425043495065,
+    "capacity": 7750.0,
+    "fos": 29.398701504167068,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "A-frame fwd foot bolts (2 x 3/8 SS): T 696 lb, V 68 lb per bolt",
+    "demand": 696.4172656195994,
+    "capacity": 7750.0,
+    "fos": 10.93803911959952,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Brace foot bolts (2 x 3/8 SS): T 1 lb, V 140 lb per bolt",
+    "demand": 140.3493010011458,
+    "capacity": 4068.0,
+    "fos": 28.984594432666988,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Brace clevis bolt, 3/8 grade 8, double shear",
+    "demand": 501.63665392993477,
+    "capacity": 12204.0,
+    "fos": 24.328365769110192,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Brace tongue bearing, 1/4 in 6061 at the weld (HAZ)",
+    "demand": 501.63665392993477,
+    "capacity": 4500.0,
+    "fos": 8.970636345542106,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Tie strut, 1 x 1 x 1/8 (compression, short)",
+    "demand": 1135.3895369653717,
+    "capacity": 15000,
+    "fos": 13.211324846353138,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "Tie strut bolt, 5/16 (grade 2 assumed), double shear",
+    "demand": 496.73292242235016,
+    "capacity": 4031.5200000000004,
+    "fos": 8.116071671553463,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Tie strut tab bearing, 1/4 in 6061 at the weld (HAZ)",
+    "demand": 496.73292242235016,
+    "capacity": 3750.0,
+    "fos": 7.549328483630364,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Yoke pivot/slot bolts, 3 x 1/2 grade 8 per peak plate",
+    "demand": 367.6935963985897,
+    "capacity": 11313.0,
+    "fos": 30.767465386414848,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   }
+  ],
+  "groups": {
+   "A-frame legs (aft)": {
+    "sigma": 1764.1735629520363,
+    "case": "T2 full power, hard turn (gyro -)",
+    "feet": "pinned",
+    "Nmin": -337.3307148488613,
+    "Nmax": 118.37821044124838
+   },
+   "crossbar (aft)": {
+    "sigma": 1696.562690565194,
+    "case": "T2 full power, hard turn (gyro -)",
+    "feet": "pinned",
+    "Nmin": -0.17481256631981523,
+    "Nmax": 0.018186957498983247
+   },
+   "A-frame legs (fwd)": {
+    "sigma": 3546.7669834337516,
+    "case": "T2 full power, hard turn (gyro -)",
+    "feet": "pinned",
+    "Nmin": -247.5849183878705,
+    "Nmax": 660.1413811933663
+   },
+   "crossbar (fwd, tie struts)": {
+    "sigma": 9821.891387153648,
+    "case": "T2 full power, hard turn (gyro -)",
+    "feet": "pinned",
+    "Nmin": -63.441905647239764,
+    "Nmax": 0
+   },
+   "braces (clevis, axial)": {
+    "sigma": 729.6533148071778,
+    "case": "T1 full power, hard turn (gyro +)",
+    "feet": "pinned",
+    "Nmin": -501.63665392993477,
+    "Nmax": 1.6078799454589576
+   }
+  },
+  "feet": {
+   "foota": {
+    "uplift": 116.28659459036271,
+    "shear": 49.96952003705709,
+    "My": 238.5181765734908,
+    "Mx": 444.4107417036475,
+    "down": 334.7373873496896
+   },
+   "footf": {
+    "uplift": 654.2183748904097,
+    "shear": 136.98654773744508,
+    "My": 238.51813285425465,
+    "Mx": 948.9121459536809,
+    "down": 54.549598018838594
+   },
+   "bfoot": {
+    "uplift": 2.135365099719477,
+    "shear": 280.6986020022916,
+    "My": 0,
+    "Mx": 0,
+    "down": 415.74947672845036
+   }
+  },
+  "brace_N": [
+   -501.63665392993477,
+   1.6078799454589576
+  ],
+  "head_disp": 0.041553994502382334,
+  "fatigue_range": {
+   "A-frame legs (aft)": 189.6651947550357,
+   "crossbar (aft)": 1.9048420170854783,
+   "A-frame legs (fwd)": 1386.7627436227635,
+   "crossbar (fwd, tie struts)": 4064.1085752601202
+  },
+  "head_weight": 136.4,
+  "checks_fixed": [
+   {
+    "item": "crossbar (fwd) as 2 x 3 x 1/8, 3 in deep, worst end (welded, pinned feet)",
+    "demand": 2746.950459835192,
+    "capacity": 15000,
+    "fos": 5.46060084421761,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "T2 full power, hard turn (gyro -)"
+   }
+  ],
+  "fatigue_fixed": {
+   "A-frame legs (aft)": 189.22488721511525,
+   "crossbar (aft)": 1.894724288172023,
+   "A-frame legs (fwd)": 1056.7601710533322,
+   "crossbar (fwd, tie struts)": 880.1086739661848
+  }
+ },
+ "cage": {
+  "as drawn": {
+   "checks": [
+    {
+     "item": "hoops 1 x .049, operating (C2)",
+     "demand": 39285.421664140056,
+     "capacity": 32000,
+     "fos": 0.8145515217725097,
+     "req": 1.65,
+     "ok": false,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "longitudinals 3/4 EMT, operating (C2)",
+     "demand": 35980.059191751054,
+     "capacity": 30000,
+     "fos": 0.8337951819400545,
+     "req": 1.65,
+     "ok": false,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "front bars 1/2 EMT, operating (C2)",
+     "demand": 7800.537327131811,
+     "capacity": 30000,
+     "fos": 3.845888910197772,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "rudder rails 1 x .065, operating (C2)",
+     "demand": 25336.84710683477,
+     "capacity": 32000,
+     "fos": 1.2629827170314258,
+     "req": 1.65,
+     "ok": false,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "aft bars 1/2 EMT, operating (C2)",
+     "demand": 24437.202212498745,
+     "capacity": 30000,
+     "fos": 1.2276364429581095,
+     "req": 1.65,
+     "ok": false,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "legs 1 x .065, operating (C2)",
+     "demand": 52296.70145122179,
+     "capacity": 32000,
+     "fos": 0.6118932764783848,
+     "req": 1.65,
+     "ok": false,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "hoops 1 x .049, misuse (C6)",
+     "demand": 36429.23920397371,
+     "capacity": 32000,
+     "fos": 0.8784152702401051,
+     "req": 1.0,
+     "ok": false,
+     "unit": "psi",
+     "note": "C6 misuse: 250 lb on top of the forward hoop"
+    },
+    {
+     "item": "longitudinals 3/4 EMT, misuse (C6)",
+     "demand": 7312.393629089361,
+     "capacity": 30000,
+     "fos": 4.102623781173007,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C6 misuse: 250 lb on top of the forward hoop"
+    },
+    {
+     "item": "front bars 1/2 EMT, misuse (C6)",
+     "demand": 8580.604052240253,
+     "capacity": 30000,
+     "fos": 3.4962573517382496,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C6 misuse: 250 lb on top of the forward hoop"
+    },
+    {
+     "item": "rudder rails 1 x .065, misuse (C4)",
+     "demand": 6092.697616770281,
+     "capacity": 32000,
+     "fos": 5.252189097965295,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C4 misuse: 250 lb on top of the aft hoop"
+    },
+    {
+     "item": "aft bars 1/2 EMT, misuse (C5)",
+     "demand": 10208.586275204545,
+     "capacity": 30000,
+     "fos": 2.938702695089767,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+    },
+    {
+     "item": "legs 1 x .065, misuse (C5)",
+     "demand": 17425.860021658464,
+     "capacity": 32000,
+     "fos": 1.8363512595778604,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+    },
+    {
+     "item": "Cage legs buckling (K 1, L 20.6 in)",
+     "demand": 324.27315351662475,
+     "capacity": 5448.927459762651,
+     "fos": 16.80351086937358,
+     "req": 1.65,
+     "ok": true,
+     "unit": "lb",
+     "note": ""
+    },
+    {
+     "item": "Cage aft pad bolts (4 x 3/8 SS): T 427, V 43 lb per bolt",
+     "demand": 426.9253541994805,
+     "capacity": 7750.0,
+     "fos": 17.824178557994305,
+     "req": 2.0,
+     "ok": true,
+     "unit": "lb",
+     "note": ""
+    },
+    {
+     "item": "Cage fwd pad bolts (4 x 3/8 SS): T 428, V 39 lb per bolt",
+     "demand": 427.7758189472626,
+     "capacity": 7750.0,
+     "fos": 17.853656817517823,
+     "req": 2.0,
+     "ok": true,
+     "unit": "lb",
+     "note": ""
+    }
+   ],
+   "deflection": {
+    "C4 misuse: 250 lb on top of the aft hoop": 0.04667214726816083,
+    "C6 misuse: 250 lb on top of the forward hoop": 0.10671960468150046,
+    "C5 misuse: 150 lb push on the side of the aft hoop": 0.30128824186958414
+   },
+   "pads": {
+    "padA": {
+     "T": 426.9253541994805,
+     "V": 43.24668382302258,
+     "F": 330.1462942507803
+    },
+    "padF": {
+     "T": 427.7758189472626,
+     "V": 38.70573642412116,
+     "F": 246.23380270339754
+    }
+   },
+   "weight": 95.84724779809301
+  },
+  "with fixes": {
+   "checks": [
+    {
+     "item": "hoops 1 x .083 DOM (was .049; .083 for the G13B), operating (C2)",
+     "demand": 26799.64682530053,
+     "capacity": 50000,
+     "fos": 1.8656962282352503,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "longitudinals 1 x .065 DOM (was 3/4 EMT), operating (C3)",
+     "demand": 15734.066391083417,
+     "capacity": 50000,
+     "fos": 3.177818038719811,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C3 full rudder, hard turn (1 g lateral)"
+    },
+    {
+     "item": "front bars 1/2 EMT, operating (C2)",
+     "demand": 4779.353453530679,
+     "capacity": 30000,
+     "fos": 6.276999659407473,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "rudder rails 1 x .065, operating (C2)",
+     "demand": 7846.462389287784,
+     "capacity": 50000,
+     "fos": 6.372298434548216,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "aft bars 1 x .065 DOM (was 1/2 EMT), operating (C2)",
+     "demand": 6804.3915264875195,
+     "capacity": 50000,
+     "fos": 7.3481956182804185,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "legs 1 x .065, operating (C2)",
+     "demand": 13128.73316464923,
+     "capacity": 50000,
+     "fos": 3.808440568708587,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "side-bay diagonals 1 x .065 (new), operating (C2)",
+     "demand": 12120.422228110116,
+     "capacity": 50000,
+     "fos": 4.125268828014772,
+     "req": 1.65,
+     "ok": true,
+     "unit": "psi",
+     "note": "C2 opposite rudder, over chop (3 g)"
+    },
+    {
+     "item": "hoops 1 x .083 DOM (was .049; .083 for the G13B), misuse (C6)",
+     "demand": 24003.101705575267,
+     "capacity": 50000,
+     "fos": 2.083064122849855,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C6 misuse: 250 lb on top of the forward hoop"
+    },
+    {
+     "item": "longitudinals 1 x .065 DOM (was 3/4 EMT), misuse (C6)",
+     "demand": 5155.297671815291,
+     "capacity": 50000,
+     "fos": 9.698760999458237,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C6 misuse: 250 lb on top of the forward hoop"
+    },
+    {
+     "item": "front bars 1/2 EMT, misuse (C6)",
+     "demand": 6185.264540664763,
+     "capacity": 30000,
+     "fos": 4.850237173004688,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C6 misuse: 250 lb on top of the forward hoop"
+    },
+    {
+     "item": "rudder rails 1 x .065, misuse (C4)",
+     "demand": 5304.6407398218025,
+     "capacity": 50000,
+     "fos": 9.425709006955227,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C4 misuse: 250 lb on top of the aft hoop"
+    },
+    {
+     "item": "aft bars 1 x .065 DOM (was 1/2 EMT), misuse (C5)",
+     "demand": 6604.576786636228,
+     "capacity": 50000,
+     "fos": 7.570507788049424,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+    },
+    {
+     "item": "legs 1 x .065, misuse (C5)",
+     "demand": 12201.012836622924,
+     "capacity": 50000,
+     "fos": 4.098020440558714,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+    },
+    {
+     "item": "side-bay diagonals 1 x .065 (new), misuse (C5)",
+     "demand": 10107.027141111055,
+     "capacity": 50000,
+     "fos": 4.9470531049255255,
+     "req": 1.0,
+     "ok": true,
+     "unit": "psi",
+     "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+    },
+    {
+     "item": "Cage legs buckling (K 1, L 20.6 in)",
+     "demand": 305.79415327411067,
+     "capacity": 5448.927459762651,
+     "fos": 17.818939313984494,
+     "req": 1.65,
+     "ok": true,
+     "unit": "lb",
+     "note": ""
+    },
+    {
+     "item": "Cage aft pad bolts (4 x 3/8 SS): T 175, V 76 lb per bolt",
+     "demand": 175.37222279353168,
+     "capacity": 7750.0,
+     "fos": 34.01523725519219,
+     "req": 2.0,
+     "ok": true,
+     "unit": "lb",
+     "note": ""
+    },
+    {
+     "item": "Cage fwd pad bolts (4 x 3/8 SS): T 231, V 11 lb per bolt",
+     "demand": 230.98332465150344,
+     "capacity": 7750.0,
+     "fos": 33.42630957152869,
+     "req": 2.0,
+     "ok": true,
+     "unit": "lb",
+     "note": ""
+    }
+   ],
+   "deflection": {
+    "C4 misuse: 250 lb on top of the aft hoop": 0.02803167406830676,
+    "C6 misuse: 250 lb on top of the forward hoop": 0.07091286529843852,
+    "C5 misuse: 150 lb push on the side of the aft hoop": 0.18848175197666847
+   },
+   "pads": {
+    "padA": {
+     "T": 175.37222279353168,
+     "V": 76.34631257420799,
+     "F": 800.5164103072954
+    },
+    "padF": {
+     "T": 230.98332465150344,
+     "V": 10.532833522965408,
+     "F": 613.3377270661571
+    }
+   },
+   "weight": 115.35052837893159
+  },
+  "checks": [
+   {
+    "item": "hoops 1 x .049, operating (C2)",
+    "demand": 39285.421664140056,
+    "capacity": 32000,
+    "fos": 0.8145515217725097,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "longitudinals 3/4 EMT, operating (C2)",
+    "demand": 35980.059191751054,
+    "capacity": 30000,
+    "fos": 0.8337951819400545,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "front bars 1/2 EMT, operating (C2)",
+    "demand": 7800.537327131811,
+    "capacity": 30000,
+    "fos": 3.845888910197772,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "rudder rails 1 x .065, operating (C2)",
+    "demand": 25336.84710683477,
+    "capacity": 32000,
+    "fos": 1.2629827170314258,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "aft bars 1/2 EMT, operating (C2)",
+    "demand": 24437.202212498745,
+    "capacity": 30000,
+    "fos": 1.2276364429581095,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "legs 1 x .065, operating (C2)",
+    "demand": 52296.70145122179,
+    "capacity": 32000,
+    "fos": 0.6118932764783848,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "hoops 1 x .049, misuse (C6)",
+    "demand": 36429.23920397371,
+    "capacity": 32000,
+    "fos": 0.8784152702401051,
+    "req": 1.0,
+    "ok": false,
+    "unit": "psi",
+    "note": "C6 misuse: 250 lb on top of the forward hoop"
+   },
+   {
+    "item": "longitudinals 3/4 EMT, misuse (C6)",
+    "demand": 7312.393629089361,
+    "capacity": 30000,
+    "fos": 4.102623781173007,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C6 misuse: 250 lb on top of the forward hoop"
+   },
+   {
+    "item": "front bars 1/2 EMT, misuse (C6)",
+    "demand": 8580.604052240253,
+    "capacity": 30000,
+    "fos": 3.4962573517382496,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C6 misuse: 250 lb on top of the forward hoop"
+   },
+   {
+    "item": "rudder rails 1 x .065, misuse (C4)",
+    "demand": 6092.697616770281,
+    "capacity": 32000,
+    "fos": 5.252189097965295,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C4 misuse: 250 lb on top of the aft hoop"
+   },
+   {
+    "item": "aft bars 1/2 EMT, misuse (C5)",
+    "demand": 10208.586275204545,
+    "capacity": 30000,
+    "fos": 2.938702695089767,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+   },
+   {
+    "item": "legs 1 x .065, misuse (C5)",
+    "demand": 17425.860021658464,
+    "capacity": 32000,
+    "fos": 1.8363512595778604,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+   },
+   {
+    "item": "Cage legs buckling (K 1, L 20.6 in)",
+    "demand": 324.27315351662475,
+    "capacity": 5448.927459762651,
+    "fos": 16.80351086937358,
+    "req": 1.65,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Cage aft pad bolts (4 x 3/8 SS): T 427, V 43 lb per bolt",
+    "demand": 426.9253541994805,
+    "capacity": 7750.0,
+    "fos": 17.824178557994305,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Cage fwd pad bolts (4 x 3/8 SS): T 428, V 39 lb per bolt",
+    "demand": 427.7758189472626,
+    "capacity": 7750.0,
+    "fos": 17.853656817517823,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   }
+  ],
+  "checks_fixed": [
+   {
+    "item": "hoops 1 x .083 DOM (was .049; .083 for the G13B), operating (C2)",
+    "demand": 26799.64682530053,
+    "capacity": 50000,
+    "fos": 1.8656962282352503,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "longitudinals 1 x .065 DOM (was 3/4 EMT), operating (C3)",
+    "demand": 15734.066391083417,
+    "capacity": 50000,
+    "fos": 3.177818038719811,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C3 full rudder, hard turn (1 g lateral)"
+   },
+   {
+    "item": "front bars 1/2 EMT, operating (C2)",
+    "demand": 4779.353453530679,
+    "capacity": 30000,
+    "fos": 6.276999659407473,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "rudder rails 1 x .065, operating (C2)",
+    "demand": 7846.462389287784,
+    "capacity": 50000,
+    "fos": 6.372298434548216,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "aft bars 1 x .065 DOM (was 1/2 EMT), operating (C2)",
+    "demand": 6804.3915264875195,
+    "capacity": 50000,
+    "fos": 7.3481956182804185,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "legs 1 x .065, operating (C2)",
+    "demand": 13128.73316464923,
+    "capacity": 50000,
+    "fos": 3.808440568708587,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "side-bay diagonals 1 x .065 (new), operating (C2)",
+    "demand": 12120.422228110116,
+    "capacity": 50000,
+    "fos": 4.125268828014772,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "C2 opposite rudder, over chop (3 g)"
+   },
+   {
+    "item": "hoops 1 x .083 DOM (was .049; .083 for the G13B), misuse (C6)",
+    "demand": 24003.101705575267,
+    "capacity": 50000,
+    "fos": 2.083064122849855,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C6 misuse: 250 lb on top of the forward hoop"
+   },
+   {
+    "item": "longitudinals 1 x .065 DOM (was 3/4 EMT), misuse (C6)",
+    "demand": 5155.297671815291,
+    "capacity": 50000,
+    "fos": 9.698760999458237,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C6 misuse: 250 lb on top of the forward hoop"
+   },
+   {
+    "item": "front bars 1/2 EMT, misuse (C6)",
+    "demand": 6185.264540664763,
+    "capacity": 30000,
+    "fos": 4.850237173004688,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C6 misuse: 250 lb on top of the forward hoop"
+   },
+   {
+    "item": "rudder rails 1 x .065, misuse (C4)",
+    "demand": 5304.6407398218025,
+    "capacity": 50000,
+    "fos": 9.425709006955227,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C4 misuse: 250 lb on top of the aft hoop"
+   },
+   {
+    "item": "aft bars 1 x .065 DOM (was 1/2 EMT), misuse (C5)",
+    "demand": 6604.576786636228,
+    "capacity": 50000,
+    "fos": 7.570507788049424,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+   },
+   {
+    "item": "legs 1 x .065, misuse (C5)",
+    "demand": 12201.012836622924,
+    "capacity": 50000,
+    "fos": 4.098020440558714,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+   },
+   {
+    "item": "side-bay diagonals 1 x .065 (new), misuse (C5)",
+    "demand": 10107.027141111055,
+    "capacity": 50000,
+    "fos": 4.9470531049255255,
+    "req": 1.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "C5 misuse: 150 lb push on the side of the aft hoop"
+   },
+   {
+    "item": "Cage legs buckling (K 1, L 20.6 in)",
+    "demand": 305.79415327411067,
+    "capacity": 5448.927459762651,
+    "fos": 17.818939313984494,
+    "req": 1.65,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Cage aft pad bolts (4 x 3/8 SS): T 175, V 76 lb per bolt",
+    "demand": 175.37222279353168,
+    "capacity": 7750.0,
+    "fos": 34.01523725519219,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Cage fwd pad bolts (4 x 3/8 SS): T 231, V 11 lb per bolt",
+    "demand": 230.98332465150344,
+    "capacity": 7750.0,
+    "fos": 33.42630957152869,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   }
+  ]
+ },
+ "side": {
+  "frame only": [
+   {
+    "item": "posts 2 x 2 (S3)",
+    "demand": 11737.314054308548,
+    "capacity": 15000,
+    "fos": 1.2779755172772072,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "cross arms 2 x 2 (S3)",
+    "demand": 6544.897530380194,
+    "capacity": 15000,
+    "fos": 2.291861703009527,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .125 (bowed) (S3)",
+    "demand": 10661.15200931508,
+    "capacity": 15000,
+    "fos": 1.4069774060902511,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "top rail 2 x 2 (S3)",
+    "demand": 5100.603516727536,
+    "capacity": 15000,
+    "fos": 2.9408284629078083,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "side diagonal 1.5 x .125 (S3)",
+    "demand": 8898.489373353996,
+    "capacity": 15000,
+    "fos": 1.6856793744022014,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "inner rail 2 x 3 (S3)",
+    "demand": 5091.159231325165,
+    "capacity": 15000,
+    "fos": 2.946283806585183,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   }
+  ],
+  "knee_defl": 0.033057727381238564,
+  "brace_R": 19.279545000000024,
+  "brace_L": 19.85509970254394,
+  "A_top": 1.1906017359190226,
+  "A_skin": 0.5618852127584655,
+  "with skins": [
+   {
+    "item": "posts 2 x 2 (S3)",
+    "demand": 11510.844682334962,
+    "capacity": 15000,
+    "fos": 1.3031189642424457,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "cross arms 2 x 2 (S3)",
+    "demand": 4435.792986920793,
+    "capacity": 15000,
+    "fos": 3.3815825139334543,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .125 (bowed) (S3)",
+    "demand": 10496.909645154961,
+    "capacity": 15000,
+    "fos": 1.4289920087978962,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "top rail 2 x 2 (S3)",
+    "demand": 2812.0490426353776,
+    "capacity": 15000,
+    "fos": 5.334188619250537,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "side diagonal 1.5 x .125 (S3)",
+    "demand": 7778.508723900621,
+    "capacity": 15000,
+    "fos": 1.9283902007990654,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "inner rail 2 x 3 (S6)",
+    "demand": 3552.8733438475324,
+    "capacity": 15000,
+    "fos": 4.221934909662715,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S6 leaning on the armrest end 250 lb"
+   }
+  ],
+  "with fixes": [
+   {
+    "item": "posts 2 x 2 x 3/16 (S3)",
+    "demand": 9034.711075065044,
+    "capacity": 15000,
+    "fos": 1.6602633858871916,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "cross arms 2 x 2 (S3)",
+    "demand": 6571.916862498755,
+    "capacity": 15000,
+    "fos": 2.282439098643245,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .188 (bowed) (S3)",
+    "demand": 8410.95324762928,
+    "capacity": 15000,
+    "fos": 1.7833888215022375,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .125 (bowed) (S3)",
+    "demand": 10.069345085654568,
+    "capacity": 15000,
+    "fos": 1489.6698715162674,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "top rail 2 x 2 (S3)",
+    "demand": 5220.125521442887,
+    "capacity": 15000,
+    "fos": 2.873494121622936,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "side diagonal 1.5 x .125 (S3)",
+    "demand": 8054.4754439459575,
+    "capacity": 15000,
+    "fos": 1.8623186704572494,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "inner rail 2 x 3 (S3)",
+    "demand": 5087.859484779921,
+    "capacity": 15000,
+    "fos": 2.9481946277942135,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   }
+  ],
+  "checks": [
+   {
+    "item": "posts 2 x 2 (S3)",
+    "demand": 11737.314054308548,
+    "capacity": 15000,
+    "fos": 1.2779755172772072,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "cross arms 2 x 2 (S3)",
+    "demand": 6544.897530380194,
+    "capacity": 15000,
+    "fos": 2.291861703009527,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .125 (bowed) (S3)",
+    "demand": 10661.15200931508,
+    "capacity": 15000,
+    "fos": 1.4069774060902511,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "top rail 2 x 2 (S3)",
+    "demand": 5100.603516727536,
+    "capacity": 15000,
+    "fos": 2.9408284629078083,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "side diagonal 1.5 x .125 (S3)",
+    "demand": 8898.489373353996,
+    "capacity": 15000,
+    "fos": 1.6856793744022014,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "inner rail 2 x 3 (S3)",
+    "demand": 5091.159231325165,
+    "capacity": 15000,
+    "fos": 2.946283806585183,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "Grip stick, 1 in 316 rod welded into the rail, 600 lb at the knob",
+    "demand": 22918.31180523293,
+    "capacity": 30000,
+    "fos": 1.308996938995747,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": "bending at the base; ultimate 75 ksi"
+   },
+   {
+    "item": "Armrest hinge pin, 1/2 316, double shear",
+    "demand": 671.9492807510074,
+    "capacity": 17640.0,
+    "fos": 26.251981370207833,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Armrest lugs, 2 x 1/4 6061 bearing (HAZ)",
+    "demand": 671.9492807510074,
+    "capacity": 12000.0,
+    "fos": 17.85849072803254,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   }
+  ],
+  "checks_fixed": [
+   {
+    "item": "posts 2 x 2 x 3/16 (S3)",
+    "demand": 9034.711075065044,
+    "capacity": 15000,
+    "fos": 1.6602633858871916,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "cross arms 2 x 2 (S3)",
+    "demand": 6571.916862498755,
+    "capacity": 15000,
+    "fos": 2.282439098643245,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .188 (bowed) (S3)",
+    "demand": 8410.95324762928,
+    "capacity": 15000,
+    "fos": 1.7833888215022375,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "knee braces 1.5 x .125 (bowed) (S3)",
+    "demand": 10.069345085654568,
+    "capacity": 15000,
+    "fos": 1489.6698715162674,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "top rail 2 x 2 (S3)",
+    "demand": 5220.125521442887,
+    "capacity": 15000,
+    "fos": 2.873494121622936,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "side diagonal 1.5 x .125 (S3)",
+    "demand": 8054.4754439459575,
+    "capacity": 15000,
+    "fos": 1.8623186704572494,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "inner rail 2 x 3 (S3)",
+    "demand": 5087.859484779921,
+    "capacity": 15000,
+    "fos": 2.9481946277942135,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "S3 grip pulled aft 600 lb"
+   },
+   {
+    "item": "Grip stick, 1-1/8 in 316 on the bolted base plate (built), 600 lb at the knob",
+    "demand": 13413.552405440398,
+    "capacity": 30000,
+    "fos": 2.2365439887372647,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "bending at the base plate weld; ultimate 75 ksi"
+   },
+   {
+    "item": "Grip base-plate bolts, 4 x 1/4 316: T 844 lb, V 150 lb per bolt",
+    "demand": 843.75,
+    "capacity": 3180.0,
+    "fos": 3.556999398120958,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": "through the console top and both rail walls, crush tubes"
+   }
+  ],
+  "stop": 623.7113402061856,
+  "pin": 671.9492807510074
+ },
+ "engine": {
+  "We": 223.4,
+  "mount_parts": {
+   "vertical, 3 g": 198.01363636363638,
+   "lateral roll couple, 1 g": 23.39377358490567,
+   "torque reaction, 2 x peak": 59.66603773584906
+  },
+  "mount_radial": 286.5685005250754,
+  "no_struts": {
+   "aft_pair_uplift": 2035.5527523884373,
+   "per_mount": 1017.7763761942186
+  },
+  "checks": [
+   {
+    "item": "Engine mount through-bolt, 1/2 grade 8 (aft mount, worst)",
+    "demand": 286.5685005250754,
+    "capacity": 22626.0,
+    "fos": 78.95494431014818,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Poly bushing bearing on the bolt (1/2 x 3 in), 90A urethane ~1,000 psi",
+    "demand": 191.04566701671695,
+    "capacity": 1000,
+    "fos": 5.234350590701948,
+    "req": 2.0,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "Prop shaft at the aft bearing, 4140 annealed (rotating bending 10.0 ksi, torsion 3.8 ksi)",
+    "demand": 9966.801442546508,
+    "capacity": 16150.0,
+    "fos": 1.4584784593790439,
+    "req": 2.0,
+    "ok": false,
+    "unit": "psi",
+    "note": "Goodman, keyway Kf 2"
+   }
+  ],
+  "checks_fixed": [
+   {
+    "item": "Prop shaft at the aft bearing, 4140 pre-hardened (28-32 HRC)",
+    "demand": 9966.801442546508,
+    "capacity": 23800.0,
+    "fos": 2.149336676979644,
+    "req": 2.0,
+    "ok": true,
+    "unit": "psi",
+    "note": "Goodman, keyway Kf 2"
+   }
+  ],
+  "shaft": {
+   "Mb": 3302.3984967800434,
+   "sa": 9966.801442546508,
+   "tm": 3757.4713675739913,
+   "Se": 16150.0,
+   "fos": 1.4584784593790439
+  },
+  "bearing": {
+   "P": 550.044448902101,
+   "L10h": 10578.451841703167
+  }
+ },
+ "pushrod": {
+  "offset": 14.171733302176875,
+  "sigma": 157826.16346972142,
+  "F_yield": 32.53477198174416,
+  "L": 102.76154363577675,
+  "Pcr": 123.13622336376991,
+  "Pcr1": 568.2486398175093,
+  "checks": [
+   {
+    "item": "Steering pushrod as drawn: bending at the dog-leg (14.2 in off the pin line)",
+    "demand": 157826.16346972142,
+    "capacity": 32000,
+    "fos": 0.20275472264228944,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "Pushrod straight long leg, 5/8 x .065, buckling (L 103 in)",
+    "demand": 160.46369503877705,
+    "capacity": 123.13622336376991,
+    "fos": 0.7673774640052585,
+    "req": 3.0,
+    "ok": false,
+    "unit": "lb",
+    "note": "3.0 for a slender steering link"
+   },
+   {
+    "item": "Pushrod long leg as 1 x .065, buckling",
+    "demand": 160.46369503877705,
+    "capacity": 568.2486398175093,
+    "fos": 3.5412910046736026,
+    "req": 3.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   }
+  ],
+  "checks_fixed": [
+   {
+    "item": "Long rod, 1 x .065 steel, buckling (L 100 in, pinned)",
+    "demand": 160.46369503877702,
+    "capacity": 595.6358321902976,
+    "fos": 3.711966323886276,
+    "req": 3.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Drive link, 5/8 x .065, buckling (13 in)",
+    "demand": 183.3870800443166,
+    "capacity": 7694.1449493884875,
+    "fos": 41.955763445980764,
+    "req": 3.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Tie bar, 5/8 x .065, buckling (26 in)",
+    "demand": 91.6935400221583,
+    "capacity": 1923.5362373471219,
+    "fos": 20.977881722990382,
+    "req": 3.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   },
+   {
+    "item": "Bellcrank bracket, 3/8 x 1.5 steel, 244 lb at 1.6 in off the hoop",
+    "demand": 11090.098637043066,
+    "capacity": 36000,
+    "fos": 3.2461388467504757,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "A36"
+   },
+   {
+    "item": "Bellcrank arm, 1/4 x 1 steel, 183 lb at 3.5 in",
+    "demand": 15404.514723722594,
+    "capacity": 36000,
+    "fos": 2.3369772203574084,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "A36, edgewise at the hub; the eye sits just under the plate"
+   },
+   {
+    "item": "Bellcrank pivot and rod-end pins, 3/8 SS, single shear",
+    "demand": 243.67892513034076,
+    "capacity": 4068.0,
+    "fos": 16.694098588230716,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": ""
+   }
+  ],
+  "hinge_M_yield": 65.0695439634883,
+  "new": {
+   "tie": 91.6935400221583,
+   "drive": 183.3870800443166,
+   "rod": 160.46369503877702,
+   "L": 100.37126872069781,
+   "hand": 60.57851311262186
+  }
+ },
+ "transom": {
+  "p": 0.75,
+  "sig_fixed": 5691.84,
+  "sig_ss": 8537.76,
+  "tab_lift": 711.7311667138129,
+  "hinge_M": 1708.154800113151,
+  "strut": 896.0818956118902,
+  "pull": 271.135682557643,
+  "checks": [
+   {
+    "item": "Transom 1/8 5052 between the bottom angle and rub rail, 0.75 psi (simply supported)",
+    "demand": 8537.76,
+    "capacity": 23000,
+    "fos": 2.6939150315773692,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "Trim-tab bracket on the bare 1/8 transom (6 in strip)",
+    "demand": 56666.653406021265,
+    "capacity": 23000,
+    "fos": 0.40588244792229206,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": ""
+   }
+  ],
+  "checks_fixed": [
+   {
+    "item": "Same with the 3/8 x 2 in 6061 flat bar riveted behind the bracket (built)",
+    "demand": 14166.663351505316,
+    "capacity": 35000,
+    "fos": 2.4705888134400387,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "a 1.5 in angle would hit the aft floor panel 0.55 in inside the transom"
+   }
+  ]
+ },
+ "footrest": {
+  "checks": [
+   {
+    "item": "Old single ladder rung, 15 in span, 400 lb at mid",
+    "demand": 15278.874536821953,
+    "capacity": 15000,
+    "fos": 0.9817477042468103,
+    "req": 1.65,
+    "ok": false,
+    "unit": "psi",
+    "note": ""
+   }
+  ],
+  "checks_fixed": [
+   {
+    "item": "Footrest right (throttle) ladder rung, 7.0 in span, 1 in solid rod, 400 lb at mid",
+    "demand": 7130.141450516911,
+    "capacity": 15000,
+    "fos": 2.103745080528879,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "Footrest left ladder rung, 5.0 in span, 1 in solid rod, 400 lb at mid",
+    "demand": 5092.958178940651,
+    "capacity": 15000,
+    "fos": 2.945243112740431,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   },
+   {
+    "item": "Footrest rail, 1 in solid rod, half the 400 lb at mid-length (16.3 in)",
+    "demand": 8280.890898405876,
+    "capacity": 15000,
+    "fos": 1.8113993028078168,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": ""
+   }
+  ]
+ }
+}

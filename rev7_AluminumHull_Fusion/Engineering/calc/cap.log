@@ -1,0 +1,15 @@
+boat weight 1317 lb, machinery 507 lb, max displacement 4800 lb (water at 12.9 in)
+max weight capacity: formula 1 291 lb, formula 2 498 lb -> 498 lb
+   offset 1000 lb: heel 30.0 deg, freeboard -12.99 in
+   offset 500 lb: heel 8.8 deg, freeboard 1.87 in
+   offset 750 lb: heel 14.5 deg, freeboard -2.12 in
+   offset 625 lb: heel 11.2 deg, freeboard 0.12 in
+   offset 688 lb: heel 12.6 deg, freeboard -0.86 in
+   offset 656 lb: heel 11.9 deg, freeboard -0.35 in
+   offset 641 lb: heel 11.5 deg, freeboard -0.12 in
+   offset 633 lb: heel 11.3 deg, freeboard 0.00 in
+   offset 637 lb: heel 11.4 deg, freeboard -0.06 in
+offset test: A = 633 lb at 11.3 deg heel -> 1055 lb; persons capacity 498 lb
+persons (whole number) = round((498 + 32) / 141) = 4
+Subpart F: submerged load 66 lb -> reserve +394 lb, freeboard min -1.2 in, GM -0.4 in
+DONE

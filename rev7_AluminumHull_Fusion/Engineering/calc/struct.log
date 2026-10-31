@@ -1,0 +1,95 @@
+== tower
+  A-frame legs (aft), worst end (welded, pinned feet)                                                   1713      15000  FoS  8.76 
+  A-frame legs (aft) buckling (K 1, L 38.6 in)                                                           339      25527  FoS 75.41 
+  crossbar (aft), worst end (welded, pinned feet)                                                       1695      15000  FoS  8.85 
+  A-frame legs (fwd), worst end (welded, pinned feet)                                                   3264      15000  FoS  4.60 
+  A-frame legs (fwd) buckling (K 1, L 38.6 in)                                                           255      25527  FoS 100.06 
+  crossbar (fwd, tie struts), worst end (welded, pinned feet)                                           8940      15000  FoS  1.68 
+  Brace buckling (pinned, L 45.1 in, KL/r 80)                                                            402      10691  FoS 26.57 
+  Brace at the welded tongues (HAZ)                                                                      585      15000  FoS 25.63 
+  A-frame aft foot bolts (2 x 3/8 SS): T 240 lb, V 25 lb per bolt                                        240       7750  FoS 31.69 
+  A-frame fwd foot bolts (2 x 3/8 SS): T 630 lb, V 62 lb per bolt                                        630       7750  FoS 12.10 
+  Brace foot bolts (2 x 3/8 SS): T 1 lb, V 113 lb per bolt                                               113       4068  FoS 36.14 
+  Brace clevis bolt, 3/8 grade 8, double shear                                                           402      12204  FoS 30.33 
+  Brace tongue bearing, 1/4 in 6061 at the weld (HAZ)                                                    402       4500  FoS 11.18 
+  Tie strut, 1 x 1 x 1/8 (compression, short)                                                           1012      15000  FoS 14.82 
+  Tie strut bolt, 5/16 (grade 2 assumed), double shear                                                   443       4032  FoS  9.10 
+  Tie strut tab bearing, 1/4 in 6061 at the weld (HAZ)                                                   443       3750  FoS  8.47 
+  Yoke pivot/slot bolts, 3 x 1/2 grade 8 per peak plate                                                  325      11313  FoS 34.82 
+  crossbar (fwd) as 2 x 3 x 1/8, 3 in deep, worst end (welded, pinned feet)                             2560      15000  FoS  5.86 
+== cage
+  hoops 1 x .049, operating (C2)                                                                       33455      32000  FoS  0.96 <-- LOW
+  longitudinals 3/4 EMT, operating (C2)                                                                31004      30000  FoS  0.97 <-- LOW
+  front bars 1/2 EMT, operating (C2)                                                                    6752      30000  FoS  4.44 
+  rudder rails 1 x .065, operating (C2)                                                                21600      32000  FoS  1.48 <-- LOW
+  aft bars 1/2 EMT, operating (C2)                                                                     21039      30000  FoS  1.43 <-- LOW
+  legs 1 x .065, operating (C2)                                                                        45265      32000  FoS  0.71 <-- LOW
+  hoops 1 x .049, misuse (C6)                                                                          36429      32000  FoS  0.88 <-- LOW
+  longitudinals 3/4 EMT, misuse (C6)                                                                    7312      30000  FoS  4.10 
+  front bars 1/2 EMT, misuse (C6)                                                                       8581      30000  FoS  3.50 
+  rudder rails 1 x .065, misuse (C4)                                                                    6093      32000  FoS  5.25 
+  aft bars 1/2 EMT, misuse (C5)                                                                        10209      30000  FoS  2.94 
+  legs 1 x .065, misuse (C5)                                                                           17426      32000  FoS  1.84 
+  Cage legs buckling (K 1, L 20.6 in)                                                                    290       5449  FoS 18.81 
+  Cage aft pad bolts (4 x 3/8 SS): T 369, V 37 lb per bolt                                               369       7750  FoS 20.62 
+  Cage fwd pad bolts (4 x 3/8 SS): T 368, V 34 lb per bolt                                               368       7750  FoS 20.75 
+  hoops 1 x .065 DOM (was .049), operating (C2)                                                        27584      50000  FoS  1.81 
+  longitudinals 1 x .065 DOM (was 3/4 EMT), operating (C3)                                             13698      50000  FoS  3.65 
+  front bars 1/2 EMT, operating (C2)                                                                    4423      30000  FoS  6.78 
+  rudder rails 1 x .065, operating (C2)                                                                 7530      50000  FoS  6.64 
+  aft bars 1 x .065 DOM (was 1/2 EMT), operating (C2)                                                   6490      50000  FoS  7.70 
+  legs 1 x .065, operating (C2)                                                                        11828      50000  FoS  4.23 
+  side-bay diagonals 1 x .065 (new), operating (C2)                                                    10917      50000  FoS  4.58 
+  hoops 1 x .065 DOM (was .049), misuse (C6)                                                           28513      50000  FoS  1.75 
+  longitudinals 1 x .065 DOM (was 3/4 EMT), misuse (C6)                                                 5662      50000  FoS  8.83 
+  front bars 1/2 EMT, misuse (C6)                                                                       6833      30000  FoS  4.39 
+  rudder rails 1 x .065, misuse (C4)                                                                    5713      50000  FoS  8.75 
+  aft bars 1 x .065 DOM (was 1/2 EMT), misuse (C5)                                                      7141      50000  FoS  7.00 
+  legs 1 x .065, misuse (C5)                                                                           12624      50000  FoS  3.96 
+  side-bay diagonals 1 x .065 (new), misuse (C5)                                                       10450      50000  FoS  4.78 
+  Cage legs buckling (K 1, L 20.6 in)                                                                    269       5449  FoS 20.23 
+  Cage aft pad bolts (4 x 3/8 SS): T 182, V 66 lb per bolt                                               182       7750  FoS 35.08 
+  Cage fwd pad bolts (4 x 3/8 SS): T 201, V 12 lb per bolt                                               201       7750  FoS 38.26 
+== side
+  posts 2 x 2 (S3)                                                                                     11737      15000  FoS  1.28 <-- LOW
+  cross arms 2 x 2 (S3)                                                                                 6545      15000  FoS  2.29 
+  knee braces 1.5 x .125 (bowed) (S3)                                                                  10661      15000  FoS  1.41 <-- LOW
+  top rail 2 x 2 (S3)                                                                                   5101      15000  FoS  2.94 
+  side diagonal 1.5 x .125 (S3)                                                                         8898      15000  FoS  1.69 
+  inner rail 2 x 3 (S3)                                                                                 5091      15000  FoS  2.95 
+  Grip stick, 1 in 316 rod welded into the rail, 600 lb at the knob                                    22918      30000  FoS  1.31 <-- LOW
+  Armrest hinge pin, 1/2 316, double shear                                                               672      17640  FoS 26.25 
+  Armrest lugs, 2 x 1/4 6061 bearing (HAZ)                                                               672      12000  FoS 17.86 
+  posts 2 x 2 x 3/16 (S3)                                                                               9035      15000  FoS  1.66 
+  cross arms 2 x 2 (S3)                                                                                 6572      15000  FoS  2.28 
+  knee braces 1.5 x .188 (bowed) (S3)                                                                   8411      15000  FoS  1.78 
+  knee braces 1.5 x .125 (bowed) (S3)                                                                     10      15000  FoS 1489.67 
+  top rail 2 x 2 (S3)                                                                                   5220      15000  FoS  2.87 
+  side diagonal 1.5 x .125 (S3)                                                                         8054      15000  FoS  1.86 
+  inner rail 2 x 3 (S3)                                                                                 5088      15000  FoS  2.95 
+  Grip stick, 1-1/8 in 316 on the bolted base plate (built), 600 lb at the knob                        13414      30000  FoS  2.24 
+  Grip base-plate bolts, 4 x 1/4 316: T 844 lb, V 150 lb per bolt                                        844       3180  FoS  3.56 
+== engine
+  Engine mount through-bolt, 1/2 grade 8 (aft mount, worst)                                              265      22626  FoS 85.41 
+  Poly bushing bearing on the bolt (1/2 x 3 in), 90A urethane ~1,000 psi                                 177       1000  FoS  5.66 
+  Prop shaft at the aft bearing, 4140 annealed (rotating bending 9.3 ksi, torsion 3.4 ksi)              9341      16150  FoS  1.56 <-- LOW
+  Prop shaft at the aft bearing, 4140 pre-hardened (28-32 HRC)                                          9341      23800  FoS  2.30 
+== pushrod
+  Steering pushrod as drawn: bending at the dog-leg (14.2 in off the pin line)                        134247      32000  FoS  0.24 <-- LOW
+  Pushrod straight long leg, 5/8 x .065, buckling (L 103 in)                                             136        123  FoS  0.90 <-- LOW
+  Pushrod long leg as 1 x .065, buckling                                                                 136        568  FoS  4.16 
+  Long rod, 1 x .065 steel, buckling (L 100 in, pinned)                                                  136        596  FoS  4.36 
+  Drive link, 5/8 x .065, buckling (13 in)                                                               156       7694  FoS 49.32 
+  Tie bar, 5/8 x .065, buckling (26 in)                                                                   78       1924  FoS 24.66 
+  Bellcrank bracket, 3/8 x 1.5 steel, 207 lb at 1.6 in off the hoop                                     9433      36000  FoS  3.82 
+  Bellcrank arm, 1/4 x 1 steel, 156 lb at 3.5 in                                                       13103      36000  FoS  2.75 
+  Bellcrank pivot and rod-end pins, 3/8 SS, single shear                                                 207       4068  FoS 19.63 
+== transom
+  Transom 1/8 5052 between the bottom angle and rub rail, 0.75 psi (simply supported)                   8538      23000  FoS  2.69 
+  Trim-tab bracket on the bare 1/8 transom (6 in strip)                                                56667      23000  FoS  0.41 <-- LOW
+  Same with the 3/8 x 2 in 6061 flat bar riveted behind the bracket (built)                            14167      35000  FoS  2.47 
+== footrest
+  Old single ladder rung, 15 in span, 400 lb at mid                                                    15279      15000  FoS  0.98 <-- LOW
+  Footrest right (throttle) ladder rung, 7.0 in span, 1 in solid rod, 400 lb at mid                     7130      15000  FoS  2.10 
+  Footrest left ladder rung, 5.0 in span, 1 in solid rod, 400 lb at mid                                 5093      15000  FoS  2.95 
+  Footrest rail, 1 in solid rod, half the 400 lb at mid-length (16.3 in)                                8281      15000  FoS  1.81 

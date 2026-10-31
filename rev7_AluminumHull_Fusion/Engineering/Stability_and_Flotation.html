@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stability and Flotation</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#1d2321;--mute:#5d6662;--line:#d9dcd6;--accent:#2f6b4f;--warn:#9a5b00;--warnbg:#fff4e0;--okbg:#e8f3ec;--a:#2f6b4f;--b:#b0582a;--c:#3b6ea8;--d:#7a7a7a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141816;--card:#1c2220;--ink:#e6e9e4;--mute:#a3aca7;--line:#333b37;--accent:#7cc39c;--warn:#f0b35a;--warnbg:#3a2c14;--okbg:#18301f;--a:#7cc39c;--b:#e8946a;--c:#8bb4e6;--d:#9a9a9a}}
+:root[data-theme="dark"]{--bg:#141816;--card:#1c2220;--ink:#e6e9e4;--mute:#a3aca7;--line:#333b37;--accent:#7cc39c;--warn:#f0b35a;--warnbg:#3a2c14;--okbg:#18301f;--a:#7cc39c;--b:#e8946a;--c:#8bb4e6;--d:#9a9a9a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:920px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:30px;line-height:1.2;margin:0 0 6px}
+h2{font-size:21px;margin:40px 0 10px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:22px 0 6px}
+.sub{color:var(--mute);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+.warn{background:var(--warnbg);border-color:transparent}
+.ok{background:var(--okbg);border-color:transparent}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:16px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi b{display:block;font-size:24px;line-height:1.2}
+.kpi span{color:var(--mute);font-size:13px}
+.tw{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card)}
+th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--mute);font-size:13px}
+tr.tot td{font-weight:600}
+svg{width:100%;height:auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:10px}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .tick{fill:var(--mute);font-size:12px;text-anchor:end}
+svg .tick.mid{text-anchor:middle}
+p.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--mute);margin:8px 0 0}
+p.legend span::before{content:"";display:inline-block;width:18px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle;background:var(--a)}
+p.legend .b::before{background:var(--b)}p.legend .c::before{background:var(--c)}p.legend .d::before{background:var(--d)}
+svg .ttl{fill:var(--mute);font-size:12px}
+svg .flood + .ttl{text-anchor:end}
+svg .flood{stroke:var(--warn);stroke-dasharray:5 4;stroke-width:1.5}
+svg .ln{fill:none;stroke-width:2.5}
+svg .lab{font-size:12px;text-anchor:end}
+svg .ln.a{stroke:var(--a)}svg .ln.b{stroke:var(--b)}svg .ln.c{stroke:var(--c)}svg .ln.d{stroke:var(--d)}
+svg .lab.a{fill:var(--a)}svg .lab.b{fill:var(--b)}svg .lab.c{fill:var(--c)}svg .lab.d{fill:var(--d)}
+ol li,ul li{margin:4px 0}
+code{font-size:13px}
+.small{font-size:14px;color:var(--mute)}
+</style>
+</head>
+<body>
+<main>
+<h1>Stability and flotation</h1>
+<p class="sub">Straddle Dart rev 7 · calculation report for engineering review · 30 Oct 2026 · fresh water</p>
+
+<div class="card">
+<p><strong>Status:</strong> calculated from the rev 7 Fusion model. Not reviewed or stamped by a licensed engineer or naval architect. Everything here is meant to make that review quick: inputs, methods, results and the scripts that reproduce them.</p>
+</div>
+
+<h2>Summary</h2>
+<div class="kpis">
+<div class="kpi"><b>1317 lb</b><span>empty, from the CAD parts (rev 7 BOM: 1,301)</span></div>
+<div class="kpi"><b>7.5 in</b><span>lowest freeboard, two aboard, full fuel</span></div>
+<div class="kpi"><b>12.0°</b><span>heel at which water comes over the rail, two aboard</span></div>
+<div class="kpi"><b>2 people / 490 lb</b><span>recommended capacity label</span></div>
+<div class="kpi"><b>+2.6 in</b><span>swamped freeboard, lowest point</span></div>
+<div class="kpi"><b>1.2 in</b><span>largest swamped righting arm, toward the list side</span></div>
+</div>
+
+<div class="card ok">
+<p><strong>Afloat and upright, the boat is fine.</strong> Two aboard with full fuel it draws 6.4 in at the transom, sits 1.3° bow-up solo, and keeps at least 7.5 in of freeboard. It is very stiff (GM about 68 in): a 200 lb person at the rail heels it about 2.9°, a 30-knot beam gust about 1.9°. By the Coast Guard capacity method it would carry 498 lb of people and gear.</p>
+</div>
+<div class="card ok">
+<p><strong>Swamped, it floats.</strong> With no crew or fuel and the bench latched, it floats 3.7° stern-down with the lowest sheer 2.6 in above the water and 670 lb of reserve buoyancy. The original design claimed 3.5 in. With the whole bench flooded it still floats, 1.6 in at the lowest point. With the Coast Guard basic-flotation test load (33 CFR 183 Subpart F, bench left out) it still floats, but only just, awash (section 5).</p>
+</div>
+<div class="card warn">
+<p><strong>Finding 1: a swamped boat can be rolled by one person.</strong> Its initial stability is close to what the design summary claimed: swamped GM 21 in (bench latched) and 12 in (bench flooded), against the summary's 35 in. But the centre of gravity sits about 1.0 in to starboard (the driver console), so the swamped boat lists 2.4&deg; to starboard. With only 2.6 in of freeboard left, water reaches the rail within a few degrees more, and the righting arm toward the list tops out at 1.2 in. That is about 129 lb-ft of righting moment. A 200 lb person pulling down on the rail 3 ft from the centreline makes 600 lb-ft. <strong>So one adult hanging on the side can roll a swamped boat over.</strong> Over a deep spot, or if it's dark, that's the hazard to design out or warn about.</p><p class="note">Correction (2026-10-30): an earlier issue of this report gave the swamped GM as 11 in. That figure came from the righting arm at 2&deg; alone, which mixes in the list; GM is now taken from the slope across upright (&minus;2&deg; to +2&deg;). The conclusion about rolling did not change.</p>
+<p><strong>Decision (2026-10-31): warning label, no added foam.</strong> Foam options were re-run on the current model with the corrected method (<code>calc/foam_strips.py</code>). Low side strips (x = 51&ndash;110 in, 2.5 lb) raised the righting moment from about 242 to 379 lb-ft (before the 31 Oct structural fixes, which add 22 lb and bring the unfixed boat down to about 129 lb-ft); stopping them at the console gives 344 lb-ft. Only 6 &times; 6 in strips high under both gunwales plus the low strips (7.2 lb of foam) reach 647 lb-ft, past the 600 lb-ft of one adult on the rail, and they cost 6 in of foot space each side from the cage to the console. The builder chose instead to fit the swamped-boat warning label (<code>Labels/Swamped_Warning_Label.svg</code>): one at the helm on the console top beside the capacity label, and one inside each side of the bench where a passenger or someone in the water will see it. It tells people not to climb on or hang from the sides, to hold on at the bow on the centreline, and to keep weight off the driver&rsquo;s side. The rolling hazard itself remains; the label manages it.</p>
+</div>
+<div class="card warn">
+<p><strong>Finding 2: the boat has grown, but the CAD and the BOM now agree.</strong> Weighing every part in the model gives 1317 lb empty, including about 26 lb of rivets, sealant, primer and fasteners that aren&rsquo;t modelled. The rev 7 BOM gives 1,301 lb, within about 15 lb. That is about 275 lb more than the original design&rsquo;s 1,040 lb. Most of it is the driver station, battery and electrical system, lights, cage bracing and the 0.125 in bottom. The G13B engine adds about 15 lb. All the results here use the CAD figure. Weigh the finished hull and boat on a trailer scale and re-run.</p>
+</div>
+
+<h2>1 · Inputs</h2>
+<h3>Hull geometry</h3>
+<p>The hull envelope comes straight from the Fusion model. The skin, UHMW wear strips, chine guards and nose cap were cut every 25 mm (153 stations, x = 0 to 150 in). Each station gives a half-breadth table b(z) in 4 mm steps, ending at the sheer. Displacement and centroids come from rasterising those sections on a 25 × 8 × 4 mm grid. Cells cut by the waterplane count by the fraction below it.</p>
+<p>Volume to the sheer is 86.8 ft³; lowest sheer 12.9 in (just aft of mid-length), 18 in at the transom.</p>
+
+<h3>Weight and centre of gravity</h3>
+<p>All 663 visible solid bodies were read with their volume and centroid. Each part's weight comes from one of two sources:</p>
+<ul>
+<li><strong>Bought items and placeholders</strong> take their BOM weight. These include the engine, radiator, prop, battery, lights, cushions and tank.</li>
+<li><strong>Everything else</strong> is volume × density by material: aluminium 2.70, steel 7.85, UHMW 0.94, HDPE 0.95, marine plywood 0.60, urethane foam 0.032, and wire 3.0 g/cm³.</li>
+</ul>
+<p>Not-in-CAD items (rivets, sealant, paint, fasteners: 38 lb) are placed at the hull's own centre of gravity.</p>
+<div class="tw"><table>
+<tr><th>Group</th><th>Weight (lb)</th><th>LCG (in fwd of transom)</th><th>VCG (in above bottom)</th></tr>
+<tr><td>Drivetrain</td><td>408</td><td>27.7</td><td>28.4</td></tr><tr><td>Seating, controls, electrical, lights</td><td>324</td><td>83.2</td><td>18.2</td></tr><tr><td>Hull</td><td>372</td><td>67.2</td><td>2.7</td></tr><tr><td>Flotation, floor, sump</td><td>73</td><td>41.7</td><td>4.2</td></tr><tr><td>Cage and rudders</td><td>114</td><td>2.7</td><td>47.5</td></tr><tr><td>Rivets, sealant, paint, fasteners (not in CAD)</td><td>26</td><td>67.2</td><td>2.7</td></tr><tr class="tot"><td>Empty boat</td><td>1317</td><td>51.9</td><td>18.4</td></tr>
+</table></div>
+<p class="small">The CG is 0.7 in to starboard (muffler, driver side frame), which gives a 0.4° list. That's negligible.</p>
+
+<h3>Load cases</h3>
+<ul>
+<li><strong>People:</strong> 200 lb each, seated with the CG 8 in above the 18.5 in cushion. The driver is at x = 90 in, the passenger at x = 64 in.</li>
+<li><strong>Fuel:</strong> gasoline at 6.1 lb/gal in the 6.6 gal tank on the bow shelf.</li>
+<li><strong>Cargo:</strong> 100 lb on the bow shelf.</li>
+<li><strong>Water:</strong> fresh, 62.4 lb/ft³.</li>
+</ul>
+
+<h2>2 · Intact hydrostatics</h2>
+<div class="tw"><table>
+<tr><th>Load case</th><th>Weight (lb)</th><th>LCG (in)</th><th>Draft at transom (in)</th><th>Trim, bow up</th><th>Least freeboard (in)</th><th>GM (in)</th><th>Rail wets at</th></tr>
+<tr><td>Empty, no fuel</td><td>1317</td><td>51.9</td><td>5.9</td><td>+2.0°</td><td>8.4</td><td>94</td><td>13.2°</td></tr><tr><td>Solo, 1 gal fuel</td><td>1523</td><td>57.2</td><td>5.9</td><td>+1.5°</td><td>8.1</td><td>81</td><td>12.8°</td></tr><tr><td>Solo, full fuel</td><td>1557</td><td>58.9</td><td>5.7</td><td>+1.3°</td><td>8.1</td><td>79</td><td>13.0°</td></tr><tr><td>Solo + 100 lb cargo, full fuel</td><td>1657</td><td>63.0</td><td>5.3</td><td>+0.7°</td><td>8.2</td><td>74</td><td>13.0°</td></tr><tr><td>Solo + passenger, full fuel</td><td>1757</td><td>59.4</td><td>6.4</td><td>+1.4°</td><td>7.5</td><td>68</td><td>12.0°</td></tr>
+</table></div>
+<p>Every case sits slightly bow-up, which suits getting on plane, and the trim tab trims it level underway. Freeboard is lowest at about x = 40 in, where the sheer dips to 12.9 in.</p>
+
+<h2>3 · Intact stability</h2>
+<p>The righting-arm (GZ) curves below hold trim at the upright value and are drawn up to 16° of heel. Past about 12.0° (two aboard) or 13.0° (solo), the low rail goes under and water pours in. That angle is the practical limit of stability, not the point where GZ peaks. The model stops counting buoyancy at the sheer, so the curve beyond that line is shown only for reference.</p>
+<svg viewBox="0 0 640 310" role="img" aria-label="Righting arm GZ (in)"><line class="grid" x1="56" x2="624" y1="270.0" y2="270.0"/><text class="tick" x="48" y="274.0">0</text><line class="grid" x1="56" x2="624" y1="210.0" y2="210.0"/><text class="tick" x="48" y="214.0">4</text><line class="grid" x1="56" x2="624" y1="150.0" y2="150.0"/><text class="tick" x="48" y="154.0">8</text><line class="grid" x1="56" x2="624" y1="90.0" y2="90.0"/><text class="tick" x="48" y="94.0">12</text><line class="grid" x1="56" x2="624" y1="30.0" y2="30.0"/><text class="tick" x="48" y="34.0">16</text><text class="tick mid" x="56.0" y="288">0°</text><text class="tick mid" x="233.5" y="288">5°</text><text class="tick mid" x="411.0" y="288">10°</text><text class="tick mid" x="588.5" y="288">15°</text><line class="flood" x1="482.0" x2="482.0" y1="30" y2="270"/><text class="ttl" x="476.0" y="42">water over the rail</text><polyline class="ln a" points="56.0,269.7 127.0,228.2 198.0,187.7 269.0,149.2 340.0,114.4 411.0,86.7 482.0,67.8 553.0,55.4 624.0,47.7"/><polyline class="ln b" points="56.0,269.7 127.0,233.9 198.0,198.6 269.0,164.7 340.0,133.1 411.0,106.0 482.0,85.8 553.0,72.5 624.0,64.8"/><text class="ttl" x="26" y="18">Righting arm GZ (in)</text></svg><p class="legend"><span class="a">Solo, full fuel</span><span class="b">Solo + passenger, full fuel</span></p>
+<ul>
+<li><strong>Initial stability is very high</strong> for a 72 in beam on about 5 in of draft. The largest righting arm before water comes aboard is about 12.3 in, two aboard.</li>
+<li><strong>Heeling moments</strong>
+  <ul>
+  <li>A 200 lb person standing at the rail: about 2.9°.</li>
+  <li>A 30-knot beam wind on the cage, rudders and topsides: about 1.9°. This uses about 3 m² of side area and Cd 1.2.</li>
+  <li>Both are far from 12.0°.</li>
+  </ul></li>
+<li><strong>Turning at speed</strong> is the real capsize risk for any flat-bottom airboat, and this static analysis doesn't cover it. In a skidding turn the outside chine can catch and trip the boat. Keep the existing operating rules: no hard turns at speed, slow down before turning, and no turns in a crosswind with a raised chine. The chine guard angles help by letting the chine slide.</li>
+</ul>
+
+<h2>4 · Capacity (Coast Guard method, applied voluntarily)</h2>
+<p>33 CFR 183 Subparts B (capacity label) and F (flotation) apply to manufacturers of boats under 20 ft, and Subpart F names airboats. A boat built for the builder's own use isn't a manufacturer's product, so neither is mandatory here. Following the method gives a load limit that holds up to scrutiny, and you'd need it if you ever sell the design or the boat. The calculation treats the airboat as an inboard boat (§183.33, §183.39).</p>
+<div class="tw"><table>
+<tr><th>Item</th><th>Value</th></tr>
+<tr><td>Boat weight (hull, permanent fittings; portable tank empty)</td><td>1317 lb</td></tr>
+<tr><td>Machinery weight (engine, redrive, prop, battery, controls)</td><td>507 lb</td></tr>
+<tr><td>Maximum displacement (level, water at the lowest sheer, 12.9 in)</td><td>4800 lb</td></tr>
+<tr><td>Max weight capacity: (D − boat)/5 − 4 × machinery/5</td><td>291 lb</td></tr>
+<tr><td>Max weight capacity: (D − boat)/7 (the greater applies)</td><td><strong>498 lb</strong></td></tr>
+<tr><td>Offset-load test (weight at seat height on one edge, both seats, until water reaches the rail)</td><td>633 lb at 11.3° heel → 1055 lb</td></tr>
+<tr><td>Persons capacity (lesser of the two)</td><td>498 lb</td></tr>
+<tr><td>Persons by formula, (498 + 32)/141</td><td>4</td></tr>
+</table></div>
+<div class="card"><p><strong>Recommended label:</strong> <em>Maximum 2 persons or 400 lb. Maximum weight capacity 490 lb (persons, gear and fuel).</em> The formula would allow 4 people, but there are 2 seats, and the label may show fewer than the formula. 490 lb rounds the 498 lb result down. The airboat has no outboard horsepower rating to show.</p></div>
+
+<h2>5 · Swamped flotation</h2>
+<p>With the hull full of water, only the parts themselves displace water: foam, wood, metal and sealed air spaces. Each body keeps its own weight and displaced volume, the lost-buoyancy method.</p>
+<ul>
+<li><strong>Bought and placeholder items</strong> displace only their solid material: the engine at 3.5 g/cm³ effective, the radiator and prop flooded, the tank empty and vented, and the cushions soaked.</li>
+<li><strong>The sealed bench spaces</strong> count only when closed: the cooler holds 2.6 ft³ of air with the lid latched and the plug in; the battery bay holds 0.8 ft³ around the battery.</li>
+<li><strong>Geometry:</strong> each body is spread evenly over its bounding box, in 36 slices so that trim and heel are followed across the wide side blocks. 75% of the skin's metal is placed in the bottom plating.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>Swamped case (no crew, no fuel)</th><th>Weight (lb)</th><th>Reserve (lb)</th><th>Trim, stern down</th><th>Least freeboard (in)</th><th>At transom (in)</th><th>GM (in)</th><th>Largest GZ (in)</th></tr>
+<tr><td>no crew or fuel, bench sealed (design case)</td><td>1317</td><td>+670</td><td>+3.7°</td><td>2.6</td><td>5.2</td><td>21</td><td>1.2</td></tr><tr><td>cooler lid open (battery bay sealed)</td><td>1317</td><td>+512</td><td>+3.8°</td><td>1.8</td><td>4.3</td><td>13</td><td>0.4</td></tr><tr><td>whole bench flooded</td><td>1317</td><td>+460</td><td>+3.8°</td><td>1.6</td><td>4.2</td><td>12</td><td>0.1</td></tr><tr><td>bench sealed, + 100 lb dense gear</td><td>1417</td><td>+570</td><td>+4.0°</td><td>1.3</td><td>3.7</td><td>8</td><td>0.3</td></tr>
+</table></div>
+<svg viewBox="0 0 640 310" role="img" aria-label="Righting arm GZ (in)"><line class="grid" x1="56" x2="624" y1="270.0" y2="270.0"/><text class="tick" x="48" y="274.0">0</text><line class="grid" x1="56" x2="624" y1="190.0" y2="190.0"/><text class="tick" x="48" y="194.0">1</text><line class="grid" x1="56" x2="624" y1="110.0" y2="110.0"/><text class="tick" x="48" y="114.0">2</text><line class="grid" x1="56" x2="624" y1="30.0" y2="30.0"/><text class="tick" x="48" y="34.0">3</text><text class="tick mid" x="56.0" y="288">0°</text><text class="tick mid" x="150.7" y="288">5°</text><text class="tick mid" x="245.3" y="288">10°</text><text class="tick mid" x="340.0" y="288">15°</text><text class="tick mid" x="434.7" y="288">20°</text><text class="tick mid" x="529.3" y="288">25°</text><text class="tick mid" x="624.0" y="288">30°</text><polyline class="ln a" points="56.0,270.0 93.9,281.8 150.7,223.7 245.3,177.4 340.0,175.9 434.7,183.0 529.3,196.2 624.0,225.1"/><polyline class="ln b" points="56.0,270.0 93.9,303.9 150.7,266.1 245.3,241.3 340.0,260.6 434.7,288.5 529.3,310.4 624.0,336.6"/><polyline class="ln c" points="56.0,270.0 93.9,308.2 150.7,274.8 245.3,260.4 340.0,286.1 434.7,322.7 529.3,352.3 624.0,384.0"/><text class="ttl" x="26" y="18">Righting arm GZ (in)</text></svg><p class="legend"><span class="a">bench sealed (design case)</span><span class="b">cooler lid open (battery bay sealed)</span><span class="c">whole bench flooded</span></p>
+<ul>
+<li>The lowest freeboard is at x ≈ 33 in. Each 100 lb of dense gear left aboard costs about 0.8 in of freeboard and much of the stability (last row; 1.3 in left).</li>
+<li><strong>Coast Guard basic-flotation check (Subpart F, voluntary).</strong> The rule load is 2/15 of the 498 lb persons capacity, plus 25% of a dead weight of zero, as submerged weight: 66 lb. Air chambers are excluded, so the whole bench counts as flooded. It still floats, with 394 lb in reserve, so it passes on the rule&rsquo;s wording (stay afloat). But it floats awash: the lowest point of the sheer is 1.2 in under water and the swamped GM is -0.4 in, so in this condition it can turn over. <strong>Marginal pass.</strong> It passed comfortably before the 0.125 in bottom, the G13B and the cage changes added about 75 lb.</li>
+<li><strong>What the swamped boat is good for:</strong> it floats awash, so you can walk or tow it to shallow water and pump it out. Nobody can sit in it, stand on it, climb onto its side or bail it from inside.</li>
+</ul>
+
+<h2>6 · Florida and federal paperwork</h2>
+<ul>
+<li><strong>Home-built titling (FLHSMV):</strong>
+  <ul>
+  <li>The builder fills in a Vessel Statement of Builder (HSMV 87002).</li>
+  <li>An FWC officer inspects the boat and issues a Certificate of Inspection (FWC/DLE 126).</li>
+  <li>Take both, with the title application (HSMV 82040), to the county tax collector.</li>
+  <li>FLHSMV assigns the hull identification number for a home-built boat.</li>
+  </ul></li>
+<li><strong>Federal standards</strong> (capacity label, flotation) bind manufacturers. Building and selling boats regularly would make you one. The calculations above already follow those methods, so the work transfers.</li>
+<li><strong>Muffler, flag and boating-safety ID:</strong> the Florida airboat rules stay as listed in the brochure (FS 327.391).</li>
+</ul>
+
+<h2>7 · Limits of this analysis</h2>
+<ul>
+<li><strong>Static, calm-water only.</strong> It doesn't cover planing stability, chine tripping in turns, wave action, or wind gusts beyond the simple beam-wind check.</li>
+<li><strong>Trim held</strong> at the upright value in the heel calculations. Free trim would change the GZ values by a few percent.</li>
+<li><strong>Placeholder weights:</strong> engine, radiator, prop, battery and tank use BOM figures. The engine (186 lb with flywheel and starter, plus oil) is the biggest uncertainty: ±20 lb moves the LCG about 0.4 in.</li>
+<li><strong>Swamped model:</strong> it spreads each body over its bounding box, which is good for the prismatic foam blocks and rough for thin shells. Expect about ±10% on reserve buoyancy and ±20% on swamped GM.</li>
+<li><strong>Verify on the real boat:</strong>
+  <ul>
+  <li>Weigh it.</li>
+  <li>Do an inclining check: 100 lb moved 30 in sideways, then measure the heel.</li>
+  <li>Do a supervised swamp test in shallow water before relying on the swamped figures.</li>
+  </ul></li>
+</ul>
+
+<h2>8 · Reviewer checklist</h2>
+<ol>
+<li>Check the weight table against a scale weight of the hull and of the finished boat.</li>
+<li>Spot-check two hull sections (for example x = 36 and 96 in) against the Fusion model or drawings.</li>
+<li>Check the hydrostatics for one load case by hand: displacement = 62.4 × V, and BM ≈ I<sub>T</sub>/V.</li>
+<li>Review the swamped displacement assumptions: the engine's effective density, the bench air spaces, and the cushions.</li>
+<li>Confirm the capacity method and the recommended label wording.</li>
+<li>Review the Finding 1 warning label wording and placement (the builder chose the label over gunwale foam), and check Finding 2 against a scale weight of the finished boat.</li>
+<li>Review the operating limits for turning at speed.</li>
+</ol>
+
+<h2>9 · Reproducing these results</h2>
+<p>The scripts are in <code>Engineering/calc/</code>.</p>
+<ul>
+<li><strong>Fusion exports (read-only):</strong> <code>fusion_survey_bodies.py</code> and <code>fusion_cut_sections.py</code> regenerate <code>data/bodies.json</code> and <code>data/sections.json</code>.</li>
+<li><strong>Calculation modules:</strong>
+  <ul>
+  <li><code>mass.py</code>: weights.</li>
+  <li><code>hydro.py</code>: intact hydrostatics.</li>
+  <li><code>swamped.py</code>: swamped cases.</li>
+  <li><code>capacity.py</code>: capacity, about 20 minutes.</li>
+  <li><code>stability.py</code>: GZ curves; writes <code>results.json</code>.</li>
+  </ul></li>
+<li><strong>Report:</strong> <code>make_report.py</code> builds this page.</li>
+<li><strong>Requirements:</strong> Python 3 with numpy.</li>
+</ul>
+<p class="small">Sources: 33 CFR 183.21, 183.33, 183.39, 183.101, 183.105 (eCFR / Cornell LII); FLHSMV form HSMV 87002 and procedure VSTL-09; Florida Statutes 327.391.</p>
+</main>
+</body>
+</html>
