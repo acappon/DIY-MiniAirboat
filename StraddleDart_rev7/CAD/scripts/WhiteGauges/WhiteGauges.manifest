@@ -1,0 +1,10 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "script",
+  "author": "",
+  "description": {
+    "": "Make the tach, water temp and fuel gauges white so they read against the black dash."
+  },
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}
