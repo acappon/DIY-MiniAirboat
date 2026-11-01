@@ -12,3 +12,6 @@ desktop.ini
 
 # Office lock files
 ~$*
+
+# Editor settings Fusion makes when you edit a script
+.vscode/

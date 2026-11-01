@@ -31,7 +31,7 @@ New here? Start with [GETTING_STARTED.md](GETTING_STARTED.md). It says what to r
 
 **Driver station**
 - **Console:** braced side frame with 3/16 in walls. It has a sheet-metal top and skins, and the dash folds up under a closed hood so nobody can get at the key wiring. The dash carries the tach, temperature and fuel gauges, key, kill-switch lanyard, NAV-OFF-ANCHOR switch, two light dimmers, USB and 12 V.
-- **Grip:** fixed Hurst-style grip, a 1-1/8 in stainless stick on a plate bolted through the console top and frame. Rated for a 600 lb pull.
+- **Grip:** a Hurst T-handle across the boat on a 1-1/8 in stainless stick, on a plate bolted through the console top and frame. The handle is a real Hurst shift knob on a pinned M16 stud with a nylon-insert lock nut, rated for a 450 lb pull; the stick, plate and frame below it are built for 600 lb.
 - **Armrest:** hinged; it swings up to let the driver in.
 - **Knee braces:** padded and curved to starboard, room for a large leg.
 - **Fittings:** cup holder, swivel phone holder, life-jacket hook and trim inclinometers.
@@ -102,7 +102,7 @@ To change something, open its own file, edit and save it. Then open the assembly
 | | Figure | Source |
 |---|---|---|
 | Empty boat | about 1,320 lb | CAD weight model before the 0.125 bottom (1,247 lb), plus about 52 lb for the bottom and 19 lb for the G13B and heavier hoops; the BOM's own total is 1,301 lb |
-| Materials | about $24,450, including 15% contingency | `BOM_rev7.xlsx`, Summary tab |
+| Materials | about $24,500, including 15% contingency | `BOM_rev7.xlsx`, Summary tab |
 | Build time | about 520 DIY hours (32 weekends of 16 hours) | `Build_Guide_rev7.xlsx` |
 | Time to plane (0-15 mph), full fuel | about 3.9 s solo, 4.7 s two aboard | `Engineering/calc/performance.py`, calibrated to the original design summary; static thrust about 430 lb is an estimate |
 | Top speed | about 40-42 mph solo, 38-41 mph two aboard | same |

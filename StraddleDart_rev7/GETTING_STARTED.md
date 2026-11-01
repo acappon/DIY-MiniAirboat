@@ -44,8 +44,8 @@ The right tether on this boat is the **kill-switch lanyard** on the dash, clippe
 
 This seating is meant to give the driver a firm connection to the boat, safely, without a seat belt. You're held by your own hands, feet, knees and thighs, so you can let go in an instant.
 
-**The handle.** The fixed Hurst-style grip by your right hand does three jobs:
-1. **A strong point to hang on to.** From there you can pull yourself back against the seat back. It's built for a 600 lb pull in any direction: a 1-1/8 in stainless stick on a plate bolted through the console top and frame.
+**The handle.** The fixed Hurst T-handle by your right hand does three jobs:
+1. **A strong point to hang on to.** From there you can pull yourself back against the seat back. It's rated for a 450 lb pull in any direction. The handle is a real Hurst shift knob, locked and pinned to a stud on a 1-1/8 in stainless stick; the stick and its plate, bolted through the console top and frame, are built for 600 lb.
 2. **Feedback.** It's bolted through the frame to the hull side, so you feel through your hand what the hull is doing.
 3. **Body English.** It lets you throw your weight one way or the other to change how the hull rides and turns.
 
@@ -77,7 +77,8 @@ Every place the driver braces against was sized for it in the structural checks 
 
 | Part | Design load |
 |---|---|
-| Grip and driver side frame | 600 lb pull in any direction |
+| Grip (Hurst T-handle) | 450 lb pull in any direction |
+| Grip stick and driver side frame | 600 lb pull in any direction |
 | Knee braces | 400 lb knee load |
 | Footrest rungs | 400 lb stomp |
 | Armrest | 250 lb lean |

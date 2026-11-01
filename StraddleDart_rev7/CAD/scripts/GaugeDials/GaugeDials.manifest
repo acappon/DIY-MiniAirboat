@@ -1,0 +1,10 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "script",
+  "author": "",
+  "description": {
+    "": "Add tick marks, figures and a needle to the tach, fuel and water temp gauges so they read in renders."
+  },
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}

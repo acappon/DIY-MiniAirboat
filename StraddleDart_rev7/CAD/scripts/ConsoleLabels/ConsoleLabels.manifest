@@ -1,0 +1,10 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "script",
+  "author": "",
+  "description": {
+    "": "Make the dash switches and sockets light gray and add white labels on the black panel below them."
+  },
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}

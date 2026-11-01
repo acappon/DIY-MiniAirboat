@@ -1397,6 +1397,46 @@
     "ok": true,
     "unit": "lb",
     "note": "through the console top and both rail walls, crush tubes"
+   },
+   {
+    "item": "Hurst T-handle stud, M16 x 1.5 on the 316 stick, 450 lb at the bar",
+    "demand": 19839.890351916907,
+    "capacity": 65000,
+    "fos": 3.2762277838758203,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "bending at the shoulder; A276 Cond B 316"
+   },
+   {
+    "item": "Hurst T-handle stud at the 1/4 pin hole",
+    "demand": 38784.29284813499,
+    "capacity": 65000,
+    "fos": 1.6759361903159113,
+    "req": 1.65,
+    "ok": true,
+    "unit": "psi",
+    "note": "net section, 0.4 in above the shoulder"
+   },
+   {
+    "item": "Hurst T-handle cross pin, 1/4 316, 450 lb pull at the bar end",
+    "demand": 1071.5625,
+    "capacity": 2208.9323345553235,
+    "fos": 2.0614125023555077,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": "twist about the stick"
+   },
+   {
+    "item": "Hurst T-handle pin bearing in the cast boss",
+    "demand": 1071.5625,
+    "capacity": 2812.5,
+    "fos": 2.6246719160104988,
+    "req": 2.0,
+    "ok": true,
+    "unit": "lb",
+    "note": "0.25 in wall assumed (measure the neck); cast aluminium Fu about 30 ksi"
    }
   ],
   "stop": 623.7113402061856,

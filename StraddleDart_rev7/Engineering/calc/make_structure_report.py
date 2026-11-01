@@ -92,7 +92,9 @@ def main():
     out.append('<div class="card ok"><p><strong>Fixed in the rev 7 CAD, BOM and build guide (31 Oct 2026):</strong></p><ol start="2">'
                '<li><strong>Grip.</strong> The 1 in 316 stick was shown welded into the 6061 inner rail. That was my rev 7 error: stainless can&rsquo;t be welded to aluminium. '
                'It is now a 1-1/8 in stick welded to a 3 &times; 2 &times; 1/4 in 316 base plate. Four 1/4 in 316 bolts clamp the plate through the console top and both rail walls, with crush tubes, Tef-Gel and a gasket. '
-               'Stick factor 1.31 &rarr; %.2f; bolts %.2f.</li>'
+               'Stick factor 1.31 &rarr; %.2f; bolts %.2f. '
+               'The ball knob is now a Hurst 1530040 T-handle threaded straight onto an M16 &times; 1.5 stud turned on the stick (cold-drawn A276 Condition B 316), with a 316 nylon-insert lock nut under the neck and a 1/4 in 316 cross pin so a pull on one end of the bar can&rsquo;t unscrew it. '
+               'The pin and the stud&rsquo;s section at the pin hole limit the hand-hold to 450 lb (a machined 6061 handle over the full stick would carry 600 lb). Measure the handle&rsquo;s neck: the pin bearing assumes a 1/4 in wall.</li>'
                '<li><strong>Prop cage.</strong> The side bays and the drum had no diagonals, so the tubes carried the loads in bending. Now:'
                '<ul>'
                '<li>DOM tube (yield 50 ksi or better) throughout.</li>'
@@ -132,7 +134,7 @@ def main():
         ('Rudder normal force', '%s lb each' % n(L['rudder_N']), 'C<sub>N</sub> 1.2 &times; q %.1f psf &times; 4.1 ft&sup2; &times; 1.25; slipstream %.0f ft/s at 39 mph at the rudders (momentum theory, 9 in aft of the disk)' % (L['q_rudder'], L['v_slip_speed'])),
         ('Rudder hinge moment and rod force', '%s lb-in; %s lb' % (n(L['hinge_M']), n(L['rod_F'])), 'Centre of pressure 0.3 chord + 0.6 in aft of the hinge; both rudders through the tie bar; horn arm 4.0 in'),
         ('Screen drag', '%s lb aft, %s lb front' % (n(L['mesh_aft']), n(L['mesh_fwd'])), 'Hardware cloth K = %.2f (Idelchik, solidity 0.16) at 39 mph plus the prop inflow, &times;1.25' % L['mesh_K']),
-        ('Hand-hold (grip)', '600 lb', 'Pull in any direction at the knob, 3.75 in above the rail'),
+        ('Hand-hold (grip)', '450 lb at the T-handle; 600 lb below it', 'Pull in any direction. The Hurst T-handle is a cast shift knob on an M16 stud, so it is rated 450 lb; the stick, base plate and frame are still checked for 600 lb, 3.75 in above the rail'),
         ('Knee on a brace', '400 lb', '325 lb rider, about 0.6 g turn, &times;2 for impact'),
         ('Armrest lean / console step', '250 lb / 300 lb', 'At the armrest end / mid console'),
         ('Cage misuse', '250 lb down, 150 lb sideways', 'Someone standing on a hoop top / shoving the side'),

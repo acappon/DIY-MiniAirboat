@@ -235,7 +235,7 @@ dl { margin: 0 }
       <div class="hero-copy">
         <div class="eyebrow">Open-source plans &middot; 12&prime;6&Prime; riveted aluminum &middot; two seats</div>
         <h1>Build your own airboat in a two-car garage</h1>
-        <p class="lede">About $20,000 in materials and about 500 evenings and weekends. Then comes one Saturday morning on the canal off Griffin Road that makes all of it worth it.</p>
+        <p class="lede">About $21,000 in materials and about 500 evenings and weekends. Then comes one Saturday morning on the canal off Griffin Road that makes all of it worth it.</p>
         <div class="cta">
           <a class="btn primary" href="https://github.com/acappon/DIY-MiniAirboat" target="_blank" rel="noopener">Get the free plans</a>
           <a class="btn ghost" href="#hull" data-jump="hull">See how the hull goes together</a>
@@ -284,13 +284,13 @@ dl { margin: 0 }
       <div class="eyebrow">The money</div>
       <h2 id="cost">About a third the price of buying one</h2>
       <p class="col">Here's how the materials cost compares with what Florida buyers pay for airboats today. If you paid a shop to build this exact design, labor alone would run about $41,000 at $90&ndash;100 an hour. You put in those hours yourself.</p>
-      <div class="chart" id="costChart" role="img" aria-label="Price ranges: build it yourself about 19.6 to 22.5 thousand dollars; this design shop-built about 60.7 thousand; used 14 ft airboats 27 to 47 thousand; new entry-level 32 to 59 thousand; new custom 80 to 160 thousand and up."></div>
+      <div class="chart" id="costChart" role="img" aria-label="Price ranges: build it yourself about 21.3 to 24.5 thousand dollars; this design shop-built about 62.5 thousand; used 14 ft airboats 27 to 47 thousand; new entry-level 32 to 59 thousand; new custom 80 to 160 thousand and up."></div>
       <div class="tbl">
         <table>
           <thead><tr><th>Option</th><th>Price</th><th>What it buys</th></tr></thead>
           <tbody>
-            <tr class="us"><td>Build this design yourself</td><td class="num">$19.6k&ndash;22.5k</td><td>All materials from the parts list. The higher figure adds 15% for shipping, tax and mistakes. Tools and a trailer are extra (see the toolkit).</td></tr>
-            <tr><td>This design, built by a shop</td><td class="num">&asymp; $60.7k</td><td>The same materials plus about $41,200 of shop labor, using the build guide's hours.</td></tr>
+            <tr class="us"><td>Build this design yourself</td><td class="num">$21.3k&ndash;24.5k</td><td>All materials from the parts list. The higher figure adds 15% for shipping, tax and mistakes. Tools and a trailer are extra (see the toolkit).</td></tr>
+            <tr><td>This design, built by a shop</td><td class="num">&asymp; $62.5k</td><td>The same materials plus about $41,200 of shop labor, using the build guide's hours.</td></tr>
             <tr><td>Used 14 ft airboat</td><td class="num">$27k&ndash;47k</td><td>Asking prices in 2026 classified listings, from a 2010 Bullfrog to an Alumitech.</td></tr>
             <tr><td>New entry-level airboat</td><td class="num">$32k&ndash;59k</td><td>Published price-guide ranges. These are older figures, so expect today's prices to be higher.</td></tr>
             <tr><td>New custom airboat</td><td class="num">$80k&ndash;160k+</td><td>A Florida builder's 2026 price guide, with big-block V8 or aircraft engines.</td></tr>
@@ -485,7 +485,7 @@ dl { margin: 0 }
     <section>
       <div class="eyebrow">Message pillars</div>
       <div class="pillars">
-        <div><h3>A third of the price</h3><p>$19.6k in materials against $27&ndash;47k used and $80k+ new custom. Fuel at about half the cost per hour.</p><p class="muted small">Proof: the priced BOM, the comparison chart.</p></div>
+        <div><h3>A third of the price</h3><p>$21.3k in materials against $27&ndash;47k used and $80k+ new custom. Fuel at about half the cost per hour.</p><p class="muted small">Proof: the priced BOM, the comparison chart.</p></div>
         <div><h3>You can build this</h3><p>A riveted hull with no welding, clecos that let you fix mistakes before they're permanent, and a step-by-step guide with hours for every step.</p><p class="muted small">Proof: rivet close-ups, the hose test, the 58-step guide.</p></div>
         <div><h3>Built for the Glades</h3><p>Caged prop, foam flotation, a bilge that drains every bay, sealed marine wiring, lights for the run home.</p><p class="muted small">Proof: renders, the wiring schematic.</p></div>
         <div><h3>Nothing hidden</h3><p>Free plans under the MIT license. Every part is editable in Fusion 360. Estimates are labeled as estimates.</p><p class="muted small">Proof: the GitHub repo itself.</p></div>
@@ -699,10 +699,10 @@ function paintScenes(root){ (root || document).querySelectorAll('[data-scene]').
 function costChart(){
   const el = document.getElementById('costChart'); if (!el) return;
   const rows = [
-    ['Build it yourself (this design)', 19.6, 22.5, true],
+    ['Build it yourself (this design)', 21.3, 24.5, true],
     ['Used 14 ft airboat', 27, 47],
     ['New entry-level airboat', 32, 59],
-    ['This design, shop-built', 60.7, 60.7],
+    ['This design, shop-built', 62.5, 62.5],
     ['New custom airboat', 80, 160, false, true],
   ];
   const W = 900, L = 230, Rr = 40, top = 14, rowH = 46, H = top + rows.length * rowH + 36, max = 170;
@@ -782,7 +782,7 @@ const SPOTS = [
     { tc: '0:12–0:15', v: { sk: 'engine' }, sup: '$600 junkyard engine', pic: 'The Suzuki 1.3 on an engine stand, half rebuilt, coffee mug on the valve cover.', snd: 'Ratchet.', vo: '"Where\'d you buy it?"' },
     { tc: '0:15–0:20', v: { scene: 'dawn', cut: '01' }, sup: '', pic: 'Sunrise at the ramp. The boat floats off the trailer. Close-up: key turns, gauges sweep, prop spins up.', snd: 'Engine catches. Music hits.', vo: '—', tag: 'RENDER' },
     { tc: '0:20–0:26', v: { scene: 'day', cut: '07' }, sup: '', pic: 'Drone tracking shot at 30 mph over sawgrass, two riders, orange flag snapping. Egrets lift off well ahead; we never chase them.', snd: 'Music swells, wind.', vo: 'I didn\'t buy it.', tag: 'RENDER' },
-    { tc: '0:26–0:30', v: { scene: 'dusk', cut: '07', end: true }, sup: 'Build your own airboat. Free plans.', pic: 'End card: the boat on the canal at dusk. "About $20k in materials. About 520 hours." URL.', snd: 'Engine idles down.', vo: 'I built it. In my garage.' },
+    { tc: '0:26–0:30', v: { scene: 'dusk', cut: '07', end: true }, sup: 'Build your own airboat. Free plans.', pic: 'End card: the boat on the canal at dusk. "About $21k in materials. About 520 hours." URL.', snd: 'Engine idles down.', vo: 'I built it. In my garage.' },
   ]},
   { id: 'B', title: 'Ramp Question', len: ':15', fmt: '9:16 first', use: 'Reels, TikTok, YouTube Shorts', idea: 'A cutdown of Spot A for people scrolling past.', frames: [
     { tc: '0:00–0:04', v: { scene: 'dawn', cut: '07' }, sup: '"Where\'d you buy it?"', pic: 'At the ramp a stranger points at the boat. Hard cut on the question.', snd: 'Ambient ramp sound.', vo: '—', tag: 'RENDER' },
@@ -821,7 +821,7 @@ function storyboards(){
 
 /* ---------- calculator ---------- */
 const OPTS = [
-  { id: 'mat', label: 'Materials from the parts list', note: 'Hull $5,040, drivetrain $6,038, everything else $8,473', amt: 19551, fixed: true },
+  { id: 'mat', label: 'Materials from the parts list', note: 'Hull $5,404, drivetrain $6,551, everything else $9,385', amt: 21340, fixed: true },
   { id: 'shear', label: 'Fab shop: shear and brake the hull blanks', note: 'Not in the parts list', amt: 600, on: true },
   { id: 'riv', label: 'Pneumatic pop riveter', note: 'Typical street price', amt: 180, on: true },
   { id: 'comp', label: 'Air compressor, 20 gal or more', note: 'Uncheck if you own one', amt: 350, on: true },
@@ -841,11 +841,11 @@ function calc(){
   const cont = document.getElementById('cont'); if (saved.cont != null) cont.value = saved.cont;
   const upd = () => {
     const c = Number(cont.value); document.getElementById('contV').textContent = c + '%';
-    const state = { cont: c }; let tot = 19551 * (1 + c / 100);
+    const state = { cont: c }; let tot = 21340 * (1 + c / 100);
     OPTS.forEach(o => { if (o.fixed) return; const on = document.getElementById('o-' + o.id).checked; state[o.id] = on; if (on) tot += o.amt; });
     try { localStorage.setItem('gba-calc', JSON.stringify(state)); } catch (e) {}
     document.getElementById('tot').textContent = fmt(tot);
-    document.getElementById('totNote').textContent = 'Materials ' + fmt(19551) + ' plus a ' + c + '% cushion (' + fmt(19551 * c / 100) + '), plus the items you checked.';
+    document.getElementById('totNote').textContent = 'Materials ' + fmt(21340) + ' plus a ' + c + '% cushion (' + fmt(21340 * c / 100) + '), plus the items you checked.';
     const cmp = [['Used 14 ft airboat, low end', 27000], ['New entry-level, low end', 32000], ['New custom, low end', 80000]];
     document.getElementById('cmp').innerHTML = cmp.map(([k, v]) => `<div style="display:grid;gap:4px"><div style="display:flex;justify-content:space-between;font-size:14px"><span>${k}</span><b class="mono">${tot < v ? 'save ' + fmt(v - tot) : 'costs ' + fmt(tot - v) + ' more'}</b></div><div class="meter"><span style="width:${Math.min(100, tot / v * 100)}%"></span></div></div>`).join('');
   };

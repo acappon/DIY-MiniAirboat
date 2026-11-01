@@ -1,0 +1,10 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "script",
+  "author": "",
+  "description": {
+    "": "Replace the grip's ball knob with a polished aluminium T-handle across the boat (the ball is hidden, not deleted)."
+  },
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}

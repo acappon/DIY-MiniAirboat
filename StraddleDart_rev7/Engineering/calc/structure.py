@@ -28,6 +28,7 @@ MAT = {
 }
 REQ_MEMBER = 1.65   # ADM / AISC ASD safety factor on yield and buckling
 REQ_CONN = 2.0      # bolts and pins against nominal capacity
+GRIP_HURST = 450    # lb, hand-hold rating at the Hurst T-handle
 
 # bolts: (tensile stress area, root area, Fu)
 BOLT = {
@@ -609,6 +610,27 @@ def run_side_frame():
     fos, Tc, Vc = bolt_fos('1/4 316 (F593 CW)', Tb, 600 / 4)
     grip_fixed.append(dict(item='Grip base-plate bolts, 4 x 1/4 316: T %.0f lb, V %.0f lb per bolt' % (Tb, 150), demand=Tb, capacity=Tc,
                            fos=fos, req=REQ_CONN, ok=fos >= REQ_CONN, unit='lb', note='through the console top and both rail walls, crush tubes'))
+    # Hurst 1530040 T-handle (cast aluminium) straight on an M16 x 1.5 stud turned on the stick end (no adapter),
+    # 316 nylon-insert lock nut under the neck, 1/4 316 cross pin 0.4 in above the shoulder. The stick is
+    # cold-drawn 316 (A276 Cond B, 65 ksi for 1-1/8 bar). A shift knob, so the hand-hold is rated GRIP_HURST lb
+    # at the handle (the stick, plate and frame keep 600 lb). Bar centre 0.75 in above the shoulder; hand up to
+    # 1.5 in off the bar centre. The lock nut's friction is not counted.
+    P_t, a_t, e_t = GRIP_HURST, 0.75, 1.5
+    D_stud, d3 = 16 / 25.4, 0.5575            # M16 x 1.5: major and minor diameter, in
+    d_pin, z_pin = 0.25, 0.4
+    Fy_b = 65000
+    S_stud = math.pi * d3 ** 3 / 32
+    grip_fixed.append(check('Hurst T-handle stud, M16 x 1.5 on the 316 stick, %d lb at the bar' % P_t, P_t * a_t / S_stud, Fy_b,
+                            REQ_MEMBER, note='bending at the shoulder; A276 Cond B 316'))
+    S_net = S_stud - d_pin * d3 ** 2 / 6       # minus the cross-pin hole
+    grip_fixed.append(check('Hurst T-handle stud at the 1/4 pin hole', P_t * (a_t - z_pin) / S_net, Fy_b, REQ_MEMBER,
+                            note='net section, %.1f in above the shoulder' % z_pin))
+    A_pin = math.pi * d_pin ** 2 / 4
+    F_pin = P_t * e_t / D_stud                 # shear per plane = twist / stud diameter
+    grip_fixed.append(check('Hurst T-handle cross pin, 1/4 316, %d lb pull at the bar end' % P_t, F_pin, 0.6 * 75000 * A_pin,
+                            REQ_CONN, 'lb', note='twist about the stick'))
+    grip_fixed.append(check('Hurst T-handle pin bearing in the cast boss', F_pin, 1.5 * 30000 * d_pin * 0.25, REQ_CONN, 'lb',
+                            note='0.25 in wall assumed (measure the neck); cast aluminium Fu about 30 ksi'))
     Fstop = 250 * 12.1 / 4.85
     Fpin = math.hypot(250, Fstop)
     extra.append(check('Armrest hinge pin, 1/2 316, double shear', Fpin, 2 * 0.6 * 75000 * 0.196, REQ_CONN, 'lb'))
