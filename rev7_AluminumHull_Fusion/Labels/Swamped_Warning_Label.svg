@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="6in" height="4in" viewBox="0 0 600 400" role="img" aria-label="Warning label: a swamped boat can roll over">
+  <!-- Print at 100% on UV-laminated marine vinyl. ANSI Z535.4 style: orange WARNING panel, black on white message. -->
+  <rect x="0" y="0" width="600" height="400" rx="14" fill="#fff" stroke="#000" stroke-width="6"/>
+  <path d="M3 17 a14 14 0 0 1 14 -14 H583 a14 14 0 0 1 14 14 V78 H3 Z" fill="#ff7900"/>
+  <g transform="translate(150 41)">
+    <path d="M0 -28 L32 26 H-32 Z" fill="#000"/>
+    <path d="M0 -17 L22 21 H-22 Z" fill="#ff7900"/>
+    <rect x="-3.5" y="-8" width="7" height="18" fill="#000"/>
+    <rect x="-3.5" y="13" width="7" height="6" fill="#000"/>
+  </g>
+  <text x="200" y="61" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="54" fill="#000">WARNING</text>
+  <line x1="3" y1="78" x2="597" y2="78" stroke="#000" stroke-width="4"/>
+
+  <!-- pictogram: swamped hull rolled by a person pulling on the rail -->
+  <g transform="translate(92 205)" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-62 30 H62" stroke-width="3"/>
+    <g transform="rotate(24)">
+      <path d="M-50 -14 L-44 16 H44 L50 -14"/>
+      <path d="M-44 6 H44" stroke-width="3" stroke-dasharray="6 5"/>
+    </g>
+    <circle cx="54" cy="44" r="8" fill="#000" stroke="none"/>
+    <path d="M54 52 V72 M54 58 L44 22"/>
+    <path d="M-30 -52 a42 42 0 0 1 60 6" stroke-width="4"/>
+    <path d="M30 -46 l-2 -14 M30 -46 l-13 -3" stroke-width="4"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" fill="#000">
+    <text x="190" y="122" font-weight="700" font-size="27">A SWAMPED BOAT</text>
+    <text x="190" y="154" font-weight="700" font-size="27">CAN ROLL OVER.</text>
+    <text x="190" y="190" font-size="18">One adult pulling down on the side</text>
+    <text x="190" y="212" font-size="18">can capsize it when it is full of water.</text>
+    <text x="190" y="250" font-size="18" font-weight="700">If the boat swamps:</text>
+    <text x="190" y="274" font-size="18">• Do not climb on or hang from the sides.</text>
+    <text x="190" y="298" font-size="18">• Hold on at the bow, on the centreline.</text>
+    <text x="190" y="322" font-size="18">• Keep weight off the driver’s side.</text>
+    <text x="190" y="346" font-size="18">• Wear a life jacket at all times.</text>
+  </g>
+  <text x="300" y="384" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#000">Failure to follow these instructions can result in death by drowning.</text>
+</svg>

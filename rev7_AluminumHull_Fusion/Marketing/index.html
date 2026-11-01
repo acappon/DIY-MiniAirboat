@@ -1,0 +1,925 @@
+<title>Garage-Built Airboat</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky tab bar over four views (brochure, storyboard, plan, toolkit); each is a single reading column
+   with full-bleed scene bands. Palette from the Glades at dawn: sawgrass gold, canal teal, flag orange. */
+:root {
+  --paper: #f1f4f0; --surface: #ffffff; --ink: #14231f; --muted: #53625d; --rule: #d1d9d4;
+  --water: #0d5a60; --sawgrass: #8f6b12; --flag: #c63f0b; --on-flag: #ffffff; --flag-soft: #fbe3d6; --water-soft: #dcecec;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #0c1513; --surface: #13201d; --ink: #e2ebe7; --muted: #98a9a3; --rule: #263631;
+  --water: #5cb8ba; --sawgrass: #d8ae4a; --flag: #ff6b2c; --on-flag: #1b0a02; --flag-soft: #3a1d10; --water-soft: #12302f; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #0c1513; --surface: #13201d; --ink: #e2ebe7; --muted: #98a9a3; --rule: #263631;
+  --water: #5cb8ba; --sawgrass: #d8ae4a; --flag: #ff6b2c; --on-flag: #1b0a02; --flag-soft: #3a1d10; --water-soft: #12302f; color-scheme: dark }
+
+* { box-sizing: border-box }
+[hidden] { display: none !important }
+body { background: var(--paper); color: var(--ink); font: 400 17px/1.55 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+a { color: var(--water); text-underline-offset: 3px }
+a:focus-visible, button:focus-visible, input:focus-visible, label:focus-within { outline: 3px solid var(--flag); outline-offset: 2px }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: .005em; }
+h1 { font-weight: 900; font-size: clamp(44px, 8vw, 92px); line-height: .9; text-transform: uppercase; }
+h2 { font-weight: 800; font-size: clamp(32px, 4.6vw, 52px); line-height: .95; text-transform: uppercase; }
+h3 { font-weight: 800; font-size: 25px; line-height: 1.05; text-transform: uppercase; }
+p { margin: 0 }
+.eyebrow { font: 500 12.5px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--sawgrass); }
+.lede { font-size: 20px; line-height: 1.5; max-width: 60ch; }
+.muted { color: var(--muted) }
+.mono { font-family: var(--mono) }
+.small { font-size: 14.5px }
+
+/* tab bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--surface); border-bottom: 1px solid var(--rule);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.bar-in { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; gap: 18px; min-height: 56px; overflow-x: auto; scrollbar-width: none }
+.mark { font: 900 21px/1 var(--display); text-transform: uppercase; white-space: nowrap; display: flex; gap: 8px; align-items: center }
+.mark i { width: 14px; height: 12px; background: var(--flag); display: inline-block }
+.tabs { display: flex; gap: 4px; margin-left: auto }
+.tabs a { font: 600 14.5px/1 var(--body); color: var(--muted); text-decoration: none; padding: 10px 12px; border-radius: 4px; white-space: nowrap }
+.tabs a[aria-current="page"] { color: var(--ink); background: var(--paper); box-shadow: inset 0 -3px 0 var(--flag) }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.view { display: grid; gap: 72px; padding-block: 0 96px }
+.view > section { display: grid; gap: 22px; min-width: 0 }
+.col { max-width: 760px }
+
+/* scene band */
+.scene { position: relative; overflow: hidden; background: #26364d; isolation: isolate }
+.scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: -1 }
+.hero { min-height: 560px; display: grid; align-items: end; color: #fdf6ec }
+.hero .wrap { width: 100%; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; align-items: end; padding-block: 64px 44px }
+.hero .eyebrow { color: #ffd59a }
+.hero p.lede { color: #fbeee0; text-shadow: 0 1px 12px rgba(10, 18, 30, .5) }
+.hero h1 { text-shadow: 0 2px 22px rgba(10, 18, 30, .45) }
+.hero .boat { width: 100%; height: auto; max-width: 620px; justify-self: end; filter: drop-shadow(0 24px 22px rgba(12, 22, 18, .45)); }
+.hero-copy { display: grid; gap: 20px; min-width: 0 }
+.cta { display: flex; flex-wrap: wrap; gap: 12px }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 700 16px/1 var(--body); padding: 14px 18px; border-radius: 4px; text-decoration: none; border: 2px solid transparent; cursor: pointer }
+.btn.primary { background: var(--flag); color: var(--on-flag) }
+.btn.ghost { border-color: currentColor; color: inherit; background: transparent }
+.hero .btn.ghost { color: #fdf6ec }
+
+/* figures strip */
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-top: 3px solid var(--ink); }
+.figs div { padding: 14px 14px 4px 0; display: grid; gap: 4px; align-content: start }
+.figs b { font: 800 34px/1 var(--display); }
+.figs span { font-size: 14px; color: var(--muted) }
+
+/* story */
+.story { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 14px 22px; max-width: 820px }
+.story time { font: 500 15px/1.5 var(--mono); color: var(--sawgrass); padding-top: 2px }
+.story p { max-width: 62ch }
+
+/* image strip */
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px }
+figure { margin: 0; display: grid; gap: 8px; min-width: 0 }
+figure img { width: 100%; height: auto; border-radius: 4px; background: #b9bcbb; display: block; aspect-ratio: 1400 / 866; object-fit: cover }
+figcaption { font-size: 14px; color: var(--muted) }
+
+/* cost chart */
+.chart { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 18px 8px; overflow-x: auto }
+.chart svg { display: block; width: 100%; min-width: 640px; height: auto }
+.chart text { fill: var(--ink); font-family: var(--body); font-size: 13px }
+.chart .tick { fill: var(--muted); font: 12px var(--mono) }
+.chart .grid { stroke: var(--rule) }
+.note { font-size: 14px; color: var(--muted); max-width: 80ch }
+
+table { border-collapse: collapse; width: 100%; font-size: 15.5px; font-variant-numeric: tabular-nums }
+th { text-align: left; font: 500 12px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--ink); white-space: nowrap }
+td { padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top }
+.tbl { overflow-x: auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px }
+td.num { text-align: right; font-family: var(--mono); white-space: nowrap }
+tr.us td { background: var(--flag-soft); font-weight: 600 }
+
+/* steps */
+.steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0; border-top: 1px solid var(--rule) }
+.step { padding: 20px 22px 22px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 10px; align-content: start; grid-template-columns: 54px minmax(0, 1fr) }
+.step .n { font: 900 46px/.9 var(--display); color: var(--flag) }
+.step h3 { font-size: 22px }
+.step .meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 500 13px/1.3 var(--mono); color: var(--sawgrass) }
+.step > div { display: grid; gap: 8px; min-width: 0 }
+.callout { background: var(--water-soft); border-left: 4px solid var(--water); padding: 18px 20px; border-radius: 0 6px 6px 0; display: grid; gap: 8px; max-width: 860px }
+.callout.warn { background: var(--flag-soft); border-left-color: var(--flag) }
+
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start }
+.list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0 }
+.list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--rule) }
+.list li span:last-child { font-family: var(--mono); font-size: 14.5px; white-space: nowrap; color: var(--muted) }
+.list li small { display: block; color: var(--muted); font-size: 14px }
+
+.garage { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px }
+.garage svg { width: 100%; height: auto; display: block }
+.garage text { fill: var(--ink); font: 12px var(--mono) }
+
+.timeline { display: grid; gap: 10px }
+.tl-bar { display: flex; height: 38px; border-radius: 4px; overflow: hidden }
+.tl-bar span { display: block; height: 100% }
+.tl-key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px }
+.tl-key i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; border-radius: 2px }
+
+.specs { columns: 2 320px; column-gap: 40px }
+.specs div { break-inside: avoid; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px }
+.specs dt { font: 500 12.5px/1.6 var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted) }
+.specs dd { margin: 0 }
+dl { margin: 0 }
+
+.endcap { color: #fdf6ec; min-height: 380px; display: grid; align-items: center }
+.endcap .wrap { display: grid; gap: 18px; padding-block: 64px; width: 100% }
+.endcap h2 { max-width: 16ch; text-shadow: 0 2px 18px rgba(10, 18, 30, .5) }
+.endcap p { max-width: 54ch; text-shadow: 0 1px 10px rgba(10, 18, 30, .6) }
+.endcap .btn.ghost { color: #fdf6ec }
+
+/* storyboard */
+.spot { display: grid; gap: 18px }
+.spot-head { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline }
+.chip { font: 500 12.5px/1 var(--mono); letter-spacing: .06em; padding: 6px 8px; border: 1px solid var(--rule); border-radius: 3px; color: var(--muted); background: var(--surface) }
+.frames { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px 18px }
+.frame { display: grid; gap: 10px; align-content: start; min-width: 0 }
+.frame .pic { position: relative; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #1b2522; color: #e9efe9; isolation: isolate }
+.frame .pic canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1 }
+.frame .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.frame .pic img.cut { object-fit: contain; inset: auto 8% 4% auto; width: 62%; height: auto; filter: drop-shadow(0 10px 10px rgba(0,0,0,.4)) }
+.frame .pic svg { position: absolute; inset: 0; width: 100%; height: 100% }
+.frame .pic .super { position: absolute; left: 8px; bottom: 8px; right: 8px; font: 800 17px/1.05 var(--display); text-transform: uppercase; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.8) }
+.frame .pic .tc { position: absolute; top: 6px; left: 6px; font: 500 11px/1 var(--mono); background: rgba(0,0,0,.6); color: #fff; padding: 4px 5px; border-radius: 2px }
+.frame dl { display: grid; gap: 4px; font-size: 14.5px }
+.frame dt { font: 500 11.5px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--sawgrass); margin-top: 4px }
+.frame dd { margin: 0 }
+
+/* plan */
+.persona { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; border-top: 3px solid var(--ink) }
+.persona > div { padding: 16px 20px 16px 0; display: grid; gap: 8px; align-content: start }
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px }
+.pillars div { display: grid; gap: 8px; align-content: start; border-top: 2px solid var(--flag); padding-top: 12px }
+.weeks { display: grid; gap: 0; border-top: 1px solid var(--rule) }
+.weeks div { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule) }
+.weeks b { font: 800 22px/1 var(--display); text-transform: uppercase }
+.weeks ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px }
+
+/* toolkit */
+.calc { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: start }
+.opts { display: grid; gap: 0; border-top: 1px solid var(--rule) }
+.opt { display: grid; grid-template-columns: 26px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 11px 0; border-bottom: 1px solid var(--rule); cursor: pointer }
+.opt input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--flag) }
+.opt small { display: block; color: var(--muted); font-size: 13.5px }
+.opt .amt { font-family: var(--mono); font-size: 14.5px; white-space: nowrap }
+.total { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 72px); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 20px; display: grid; gap: 12px }
+.total .big { font: 900 60px/.9 var(--display) }
+.range { display: grid; gap: 6px }
+.range label { font-size: 14.5px; display: flex; justify-content: space-between }
+.range input { width: 100%; accent-color: var(--flag) }
+.meter { height: 10px; background: var(--paper); border-radius: 5px; overflow: hidden; border: 1px solid var(--rule) }
+.meter span { display: block; height: 100%; background: var(--water) }
+.quiz { display: grid; gap: 0; border-top: 1px solid var(--rule); max-width: 860px }
+.q { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--rule) }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden }
+.seg button { font: 600 14px/1 var(--body); padding: 9px 14px; background: var(--surface); color: var(--muted); border: 0; cursor: pointer }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper) }
+.verdict { padding: 16px 18px; border-radius: 6px; background: var(--water-soft); max-width: 860px }
+.copyblock { display: grid; gap: 0; border-top: 1px solid var(--rule) }
+.copyrow { display: grid; grid-template-columns: 140px minmax(0, 1fr) auto; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); align-items: start }
+.copyrow .k { font: 500 12px/1.5 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--sawgrass) }
+.copyrow p { white-space: pre-line }
+.copybtn { font: 600 13px/1 var(--body); padding: 8px 10px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 4px; cursor: pointer }
+.flyer { background: var(--surface); border: 2px dashed var(--muted); padding: 26px; display: grid; gap: 12px; max-width: 640px; border-radius: 4px }
+.flyer h3 { font-size: 40px; line-height: .9 }
+.flyer .tear { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 2px dashed var(--muted); padding-top: 10px; gap: 0 }
+.flyer .tear span { writing-mode: vertical-rl; transform: rotate(180deg); font: 500 11px var(--mono); border-left: 1px dashed var(--rule); padding: 6px 4px; height: 120px }
+.sources { font-size: 14px; color: var(--muted); display: grid; gap: 4px; max-width: 90ch }
+.sources a { word-break: break-word }
+
+@media (max-width: 820px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .hero .boat { justify-self: center; max-width: 440px; order: -1 }
+  .two, .calc, .persona { grid-template-columns: minmax(0, 1fr) }
+  .story { grid-template-columns: minmax(0, 1fr); gap: 4px 0 }
+  .story p { margin-bottom: 12px }
+  .specs div { grid-template-columns: 130px minmax(0, 1fr) }
+  .copyrow { grid-template-columns: minmax(0, 1fr) auto }
+  .copyrow .k { grid-column: 1 / -1 }
+  .weeks div { grid-template-columns: minmax(0, 1fr); gap: 4px }
+  .total { position: static }
+  .mark span { display: none }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero .boat { animation: bob 6s ease-in-out infinite }
+  @keyframes bob { 50% { transform: translateY(-6px) rotate(-.4deg) } }
+}
+</style>
+
+<nav class="bar" aria-label="Kit sections">
+  <div class="bar-in">
+    <div class="mark"><i aria-hidden="true"></i><span>Garage-Built Airboat</span></div>
+    <div class="tabs" role="tablist">
+      <a href="#brochure" data-tab="brochure">Brochure</a>
+      <a href="#storyboard" data-tab="storyboard">Video storyboard</a>
+      <a href="#plan" data-tab="plan">Marketing plan</a>
+      <a href="#toolkit" data-tab="toolkit">Builder toolkit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================== BROCHURE ============================== -->
+<main id="v-brochure" class="view" data-view="brochure">
+  <header class="scene hero" data-scene="dawn">
+    <canvas aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Open-source plans &middot; 12&prime;6&Prime; riveted aluminum &middot; two seats</div>
+        <h1>Build your own airboat in a two-car garage</h1>
+        <p class="lede">About $20,000 in materials and about 500 evenings and weekends. Then comes one Saturday morning on the canal off Griffin Road that makes all of it worth it.</p>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/acappon/DIY-MiniAirboat" target="_blank" rel="noopener">Get the free plans</a>
+          <a class="btn ghost" href="#hull" data-jump="hull">See how the hull goes together</a>
+        </div>
+      </div>
+      <img class="boat" src="img/07_cutout.webp" alt="The finished airboat with a driver and passenger seated on the bench, prop cage and orange flag behind them" width="851" height="942">
+    </div>
+  </header>
+
+  <div class="wrap" style="display:grid;gap:72px">
+    <section aria-label="Key figures">
+      <div class="figs">
+        <div><b>$19,550</b><span>materials from the parts list, before a 15% cushion</span></div>
+        <div><b>~520 h</b><span>build time from the 58-step guide</span></div>
+        <div><b>12&prime;6&Prime; &times; 6&prime;</b><span>hull length and beam, 14&prime; with rudders</span></div>
+        <div><b>~30 mph</b><span>calculated cruise, two up</span></div>
+        <div><b>$600</b><span>junkyard Suzuki 1.3 L engine, about 70 hp</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="pic">
+      <div class="eyebrow">Picture it</div>
+      <h2 id="pic">A Saturday, eighteen months from now</h2>
+      <div class="story">
+        <time>5:50 a.m.</time><p>The truck is hitched before the coffee is done. The boat on the trailer behind it is one you riveted together yourself, every one of its 2,500 rivets. Your neighbor has stopped asking what you were doing in that garage all last summer.</p>
+        <time>6:25 a.m.</time><p>West on Griffin Road, past the last of the subdivisions, to the ramp at the edge of the Glades. Mist is still sitting on the canal. You back it in, float it off and climb onto the bench.</p>
+        <time>6:40 a.m.</time><p>Key on. The fuel gauge you wired shows full. The junkyard Suzuki you rebuilt on an engine stand catches on the second crank, and the carbon prop you pitched with a protractor spins up behind you.</p>
+        <time>7:05 a.m.</time><p>Thirty miles an hour across the sawgrass with a friend on the back seat, egrets lifting off the water ahead. The cooler under the passenger cushion has breakfast in it.</p>
+        <time>7:30 p.m.</time><p>The run home is in the dark, so you switch on the light bar and swing the searchlight onto the channel markers from your seat. Back at the ramp, somebody asks where you bought it. You get to say <em>my garage</em>.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="look">
+      <div class="eyebrow">What you&rsquo;re building</div>
+      <h2 id="look">Every part is already drawn</h2>
+      <p class="col">These are renders of the complete design, not concept art. The plans include the full 3D model, so you can measure any part, print any template and see how every bolt goes in before you buy a single sheet of aluminum.</p>
+      <div class="shots">
+        <figure><img src="img/02.webp" alt="Front three-quarter view of the airboat from the port side" loading="lazy" width="1400" height="866"><figcaption>Riveted 5052 aluminum hull with UHMW wear strips on the bottom.</figcaption></figure>
+        <figure><img src="img/09.webp" alt="Driver's-eye view of the grip, armrest and tilted dash" loading="lazy" width="1400" height="866"><figcaption>Driver's seat: armrest grip, tilted dash with tach, temp and fuel gauges, USB and 12 V.</figcaption></figure>
+        <figure><img src="img/10.webp" alt="The bench cooler lid open at 95 degrees" loading="lazy" width="1400" height="866"><figcaption>Bench with a sealed battery bay up front and a gasketed cooler under the passenger.</figcaption></figure>
+        <figure><img src="img/03.webp" alt="Aft three-quarter view showing the prop cage, rudders and stern light" loading="lazy" width="1400" height="866"><figcaption>Fully caged 64 in carbon prop, twin honeycomb rudders, all-round stern light.</figcaption></figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="cost">
+      <div class="eyebrow">The money</div>
+      <h2 id="cost">About a third the price of buying one</h2>
+      <p class="col">Here's how the materials cost compares with what Florida buyers pay for airboats today. If you paid a shop to build this exact design, labor alone would run about $41,000 at $90&ndash;100 an hour. You put in those hours yourself.</p>
+      <div class="chart" id="costChart" role="img" aria-label="Price ranges: build it yourself about 19.6 to 22.5 thousand dollars; this design shop-built about 60.7 thousand; used 14 ft airboats 27 to 47 thousand; new entry-level 32 to 59 thousand; new custom 80 to 160 thousand and up."></div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Option</th><th>Price</th><th>What it buys</th></tr></thead>
+          <tbody>
+            <tr class="us"><td>Build this design yourself</td><td class="num">$19.6k&ndash;22.5k</td><td>All materials from the parts list. The higher figure adds 15% for shipping, tax and mistakes. Tools and a trailer are extra (see the toolkit).</td></tr>
+            <tr><td>This design, built by a shop</td><td class="num">&asymp; $60.7k</td><td>The same materials plus about $41,200 of shop labor, using the build guide's hours.</td></tr>
+            <tr><td>Used 14 ft airboat</td><td class="num">$27k&ndash;47k</td><td>Asking prices in 2026 classified listings, from a 2010 Bullfrog to an Alumitech.</td></tr>
+            <tr><td>New entry-level airboat</td><td class="num">$32k&ndash;59k</td><td>Published price-guide ranges. These are older figures, so expect today's prices to be higher.</td></tr>
+            <tr><td>New custom airboat</td><td class="num">$80k&ndash;160k+</td><td>A Florida builder's 2026 price guide, with big-block V8 or aircraft engines.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="two">
+        <div class="callout"><h3>Cheaper every trip, too</h3><p>A 1.3 L four-cylinder at cruise burns about 3.5&ndash;4.5 gallons an hour in the real world. Big V8 airboats burn 8&ndash;10. At about $3.90 a gallon that's roughly <b>$14&ndash;18 an hour</b> against <b>$31&ndash;39</b>.</p></div>
+        <div class="callout"><h3>And the parts are everywhere</h3><p>The engine came in millions of Geo Metros and Suzuki Swifts, and the radiator is a Honda Civic part. The electrics use standard marine fuses and Deutsch connectors. When something wears out, you already know how to fix it, because you built it.</p></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="hull" id="hull">
+      <div class="eyebrow">The hull, step by step</div>
+      <h2 id="hullh">No welding. Just clecos, a drill and a rivet gun.</h2>
+      <p class="col lede">The hull is the part people assume they can't build, yet it's the one part that needs no welding at all. It goes together like a big sheet-metal kit: you hold it with clecos, drill it, take it apart, seal it and rivet it. Homebuilt-aircraft builders have built this way for decades. It takes about 150 of your hours.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><h3>Print the templates</h3><div class="meta"><span>6 h</span><span>Laptop, printer, tape</span></div><p>Export the flat pattern of every skin panel, frame and stringer from the free CAD files. Print them full size and tape them together on the garage floor.</p></div></div>
+        <div class="step"><span class="n">2</span><div><h3>Build the strongback</h3><div class="meta"><span>10 h</span><span>2&times;6 lumber, plywood, level</span></div><p>Build a ladder-style table with plywood station molds at each frame, shimmed level and flat to 1/16 in end to end. Everything after this step is only as straight as this table.</p></div></div>
+        <div class="step"><span class="n">3</span><div><h3>Let a fab shop bend the big pieces</h3><div class="meta"><span>4 h of yours</span><span>&asymp; $600 shop service</span></div><p>Take your templates to a local sheet-metal shop. They shear the 5052 aluminum blanks and brake the long 45&deg; chine bends on machines you don't need to own.</p></div></div>
+        <div class="step"><span class="n">4</span><div><h3>Make stringers and frames</h3><div class="meta"><span>19 h</span><span>Chop saw, files, drill</span></div><p>Bend the hat-section stringers to the gentle bow curve and cut the frames from aluminum angle. Notch a drain hole in every bay so water can always reach the sump.</p></div></div>
+        <div class="step"><span class="n">5</span><div><h3>Cleco the skeleton</h3><div class="meta"><span>14 h</span><span>Clecos, square, tape</span></div><p>Clecos are spring pins that hold metal together like temporary rivets. Pin the frames and stringers together on the jig, check the diagonals match, then rivet the framing.</p></div></div>
+        <div class="step"><span class="n">6</span><div><h3>Wrap it in skin</h3><div class="meta"><span>24 h</span><span>Clecos, hand seamer, snips</span></div><p>Lay the bottom sheets over the skeleton, then fit the sides, bow and transom with 1 in overlaps. It's all pinned with clecos for now, so nothing is permanent and every piece can still be adjusted.</p></div></div>
+        <div class="step"><span class="n">7</span><div><h3>Drill, seal, rivet for keeps</h3><div class="meta"><span>34 h</span><span>Pneumatic riveter, caulk gun</span></div><p>Drill about 2,000 holes, deburr them and pull the panels apart. Butter every overlap with marine sealant, then pull closed-end aluminum rivets with the air riveter, about two seconds each. In a 90&deg;F Florida garage the sealant skins over fast, so work one seam at a time.</p></div></div>
+        <div class="step"><span class="n">8</span><div><h3>Engine beds and the hose test</h3><div class="meta"><span>16 h</span><span>Garden hose, flashlight</span></div><p>Rivet in the engine beds and rub rails. Then fill the hull with 4 in of water from the garden hose and watch underneath for a day. Drill out and replace any rivet that weeps.</p></div></div>
+        <div class="step"><span class="n">9</span><div><h3>Wear strips and paint</h3><div class="meta"><span>22 h</span><span>Drill, spray gun or rollers</span></div><p>Bolt the 1/4 in UHMW plastic strips under the bottom so the sawgrass and limestone wear them instead of your aluminum. Then prime and paint the hull. Now you own a boat hull.</p></div></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="tools">
+      <div class="eyebrow">Tools</div>
+      <h2 id="tools">What you&rsquo;ll buy, what you&rsquo;ll hire out</h2>
+      <div class="two">
+        <div>
+          <h3 style="margin-bottom:8px">Buy (typical street prices)</h3>
+          <ul class="list">
+            <li><span>Pneumatic pop riveter, 3/16 in capacity<small>Saves your hands on 2,500 rivets</small></span><span>$100&ndash;250</span></li>
+            <li><span>Air compressor, 20 gal or more<small>Skip it if you already own one</small></span><span>$250&ndash;450</span></li>
+            <li><span>Hand seamer and aviation snips</span><span>$60&ndash;100</span></li>
+            <li><span>Second cordless drill, step drills, 3/16 in bits</span><span>$100&ndash;250</span></li>
+            <li><span>Carbide router and jigsaw bits for aluminum</span><span>$40&ndash;80</span></li>
+            <li><span>Strongback lumber and plywood</span><span>$150&ndash;250</span></li>
+            <li><span>Respirator, eye and ear protection, gloves</span><span>$80&ndash;150</span></li>
+            <li><span>Clecos, cleco pliers, deburr tools<small>Already in the parts list</small></span><span>in BOM</span></li>
+          </ul>
+          <p class="note" style="margin-top:10px">About $800&ndash;1,500 in all if you already own basic hand and power tools.</p>
+        </div>
+        <div>
+          <h3 style="margin-bottom:8px">Hire out</h3>
+          <ul class="list">
+            <li><span>Shear and brake the hull blanks<small>Any sheet-metal shop</small></span><span>&asymp; $600</span></li>
+            <li><span>Roll the two 6 ft prop-cage hoops<small>A muffler or fab shop</small></span><span>in BOM</span></li>
+            <li><span>Plasma or waterjet the flat plates<small>DXF files included; optional</small></span><span>varies</span></li>
+            <li><span>Welding, if you don&rsquo;t weld<small>Engine A-frames, prop cage, driver&rsquo;s frame</small></span><span>up to &asymp; $5,300</span></li>
+          </ul>
+          <p class="note" style="margin-top:10px">The welded parts are small, bolt-on assemblies. You can cut and fit every piece yourself, then hand a shop the tacked assemblies to finish-weld, which costs far less than having them build it.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="gar">
+      <div class="eyebrow">The space</div>
+      <h2 id="gar">It fits in a standard two-car garage</h2>
+      <div class="two">
+        <div class="garage" id="garage" role="img" aria-label="Plan view of a 20 by 20 foot garage with the 12 and a half foot hull on its strongback in the middle, about 6 feet of walk-around space on each side, a workbench and sheet rack on the left wall and the compressor in a corner."></div>
+        <div style="display:grid;gap:14px">
+          <p>A 20 &times; 20 ft garage leaves about 6 ft of walk-around space on each side of the hull and nearly 4 ft at each end, with room for a bench and a sheet rack on one wall.</p>
+          <p>Build the hull, engine, bench and wiring inside. With the prop, cage and lights off, the boat on a low dolly stands about 6 ft 10 in at the radiator, so it rolls out under a standard 7 ft door with a couple of inches to spare. The cage and prop bolt on in the driveway.</p>
+          <div class="callout warn"><h3>Where it lives when it&rsquo;s done</h3><p>Finished and on its trailer, the boat is about 10&frac12; ft tall to the stern light, even with the flag staff pulled out. It won't fit back in the garage, so plan for a tall carport, a side yard or a storage lot. Check your HOA's rules on trailers before you start.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="time">
+      <div class="eyebrow">The time</div>
+      <h2 id="time">About 520 hours, start to water</h2>
+      <div class="timeline">
+        <div class="tl-bar" id="tlBar"></div>
+        <div class="tl-key" id="tlKey"></div>
+      </div>
+      <div class="figs">
+        <div><b>~52 weeks</b><span>at 10 hours a week, evenings plus a Saturday morning</span></div>
+        <div><b>~32 weekends</b><span>at two full 8-hour days each</span></div>
+        <div><b>149 h</b><span>for the hull, the biggest single job</span></div>
+        <div><b>0 h</b><span>of welding on the hull</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="spec">
+      <div class="eyebrow">Specifications</div>
+      <h2 id="spec">The numbers</h2>
+      <dl class="specs">
+        <div><dt>Hull</dt><dd>12 ft 6 in &times; 6 ft, riveted 5052-H32 aluminum (0.090 in bottom, 0.063 in sides, 0.125 in transom)</dd></div>
+        <div><dt>Bottom</dt><dd>5.5 ft wide flat planing bottom with 1/4 in UHMW wear strips</dd></div>
+        <div><dt>Overall</dt><dd>14 ft with rudders; about 11 ft 2 in to the top of the flag staff, which pulls out for trailering</dd></div>
+        <div><dt>Weight</dt><dd>about 1,160 lb empty</dd></div>
+        <div><dt>Engine</dt><dd>Suzuki G13 1.3 L four-cylinder (Geo Metro / Swift), about 70 hp</dd></div>
+        <div><dt>Drive</dt><dd>HTD toothed-belt reduction, 2.5 : 1</dd></div>
+        <div><dt>Prop</dt><dd>Warp Drive 64 in three-blade carbon, ground-adjustable, fully caged</dd></div>
+        <div><dt>Speed</dt><dd>about 30 mph cruise, mid-to-high 30s top (calculated, &plusmn;15%)</dd></div>
+        <div><dt>Fuel</dt><dd>6.6 gal portable tank; about 3.5&ndash;4.5 gph at cruise; plan on 40&ndash;50 miles</dd></div>
+        <div><dt>Seating</dt><dd>Driver and passenger on a straddle bench with backrests</dd></div>
+        <div><dt>Storage</dt><dd>Gasketed cooler under the passenger, bow shelf for the tank and safety gear</dd></div>
+        <div><dt>Electrical</dt><dd>Group 31 AGM, sealed fuse hub, main switch, 30 in LED light bar, remote searchlight, nav lights, USB and 12 V</dd></div>
+        <div><dt>Safety</dt><dd>Removable foam flotation, automatic bilge pump, kill-switch lanyard, extinguisher, horn</dd></div>
+        <div><dt>Plans</dt><dd>Fusion 360 model, STEP files, CNC DXFs, priced parts list, 58-step build guide, wiring schematic. MIT license.</dd></div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="fl">
+      <div class="eyebrow">Florida must-knows</div>
+      <h2 id="fl">Before your first run</h2>
+      <div class="pillars">
+        <div><h3>Boater ID</h3><p>Anyone born on or after January 1, 1988 needs a Florida Boating Safety Education ID card to run a boat of 10 hp or more.</p></div>
+        <div><h3>Muffler</h3><p>Florida law requires a real muffler on an airboat. The design has one, mounted above the aft flotation.</p></div>
+        <div><h3>Orange flag</h3><p>Florida law requires a 10 &times; 12 in international-orange flag at least 10 ft above the bottom of the boat. The design has a removable staff on the aft cage hoop that puts the flag's bottom edge at 10 ft 2 in.</p></div>
+        <div><h3>Where to run</h3><p>Everglades National Park is closed to private airboats. Broward locals run the Water Conservation Areas west of US-27, so check FWC's area rules and seasonal closures.</p></div>
+      </div>
+      <div class="callout warn"><h3>Founding builders wanted</h3><p>The design is complete and checked part by part in CAD, but nobody has built one yet. The first builders get the most support and the best stories. Speeds and fuel burn are calculated estimates; your boat will set the real numbers.</p></div>
+    </section>
+  </div>
+
+  <section class="scene endcap" data-scene="dusk" aria-labelledby="end">
+    <canvas aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="eyebrow" style="color:#ffd59a">Your garage. Your boat.</div>
+      <h2 id="end">Start with the plans. They&rsquo;re free.</h2>
+      <p>Download the full design, read the build guide, price it against your own budget, and see whether it's your next project.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/acappon/DIY-MiniAirboat" target="_blank" rel="noopener">Get the free plans on GitHub</a>
+        <a class="btn ghost" href="#toolkit" data-tab="toolkit">Price your own build</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="sources">
+      <b>Sources for the price comparison</b>
+      <span>Patriot Airboats, <a href="https://www.patriotairboats.com/airboating-resources/airboat-price-guide/" target="_blank" rel="noopener">Airboat Price Guide 2026</a> (new custom range, used lot prices, V8 fuel burn and cost).</span>
+      <span>Southern Airboat, <a href="https://southernairboat.com/southern-airboat-classifieds/browse-ads/391/airboats-for-sale-or-trade/?results=40&amp;offset=0" target="_blank" rel="noopener">classifieds</a> (used 14 ft asking prices).</span>
+      <span>Flat Bottom Boat World, <a href="https://www.flatbottomboatworld.com/how-much-does-an-airboat-cost/" target="_blank" rel="noopener">How much does an airboat cost?</a> (entry-level ranges).</span>
+      <span>Florida Statutes <a href="https://florida.public.law/statutes/fla._stat._327.391" target="_blank" rel="noopener">&sect;327.391</a> (airboat muffler and flag).</span>
+      <span>Build cost and hours: this design's BOM_rev7.xlsx and Build_Guide_rev7.xlsx.</span>
+    </div>
+  </div>
+</main>
+
+<!-- ============================== STORYBOARD ============================== -->
+<main id="v-storyboard" class="view" data-view="storyboard" hidden>
+  <div class="wrap" style="display:grid;gap:64px;padding-top:48px">
+    <section>
+      <div class="eyebrow">Video ads</div>
+      <h2>Storyboards</h2>
+      <p class="col lede">Four spots built on one idea: <b>Built, not bought.</b> Until the first boat is finished, the frames marked <span class="chip">RENDER</span> use the CAD renders and turntable animation. Swap them for real footage once a founding builder's boat is on the water.</p>
+      <div class="callout"><h3>Rules for every shoot</h3><p>Everyone aboard wears a PFD and the driver clips on the kill lanyard. The orange flag is up, nobody chases wildlife, and the boat runs only where airboats are allowed. Every on-screen speed or cost carries &ldquo;estimate&rdquo; until a real boat proves it.</p></div>
+    </section>
+    <div id="spots" style="display:grid;gap:64px"></div>
+  </div>
+</main>
+
+<!-- ============================== PLAN ============================== -->
+<main id="v-plan" class="view" data-view="plan" hidden>
+  <div class="wrap" style="display:grid;gap:64px;padding-top:48px">
+    <section>
+      <div class="eyebrow">Marketing plan &middot; South Florida launch</div>
+      <h2>Five founding builders in twelve months</h2>
+      <p class="col lede">The plans are free and open, so this campaign doesn't sell plans. It recruits a few serious builders in Broward, Palm Beach and Miami-Dade, gets their builds on video, and lets those builds sell the next ten.</p>
+      <div class="figs">
+        <div><b>5</b><span>founding builders who have ordered metal</span></div>
+        <div><b>1,500</b><span>plan downloads from South Florida</span></div>
+        <div><b>400</b><span>build-log email subscribers</span></div>
+        <div><b>25k</b><span>views of the build video series</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Who we&rsquo;re talking to</div>
+      <h3 style="font-size:32px">The backyard mechanic with a free bay</h3>
+      <div class="persona">
+        <div><span class="eyebrow">Profile</span><p>Age 35&ndash;65, owns a house with a two-car garage in Davie, Weston, Southwest Ranches, Plantation or Coral Springs. Has swapped an engine, restored a Bronco or built an off-road rig. Some savings set aside for a toy, around $20&ndash;25k. Has time on weeknights and weekends, or is newly retired.</p></div>
+        <div><span class="eyebrow">What they want</span><p>To be out in the Glades on their own boat rather than paying $40 a seat for a tour. A project with an ending. To be the person at the ramp everyone wants to talk to. To ride with a kid, a buddy or a partner who helped build it.</p></div>
+        <div><span class="eyebrow">What stops them</span><p>&ldquo;I've never built a boat.&rdquo; &ldquo;I can't weld aluminum.&rdquo; &ldquo;What if it leaks?&rdquo; &ldquo;Where would I even keep it?&rdquo; &ldquo;Will my HOA freak out?&rdquo; &ldquo;What if I quit halfway?&rdquo;</p></div>
+      </div>
+      <p class="muted small">Also in reach: Florida Python Challenge hunters; homebuilt-aircraft builders (they already rivet); parent-and-teen project teams; marine-tech and welding students who want a portfolio piece.</p>
+    </section>
+
+    <section>
+      <div class="eyebrow">Positioning</div>
+      <p class="lede col" style="font-size:23px">For South Florida backyard mechanics who want to run the Glades, the Garage-Built Airboat is a complete, free, open-source design you can build at home for about a third of what a used airboat costs, because every part is already drawn, priced and sequenced.</p>
+    </section>
+
+    <section>
+      <div class="eyebrow">Message pillars</div>
+      <div class="pillars">
+        <div><h3>A third of the price</h3><p>$19.6k in materials against $27&ndash;47k used and $80k+ new custom. Fuel at about half the cost per hour.</p><p class="muted small">Proof: the priced BOM, the comparison chart.</p></div>
+        <div><h3>You can build this</h3><p>A riveted hull with no welding, clecos that let you fix mistakes before they're permanent, and a step-by-step guide with hours for every step.</p><p class="muted small">Proof: rivet close-ups, the hose test, the 58-step guide.</p></div>
+        <div><h3>Built for the Glades</h3><p>Caged prop, foam flotation, a bilge that drains every bay, sealed marine wiring, lights for the run home.</p><p class="muted small">Proof: renders, the wiring schematic.</p></div>
+        <div><h3>Nothing hidden</h3><p>Free plans under the MIT license. Every part is editable in Fusion 360. Estimates are labeled as estimates.</p><p class="muted small">Proof: the GitHub repo itself.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Channels</div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Channel</th><th>Role</th><th>What runs there</th></tr></thead>
+          <tbody>
+            <tr><td>YouTube</td><td>Primary home</td><td>The 60 s explainer, then a weekly founding-builder episode. Hull assembly animations from the CAD until real footage exists.</td></tr>
+            <tr><td>Instagram / Facebook Reels, TikTok</td><td>Reach</td><td>Vertical "Rivet #1 to #2,500" clips and the 15 s cutdown, geo-targeted to a 40-mile radius of Fort Lauderdale, interests: airboats, Everglades, off-road, welding, fishing.</td></tr>
+            <tr><td>Facebook groups and forums</td><td>Credibility</td><td>Founder posts in Florida airboat, python-hunting and DIY boatbuilding groups, and on Southern Airboat's forum. Ask questions and share the CAD; don't spam ads.</td></tr>
+            <tr><td>Paid search</td><td>Capture intent</td><td>"build an airboat", "airboat plans", "used airboat Florida", "cheap airboat". Small daily cap.</td></tr>
+            <tr><td>In person</td><td>Trust</td><td>Flyers at marine supply counters, aluminum suppliers, pull-a-part yards and ramp bulletin boards. A booth or meetup around the Fort Lauderdale boat show each fall. Talks at EAA chapters and makerspaces.</td></tr>
+            <tr><td>Email</td><td>Convert</td><td>A four-email "Should you build it?" sequence after the plan download, then a monthly build log.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Founding-builder program</div>
+      <div class="two">
+        <div style="display:grid;gap:12px">
+          <p>Make the first builds easy to start and hard to abandon.</p>
+          <ul class="list">
+            <li><span>Monthly video call with the designer, and answers within a day</span><span>support</span></li>
+            <li><span>A shared South Florida tool library: rivet guns, clecos, the strongback molds</span><span>saves &asymp; $500</span></li>
+            <li><span>Group buy on 5052 sheet, rivets and UHMW for the first five hulls</span><span>shipping split</span></li>
+            <li><span>A featured episode in the build series for each milestone</span><span>publicity</span></li>
+            <li><span>Build days: two Saturdays riveting the first hull together</span><span>community</span></li>
+          </ul>
+        </div>
+        <div class="callout"><h3>Milestones that keep builds alive</h3><p>Strongback level. Skeleton riveted. Hose test passed. Engine runs on the stand. First float. Each milestone gets a video, a social post and a call. Builders who stall get a call, not a sales pitch.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Twelve-week launch</div>
+      <div class="weeks">
+        <div><b>Weeks 1&ndash;2</b><section><p>Get ready.</p><ul><li>Publish the brochure page and point a short domain at it.</li><li>Cut the CAD turntable and hull-assembly animations.</li><li>Set up the email list and the four-email sequence.</li><li>Print 200 flyers.</li></ul></section></div>
+        <div><b>Weeks 3&ndash;4</b><section><p>Soft launch.</p><ul><li>Founder posts in 6&ndash;8 groups and forums, one per day, with real questions and real answers.</li><li>Put flyers out at supply counters and ramps.</li></ul></section></div>
+        <div><b>Weeks 5&ndash;8</b><section><p>Paid reach.</p><ul><li>Run the 30 s and 15 s spots, geo-fenced to South Florida, with $20&ndash;30 a day split across Meta and YouTube.</li><li>Retarget brochure visitors with the 60 s explainer.</li></ul></section></div>
+        <div><b>Weeks 9&ndash;10</b><section><p>Meet people.</p><ul><li>Hold a "Rivet Saturday" open garage: bring a sample lap joint and let people pull rivets themselves.</li><li>Sign up founding builders on the spot.</li></ul></section></div>
+        <div><b>Weeks 11&ndash;12</b><section><p>Commit.</p><ul><li>Close the group buy for the first metal order.</li><li>Film episode 1, "The strongback", in a founding builder's garage.</li></ul></section></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Budget (first 12 weeks)</div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Item</th><th style="text-align:right">Amount</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Meta and YouTube ads</td><td class="num">$1,800</td><td>Weeks 5&ndash;8 at about $25 a day, plus retargeting</td></tr>
+            <tr><td>Paid search</td><td class="num">$400</td><td>Capped at $10 a day</td></tr>
+            <tr><td>Video production</td><td class="num">$1,200</td><td>Gimbal, mic, drone footage once there's a boat; editing time</td></tr>
+            <tr><td>Print</td><td class="num">$250</td><td>Flyers and a roll-up banner</td></tr>
+            <tr><td>Rivet Saturday</td><td class="num">$500</td><td>Sample kits, rivets, food</td></tr>
+            <tr><td>Tool library seed</td><td class="num">$650</td><td>Two pneumatic riveters, 300 clecos, deburr tools</td></tr>
+            <tr><td><b>Total</b></td><td class="num"><b>$4,800</b></td><td>Suggested starting budget</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Measure it</div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Stage</th><th>Metric</th><th style="text-align:right">Target</th></tr></thead>
+          <tbody>
+            <tr><td>See</td><td>Video views (3 s+), South Florida</td><td class="num">150,000</td></tr>
+            <tr><td>Visit</td><td>Brochure page visits</td><td class="num">6,000</td></tr>
+            <tr><td>Download</td><td>Plan downloads (GitHub clones, zip downloads)</td><td class="num">1,500</td></tr>
+            <tr><td>Subscribe</td><td>Build-log email sign-ups</td><td class="num">400</td></tr>
+            <tr><td>Show up</td><td>Rivet Saturday attendees</td><td class="num">40</td></tr>
+            <tr><td>Commit</td><td>Builders who order metal</td><td class="num">5</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Risks</div>
+      <div class="pillars">
+        <div><h3>Overpromising</h3><p>Label speed and fuel numbers as estimates. Say plainly that nobody has built one yet, and use that as the founding-builder hook.</p></div>
+        <div><h3>Safety</h3><p>Airboats can flip in hard turns at speed, and a prop cage can't contain a failed blade. Show safe operation in every shot and point builders to a boating course.</p></div>
+        <div><h3>Noise and neighbors</h3><p>Lead with the muffler and the 4-cylinder, and run engine tests at the ramp, not in the driveway at 6 a.m.</p></div>
+        <div><h3>Abandoned builds</h3><p>Milestone check-ins, the tool library, and a forum where an unfinished hull can find a new owner.</p></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ============================== TOOLKIT ============================== -->
+<main id="v-toolkit" class="view" data-view="toolkit" hidden>
+  <div class="wrap" style="display:grid;gap:64px;padding-top:48px">
+    <section>
+      <div class="eyebrow">Builder toolkit</div>
+      <h2>Price your own build</h2>
+      <p class="col">Start from the parts list, then add what your garage doesn't already have. Prices for tools and a trailer are typical estimates; materials come from the design's BOM.</p>
+      <div class="calc">
+        <div style="display:grid;gap:18px">
+          <div class="range"><label for="cont"><span>Cushion for shipping, tax and mistakes</span><b id="contV" class="mono">15%</b></label><input id="cont" type="range" min="0" max="30" step="1" value="15"></div>
+          <div class="opts" id="opts"></div>
+        </div>
+        <aside class="total" aria-live="polite">
+          <span class="eyebrow">Your all-in estimate</span>
+          <span class="big" id="tot">$0</span>
+          <span class="muted small" id="totNote"></span>
+          <div style="display:grid;gap:8px" id="cmp"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Self-check</div>
+      <h2>Are you the builder?</h2>
+      <p class="col">Eight honest questions. Nobody needs a perfect score; this just tells you where you'll need help.</p>
+      <div class="quiz" id="quiz"></div>
+      <div class="verdict" id="verdict"></div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Ad and social copy</div>
+      <h2>Copy pack</h2>
+      <div class="copyblock" id="copy"></div>
+    </section>
+
+    <section>
+      <div class="eyebrow">Bulletin-board flyer</div>
+      <h2>For the marine store counter</h2>
+      <div class="flyer">
+        <span class="eyebrow">Free plans &middot; South Florida builders wanted</span>
+        <h3>Build your own airboat in your garage</h3>
+        <p>12&prime;6&Prime; riveted aluminum hull with no welding required. Junkyard Suzuki engine, caged 64 in carbon prop, two seats, cooler, LED lights. About $19,550 in materials. About 520 hours.</p>
+        <p><b>Rivet Saturday:</b> come pull a few rivets and see if it&rsquo;s your next project.</p>
+        <p class="mono small">github.com/acappon/DIY-MiniAirboat</p>
+        <div class="tear" aria-hidden="true"><span>Garage-Built Airboat &middot; free plans</span><span>Garage-Built Airboat &middot; free plans</span><span>Garage-Built Airboat &middot; free plans</span><span>Garage-Built Airboat &middot; free plans</span><span>Garage-Built Airboat &middot; free plans</span><span>Garage-Built Airboat &middot; free plans</span></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+/* ---------- seeded random ---------- */
+function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* ---------- Glades scene: sky, hammocks, sawgrass, canal ---------- */
+const SKIES = {
+  dawn: { sky: ['#1f2f4a', '#6a5578', '#e78a52', '#f6c47c'], sun: [0.74, 0.60, '#ffe2ae'], hammock: '#1c2924', grass: ['#5b5a2c', '#8b7a35', '#b39548', '#6e6a33'], water: ['#f3b977', '#7e6c7f'] },
+  day:  { sky: ['#4f8fc6', '#8dbde0', '#cfe5f0', '#e8f1ea'], sun: [0.18, 0.18, '#fffbe8'], hammock: '#2c4234', grass: ['#6f7a35', '#9a9a48', '#c2b45e', '#7f8a3e'], water: ['#bcd9e6', '#4d7f95'] },
+  dusk: { sky: ['#191c38', '#4a2f57', '#d25b3a', '#f2a65a'], sun: [0.30, 0.63, '#ffc78a'], hammock: '#141b1c', grass: ['#3d3a25', '#6b5a2c', '#8c6f35', '#4c4528'], water: ['#e48d55', '#3d2d48'] },
+  night:{ sky: ['#070b16', '#101a2c', '#1d2a3e', '#2b3a4c'], sun: [0.8, 0.2, '#dfe6f2'], hammock: '#0a0f12', grass: ['#18201c', '#232c22', '#2d3628', '#1b241d'], water: ['#2f4157', '#0c121c'] },
+};
+function drawScene(cv, kind, seed){
+  const s = SKIES[kind] || SKIES.dawn;
+  const r = cv.getBoundingClientRect(); const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+  cv.width = w; cv.height = h; const g = cv.getContext('2d'); const R = rng(seed || 7);
+  const hz = h * 0.62;
+  let gr = g.createLinearGradient(0, 0, 0, hz);
+  s.sky.forEach((c, i) => gr.addColorStop(i / (s.sky.length - 1), c));
+  g.fillStyle = gr; g.fillRect(0, 0, w, hz + 2);
+  const [sx, sy, sc] = s.sun; const sr = Math.min(w, h) * (kind === 'night' ? 0.03 : 0.07);
+  let glow = g.createRadialGradient(w * sx, h * sy, 0, w * sx, h * sy, sr * 6);
+  glow.addColorStop(0, sc); glow.addColorStop(0.18, sc + 'aa'); glow.addColorStop(1, sc + '00');
+  g.fillStyle = glow; g.fillRect(0, 0, w, hz);
+  g.fillStyle = sc; g.beginPath(); g.arc(w * sx, h * sy, sr, 0, Math.PI * 2); g.fill();
+  if (kind === 'night') { for (let i = 0; i < 160; i++) { g.fillStyle = 'rgba(255,255,255,' + (0.2 + R() * 0.6) + ')'; g.fillRect(R() * w, R() * hz * 0.9, dpr, dpr); } }
+  // tree islands
+  g.fillStyle = s.hammock;
+  for (let k = 0; k < 7; k++) {
+    const cx = R() * w, wid = w * (0.05 + R() * 0.14), ht = h * (0.025 + R() * 0.05);
+    for (let j = 0; j < 14; j++) { const x = cx + (R() - 0.5) * wid, rr = ht * (0.4 + R() * 0.6); g.beginPath(); g.ellipse(x, hz - rr * 0.6, rr * 1.2, rr, 0, 0, Math.PI * 2); g.fill(); }
+    if (R() > 0.5) { const px = cx + (R() - 0.5) * wid; g.fillRect(px, hz - ht * 3, Math.max(1, dpr * 1.5), ht * 3); for (let f = 0; f < 6; f++) { g.beginPath(); g.ellipse(px + Math.cos(f) * ht * 0.6, hz - ht * 3 + Math.sin(f) * ht * 0.2, ht * 0.7, ht * 0.15, f, 0, Math.PI * 2); g.fill(); } }
+  }
+  g.fillRect(0, hz - 2, w, 3);
+  // marsh ground
+  gr = g.createLinearGradient(0, hz, 0, h); gr.addColorStop(0, s.grass[1]); gr.addColorStop(1, s.grass[0]);
+  g.fillStyle = gr; g.fillRect(0, hz, w, h - hz);
+  // canal: widening band from horizon to lower left
+  const cx0 = w * 0.56, cx1 = w * 0.30;
+  g.beginPath(); g.moveTo(cx0 - w * 0.01, hz); g.bezierCurveTo(cx0 - w * 0.05, hz + h * 0.12, cx1 - w * 0.25, h * 0.86, cx1 - w * 0.50, h);
+  g.lineTo(cx1 + w * 0.72, h); g.bezierCurveTo(cx1 + w * 0.36, h * 0.86, cx0 + w * 0.07, hz + h * 0.12, cx0 + w * 0.012, hz); g.closePath();
+  gr = g.createLinearGradient(0, hz, 0, h); gr.addColorStop(0, s.water[0]); gr.addColorStop(1, s.water[1]);
+  g.fillStyle = gr; g.fill();
+  g.save(); g.clip();
+  for (let i = 0; i < 90; i++) { const y = hz + Math.pow(R(), 1.6) * (h - hz); const len = (8 + R() * 60) * (0.3 + (y - hz) / (h - hz)) * dpr; g.fillStyle = 'rgba(255,240,220,' + (0.08 + R() * 0.18) + ')'; g.fillRect(R() * w, y, len, Math.max(1, dpr * (0.5 + (y - hz) / (h - hz)))); }
+  g.restore();
+  // sawgrass blades
+  const N = Math.round(w * h / (dpr * dpr) / 55);
+  for (let i = 0; i < N; i++) {
+    const t = Math.pow(R(), 0.9); const y = hz + t * (h - hz) + 2;
+    const x = R() * w;
+    const inCanal = (() => { const f = (y - hz) / (h - hz); const l = cx0 - w * 0.01 + (cx1 - w * 0.5 - (cx0 - w * 0.01)) * Math.pow(f, 1.4); const rgt = cx0 + w * 0.012 + (cx1 + w * 0.72 - (cx0 + w * 0.012)) * Math.pow(f, 1.4); return x > l && x < rgt; })();
+    if (inCanal && R() > 0.04) continue;
+    const L = (4 + R() * 10) * (0.25 + t * 2.2) * dpr; const lean = (R() - 0.45) * 0.5;
+    g.strokeStyle = s.grass[(R() * s.grass.length) | 0]; g.globalAlpha = 0.55 + R() * 0.45; g.lineWidth = Math.max(0.6, (0.4 + t * 1.4) * dpr);
+    g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + lean * L * 0.4, y - L * 0.6, x + lean * L, y - L); g.stroke();
+  }
+  g.globalAlpha = 1;
+}
+function paintScenes(root){ (root || document).querySelectorAll('[data-scene]').forEach((el, i) => { const cv = el.querySelector('canvas'); if (cv && el.offsetParent !== null) drawScene(cv, el.dataset.scene, Number(el.dataset.seed) || (i + 3) * 101); }); }
+
+/* ---------- cost chart ---------- */
+function costChart(){
+  const el = document.getElementById('costChart'); if (!el) return;
+  const rows = [
+    ['Build it yourself (this design)', 19.6, 22.5, true],
+    ['Used 14 ft airboat', 27, 47],
+    ['New entry-level airboat', 32, 59],
+    ['This design, shop-built', 60.7, 60.7],
+    ['New custom airboat', 80, 160, false, true],
+  ];
+  const W = 900, L = 230, Rr = 40, top = 14, rowH = 46, H = top + rows.length * rowH + 36, max = 170;
+  const x = v => L + (W - L - Rr) * v / max;
+  let s = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">';
+  for (let v = 0; v <= 160; v += 20) { s += '<line class="grid" x1="' + x(v) + '" x2="' + x(v) + '" y1="' + top + '" y2="' + (H - 30) + '" stroke-width="1"/>'; s += '<text class="tick" x="' + x(v) + '" y="' + (H - 10) + '" text-anchor="middle">$' + v + 'k</text>'; }
+  rows.forEach((r, i) => {
+    const y = top + i * rowH + rowH / 2;
+    s += '<text x="0" y="' + (y + 4) + '" style="font-weight:' + (r[3] ? 700 : 500) + '">' + r[0] + '</text>';
+    const col = r[3] ? 'var(--flag)' : 'var(--water)';
+    if (r[1] === r[2]) { s += '<circle cx="' + x(r[1]) + '" cy="' + y + '" r="8" fill="' + col + '"/>'; }
+    else { s += '<rect x="' + x(r[1]) + '" y="' + (y - 10) + '" width="' + (x(r[2]) - x(r[1])) + '" height="20" rx="3" fill="' + col + '"' + (r[3] ? '' : ' fill-opacity=".85"') + '/>'; }
+    if (r[4]) s += '<path d="M' + (x(r[2]) + 4) + ' ' + (y - 10) + ' l12 10 l-12 10z" fill="' + col + '" fill-opacity=".5"/>';
+    const lab = r[1] === r[2] ? '≈ $' + r[1] + 'k' : '$' + r[1] + 'k–' + r[2] + 'k' + (r[4] ? '+' : '');
+    const lx = r[4] ? x(r[1]) + 8 : x(r[2]) + 12, anchor = 'start';
+    s += '<text x="' + lx + '" y="' + (y + 4) + '" text-anchor="' + anchor + '" style="font-family:var(--mono);font-size:12.5px' + (r[4] ? ';fill:var(--surface);font-weight:500' : '') + '">' + lab + '</text>';
+  });
+  el.innerHTML = s + '</svg>';
+}
+
+/* ---------- garage plan (1 unit = 1 in) ---------- */
+function garage(){
+  const el = document.getElementById('garage'); if (!el) return;
+  const s = `<svg viewBox="-34 -24 312 312" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="240" height="240" fill="var(--paper)" stroke="var(--ink)" stroke-width="4"/>
+  <line x1="24" y1="240" x2="216" y2="240" stroke="var(--surface)" stroke-width="6"/>
+  <line x1="24" y1="240" x2="216" y2="240" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="120" y="256" text-anchor="middle">16 ft door, 7 ft tall</text>
+  <rect x="2" y="30" width="24" height="110" fill="var(--water-soft)" stroke="var(--water)"/>
+  <text x="14" y="85" text-anchor="middle" transform="rotate(-90 14 85)">workbench</text>
+  <rect x="2" y="150" width="14" height="80" fill="var(--surface)" stroke="var(--muted)"/>
+  <text x="9" y="190" text-anchor="middle" transform="rotate(-90 9 190)">sheet rack</text>
+  <circle cx="222" cy="18" r="13" fill="var(--surface)" stroke="var(--muted)"/>
+  <text x="222" y="22" text-anchor="middle">air</text>
+  <rect x="104" y="42" width="56" height="156" fill="none" stroke="var(--sawgrass)" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <path d="M96 195 L168 195 L168 75 L155.5 45 L108.5 45 L96 75 Z" fill="var(--flag-soft)" stroke="var(--flag)" stroke-width="2.5"/>
+  ${[57,69,81,93,117,141,165].map(y => `<line x1="98" x2="166" y1="${195 - (y - 45) * 1}" y2="${195 - (y - 45) * 1}" stroke="var(--flag)" stroke-opacity=".35"/>`).join('')}
+  <text x="132" y="124" text-anchor="middle" style="font-weight:500">HULL</text>
+  <text x="132" y="138" text-anchor="middle">12'6" × 6'</text>
+  <text x="132" y="210" text-anchor="middle" style="fill:var(--muted)">transom → door</text>
+  <line x1="28" y1="124" x2="94" y2="124" stroke="var(--water)" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="61" y="118" text-anchor="middle">6 ft</text>
+  <line x1="170" y1="124" x2="238" y2="124" stroke="var(--water)" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="204" y="118" text-anchor="middle">6 ft</text>
+  <line x1="132" y1="3" x2="132" y2="43" stroke="var(--water)" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="138" y="27">3'9"</text>
+  <text x="120" y="-8" text-anchor="middle" style="font-weight:500">20 ft</text>
+  <text x="-12" y="120" text-anchor="middle" transform="rotate(-90 -12 120)" style="font-weight:500">20 ft</text>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="var(--water)"/></marker></defs>
+  </svg>`;
+  el.innerHTML = s;
+}
+
+/* ---------- build-hours timeline ---------- */
+function timeline(){
+  const ph = [['Hull', 149, 'var(--flag)'], ['Drivetrain', 116, 'var(--water)'], ['Floor, bench, flotation', 73, 'var(--sawgrass)'], ['Driver station, lights, deck hardware', 68, '#7d8a86'], ['Prop cage, rudders, steering', 52, '#4a6d74'], ['Electrical and water trials', 36, '#a35a2e'], ['Joint details', 25, '#b9a26a']];
+  const tot = ph.reduce((a, p) => a + p[1], 0);
+  document.getElementById('tlBar').innerHTML = ph.map(p => `<span style="width:${p[1] / tot * 100}%;background:${p[2]}" title="${p[0]}: ${p[1]} h"></span>`).join('');
+  document.getElementById('tlKey').innerHTML = ph.map(p => `<span><i style="background:${p[2]}"></i>${p[0]} <b class="mono">${p[1]} h</b></span>`).join('');
+}
+
+/* ---------- storyboards ---------- */
+const SK = {
+  garage: `<svg viewBox="0 0 160 90" fill="none" stroke="#e9efe9" stroke-width="1.2"><rect width="160" height="90" fill="#232c2a" stroke="none"/><path d="M0 70 H160" stroke-opacity=".4"/><path d="M30 64 H130 M36 64 v6 M124 64 v6 M60 64 v6 M100 64 v6"/>${[44,56,68,80,92,104,116].map(x=>`<path d="M${x} 64 q0 -12 0 -14" />`).join('')}<path d="M40 52 Q80 44 122 52" stroke="#f4b27a"/><rect x="8" y="22" width="22" height="30" stroke-opacity=".5"/><circle cx="148" cy="16" r="5" fill="#ffe2ae" stroke="none"/><path d="M148 21 L130 64" stroke="#ffe2ae" stroke-opacity=".25" stroke-width="10"/></svg>`,
+  rivet: `<svg viewBox="0 0 160 90" fill="none" stroke="#e9efe9" stroke-width="1.4"><rect width="160" height="90" fill="#1d2523" stroke="none"/><rect x="0" y="52" width="160" height="38" fill="#9aa3a6" stroke="none"/><rect x="0" y="48" width="160" height="8" fill="#b9c1c4" stroke="none"/>${[18,34,50,66,82].map(x=>`<circle cx="${x}" cy="52" r="3" fill="#d9dfe0" stroke="#5b6466"/>`).join('')}<path d="M96 52 v-8" stroke-width="3"/><rect x="90" y="14" width="22" height="30" rx="3" fill="#c63f0b" stroke="none"/><rect x="104" y="24" width="38" height="12" rx="3" fill="#2a2f30" stroke="none"/><path d="M142 30 h18" stroke="#6b7476" stroke-width="3"/></svg>`,
+  hose: `<svg viewBox="0 0 160 90" fill="none" stroke="#e9efe9" stroke-width="1.2"><rect width="160" height="90" fill="#202826" stroke="none"/><path d="M20 30 L140 30 L132 54 L28 54 Z" fill="#a9b2b5" stroke="none"/><path d="M24 34 L136 34" stroke="#5aa5c4" stroke-width="4"/><path d="M28 54 v18 M132 54 v18" stroke-opacity=".6"/><path d="M146 6 C130 10 120 22 112 32" stroke="#4f8a3c" stroke-width="3"/><circle cx="70" cy="62" r="2" fill="#5aa5c4" stroke="none"/><path d="M50 80 L66 62" stroke="#ffe2ae" stroke-opacity=".5" stroke-width="6"/></svg>`,
+  engine: `<svg viewBox="0 0 160 90" fill="none" stroke="#e9efe9" stroke-width="1.3"><rect width="160" height="90" fill="#232a29" stroke="none"/><path d="M48 76 H112 M80 76 V58 M60 76 l-6 8 M100 76 l6 8" stroke-opacity=".7"/><rect x="52" y="24" width="56" height="34" rx="3" fill="#4a5253"/><rect x="58" y="16" width="44" height="10" rx="2" fill="#6f7778"/><circle cx="114" cy="42" r="10" fill="#2b3132"/><path d="M40 30 h12 M40 40 h12 M40 50 h12" stroke-opacity=".7"/></svg>`,
+  key: `<svg viewBox="0 0 160 90" fill="none" stroke="#e9efe9" stroke-width="1.3"><rect width="160" height="90" fill="#151b1a" stroke="none"/><rect x="30" y="16" width="100" height="58" rx="4" fill="#0c0f0f"/><circle cx="62" cy="40" r="14" stroke="#e9efe9"/><path d="M62 40 L70 30" stroke="#c63f0b" stroke-width="2"/><circle cx="98" cy="36" r="7"/><circle cx="98" cy="60" r="4" fill="#c63f0b" stroke="none"/><path d="M58 64 h10" stroke-width="3"/></svg>`,
+  ramp: null,
+};
+const SPOTS = [
+  { id: 'A', title: 'Built, Not Bought', len: ':30', fmt: '16:9 and 9:16', use: 'YouTube in-stream, Meta feed and Reels', idea: 'Open on launch morning, flash back to the garage, then show the payoff on the water.', frames: [
+    { tc: '0:00–0:03', v: { scene: 'night', cut: '01' }, sup: 'Fort Lauderdale. 5:50 a.m.', pic: 'Pre-dawn driveway. Truck and trailer, the boat\'s cage silhouetted against a streetlight.', snd: 'Crickets. A tailgate latch.', vo: '—', tag: 'RENDER' },
+    { tc: '0:03–0:06', v: { sk: 'garage' }, sup: 'One year earlier', pic: 'The same garage: bare strongback, paper templates taped to the floor, one work light.', snd: 'Compressor kicks on.', vo: 'Everybody at the ramp asks me the same thing.' },
+    { tc: '0:06–0:09', v: { sk: 'rivet' }, sup: '2,500 rivets', pic: 'Three fast macro cuts: cleco out, sealant bead, rivet gun pulls. Thunk, thunk, thunk.', snd: 'Rivet pops on the beat of the music.', vo: '—' },
+    { tc: '0:09–0:12', v: { sk: 'hose' }, sup: 'Leak-tested with a garden hose', pic: 'Hull on stands, 4 in of water inside. A kid with a flashlight checks underneath and gives a thumbs-up.', snd: 'Hose running, kid laughing.', vo: '—' },
+    { tc: '0:12–0:15', v: { sk: 'engine' }, sup: '$600 junkyard engine', pic: 'The Suzuki 1.3 on an engine stand, half rebuilt, coffee mug on the valve cover.', snd: 'Ratchet.', vo: '"Where\'d you buy it?"' },
+    { tc: '0:15–0:20', v: { scene: 'dawn', cut: '01' }, sup: '', pic: 'Sunrise at the ramp. The boat floats off the trailer. Close-up: key turns, gauges sweep, prop spins up.', snd: 'Engine catches. Music hits.', vo: '—', tag: 'RENDER' },
+    { tc: '0:20–0:26', v: { scene: 'day', cut: '07' }, sup: '', pic: 'Drone tracking shot at 30 mph over sawgrass, two riders, orange flag snapping. Egrets lift off well ahead; we never chase them.', snd: 'Music swells, wind.', vo: 'I didn\'t buy it.', tag: 'RENDER' },
+    { tc: '0:26–0:30', v: { scene: 'dusk', cut: '07', end: true }, sup: 'Build your own airboat. Free plans.', pic: 'End card: the boat on the canal at dusk. "About $20k in materials. About 520 hours." URL.', snd: 'Engine idles down.', vo: 'I built it. In my garage.' },
+  ]},
+  { id: 'B', title: 'Ramp Question', len: ':15', fmt: '9:16 first', use: 'Reels, TikTok, YouTube Shorts', idea: 'A cutdown of Spot A for people scrolling past.', frames: [
+    { tc: '0:00–0:04', v: { scene: 'dawn', cut: '07' }, sup: '"Where\'d you buy it?"', pic: 'At the ramp a stranger points at the boat. Hard cut on the question.', snd: 'Ambient ramp sound.', vo: '—', tag: 'RENDER' },
+    { tc: '0:04–0:11', v: { sk: 'rivet' }, sup: 'I didn\'t.', pic: 'Six rapid garage cuts: templates, clecos, rivets, hose test, engine stand, paint.', snd: 'A rivet pop on every cut.', vo: '—' },
+    { tc: '0:11–0:15', v: { scene: 'day', cut: '01', end: true }, sup: 'Free plans. Build it in your garage.', pic: 'Boat at speed. Pinned URL comment.', snd: 'Engine.', vo: '—', tag: 'RENDER' },
+  ]},
+  { id: 'C', title: 'Can I Really Build This?', len: ':60', fmt: '16:9', use: 'YouTube pre-roll and the top of the brochure page', idea: 'The designer, on camera in the garage, answers the four objections one at a time.', frames: [
+    { tc: '0:00–0:08', v: { sk: 'garage' }, sup: 'Can you really build an airboat at home?', pic: 'The designer in the garage, leaning on the strongback.', snd: 'Room tone.', vo: '"Short answer: if you\'ve rebuilt an engine, yes."' },
+    { tc: '0:08–0:22', v: { img: '05' }, sup: '"I can\'t weld aluminum."', pic: 'Exploded hull animation from the CAD: frames, stringers, skins fly in and cleco together.', snd: 'Soft music.', vo: '"You don\'t have to. The hull is riveted, like a homebuilt airplane."', tag: 'RENDER' },
+    { tc: '0:22–0:34', v: { sk: 'hose' }, sup: '"What if it leaks?"', pic: 'Hose test, then a drilled-out rivet replaced in ten seconds.', snd: 'Drill, rivet pop.', vo: '"You test it in your driveway first, and every rivet can be replaced."' },
+    { tc: '0:34–0:46', v: { img: '04' }, sup: '"What does it cost?"', pic: 'The comparison chart animates in over a profile render.', snd: 'Music builds.', vo: '"About nineteen and a half thousand in materials. Used ones run thirty to fifty."', tag: 'RENDER' },
+    { tc: '0:46–0:60', v: { scene: 'dawn', cut: '07', end: true }, sup: 'Free plans. Founding builders wanted.', pic: 'The finished boat at dawn. Call to action and URL.', snd: 'Engine starts.', vo: '"The plans are free. Come build one with us."', tag: 'RENDER' },
+  ]},
+  { id: 'D', title: 'Rivet #1 to #2,500', len: 'Weekly, :20–:45', fmt: '9:16 series', use: 'Reels and Shorts, one per week, following a founding builder', idea: 'A running build log with a counter that climbs each week. People follow it like a show.', frames: [
+    { tc: 'Ep. 1', v: { sk: 'garage' }, sup: 'Week 1: the strongback', pic: 'Leveling the strongback with a laser. Rivet counter: 0 / 2,500.', snd: 'Trending audio, low.', vo: 'Builder talks to camera in one sentence.' },
+    { tc: 'Ep. 6', v: { sk: 'rivet' }, sup: 'Week 6: 1,140 / 2,500', pic: 'Riveting the bottom seam. Counter ticks with every pop.', snd: 'Rivet pops on the beat.', vo: '—' },
+    { tc: 'Ep. 9', v: { sk: 'hose' }, sup: 'Week 9: does it float? (in the driveway)', pic: 'Hose test, with suspense: one weeping rivet found and fixed.', snd: 'Drumroll, cheer.', vo: '—' },
+    { tc: 'Ep. 30', v: { scene: 'dawn', cut: '01', end: true }, sup: 'Week 30: first float', pic: 'First launch. Counter: 2,500 / 2,500.', snd: 'Engine.', vo: '"We did it."', tag: 'RENDER' },
+  ]},
+];
+function frameVis(v, tc){
+  let inner = '<span class="tc">' + tc + '</span>';
+  if (v.sk) return '<div class="pic">' + SK[v.sk] + inner + '</div>';
+  if (v.img) return '<div class="pic"><img src="img/' + v.img + '.webp" alt="" loading="lazy">' + inner + '</div>';
+  return '<div class="pic" data-scene="' + v.scene + '" data-seed="' + (tc.length * 97 + v.scene.length * 13) + '"><canvas aria-hidden="true"></canvas>' + (v.cut ? '<img class="cut" src="img/' + v.cut + '_cutout.webp" alt="" loading="lazy">' : '') + inner + '</div>';
+}
+function storyboards(){
+  const host = document.getElementById('spots'); if (!host || host.childElementCount) return;
+  host.innerHTML = SPOTS.map(sp => `<section class="spot">
+    <div class="spot-head"><h3 style="font-size:34px">Spot ${sp.id} &middot; ${sp.title}</h3><span class="chip">${sp.len}</span><span class="chip">${sp.fmt}</span><span class="chip">${sp.use}</span></div>
+    <p class="col">${sp.idea}</p>
+    <div class="frames">${sp.frames.map(f => `<div class="frame">${frameVis(f.v, f.tc).replace('</div>', (f.sup ? '<span class="super">' + f.sup + '</span>' : '') + '</div>')}
+      <dl><dt>Picture${f.tag ? ' &middot; ' + f.tag : ''}</dt><dd>${f.pic}</dd><dt>Sound</dt><dd>${f.snd}</dd><dt>Voice-over</dt><dd>${f.vo}</dd></dl></div>`).join('')}</div>
+  </section>`).join('');
+}
+
+/* ---------- calculator ---------- */
+const OPTS = [
+  { id: 'mat', label: 'Materials from the parts list', note: 'Hull $5,040, drivetrain $6,038, everything else $8,473', amt: 19551, fixed: true },
+  { id: 'shear', label: 'Fab shop: shear and brake the hull blanks', note: 'Not in the parts list', amt: 600, on: true },
+  { id: 'riv', label: 'Pneumatic pop riveter', note: 'Typical street price', amt: 180, on: true },
+  { id: 'comp', label: 'Air compressor, 20 gal or more', note: 'Uncheck if you own one', amt: 350, on: true },
+  { id: 'hand', label: 'Snips, seamer, bits, carbide cutters, caulk guns', note: '', amt: 300, on: true },
+  { id: 'jig', label: 'Strongback lumber and plywood', note: '', amt: 200, on: true },
+  { id: 'ppe', label: 'Respirator, eye and ear protection', note: '', amt: 120, on: true },
+  { id: 'trl', label: 'Used single-axle boat trailer', note: 'Not in the parts list; estimate', amt: 1500, on: true },
+  { id: 'wa', label: 'Shop welds the engine A-frames', note: 'Build guide shop-rate estimate', amt: 2500 },
+  { id: 'wc', label: 'Shop welds the prop cage', note: 'Build guide shop-rate estimate', amt: 1700 },
+  { id: 'wd', label: 'Shop welds the driver\'s side frame', note: 'Build guide shop-rate estimate', amt: 1100 },
+];
+const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+function calc(){
+  const host = document.getElementById('opts');
+  let saved = {}; try { saved = JSON.parse(localStorage.getItem('gba-calc') || '{}'); } catch (e) {}
+  host.innerHTML = OPTS.map(o => `<label class="opt" for="o-${o.id}"><input type="checkbox" id="o-${o.id}" ${o.fixed ? 'checked disabled' : ((o.id in saved ? saved[o.id] : o.on) ? 'checked' : '')}><span>${o.label}${o.note ? '<small>' + o.note + '</small>' : ''}</span><span class="amt">${fmt(o.amt)}</span></label>`).join('');
+  const cont = document.getElementById('cont'); if (saved.cont != null) cont.value = saved.cont;
+  const upd = () => {
+    const c = Number(cont.value); document.getElementById('contV').textContent = c + '%';
+    const state = { cont: c }; let tot = 19551 * (1 + c / 100);
+    OPTS.forEach(o => { if (o.fixed) return; const on = document.getElementById('o-' + o.id).checked; state[o.id] = on; if (on) tot += o.amt; });
+    try { localStorage.setItem('gba-calc', JSON.stringify(state)); } catch (e) {}
+    document.getElementById('tot').textContent = fmt(tot);
+    document.getElementById('totNote').textContent = 'Materials ' + fmt(19551) + ' plus a ' + c + '% cushion (' + fmt(19551 * c / 100) + '), plus the items you checked.';
+    const cmp = [['Used 14 ft airboat, low end', 27000], ['New entry-level, low end', 32000], ['New custom, low end', 80000]];
+    document.getElementById('cmp').innerHTML = cmp.map(([k, v]) => `<div style="display:grid;gap:4px"><div style="display:flex;justify-content:space-between;font-size:14px"><span>${k}</span><b class="mono">${tot < v ? 'save ' + fmt(v - tot) : 'costs ' + fmt(tot - v) + ' more'}</b></div><div class="meter"><span style="width:${Math.min(100, tot / v * 100)}%"></span></div></div>`).join('');
+  };
+  host.addEventListener('change', upd); cont.addEventListener('input', upd); upd();
+}
+
+/* ---------- quiz ---------- */
+const QS = [
+  'Have you rebuilt or swapped an engine before?',
+  'Can you measure to 1/16 in and drill on a line?',
+  'Can you give up one garage bay for about a year?',
+  'Can you put in about 10 hours a week, most weeks?',
+  'Can you weld aluminum, or budget a shop to weld three assemblies?',
+  'Is about $25,000 all-in workable for you?',
+  'Do you have somewhere to keep a 10 ft tall boat on its trailer?',
+  'Will two or three friends help you flip a 330 lb hull?',
+];
+function quiz(){
+  const host = document.getElementById('quiz'); const ans = {};
+  host.innerHTML = QS.map((q, i) => `<div class="q"><span>${q}</span><span class="seg" role="group" aria-label="${q}"><button type="button" data-q="${i}" data-a="1" aria-pressed="false">Yes</button><button type="button" data-q="${i}" data-a="0" aria-pressed="false">Not yet</button></span></div>`).join('');
+  const out = () => {
+    const n = Object.keys(ans).length, yes = Object.values(ans).filter(Boolean).length;
+    const v = document.getElementById('verdict');
+    if (n < QS.length) { v.innerHTML = '<b>' + n + ' of ' + QS.length + ' answered.</b> Answer all eight for a read on where you stand.'; return; }
+    const gaps = QS.filter((q, i) => !ans[i]);
+    if (yes === 8) v.innerHTML = '<b>You\'re the builder.</b> Download the plans and price your build above. Then come to a Rivet Saturday.';
+    else if (yes >= 5) v.innerHTML = '<b>You can do this with some help.</b> Plan around: ' + gaps.map(g => '<br>• ' + g.replace('?', '')).join('') + '<br>The founding-builder group covers most of these.';
+    else v.innerHTML = '<b>Not yet, and that\'s fine.</b> Start by reading the build guide and pulling a few rivets on a scrap lap joint. The plans will still be free when you\'re ready.';
+  };
+  host.addEventListener('click', e => { const b = e.target.closest('button[data-q]'); if (!b) return; ans[b.dataset.q] = b.dataset.a === '1'; b.parentElement.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false')); out(); });
+  out();
+}
+
+/* ---------- copy pack ---------- */
+const COPY = [
+  ['Headline', 'Build your own airboat in a two-car garage.'],
+  ['Headline', 'Everybody at the ramp asks where you bought it.'],
+  ['Headline', '2,500 rivets. You can pull every one.'],
+  ['Headline', 'A used airboat costs $30k+. This one costs a year of Saturdays.'],
+  ['Primary text', 'Free, open-source plans for a 12\'6" riveted aluminum airboat. The hull needs no welding. The engine is a $600 junkyard Suzuki. Every part is drawn, priced and sequenced, about $19,550 in materials and about 520 hours. Founding builders wanted in South Florida.'],
+  ['Primary text', 'You\'ve rebuilt engines. You\'ve built off-road rigs. This is the next project: a two-seat airboat you build in your own garage and run in the Glades. Download the free plans and price it against your budget.'],
+  ['Reel caption', 'Rivet 1,140 of 2,500. The bottom seam is closed. Next week: the garden-hose leak test. #airboat #everglades #diyboat #fortlauderdale'],
+  ['Reel caption', 'This $600 junkyard engine is going to push a two-seat airboat across the Glades. Week 14 of the build. #sawgrass #boatbuild #suzukig13'],
+  ['Email 1', 'Subject: Your airboat plans (and where to start)\nThe plans are attached. Start with the README, then open the build guide and read steps 1 to 13: that\'s the whole hull.'],
+  ['Email 2', 'Subject: "I can\'t weld aluminum"\nYou don\'t need to for the hull. Here\'s how clecos and a rivet gun build it, and what a shop charges for the three welded parts.'],
+  ['Email 3', 'Subject: What it really costs\nThe priced parts list, the tools you\'ll buy, a trailer, and how it compares with used boats on the Florida classifieds.'],
+  ['Email 4', 'Subject: Come pull a rivet\nRivet Saturday is coming up. Bring gloves. Leave knowing whether this is your next project.'],
+];
+function copyPack(){
+  const host = document.getElementById('copy');
+  host.innerHTML = COPY.map(([k, t], i) => `<div class="copyrow"><span class="k">${k}</span><p id="c${i}">${t.replace(/</g, '&lt;')}</p><button class="copybtn" type="button" data-c="${i}">Copy</button></div>`).join('');
+  host.addEventListener('click', e => { const b = e.target.closest('button[data-c]'); if (!b) return; const txt = COPY[b.dataset.c][1];
+    const done = ok => { b.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(() => b.textContent = 'Copy', 1600); };
+    try { navigator.clipboard.writeText(txt).then(() => done(true), () => { selectText('c' + b.dataset.c); done(false); }); } catch (err) { selectText('c' + b.dataset.c); done(false); } });
+}
+function selectText(id){ const r = document.createRange(); r.selectNodeContents(document.getElementById(id)); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+/* ---------- tabs ---------- */
+const VIEWS = ['brochure', 'storyboard', 'plan', 'toolkit'];
+function show(name, anchor){
+  if (!VIEWS.includes(name)) name = 'brochure';
+  document.querySelectorAll('[data-view]').forEach(v => v.hidden = v.dataset.view !== name);
+  document.querySelectorAll('.tabs a').forEach(a => { if (a.dataset.tab === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  if (name === 'storyboard') storyboards();
+  requestAnimationFrame(() => { paintScenes(document.getElementById('v-' + name)); if (anchor) document.getElementById(anchor)?.scrollIntoView(); else window.scrollTo(0, 0); });
+  try { localStorage.setItem('gba-tab', name); } catch (e) {}
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-tab], a[data-jump]'); if (!a) return; e.preventDefault();
+  if (a.dataset.jump) { show('brochure', a.dataset.jump); return; }
+  history.replaceState(null, '', '#' + a.dataset.tab); show(a.dataset.tab);
+});
+window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => paintScenes(), 150); });
+costChart(); garage(); timeline(); calc(); quiz(); copyPack();
+show(location.hash.slice(1) || 'brochure');
+</script>
