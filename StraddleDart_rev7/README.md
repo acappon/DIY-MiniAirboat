@@ -88,7 +88,8 @@ To change something, open its own file, edit and save it. Then open the assembly
 | `Engineering/Structural_Checks.html` | Structural report for engineering review. It covers 50 checks on the drive tower, prop cage, driver side frame, engine mounts, prop shaft, steering, transom, trim tab and foot ladders, each with before-and-after tables for the fixes, plus the ISO 12215-5 bottom plating check | yes |
 | `Engineering/calc/` | The Python scripts and data that reproduce both reports | yes |
 | `Labels/Swamped_Warning_Label.svg` | Warning label: a swamped boat can be rolled by one person pulling on the side. Print 3 on UV-laminated marine vinyl | yes |
-| `Electrical/Wiring_Schematic.html` | Wiring schematic: one-line diagram, fuse-hub table, wire list with gauges, colours and lengths, connectors | yes |
+| `Electrical/Wiring_Schematic.html` | Wiring schematic: one-line power diagram, control and signal diagram (key and kill switch, relay coils, gauges and senders, light switches, bilge switch, every wire with its colour), fuse-hub table, wire list with gauges, colours and lengths, connectors. Open it in a browser | yes, 1 Nov |
+| `Electrical/Wiring_One_Line_Diagram.svg` / `.pdf`, `Wiring_Control_and_Signals.svg` / `.pdf` | The two diagrams as standalone drawings: SVG to view on GitHub, PDF on one 11 × 17 landscape sheet for printing | yes, 1 Nov |
 | `CAD/StraddleDart_rev7_*.f3d` | One Fusion archive per design file (Hull, Drivetrain, Flotation, Cage and rudders, Layout, Render people), each with its full history, parameters and joints. To rebuild the assembly offline, upload all six to one Fusion project, insert them into a new design, and recreate the steering rod's ball joint at the lever's rod end | yes, 31 Oct (current) |
 | `CAD/StraddleDart_rev7_complete.step` | Whole boat, STEP (render mannequins left out) | as above |
 | `CAD/hull.step`, `drivetrain.step`, `flotation.step`, `cage.step`, `layout.step` | Each subassembly, STEP | as above |
