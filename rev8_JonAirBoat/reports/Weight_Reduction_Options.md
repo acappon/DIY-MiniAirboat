@@ -86,3 +86,19 @@ A lithium Group 31 battery would add about 40 lb to each of these limits.
 - **BOM:** the A-frame, cage, battery, seat and box lines, plus the armor coverage line.
 - **Build Guide:** the A-frame build (2.8) becomes bolted aluminum, and the cage (2.12) gains a tube-rolling step.
 - **Requirements:** R7.5 (weight budget) gets a weigh-in at each build stage.
+
+## Running weight log (driver gear allowance)
+
+Design payload is 280 lb of driver + gear on a 1652 (R1.1, R7.5). Every change below moves the driver's gear allowance pound for pound.
+
+| Date | Change | Weight effect vs the plan | Driver gear allowance |
+|---|---|---|---|
+| 2026-11-02 | Starting point (200 lb driver) | — | ~80 lb |
+| 2026-11-02 | Transom notch cut and capped with aluminum channel (1652 refit) | +1.5 lb | ~78 lb |
+| 2026-11-02 | **Aluminum A-frame modeled in CAD.** The steel rev7 A-frame measured **~145 lb** in CAD, not the 100 lb estimated. The bolted aluminum version is 76.7 lb of 6061 (22 parts) plus ~4 lb of bolts, about **81 lb**. That is ~64 lb lighter than the steel, but ~26 lb heavier than the 55 lb this plan had assumed. | +26 lb | **~52 lb** |
+
+Notes:
+- The 100 lb steel estimate was low, so other drivetrain estimates may be off too. A full CAD weigh-in (materials assigned to every part) should replace the estimates before the next release.
+- Ways to win back A-frame weight:
+  - Pocket the 1/2 in peak plates with lightening holes (about 5–8 lb).
+  - Use 3/8 in aluminum peak plates (about 6.5 lb). The plates take mostly in-plane loads, but check the bearing-flange bolt areas first.
