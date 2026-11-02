@@ -91,6 +91,10 @@ export const jonHull = defineFeature(function(context is Context, id is Id, defi
         isLength(definition.frontBench1, { (inch) : [60, 158, 250] } as LengthBoundSpec);
         annotation { "Name" : "Bench top height" }
         isLength(definition.benchTop, { (inch) : [6, 14, 24] } as LengthBoundSpec);
+        annotation { "Name" : "Transom notch width (0 for none)" }
+        isLength(definition.notchWidth, { (inch) : [0, 0, 70] } as LengthBoundSpec);
+        annotation { "Name" : "Transom notch bottom height" }
+        isLength(definition.notchHeight, { (inch) : [6, 15.85, 30] } as LengthBoundSpec);
     }
     {
         const xf = definition.flatEnd / inch;
@@ -113,9 +117,15 @@ export const jonHull = defineFeature(function(context is Context, id is Id, defi
         loftSolid(context, id + "cavity", definition, xsIn, t, G + 1);
         // Transom top is lower than the sides.
         fCuboid(context, id + "transomCut", { "corner1" : vector(-1, -60, definition.transomHeight / inch) * inch, "corner2" : vector(t + 0.01, 60, G + 1) * inch });
+        // Optional center notch cut down into the transom (clearance for the prop cage and exhaust).
+        const nw = definition.notchWidth / inch;
+        if (nw > 0)
+            fCuboid(context, id + "notchCut", { "corner1" : vector(-1, -nw / 2, definition.notchHeight / inch) * inch, "corner2" : vector(t + 0.01, nw / 2, G + 1) * inch });
         loftSolid(context, id + "outer", definition, xsOut, 0, G);
         opBoolean(context, id + "outer" + "hollow", { "targets" : qCreatedBy(id + "outer", EntityType.BODY), "tools" : qCreatedBy(id + "cavity", EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
         opBoolean(context, id + "outer" + "trim", { "targets" : qCreatedBy(id + "outer", EntityType.BODY), "tools" : qCreatedBy(id + "transomCut", EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
+        if (nw > 0)
+            opBoolean(context, id + "outer" + "notch", { "targets" : qCreatedBy(id + "outer", EntityType.BODY), "tools" : qCreatedBy(id + "notchCut", EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
         setProperty(context, { "entities" : qCreatedBy(id + "outer", EntityType.BODY), "propertyType" : PropertyType.NAME, "value" : "Hull shell (parametric 1652 placeholder)" });
         setProperty(context, { "entities" : qCreatedBy(id + "outer", EntityType.BODY), "propertyType" : PropertyType.APPEARANCE, "value" : color(0.86, 0.45, 0.1) });
 

@@ -1,7 +1,7 @@
 FeatureScript 3112;
 import(path : "onshape/std/geometry.fs", version : "3112.0");
 
-// Drivetrain mounts for the Lowe 1448 hull, in the airboat assembly frame:
+// Drivetrain mounts for a flat-bottom jonboat hull, in the airboat assembly frame:
 // X forward from the transom, Y = 0 on the centerline, Z up from the hull bottom.
 //   - Two engine beds: 2 x 6 x 1/8 in 6061 rectangular tube on edge, with welded 1-1/2 in angle
 //     flanges, notched over the ribs, sitting on 1/8 in 5052 bottom doublers
@@ -10,24 +10,11 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //     knee brace to the transom, 1/4 in top plate with captive nuts for the front cage foot pads,
 //     and a vertical aft post on the knee carrying a second top plate for the aft foot pads
 
-// Hull bottom half-width (chine) vs. X, same table as the hull armor feature.
-const HW0 = [[0, 24.03], [30, 24.2], [60, 24.38], [78, 24.47], [90, 24.44], [100, 24.49]];
-const SIDE_FLARE = 0.515; // hull side: half-width grows 0.515 in per inch of height
+// The hull side is described by two parameters: the inside half-width at the floor and the side flare.
+// Rib positions are the 1448's; check them on the real hull.
 const RIBS = [37.85, 54.75];
 // Rev7 A-frame and brace foot footprints [x0, x1]; all span 13-16 in off the centerline.
 const FEET = [[10, 17, "A-frame aft"], [19, 26, "A-frame forward"], [45, 53, "brace"]];
-
-function interp(t is array, x is number) returns number
-{
-    if (x <= t[0][0])
-        return t[0][1];
-    for (var i = 1; i < size(t); i += 1)
-    {
-        if (x <= t[i][0])
-            return t[i - 1][1] + (x - t[i - 1][0]) / (t[i][0] - t[i - 1][0]) * (t[i][1] - t[i - 1][1]);
-    }
-    return t[size(t) - 1][1];
-}
 
 function mkBox(context is Context, id is Id, x0 is number, x1 is number, y0 is number, y1 is number, z0 is number, z1 is number)
 {
@@ -93,8 +80,21 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
 
         annotation { "Name" : "Cage top plate height (Z)" }
         isLength(definition.cageZ, { (inch) : [10, 16.9, 24] } as LengthBoundSpec);
+
+        annotation { "Name" : "Hull inside half-width at the floor" }
+        isLength(definition.hullHalf, { (inch) : [18, 24.2, 36] } as LengthBoundSpec);
+
+        annotation { "Name" : "Hull side flare (half-width gain per unit height)" }
+        isReal(definition.sideFlare, { (unitless) : [0, 0.515, 1.5] } as RealBoundSpec);
+
+        annotation { "Name" : "Cage feet moved inboard from rev7 (each side)" }
+        isLength(definition.cageDelta, { (inch) : [0, 2.75, 8] } as LengthBoundSpec);
+
+        annotation { "Name" : "Transom inside face (X)" }
+        isLength(definition.transomInside, { (inch) : [-5, 0.1, 5] } as LengthBoundSpec);
     }
     {
+        const dC = definition.cageDelta / inch;
         const by = definition.bedY / inch;
         const x0 = definition.bedX0 / inch;
         const x1 = definition.bedX1 / inch;
@@ -191,17 +191,18 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             // ---- Cage support ----
             const cid = id + ("cage" ~ side);
             const cx = 11;                       // post spans X 11-13
-            const hw = interp(HW0, cx + 1);
-            const u = function(z) { return hw + SIDE_FLARE * z; };
+            const hw = definition.hullHalf / inch;
+            const flare = definition.sideFlare;
+            const u = function(z) { return hw + flare * z; };
             const zTop = definition.cageZ / inch - pT;
-            const axis = normalize(vector(0, s * SIDE_FLARE, 1));
-            const nIn = normalize(vector(0, -s * 1, SIDE_FLARE));
+            const axis = normalize(vector(0, s * flare, 1));
+            const nIn = normalize(vector(0, -s * 1, flare));
             const P0 = vector(cx, s * (u(pT) - 0.05), pT);
             const len = (zTop - pT) / axis[2];
             angleStock(context, cid + "post", P0, axis, vector(1, 0, 0), nIn, 2, 0.25, len);
             paintBody(context, qCreatedBy(cid + "post", EntityType.BODY), "Cage support post 2x2x1/4 6061 angle - " ~ side, alu);
 
-            mkBox(context, cid + "foot", 9, 15, s * 20.5, s * (interp(HW0, 12) - 0.05), 0, pT);
+            mkBox(context, cid + "foot", 9, 15, s * (hw - 3.5), s * (hw - 0.05), 0, pT);
             paintBody(context, qCreatedBy(cid + "foot", EntityType.BODY), "Cage support bottom foot 1/4 6061 - " ~ side, plateC);
 
             const uTop = u(zTop + pT) - 0.1;
@@ -209,7 +210,7 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             // Hole pattern matches the narrowed rev7 cage foot pads (bolts 2.5 in apart each way).
             for (var tx in [10.75, 13.25])
             {
-                for (var hu in [29.2, 31.7])
+                for (var hu in [31.95 - dC, 34.45 - dC])
                 {
                     const hid = cid + ("th" ~ round(tx * 10) ~ round(hu * 10));
                     mkCyl(context, hid, vector(tx, s * hu, zTop - 0.1), vector(tx, s * hu, zTop + pT + 0.1), 0.203);
@@ -219,16 +220,18 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
                     paintBody(context, qCreatedBy(nid, EntityType.BODY), "Captive nut 3/8-16 SS (welded)", nutC);
                 }
             }
-            mkBox(context, cid + "top" + "box", 9.5, 14.5, s * 28.25, s * uTop, zTop, zTop + pT);
+            mkBox(context, cid + "top" + "box", 9.5, 14.5, s * (31.0 - dC), s * uTop, zTop, zTop + pT);
             doCut(context, cid + "top" + "drill", qCreatedBy(cid + "top", EntityType.BODY), qUnion(th));
             paintBody(context, qCreatedBy(cid + "top", EntityType.BODY), "Cage support top plate 1/4 6061 - " ~ side, plateC);
 
-            // Knee brace: horizontal angle from the post aft to a clip plate on the transom.
+            // Knee brace: horizontal angle from the post aft to a clip plate bolted to the inside of the transom.
             const zk = 10;
             const uk = u(zk) - 2.4;
-            angleStock(context, cid + "knee", vector(-2.25, s * uk, zk), vector(1, 0, 0), vector(0, s, 0), vector(0, 0, -1), 2, 0.25, cx + 0.25 + 2.25);
+            const xT = definition.transomInside / inch;
+            angleStock(context, cid + "knee", vector(xT + pT, s * uk, zk), vector(1, 0, 0), vector(0, s, 0), vector(0, 0, -1), 2, 0.25, cx + 0.25 - xT - pT);
             paintBody(context, qCreatedBy(cid + "knee", EntityType.BODY), "Cage support knee 2x2x1/4 6061 angle - " ~ side, alu);
-            mkBox(context, cid + "clip", -2.5, -2.25, s * (uk - 1), s * (uk + 3), zk - 3, zk + 1);
+            // Clip stays inside the flared side at its lowest edge.
+            mkBox(context, cid + "clip", xT, xT + pT, s * (uk - 2.5), s * (u(zk - 3) - 0.1), zk - 3, zk + 1);
             paintBody(context, qCreatedBy(cid + "clip", EntityType.BODY), "Cage support transom clip 1/4 6061 - " ~ side, plateC);
 
             // Aft cage feet: a vertical angle post standing on the knee, under a second top plate.
@@ -238,7 +241,7 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             var ah = [];
             for (var ax in [1.8, 4.3])
             {
-                for (var au in [29.2, 31.7])
+                for (var au in [31.95 - dC, 34.45 - dC])
                 {
                     const hid = cid + ("ath" ~ round(ax * 10) ~ round(au * 10));
                     mkCyl(context, hid, vector(ax, s * au, zAft - 0.1), vector(ax, s * au, zAft + pT + 0.1), 0.203);
@@ -248,7 +251,7 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
                     paintBody(context, qCreatedBy(nid, EntityType.BODY), "Captive nut 3/8-16 SS (welded)", nutC);
                 }
             }
-            mkBox(context, cid + "aftTop" + "box", 0.55, 5.55, s * uk, s * (interp(HW0, 3) + SIDE_FLARE * (zAft + pT) - 0.1), zAft, zAft + pT);
+            mkBox(context, cid + "aftTop" + "box", 0.55, 5.55, s * uk, s * (hw + flare * (zAft + pT) - 0.1), zAft, zAft + pT);
             doCut(context, cid + "aftTop" + "drill", qCreatedBy(cid + "aftTop", EntityType.BODY), qUnion(ah));
             paintBody(context, qCreatedBy(cid + "aftTop", EntityType.BODY), "Cage support aft top plate 1/4 6061 - " ~ side, plateC);
         }
