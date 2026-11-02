@@ -95,6 +95,10 @@ export const jonHull = defineFeature(function(context is Context, id is Id, defi
         isLength(definition.notchWidth, { (inch) : [0, 0, 70] } as LengthBoundSpec);
         annotation { "Name" : "Transom notch bottom height" }
         isLength(definition.notchHeight, { (inch) : [6, 15.85, 30] } as LengthBoundSpec);
+        annotation { "Name" : "Rear bench cut-out, inner edge of port box (0 = full bench)" }
+        isLength(definition.rearGapPort, { (inch) : [0, 0, 30] } as LengthBoundSpec);
+        annotation { "Name" : "Rear bench cut-out, inner edge of starboard box (0 = full bench)" }
+        isLength(definition.rearGapStbd, { (inch) : [0, 0, 30] } as LengthBoundSpec);
     }
     {
         const xf = definition.flatEnd / inch;
@@ -130,7 +134,13 @@ export const jonHull = defineFeature(function(context is Context, id is Id, defi
         setProperty(context, { "entities" : qCreatedBy(id + "outer", EntityType.BODY), "propertyType" : PropertyType.APPEARANCE, "value" : color(0.86, 0.45, 0.1) });
 
         // Benches: closed aluminum boxes (foam-filled on the real boat), fitted to the inside of the sides.
-        const benches = [["rearBench", definition.rearBench0 / inch, definition.rearBench1 / inch, "Rear bench (factory, foam-filled)"],
+        // The rear bench center can be cut out (drivetrain bay), leaving a foam-filled box at each side.
+        const gapP = definition.rearGapPort / inch;
+        const gapS = definition.rearGapStbd / inch;
+        const splitRear = gapP > 0 || gapS > 0;
+        if (splitRear)
+            fCuboid(context, id + "rearGapCut", { "corner1" : vector(definition.rearBench0 / inch - 1, -gapS, -1) * inch, "corner2" : vector(definition.rearBench1 / inch + 1, gapP, G + 1) * inch });
+        const benches = [["rearBench", definition.rearBench0 / inch, definition.rearBench1 / inch, splitRear ? "Rear side box (bench end, foam-filled)" : "Rear bench (factory, foam-filled)"],
                          ["frontBench", definition.frontBench0 / inch, definition.frontBench1 / inch, "Front bench (factory, foam-filled)"]];
         for (var bn in benches)
         {
@@ -147,7 +157,9 @@ export const jonHull = defineFeature(function(context is Context, id is Id, defi
             skSolve(sk);
             opExtrude(context, bid + "ex", { "entities" : qSketchRegion(bid + "sk"), "direction" : vector(1, 0, 0), "endBound" : BoundingType.BLIND, "endDepth" : (x1 - bn[1]) * inch });
             opDeleteBodies(context, bid + "del", { "entities" : qCreatedBy(bid + "sk", EntityType.BODY) });
-            setProperty(context, { "entities" : qCreatedBy(bid + "ex", EntityType.BODY), "propertyType" : PropertyType.NAME, "value" : bn[3] });
-            setProperty(context, { "entities" : qCreatedBy(bid + "ex", EntityType.BODY), "propertyType" : PropertyType.APPEARANCE, "value" : color(0.8, 0.42, 0.1) });
+            if (splitRear && bn[0] == "rearBench")
+                opBoolean(context, bid + "gap", { "targets" : qCreatedBy(bid, EntityType.BODY), "tools" : qCreatedBy(id + "rearGapCut", EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
+            setProperty(context, { "entities" : qCreatedBy(bid, EntityType.BODY), "propertyType" : PropertyType.NAME, "value" : bn[3] });
+            setProperty(context, { "entities" : qCreatedBy(bid, EntityType.BODY), "propertyType" : PropertyType.APPEARANCE, "value" : color(0.8, 0.42, 0.1) });
         }
     });

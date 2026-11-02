@@ -5,9 +5,10 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 // X forward from the transom, Y = 0 on the centerline, Z up from the hull bottom.
 //   - Two engine beds: 2 x 6 x 1/8 in 6061 rectangular tube on edge, with welded 1-1/2 in angle
 //     flanges, notched over the ribs, sitting on 1/8 in 5052 bottom doublers
-//   - Six 1/4 in mount plates (A-frame aft/forward feet, brace feet) with captive 3/8-16 nuts
+//   - Six 1/4 in mount plates (A-frame aft/forward feet, brace feet) and four engine-mount plates,
+//     bolted into 3/8-16 rivnuts set in the bed tops
 //   - Two cage supports: 2 x 2 x 1/4 in angle post along the hull side, bottom foot near the chine,
-//     knee brace to the transom, 1/4 in top plate with captive nuts for the front cage foot pads,
+//     knee brace to the transom, 1/4 in top plate with nylocks underneath for the front cage foot pads,
 //     and a vertical aft post on the knee carrying a second top plate for the aft foot pads
 
 // The hull side is described by two parameters: the inside half-width at the floor and the side flare.
@@ -15,6 +16,8 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 const RIBS = [37.85, 54.75];
 // Rev7 A-frame and brace foot footprints [x0, x1]; all span 13-16 in off the centerline.
 const FEET = [[10, 17, "A-frame aft"], [19, 26, "A-frame forward"], [45, 53, "brace"]];
+// Rev7 rubber engine mounts [x0, x1]: their bases reach from Y 7.6 to 16.3, inboard of the beds.
+const ENGINE = [[27.25, 34.75, "aft"], [38.25, 44, "forward"]];
 
 function mkBox(context is Context, id is Id, x0 is number, x1 is number, y0 is number, y1 is number, z0 is number, z1 is number)
 {
@@ -141,6 +144,20 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
                 }
                 j += 1;
             }
+            // Plate bolts into the bed top: the bed is a closed tube, so 3/8-16 rivnuts (plus-nuts) are set
+            // in its top wall under every plate bolt.
+            var rv = [];
+            var rvX = [];
+            for (var fe in FEET)
+                rvX = concatenateArrays([rvX, [fe[0] + 1, fe[1] - 1]]);
+            for (var en in ENGINE)
+                rvX = concatenateArrays([rvX, [(en[0] + en[1]) / 2 - 2, (en[0] + en[1]) / 2 + 2]]);
+            for (var q = 0; q < size(rvX); q += 1)
+            {
+                const rid = bid + ("rv" ~ q);
+                mkCyl(context, rid, vector(rvX[q], yc, dT + H - wall - 0.1), vector(rvX[q], yc, topZ + pT + 0.1), 0.265);
+                rv = append(rv, qCreatedBy(rid, EntityType.BODY));
+            }
 
             // Bed: tube (closed ends act as end caps) welded to both bottom flanges, notched, drilled.
             const bb = bid + "b";
@@ -155,6 +172,7 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             doUnite(context, bb + "weld", qCreatedBy(bb, EntityType.BODY));
             doCut(context, bb + "notches", qCreatedBy(bb, EntityType.BODY), qUnion(notches));
             opBoolean(context, bb + "drill", { "targets" : qCreatedBy(bb, EntityType.BODY), "tools" : qUnion(holes), "operationType" : BooleanOperationType.SUBTRACTION, "keepTools" : true });
+            opBoolean(context, bb + "rivnut", { "targets" : qCreatedBy(bb, EntityType.BODY), "tools" : qUnion(rv), "operationType" : BooleanOperationType.SUBTRACTION, "keepTools" : true });
             paintBody(context, qCreatedBy(bb, EntityType.BODY), "Engine bed 2x6x1/8 6061 with flanges (welded) - " ~ side, alu);
 
             // Bottom doublers between the ribs, drilled to match the flanges.
@@ -168,25 +186,40 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             }
             opDeleteBodies(context, bid + "holesDel", { "entities" : qUnion(holes) });
 
-            // Mount plates, each with two captive nuts welded underneath.
+            // Mount plates for the A-frame and brace feet, bolted down into the bed-top rivnuts.
+            // The starboard exhaust hangers also bolt to the A-frame plates (two 5/16 bolts each).
             for (var m = 0; m < size(FEET); m += 1)
             {
                 const ft = FEET[m];
-                var ph = [];
-                for (var px in [ft[0] + 1, ft[1] - 1])
-                {
-                    const hid = bid + ("ph" ~ m ~ round(px * 10));
-                    mkCyl(context, hid, vector(px, yc, topZ - 0.1), vector(px, yc, topZ + pT + 0.1), 0.203);
-                    ph = append(ph, qCreatedBy(hid, EntityType.BODY));
-                    const nid = bid + ("nut" ~ m ~ round(px * 10));
-                    mkCyl(context, nid, vector(px, yc, topZ - 0.33), vector(px, yc, topZ), 0.32);
-                    paintBody(context, qCreatedBy(nid, EntityType.BODY), "Captive nut 3/8-16 SS (welded)", nutC);
-                }
                 const pid = bid + ("plate" ~ m);
                 mkBox(context, pid + "box", ft[0] - 1, ft[1] + 1, s * 12, s * 17, topZ, topZ + pT);
-                doCut(context, pid + "drill", qCreatedBy(pid, EntityType.BODY), qUnion(ph));
+                opBoolean(context, pid + "drill", { "targets" : qCreatedBy(pid, EntityType.BODY), "tools" : qUnion(rv), "operationType" : BooleanOperationType.SUBTRACTION, "keepTools" : true });
                 paintBody(context, qCreatedBy(pid, EntityType.BODY), "Mount plate 1/4 6061 - " ~ ft[2] ~ " foot - " ~ side, plateC);
             }
+
+            // Engine-mount plates: bolted to the bed top (rivnuts) and reaching inboard under the rubber
+            // engine mounts, whose studs take nylocks underneath the overhang.
+            for (var em = 0; em < size(ENGINE); em += 1)
+            {
+                const ep = ENGINE[em];
+                const xc = (ep[0] + ep[1]) / 2;
+                var sh = [];
+                for (var px in [xc - 2, xc + 2])
+                {
+                    const hid = bid + ("eh" ~ em ~ round(px * 10));
+                    mkCyl(context, hid, vector(px, s * 9.5, topZ - 0.1), vector(px, s * 9.5, topZ + pT + 0.1), 0.265);
+                    sh = append(sh, qCreatedBy(hid, EntityType.BODY));
+                    const nid = bid + ("enut" ~ em ~ round(px * 10));
+                    mkCyl(context, nid, vector(px, s * 9.5, topZ - 0.45), vector(px, s * 9.5, topZ), 0.4);
+                    paintBody(context, qCreatedBy(nid, EntityType.BODY), "Nylock nut 1/2-13 + washer (engine mount stud)", nutC);
+                }
+                const pid = bid + ("eplate" ~ em);
+                mkBox(context, pid + "box", ep[0], ep[1], s * 7.25, s * 17, topZ, topZ + pT);
+                opBoolean(context, pid + "drill", { "targets" : qCreatedBy(pid, EntityType.BODY), "tools" : qUnion(concatenateArrays([sh, rv])), "operationType" : BooleanOperationType.SUBTRACTION, "keepTools" : true });
+                paintBody(context, qCreatedBy(pid, EntityType.BODY), "Engine mount plate 1/4 6061 - " ~ ep[2] ~ " - " ~ side, plateC);
+                opDeleteBodies(context, pid + "holesDel", { "entities" : qUnion(sh) });
+            }
+            opDeleteBodies(context, bid + "rvDel", { "entities" : qUnion(rv) });
 
             // ---- Cage support ----
             const cid = id + ("cage" ~ side);
@@ -197,15 +230,27 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             const zTop = definition.cageZ / inch - pT;
             const axis = normalize(vector(0, s * flare, 1));
             const nIn = normalize(vector(0, -s * 1, flare));
-            const P0 = vector(cx, s * (u(pT) - 0.05), pT);
-            const len = (zTop - pT) / axis[2];
+            // The post top is cut flush with the underside of the top plate (about 29 deg to the post).
+            mkBox(context, cid + "postTrim", cx - 1, cx + 4, s * (hw - 6), s * (hw + 20), zTop, zTop + 8);
+            // Hole-saw reliefs in the post's inboard leg, around the outboard row of plate nuts.
+            var relief = [qCreatedBy(cid + "postTrim", EntityType.BODY)];
+            for (var rx2 in [10.75, 13.25])
+            {
+                const rid = cid + ("relief" ~ round(rx2 * 10));
+                mkCyl(context, rid, vector(rx2, s * (34.45 - dC), zTop - 0.6), vector(rx2, s * (34.45 - dC), zTop + 0.1), 0.45);
+                relief = append(relief, qCreatedBy(rid, EntityType.BODY));
+            }
+            const P0 = vector(cx, s * (u(pT) - 0.2), pT);
+            const len = (zTop + 1 - pT) / axis[2];
             angleStock(context, cid + "post", P0, axis, vector(1, 0, 0), nIn, 2, 0.25, len);
+            doCut(context, cid + "post" + "trim", qCreatedBy(cid + "post", EntityType.BODY), qUnion(relief));
             paintBody(context, qCreatedBy(cid + "post", EntityType.BODY), "Cage support post 2x2x1/4 6061 angle - " ~ side, alu);
 
-            mkBox(context, cid + "foot", 9, 15, s * (hw - 3.5), s * (hw - 0.05), 0, pT);
+            mkBox(context, cid + "foot", 9, 15, s * (hw - 3.5), s * hw, 0, pT);
             paintBody(context, qCreatedBy(cid + "foot", EntityType.BODY), "Cage support bottom foot 1/4 6061 - " ~ side, plateC);
 
-            const uTop = u(zTop + pT) - 0.1;
+            // Plate edges stop just inside the flared side at the plate underside (its lowest, narrowest point).
+            const uTop = u(zTop) - 0.05;
             var th = [];
             // Hole pattern matches the narrowed rev7 cage foot pads (bolts 2.5 in apart each way).
             for (var tx in [10.75, 13.25])
@@ -217,7 +262,7 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
                     th = append(th, qCreatedBy(hid, EntityType.BODY));
                     const nid = cid + ("nut" ~ round(tx * 10) ~ round(hu * 10));
                     mkCyl(context, nid, vector(tx, s * hu, zTop - 0.33), vector(tx, s * hu, zTop), 0.32);
-                    paintBody(context, qCreatedBy(nid, EntityType.BODY), "Captive nut 3/8-16 SS (welded)", nutC);
+                    paintBody(context, qCreatedBy(nid, EntityType.BODY), "Nylock nut 3/8-16 + washer (under plate)", nutC);
                 }
             }
             mkBox(context, cid + "top" + "box", 9.5, 14.5, s * (31.0 - dC), s * uTop, zTop, zTop + pT);
@@ -228,8 +273,11 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
             const zk = 10;
             const uk = u(zk) - 2.4;
             const xT = definition.transomInside / inch;
-            angleStock(context, cid + "knee", vector(xT + pT, s * uk, zk), vector(1, 0, 0), vector(0, s, 0), vector(0, 0, -1), 2, 0.25, cx + 0.25 - xT - pT);
+            angleStock(context, cid + "knee", vector(xT + pT, s * uk, zk), vector(1, 0, 0), vector(0, s, 0), vector(0, 0, -1), 2, 0.25, cx - 0.1 - xT - pT);
             paintBody(context, qCreatedBy(cid + "knee", EntityType.BODY), "Cage support knee 2x2x1/4 6061 angle - " ~ side, alu);
+            // Knee-to-post clip: one leg on top of the knee, one against the post's aft face (two 5/16 bolts each).
+            angleStock(context, cid + "kneeClip", vector(cx, s * uk, zk), vector(0, s, 0), vector(-1, 0, 0), vector(0, 0, 1), 2, 0.25, 2);
+            paintBody(context, qCreatedBy(cid + "kneeClip", EntityType.BODY), "Cage support knee clip 2x2x1/4 6061 angle - " ~ side, plateC);
             // Clip stays inside the flared side at its lowest edge.
             mkBox(context, cid + "clip", xT, xT + pT, s * (uk - 2.5), s * (u(zk - 3) - 0.1), zk - 3, zk + 1);
             paintBody(context, qCreatedBy(cid + "clip", EntityType.BODY), "Cage support transom clip 1/4 6061 - " ~ side, plateC);
@@ -248,10 +296,10 @@ export const drivetrainMounts = defineFeature(function(context is Context, id is
                     ah = append(ah, qCreatedBy(hid, EntityType.BODY));
                     const nid = cid + ("anut" ~ round(ax * 10) ~ round(au * 10));
                     mkCyl(context, nid, vector(ax, s * au, zAft - 0.33), vector(ax, s * au, zAft), 0.32);
-                    paintBody(context, qCreatedBy(nid, EntityType.BODY), "Captive nut 3/8-16 SS (welded)", nutC);
+                    paintBody(context, qCreatedBy(nid, EntityType.BODY), "Nylock nut 3/8-16 + washer (under plate)", nutC);
                 }
             }
-            mkBox(context, cid + "aftTop" + "box", 0.55, 5.55, s * uk, s * (hw + flare * (zAft + pT) - 0.1), zAft, zAft + pT);
+            mkBox(context, cid + "aftTop" + "box", 0.55, 5.55, s * uk, s * (u(zAft) - 0.05), zAft, zAft + pT);
             doCut(context, cid + "aftTop" + "drill", qCreatedBy(cid + "aftTop", EntityType.BODY), qUnion(ah));
             paintBody(context, qCreatedBy(cid + "aftTop", EntityType.BODY), "Cage support aft top plate 1/4 6061 - " ~ side, plateC);
         }

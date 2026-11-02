@@ -62,7 +62,24 @@ Items 6–13 come to about 5.5 lb. The aluminum A-frame estimate already carried
 | **Total** | **+9.4 lb**, so the gear allowance goes from **~52 lb to ~43 lb** |
 | Rear bench center removed (#1) | −10 to −15 lb of hull (better for performance; no effect on the plate math) |
 
-## 6. Decisions needed
-1. Remove the rear bench center and replace its ends with foam side boxes? (Recommended.)
-2. Welded black-steel cage instead of galvanized EMT? (Recommended.)
-3. OK to add the engine-mount plates, hanger stands and joint hardware to the CAD and BOM? This brings the gear allowance to about 43 lb.
+## 6. Decisions (user, 2026-11-02: "Yes to all of it")
+1. Rear bench center removed; its outboard ends are kept as foam-filled side boxes (port box from Y +17.5, starboard from Y −23.75, out to the hull sides). Hull CAD param: rearGapPort / rearGapStbd.
+2. Prop cage: welded from black steel / DOM tube of the same sizes, not galvanized EMT. It is built off the boat as a module on a plywood jig, then bolted to the cage-support top plates. MIG (120 V flux-core or gas) is a DIY skill and has been added to the Build Guide; the welder and PPE are in the BOM.
+3. Engine-mount plates, joint hardware and the rest: added to CAD and BOM. Gear allowance is now **~43 lb**.
+
+## 7. Status after the fixes (CAD, 2026-11-02)
+
+| # | Fix as modeled |
+|---|---|
+| 1 | Hull feature splits the rear bench into two side boxes. No drivetrain, A-frame, cage or mount part touches them. |
+| 2 | Four engine-mount plates, 1/4 in: aft X 27.25–34.75, forward X 38.25–44, Y 7.25–17 each side. Each bolts down to the bed top with two rivnuts; 1/2-13 nylocks go under the plate for the rubber-mount studs. The forward plate butts the brace-foot plate at X 44; they are kept separate so each can be pulled on its own. |
+| 3 | The starboard exhaust hangers bolt to the A-frame mount plates (two 5/16 bolts each), so no floor stands are needed. |
+| 4 | Captive nuts are gone. 3/8-16 rivnut holes (0.53 in) go through the bed top under every plate bolt: 10 per bed. |
+| 5 | Post top is trimmed flush under the top plate. Two hole-saw reliefs in the post leg clear the outboard nuts. The bottom foot reaches the hull side, and a 2 × 2 × 1/4 knee clip joins the knee and post. The top-plate edges stop 0.05 in inside the flared side. |
+| 8 | Crossbars stop 0.15 in short of the leaning legs and sit on 2 × 2 × 1/4 shelf clips (4). |
+| 9 | Brace top bracket stands 0.15 in outboard, shimmed with a washer. The brace bottom now runs down to (49.76, ±14.6, 7.6), into the shoe's upright leg, for its through-bolt. |
+
+Interference re-check:
+- Every pair inside the mounts studio (58 parts), the A-frame against the whole drivetrain studio (26 against 106 parts), and the mounts, drivetrain and cage against the hull walls (transom notch included) and both rear side boxes all show **0 overlap**.
+- Steering pins and rod ends still pass through undrilled parts (#17), and the cage tube nodes still have no copes (#15). This is expected; drill and cope at build.
+- Assembly 1 has no dangling instances and every studio part is placed.

@@ -9,9 +9,11 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //   - Legs: 2-1/2 x 2-1/2 x 3/16 in square tube on the steel legs' centerlines; the top end is slotted
 //     to straddle the peak plate (clevis) and through-bolted with two 3/8 in bolts
 //   - Feet: 2 x 2 x 1/4 in angle clips on the front and back faces of each leg, held down by the
-//     existing 3/8-16 bolts into the mount-plate captive nuts
-//   - Crossbars: 2 x 2 x 3/16 in tube between the legs, on angle clips
-//   - Braces: 2 x 2 x 3/16 in tube, angle-clip brackets on the forward leg and on the brace mount plate
+//     3/8-16 bolts through the mount plates into rivnuts in the engine-bed tops
+//   - Crossbars: 2 x 2 x 3/16 in tube between the legs, square-cut 0.15 in short of the leaning leg
+//     faces and carried on a 2 x 2 x 1/4 in angle shelf clip under each end
+//   - Braces: 2 x 2 x 3/16 in tube, angle-clip brackets on the forward leg and on the brace mount plate,
+//     one 3/8 in through-bolt with a crush sleeve at each end
 // The steel parts are found by position and size (imported part names are not visible during
 // regeneration) and deleted.
 
@@ -170,12 +172,26 @@ export const aluminumAFrame = defineFeature(function(context is Context, id is I
                     label(context, qCreatedBy(cid, EntityType.BODY), "A-frame foot clip 2x2x1/4 6061 angle");
                 }
             }
-            // Crossbar between the leg inside faces, at the steel crossbar height
+            // Crossbar between the leg inside faces, at the steel crossbar height. The legs lean about 4 deg,
+            // so the square-cut ends stop 0.15 in short of the leg faces at mid-height.
             const zc = p == 0 ? 28.7 : 29.46;
-            const yIn = 14.81 - 2.91 * (zc - 6.62) / 43.08 - LEG_W / 2 - 0.05;
+            const legY = function(z) { return 14.81 - 2.91 * (z - 6.62) / 43.08; };
+            const faceOff = LEG_W / 2 / cos(atan(2.91 / 43.08));
+            const yIn = legY(zc) - faceOff - 0.15;
             const bid = id + ("bar" ~ p);
             squareTube(context, bid, vector(legX[p], -yIn, zc), vector(legX[p], yIn, zc), vector(1, 0, 0), BAR_W, BAR_T);
             label(context, qCreatedBy(bid, EntityType.BODY), "A-frame crossbar 2x2x3/16 6061 - " ~ (p == 0 ? "aft" : "fwd"));
+            // Shelf clip under each crossbar end: one leg down the leg's inside face, one under the bar
+            // (two 5/16 bolts each way; the 4 deg lean is taken up by opening the angle slightly).
+            for (var sc in [1, -1])
+            {
+                const kid = id + ("barClip" ~ p ~ (sc > 0 ? "P" : "S"));
+                const zb = zc - BAR_W / 2 - 0.005;
+                const down = normalize(vector(0, sc * 2.91, -43.08));   // down along the leaning face
+                const inb = normalize(vector(0, -sc * 43.08, -2.91));   // inboard, square to the face
+                angleClip(context, kid, vector(legX[p] - BAR_W / 2, sc * (legY(zb) - faceOff - 0.01), zb), vector(1, 0, 0), down, inb, 2, 0.25, BAR_W);
+                label(context, qCreatedBy(kid, EntityType.BODY), "A-frame crossbar clip 2x2x1/4 6061 angle");
+            }
         }
 
         // ---- Braces from the forward legs to the brace mount plates ----
@@ -183,14 +199,16 @@ export const aluminumAFrame = defineFeature(function(context is Context, id is I
         {
             const sid = id + ("brace" ~ (s > 0 ? "P" : "S"));
             const top = vector(legX[1] + LEG_W / 2 + 1.2, s * 12.0, 44.0);
-            const bot = vector(48.6, s * 14.6, 9.3);
+            // The bottom end runs down into the shoe's upright leg for its through-bolt.
+            const bot = vector(49.76, s * 14.6, 7.6);
             const ax = normalize(bot - top);
             squareTube(context, sid, top, bot, normalize(cross(ax, vector(0, 1, 0))), BAR_W, BAR_T);
             label(context, qCreatedBy(sid, EntityType.BODY), "A-frame brace 2x2x3/16 6061 - " ~ (s > 0 ? "port" : "stbd"));
 
-            // Top bracket: angle on the forward leg's front face, outboard of the brace
+            // Top bracket: angle on the forward leg's front face, outboard of the brace; the brace flares
+            // outboard as it runs forward, so the bracket stands 0.15 in off it (one washer as a shim).
             const tbid = id + ("braceTop" ~ (s > 0 ? "P" : "S"));
-            angleClip(context, tbid, vector(legX[1] + LEG_W / 2, s * (12.0 + BAR_W / 2), 42.5), vector(0, 0, 1), vector(1, 0, 0), vector(0, s, 0), 2, 0.25, 3);
+            angleClip(context, tbid, vector(legX[1] + LEG_W / 2, s * (12.0 + BAR_W / 2 + 0.15), 42.5), vector(0, 0, 1), vector(1, 0, 0), vector(0, s, 0), 2, 0.25, 3);
             label(context, qCreatedBy(tbid, EntityType.BODY), "A-frame brace top bracket 2x2x1/4 6061 angle");
 
             // Bottom shoe: angle bolted to the brace mount plate, upright leg outboard of the brace

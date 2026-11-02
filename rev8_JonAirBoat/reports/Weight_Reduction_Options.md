@@ -95,7 +95,10 @@ Design payload is 280 lb of driver + gear on a 1652 (R1.1, R7.5). Every change b
 |---|---|---|---|
 | 2026-11-02 | Starting point (200 lb driver) | — | ~80 lb |
 | 2026-11-02 | Transom notch cut and capped with aluminum channel (1652 refit) | +1.5 lb | ~78 lb |
-| 2026-11-02 | **Aluminum A-frame modeled in CAD.** The steel rev7 A-frame measured **~145 lb** in CAD, not the 100 lb estimated. The bolted aluminum version is 76.7 lb of 6061 (22 parts) plus ~4 lb of bolts, about **81 lb**. That is ~64 lb lighter than the steel, but ~26 lb heavier than the 55 lb this plan had assumed. | +26 lb | **~52 lb** |
+| 2026-11-02 | **Aluminum A-frame modeled in CAD.** The steel rev7 A-frame measured **~145 lb** in CAD, not the 100 lb estimated. The bolted aluminum version is 76.7 lb of 6061 (22 parts) plus ~4 lb of bolts, about **81 lb**. That is ~64 lb lighter than the steel, but ~26 lb heavier than the 55 lb this plan had assumed. | +26 lb | ~52 lb |
+| 2026-11-02 | **Connection-review fixes in CAD.** 4 engine-mount plates, 1/4 in 6061, ~6.3 lb, plus 1/2-13 nylocks: **+6.4**. Cage-post knee clips and post trim: **+0.5**. Exhaust hangers bolted to the A-frame mount plates (no separate stands): **+0.1**. A-frame crossbar shelf clips, longer braces and the bolts for every drawn-but-unbolted joint, net of the 4 lb already carried: **+1.5**. 3/8-16 rivnuts in place of the captive nuts: **+0.4**. | +8.9 lb | **~43 lb** |
+| 2026-11-02 | Welded cage in black steel / DOM instead of galvanized EMT (same sizes) | ~0 | ~43 lb |
+| 2026-11-02 | Rear bench center removed, foam side boxes kept. About 10–15 lb comes off the hull, which isn't counted against the capacity plate, so it gives no plate allowance back. It does help planing. | (−10 to −15 lb hull) | ~43 lb |
 
 Notes:
 - The 100 lb steel estimate was low, so other drivetrain estimates may be off too. A full CAD weigh-in (materials assigned to every part) should replace the estimates before the next release.
