@@ -15,3 +15,4 @@ desktop.ini
 
 # Editor settings Fusion makes when you edit a script
 .vscode/
+node_modules/

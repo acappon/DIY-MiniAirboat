@@ -1,6 +1,6 @@
-# DIY Jon-Air Airboat — Release Notes v1.0.0.3 (DRAFT)
+# DIY Jon-Air Airboat — Release Notes v1.0.0.3 (in development)
 
-> **Draft: not yet released.** This file and `Airboat Build Tracker v1.0.0.3.xlsx` are updated as the work proceeds on branch `rev8/1652-hull`. At release time the CAD exports and renders are made, the Onshape version is created, the totals below are refreshed, and this banner is removed.
+> **In development: not yet released.** This file and `Airboat Build Tracker v1.0.0.3.xlsx` carry the version in `VERSION` and are updated as the work proceeds on branch `rev8/1652-hull`. At release time the CAD exports and renders are made, the Onshape version is created, the totals below are refreshed, and `node tools/set_version.js --release <date>` removes this banner (see `RELEASING.md`).
 
 **Release date:** TBD
 **CAD source:** Onshape document "DIY Jon-Air boat", branch workspace "1652 hull", version **v1.0.0.3** (to be created at release)
