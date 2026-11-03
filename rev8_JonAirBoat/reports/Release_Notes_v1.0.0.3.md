@@ -67,6 +67,15 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 - **Checks:** no overlaps in the studio; no hits on the hull, seating, console or engine beds; the cables pass the box panels through their grommets; no cable or end fitting touches the cage or drivetrain parts. Tightest bends 8.6 in (43C allows 5 in) and 12.8 in (33C allows 8 in).
 - Weight about 22 lb against 15 lb planned (the footrest is new), so the gear allowance drops to about 81 lb. Static trim improves slightly.
 
+### Moving parts mated in Assembly 1 (new feature "Motion sets", `CAD/FeatureScript/Motion_sets.fs`)
+- **How it works:** the drivetrain, cage, controls and seating Part Studios each get a `set` configuration input and a last "Motion sets" feature. Set 0 is the studio as designed, set 1 is its fixed parts, and sets 2 and up are one rigid moving group each, with mate connectors on the joint axes. Assembly 1 inserts set 1 fixed and each moving set free, then mates them. The rev7 steering pushrod is left out of every set, so it is gone from the assembly (it stays in the studio's default view).
+- **Drivetrain:** prop + prop flange + prop shaft + 75T pulley turn as one group on the prop-shaft axis; flywheel + flex coupling + jackshaft + 30T pulley turn on the crank axis. A gear relation makes the prop turn 0.4 x the crank (30T:75T), the same direction. The back-side idler turns 0.78 x the crank, opposite. The belt is a closed loop whose shape doesn't change as it runs, so it stays fixed.
+- **Steering:** stick revolute on its pivot bolt, coupled 1.1:1 to the bellcrank (4.4 in lug / 4 in pin B arm, the 43C cable). The bellcrank drives the drive link, port rudder, tie bar and starboard rudder as a real four-bar and parallelogram linkage (revolute plus cylindrical mates), so the rudder angle is solved, not assumed. Both cable core rods slide in their hubs, coupled to the stick and bellcrank.
+- **Throttle:** pedal revolute on its shaft; the pedal-end core rod slides 2.85 in per radian of pedal; the engine-end core rod moves out by the same amount.
+- **Seating:** driver bucket seat slider on its tracks; storage box lid + cushion revolute on the aft-rail piano hinge.
+- **Checked by driving the mates:** crank 90 deg → prop 36 deg, idler −70 deg. Stick 20 deg forward → bellcrank −22 deg, both rudders −26.5 deg (trailing edges to port: stick forward = turn left), steering core moves 1.54 in at both ends (matches the 3 in cable travel for ±20 deg). Pedal 10 deg → throttle core 0.50 in. Lid opens upward; seat slides fore-aft. All mates are left at zero (design position).
+- **Not mated (adjustments, not motion):** engine tilt on the slotted pivot bolts and jack screw (belt tension), seat-track lock positions, cable clamps. Crew mannequins stay fixed.
+
 ### Build Guide
 - **1.1** shops for a 1652 and ends by measuring the hull for the CAD. **1.2** carries a re-layout warning (see known issues).
 - **2.1, 2.3–2.8, 2.10–2.12** rewritten for the 1652, rivnuts, the aluminum A-frame, the welded cage and the lithium battery.
@@ -94,7 +103,9 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
    - **Steering cable load:** the rev7 structural check puts about 160 lb on the steering link at hard rudder. Confirm the 43C cable's rated working load with SeaStar before the first run; if it is short, use the 64C series, two cables, or a solid rod.
    - **Throttle body position** on the G13 is a placeholder in the CAD; set the engine-end bracket on the real engine.
    - The steering cable's aft clamp tab is welded to a short arm off the aft cage hoop at fit-up (the arm is not modeled).
-   - The rev7 pushrod is removed from the assembly only; it still exists in the imported cage Part Studio and should be removed there before the STEP export.
+   - The rev7 pushrod is left out of the assembly (Motion sets); it still exists in the cage Part Studio's default view, so the per-studio cage STEP should be exported with `set=1` plus the moving sets, or the pushrod deleted there.
+   - **Mates have no limits yet.** Stops to add: rudders about ±30 deg, stick ±20 deg, pedal 0 to about 20 deg, lid 0 to about 100 deg, seat ±3 in. Rudder-to-cage clearance at full deflection has not been checked in the assembly.
+   - **Motion sets pick parts by their bounding-box centres.** If a moving part (or a fixed part a connector sits on) is resized or moved, update its centre in `Motion_sets.fs`, or the set will come out empty (the first part of that set is then renamed "MOTION SETS ERROR ...").
 4. **Front (bow) bench kept** as factory structure and flotation; the fuel tank goes just aft of it. The driver's feet now rest on the footrest; the passenger's feet hang about 1 in above the floor (high box seat).
 5. **Weights are partly estimates.** The A-frame, connection parts, seating and console have CAD weights; the rest are estimates. A full CAD weigh-in should replace the estimates before release.
 6. **Build-step 1.1 render** is still the old 1448 image.
