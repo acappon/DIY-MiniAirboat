@@ -154,9 +154,9 @@ The anchor, line and paddle are counted as part of the 150 lb of gear.
 | Load case | Needs | Margin | Top speed |
 |---|---|---|---|
 | Driver + 150 lb of gear | 350 lb | **+2 lb** | 34.25 mph (gear in the bow) |
-| Driver + passenger | 400 lb | **−48 lb (over)** | 35 mph |
+| Driver + passenger (not a requirement since 2026-11-03) | 400 lb | −48 lb (over) | 35 mph |
 
-Solo dock trim is about 2.35°, just over the 0.5–2° target; stow gear forward of the driver. **The passenger case does not fit; the options are in the v1.0.0.4 release notes.**
+Solo dock trim is about 2.35°, just over the 0.5–2° target; stow gear forward of the driver. **Design case (2026-11-03): driver + 150 lb of gear only;** the passenger requirement was dropped. The margin is only about 2 lb, so any weight added as the details are designed needs an offsetting cut.
 
 **Electrical load:** the light bar (about 10.3 A), searchlight (about 3.7 A) and navigation lights come to about 15 A, about 200 W at 13.8 V. Check the 800R's spare charging output (service manual) before fitting, and size the battery for running the lights with the engine off. If the stand comes out over 45 lb, or the engine weighs more than 79 lb, take the difference out of the outfit too.
 

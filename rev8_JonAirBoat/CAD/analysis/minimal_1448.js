@@ -163,13 +163,13 @@ for (const [ek, en, hp, lb, propLb, T0, Vp] of ENGINES) {
 console.table(out);
 
 // ---------------- Engine budget (2026-11-03 targets) ----------------
-// Targets: solo + 150 lb gear, or driver + passenger, within the 825 lb plate; planes easily; at least 33 mph.
+// Targets: driver + 150 lb gear within the 825 lb plate; planes easily; at least 33 mph.
+// (The driver + passenger case was dropped 2026-11-03; plus1 is still reported above for reference.)
 // Sweep the engine system weight (engine, reduction, radiator, exhaust, extra stand over the 45 lb in OUTFIT;
 // prop 15 lb) and the power used at the prop. Each cell: worst-case top mph / worst hump margin (lbf).
 // Top speed depends almost only on power; the plate sets the weight limit.
 const CASES = {
   soloGear150: [['Driver', 200, 58, 0, 30], ['Gear amidships', 150, 80, 0, 10]],
-  plus1: CREW.plus1,
 };
 const outfitLb = OUTFIT.reduce((s, r) => s + r[1], 0);
 const budget = [];
@@ -188,5 +188,5 @@ for (const sysLb of [100, 125, 150, 175, 200]) {
   }
   budget.push(row);
 }
-console.log('Engine budget: worst-case top mph / hump margin lbf (payload must be at least 400 lb)');
+console.log('Engine budget: worst-case top mph / hump margin lbf (payload must be at least 350 lb)');
 console.table(budget);

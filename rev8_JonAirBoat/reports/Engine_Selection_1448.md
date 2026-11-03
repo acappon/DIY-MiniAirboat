@@ -8,9 +8,9 @@
 | # | Requirement |
 |---|---|
 | E1 | Normal use: **driver + 150 lb of gear**, within the capacity plate. |
-| E2 | Also: **driver + one passenger** (200 lb each), within the capacity plate. Not both passenger and gear at once. |
-| E3 | Gets on plane easily in both cases. |
-| E4 | Top speed **at least 33 mph** in both cases. |
+| ~~E2~~ | ~~Also: driver + one passenger (200 lb each), within the capacity plate.~~ **Dropped 2026-11-03:** with the full outfit the 1448 can't carry it under the plate. |
+| E3 | Gets on plane easily. |
+| E4 | Top speed **at least 33 mph**. |
 | E5 | Lightweight and inexpensive: the original intent of the 1448 build. |
 
 **Capacity plate:** the Lowe L1448 lists **825 lb** maximum (persons, motor and gear), 4 persons / 500 lb, 25 hp maximum, about 260 lb hull ([iboats L1448](https://boats.iboats.com/2016-lowe-boats-l1448-jon/1669710.html)). Newer L1448M listings show 831 lb. Use the plate on the boat you buy. The model uses 248 lb for the hull; at 260 lb the trim and speed results change only slightly.
