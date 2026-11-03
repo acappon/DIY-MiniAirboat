@@ -103,7 +103,8 @@ const OUTFIT = [
   ['Raised driver seat on an aluminum frame', 15, 58, 0, 20],
   ['Safety gear: PFD, extinguisher, horn, lines', 15, 85, 0, 8],
   ['Navigation lights', 5, 30, 0, 50],
-  ['UHMW bottom strips 3/16 in and fasteners (no chine angles or bow skin)', 45, 62, 0, -0.1],
+  // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
+  ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 35, 62, 0, -0.1],
   ['Small trim tab and turnbuckle', 3, -2, -19, 1],
 ];
 // [key, name, hp used, lb (engine + reduction + radiator + exhaust + mounts), prop lb, static thrust lbf, Vp mph]
@@ -111,7 +112,7 @@ const OUTFIT = [
 const T = hp => Math.round(440 * Math.pow(hp / 100, 2 / 3));
 const ENGINES = [
   ['rotax', 'Rotax 582 + B/C gearbox, electric start (65 hp)', 65, 103, 12, T(65), 75],
-  // gsxr: 206 lb engine system from bike_reduction.js, plus 11 lb for its heavier stand and beds (56 lb against the 45 lb in OUTFIT).
+  // gsxr: 206 lb engine system from archive/rev8_JonAirBoat/bike_reduction.js, plus 11 lb for its heavier stand and beds (56 lb against the 45 lb in OUTFIT).
   ['gsxr', 'GSX-R1000-class bike engine + its gearbox + belt reduction (150 hp used)', 150, 217, 20, T(150), 85],
   // etec800: 79 lb bare (unverified) + exhaust 20, radiator 15, belt/shaft/bearings 39, oil tank/ECU/harness 10, mounts 5
   // (Engine_Selection_1448.md, Section 4a); about 120 hp at the prop.

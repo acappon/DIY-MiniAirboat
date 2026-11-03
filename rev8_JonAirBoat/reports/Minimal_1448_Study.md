@@ -1,7 +1,7 @@
 # Minimal 1448 Airboat — Concept Study
 
 **Date:** 2026-11-03. **Branch:** `main` (started on `study/minimal-1448` from v1.0.0.2, merged into `main` 2026-11-03). **Status:** concept study; every outfit weight is an estimate until parts are weighed.
-**Decision (2026-11-03): build around a 1000 cc sport-bike engine** (for example a Suzuki GSX-R1000) with its gearbox and a belt reduction: cheaper than the Rotax 582 at US prices, about 38 mph with any load, and about 338 lb of payload under the plate (updated with the stand and reduction design, Bike_Engine_Stand_and_Reduction.md).
+**Superseded (2026-11-03): the engine is now a Rotax 800R E-TEC snowmobile two-stroke** (`reports/Engine_Selection_1448.md`, `reports/Drivetrain_800R_ETEC.md`): the bike engine left driver + passenger 62 lb over the plate. The rest of this study (keep the benches, a light stand, a small cage, thin armor) still stands. **Earlier decision (2026-11-03): build around a 1000 cc sport-bike engine** (for example a Suzuki GSX-R1000) with its gearbox and a belt reduction: cheaper than the Rotax 582 at US prices, about 38 mph with any load, and about 338 lb of payload under the plate (updated with the stand and reduction design, archive/rev8_JonAirBoat/Bike_Engine_Stand_and_Reduction.md).
 **Model:** `CAD/analysis/minimal_1448.js` (1448 hull hydrostatics and Savitsky planing, the same method as the rev8 analyses).
 
 ## 1. Why this study
@@ -47,7 +47,7 @@ So the hull was never the problem: the outfit was. A cheap, light, one-owner air
 | | Rotax 582 (two-stroke, ultralight aircraft) | 1000 cc sport-bike engine (for example a GSX-R1000) |
 |---|---|---|
 | Power used | 65 hp | about 150 hp (derated for continuous airboat load) |
-| Weight with reduction, radiator, exhaust | **about 103 lb** with the B or C gearbox and electric start (about 90–95 lb without the starter) | about 206 lb: about 145 lb engine with gearbox, oil and coolant, plus the belt reduction and bearings (39), radiator (12) and exhaust (10); the stand and beds add about 11 lb over the Rotax stand (Bike_Engine_Stand_and_Reduction.md) |
+| Weight with reduction, radiator, exhaust | **about 103 lb** with the B or C gearbox and electric start (about 90–95 lb without the starter) | about 206 lb: about 145 lb engine with gearbox, oil and coolant, plus the belt reduction and bearings (39), radiator (12) and exhaust (10); the stand and beds add about 11 lb over the Rotax stand (archive/rev8_JonAirBoat/Bike_Engine_Stand_and_Reduction.md) |
 | Reduction | Its own gearbox (2.58–3:1), prop mounts on it | The bike gearbox (fixed gear) plus a belt reduction to get the prop down to about 2,300 rpm |
 | Used price (US) | **about $4,000–5,500 with a gearbox** in US listings; remanufactured about $6,500; new about $6,500–8,200. UK listings are much lower (about £950–1,900), but shipping and import fees close much of the gap | complete running engines list from about $2,500 to $4,800; less from a crashed bike |
 | Where to find | Ultralight aircraft sales and owner forums | Motorcycle salvage, crashed-bike auctions, eBay |
@@ -88,7 +88,7 @@ For comparison: the rev8 1652 design leaves about 80 lb of driver gear, and the 
 | Smaller battery | −$50 | −$50 |
 | **Estimated total** | **about $12,000** | **about $10,750** |
 
-The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. **The v1.0.0.4 build tracker BOM for the bike engine comes to about $12,150** after the detailed design (Bike_Engine_Stand_and_Reduction.md): an inline EFI fuel pump, the clutch lever, a tapered-roller thrust bearing and a Warp Drive 3-blade prop (about $1,625 with its face plate and flange). It still carries the v1.0.0.2 engine-bed lines until the engine stand is detailed. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
+The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. **The v1.0.0.4 build tracker BOM for the bike engine comes to about $12,150** after the detailed design (archive/rev8_JonAirBoat/Bike_Engine_Stand_and_Reduction.md): an inline EFI fuel pump, the clutch lever, a tapered-roller thrust bearing and a Warp Drive 3-blade prop (about $1,625 with its face plate and flange). It still carries the v1.0.0.2 engine-bed lines until the engine stand is detailed. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
 
 ## 6. What you give up
 

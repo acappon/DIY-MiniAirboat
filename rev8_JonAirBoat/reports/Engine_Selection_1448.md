@@ -1,6 +1,6 @@
 # Engine Selection for the Minimal 1448 — Requirements and Budget
 
-**Date:** 2026-11-03. **Branch:** `main`. **Status:** research done; the lead candidate is the Rotax 800R E-TEC snowmobile two-stroke (Section 4a), awaiting the user's decision. The GSX-R1000 choice (Minimal_1448_Study.md, Bike_Engine_Stand_and_Reduction.md) does not meet these requirements.
+**Date:** 2026-11-03. **Branch:** `main`. **Status:** **decided 2026-11-03: the Rotax 800R E-TEC** snowmobile two-stroke (Section 4a), with the UHMW trimmed to the wear zones. Design: `reports/Drivetrain_800R_ETEC.md`. The GSX-R1000 choice (Minimal_1448_Study.md, archive/rev8_JonAirBoat/Bike_Engine_Stand_and_Reduction.md) does not meet these requirements.
 **Model:** `CAD/analysis/minimal_1448.js` (the "Engine budget" section at the end).
 
 ## 1. Requirements (user, 2026-11-03)
@@ -87,6 +87,6 @@ Worst case of E1 and E2, from the model (top mph / thrust margin at the 12–16 
 ## 7. Next steps
 
 1. ~~Weights and prices for 600- and 800-class engines~~: done (Section 4a); the weights are still unverified.
-2. **Decide:** the Rotax 800R E-TEC, plus an outfit trim of at least 8 lb.
-3. Then redesign the reduction for about 3:1, check the prop rating at about 120 hp, and update the stand, BOM (engine, reduction, clutch line, fuel tank) and the model's engine entry.
+2. ~~Decide~~: the Rotax 800R E-TEC, with the UHMW over the wear zones only (45 → 35 lb), 2026-11-03.
+3. ~~Reduction, prop check, BOM~~: done in `reports/Drivetrain_800R_ETEC.md` and the v1.0.0.4 tracker.
 4. Weigh the real engine with its exhaust when it's bought.
