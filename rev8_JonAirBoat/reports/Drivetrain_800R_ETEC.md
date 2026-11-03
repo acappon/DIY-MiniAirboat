@@ -147,14 +147,16 @@ With the 250 lb outfit and the 15 lb prop, equipment is 433 lb and payload is **
 
 The anchor, line and paddle are counted as part of the 150 lb of gear.
 
-**Result:** equipment about **471 lb**, payload about **354 lb** under the 825 lb plate.
+**Safety and regulatory gear (itemized 2026-11-03; was one 15 lb line):** PFDs (2) and dock lines 8 lb; USCG B-I / UL 5-B fire extinguisher with bracket 4 lb, mounted near the fuel tank but within the driver's reach, not over the tank; air horn with bracket 2 lb, at the driver; **Florida airboat flag** (10 x 12 in international orange, at least 10 ft above the lowest part of the boat, Fla. Stat. 327.391; check the current FWC rule) on a whip with a fold-down mount 3 lb. Mount the flag on the **aft side of the prop cage**, so the prop blast blows it away from the blades; never forward of the prop. Net change: +2 lb.
+
+**Result:** equipment about **473 lb**, payload about **352 lb** under the 825 lb plate.
 
 | Load case | Needs | Margin | Top speed |
 |---|---|---|---|
-| Driver + 150 lb of gear | 350 lb | **+4 lb** | 34.25 mph (gear in the bow) |
-| Driver + passenger | 400 lb | **−46 lb (over)** | 35 mph |
+| Driver + 150 lb of gear | 350 lb | **+2 lb** | 34.25 mph (gear in the bow) |
+| Driver + passenger | 400 lb | **−48 lb (over)** | 35 mph |
 
-Solo dock trim is about 2.3°, just over the 0.5–2° target; stow gear forward of the driver. **The passenger case does not fit; the options are in the v1.0.0.4 release notes.**
+Solo dock trim is about 2.35°, just over the 0.5–2° target; stow gear forward of the driver. **The passenger case does not fit; the options are in the v1.0.0.4 release notes.**
 
 **Electrical load:** the light bar (about 10.3 A), searchlight (about 3.7 A) and navigation lights come to about 15 A, about 200 W at 13.8 V. Check the 800R's spare charging output (service manual) before fitting, and size the battery for running the lights with the engine off. If the stand comes out over 45 lb, or the engine weighs more than 79 lb, take the difference out of the outfit too.
 

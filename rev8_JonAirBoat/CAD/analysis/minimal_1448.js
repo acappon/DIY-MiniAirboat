@@ -101,7 +101,11 @@ const OUTFIT = [
   ['Small lithium battery (electric start), cables, kill switch', 10, 40, 0, 6],
   ['Fuel, 6 gal portable tank, full', 45, 100, 0, 6],
   ['Raised driver seat on an aluminum frame', 15, 58, 0, 20],
-  ['Safety gear: PFD, extinguisher, horn, lines', 15, 85, 0, 8],
+  // Safety and regulatory gear, itemized 2026-11-03 (was one 15 lb line):
+  ['PFDs (2) and dock lines', 8, 85, 0, 8],
+  ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver near the fuel tank', 4, 80, -20, 12],
+  ['Air horn with bracket, at the driver', 2, 62, 15, 25],
+  ['Florida airboat flag (10 x 12 in orange) on a whip at least 10 ft above the bottom, with mount', 3, -4, 0, 100],
   ['Navigation lights', 5, 30, 0, 50],
   // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
   ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 35, 62, 0, -0.1],
