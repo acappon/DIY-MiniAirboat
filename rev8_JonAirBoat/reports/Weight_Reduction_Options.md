@@ -4,6 +4,8 @@
 **Goal:** keep the 400 lb design load (solo + gear, or driver + 1) within the 1652's ~1,216 lb capacity plate. That means equipment of **about 816 lb or less**, so roughly **185 lb** has to come out.
 All weights are estimates; weigh the real parts as they are bought or built (requirement R7.4).
 
+> **Note (2026-11-03):** the design moved to an 1860 hull with a Toyota 2GR-FE V6 (branch rev8/1860-hull). The 1652 analysis below, with the earlier 1.3 L Suzuki engine, is kept as history; the weight cuts it chose (aluminum A-frame, lithium battery and so on) are in the new design. The running log at the end continues with the 1860.
+
 ## Where the weight is (1652, baseline)
 
 | Item | Weight (lb) | Share |
@@ -89,7 +91,7 @@ A lithium Group 31 battery would add about 40 lb to each of these limits.
 
 ## Running weight log (driver gear allowance)
 
-Design payload is 280 lb of driver + gear on a 1652 (R1.1, R7.5). Every change below moves the driver's gear allowance pound for pound.
+Design payload is 280 lb of driver + gear (R1.1, R7.5): on a 1652 until 2026-11-03, then on an 1860. Every change below moves the driver's gear allowance pound for pound.
 
 | Date | Change | Weight effect vs the plan | Driver gear allowance |
 |---|---|---|---|
@@ -102,6 +104,7 @@ Design payload is 280 lb of driver + gear on a 1652 (R1.1, R7.5). Every change b
 | 2026-11-02 | **Battery: Group 31 LiFePO4 lithium, dual-purpose, in place of the 70 lb AGM** (user decision: more power, lighter; option 2 above). About 27 lb plus an alternator protector, about 28 lb in all. It has more usable capacity (80–90% versus about 50%) and holds starting voltage better. | −42 lb | **~85 lb** |
 | 2026-11-02 | **Seating, interior mount rails and console modeled in CAD** (tandem seating, storage box as the new thwart, grab bar, battery dry box, bucket seat, console with instruments). CAD weights: storage box/thwart with foam, lid and cushion 45.7 lb (plan 35), interior mount rails 11.9 lb (new), grab bar 7.5 lb (plan 20), dry box/power hub/wiring 19.1 lb (plan 15), seat and tracks 15 lb (plan 25), console 22.9 lb (plan 30). Total about 122 lb against 125 lb planned. | −3 lb | **~88 lb** |
 | 2026-11-02 | **Steering stick and foot-pedal throttle on Teleflex push-pull cables, modeled in CAD** (replaces the rev7 1 in steel pushrod). DOM steel stick with pivot base ~4 lb; footrest platform, pedal, brackets and three short mount rails ~13.4 lb of aluminum; 43C steering cable (~9 ft) and 33C throttle cable (~7 ft) ~2.9 lb; pins, rods, hubs and hardware ~1.7 lb. About 22 lb against the 15 lb planned for "steering stick and pushrods": the new footrest (about 6 lb) is most of the difference. | +7 lb | **~81 lb** |
+| 2026-11-03 | **Hull and engine change: 1860-class hull (plate about 1,550 lb, hull about 640 lb) and a Toyota 2GR-FE 3.5 L V6** (branch rev8/1860-hull). Engine, redrive and radiator about 480 lb against 265 lb (+215 lb, estimates); armor scaled to the bigger bottom (+37 lb). Equipment about 1,213 lb (`CAD/analysis/performance_1860.js`). The plate rises 334 lb, so the allowance goes up. **New baseline** from the model (1,550 − 1,213 − 200 lb driver), not a running delta: the model reads about 20 lb heavier than this log on the 1652. The redrive, prop and cage are not yet resized, so expect this to move. | new baseline: equipment ~1,213 lb, plate ~1,550 lb | **~137 lb** |
 
 Notes:
 - The 100 lb steel estimate was low, so other drivetrain estimates may be off too. A full CAD weigh-in (materials assigned to every part) should replace the estimates before the next release.
