@@ -31,7 +31,14 @@ The prop wants about **2,600 rpm**: a 66 in prop then has a tip speed of about M
 
 **4th gear** is the middle choice. A lower gear means more torque through the belt (a wider belt); a higher gear means a faster small pulley (more belt speed). All are within what the gearbox already carries: in 1st gear the bike sees about 320 lb-ft at the countershaft.
 
-**Locking the gear:** select 4th, remove the shift linkage and fit a detent stop or lock plate on the shift drum (or shaft) so it cannot jump out of gear. There is no clutch in use: start in gear with the clutch lever tied in (or the clutch cable to a lever on the stand), or start in neutral and select 4th at idle with the prop stopped. **Decide which before the CAD.**
+**Locking the gear:** select 4th, remove the shift linkage and fit a detent stop or lock plate on the shift drum (or shaft) so it cannot jump out of gear. The gearbox is never shifted with the engine running.
+
+**Clutch (decided 2026-11-03): the bike clutch stays, worked by a hand lever on the steering stick.**
+- **Lever:** a motorcycle or ATV clutch lever with a parking lock (a latch that holds it pulled in) and a clutch switch, clamped to the stick grip so the driver works it with the steering hand. Use a lever ratio that matches the bike lever, so the pull stays light.
+- **Cable:** a longer custom clutch cable (about 5–6 ft) from the stick to the clutch arm on the engine. Leave a slack loop at the stick pivot so full stick travel does not pull the clutch, and route it clear of the belt and exhaust. (K5–K8 clutches are cable-operated; check the engine you buy.)
+- **Starting:** pull and lock the lever, start on the button (the bike starter then spins only the engine, as designed), let it warm up with the prop stopped, then release the lever slowly at idle to bring the prop up to speed.
+- **Interlocks:** keep the clutch switch in the start circuit (no start unless the lever is pulled); jumper the side-stand switch; keep the tip-over sensor, mounted level, so the engine stops if the boat capsizes. The lanyard kill switch stays the main stop.
+- **At the dock:** lock the lever in to idle with the prop stopped; never leave the boat with the engine running.
 
 ## 4. Belt
 
@@ -89,7 +96,7 @@ That is about 30 lb more than the concept study assumed (180 lb engine system pl
 
 ## 8. Decisions and checks before the CAD
 
-1. **Start-up method** with no clutch in use (Section 3).
+1. ~~Start-up method~~: decided, the bike clutch with a lever on the steering stick (Section 3).
 2. **Primary reduction** and the countershaft spline: confirm on the engine (service manual).
 3. **Belt width** from Gates DesignFlex; the pulley width follows.
 4. **Thrust bearing type:** tapered-roller housing or angular-contact flange unit.
