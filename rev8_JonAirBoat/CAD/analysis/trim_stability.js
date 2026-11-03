@@ -85,7 +85,7 @@ function baseItems(proto) {
     ['Exhaust', 20, 26, 9, 22, 'Drivetrain', ST],
     ['Prop cage (steel EMT, mesh)', 85, 5, 0, 52, 'Cage', ST],
     ['Rudders, horns, rails, bellcrank', 25, -7, 0, 45, 'Cage', AL],
-    ['Steering stick and pushrods', 15, 75, 12, 14, 'Controls', AL],
+    ['Controls: stick, throttle pedal, footrest, push-pull cables (CAD)', 22, 108, 5.7, 7.3, 'Controls', AL],
     ['Battery, Group 31 LiFePO4 dual-purpose (~27 lb) + alternator protector', 28, 104.5, 6.85, 5.6, 'Electrical', 0.4],
     ['Dry box, power hub, fuses, wiring (CAD 2026-11-02)', 19.1, 104.5, 1, 7, 'Electrical', 0.3],
     ['Interior mount rails 1x2x1/8 6061 (CAD)', 11.9, 88, -4, 0.5, 'Seating', AL],

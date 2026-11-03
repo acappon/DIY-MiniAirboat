@@ -16,9 +16,9 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 
 | Location | What it is |
 |---|---|
-| `Airboat Build Tracker v1.0.0.3.xlsx` | BOM (81 lines), Build Guide (27 tasks in 4 sections) and Read Me (pro labor rate, legend) |
-| `CAD/Airboat_v1.0.0.3_*.step` | *To be exported at release:* full assembly plus the hull, drivetrain mounts, drivetrain, cage, seating and console Part Studios |
-| `CAD/FeatureScript/` | Feature source: Hull armor, Crew mannequins, Drivetrain mounts (parametric for the hull), Utility features, **Jon hull (new, parametric 1652 placeholder)**, **A-frame aluminum (new)**, **Seating (new: seating and interior mounts)**, **Console (new: driver console)** |
+| `Airboat Build Tracker v1.0.0.3.xlsx` | BOM (85 lines), Build Guide (28 tasks in 4 sections) and Read Me (pro labor rate, legend) |
+| `CAD/Airboat_v1.0.0.3_*.step` | *To be exported at release:* full assembly plus the hull, drivetrain mounts, drivetrain, cage, seating, console and controls Part Studios |
+| `CAD/FeatureScript/` | Feature source: Hull armor, Crew mannequins, Drivetrain mounts (parametric for the hull), Utility features, **Jon hull (new, parametric 1652 placeholder)**, **A-frame aluminum (new)**, **Seating (new: seating and interior mounts)**, **Console (new: driver console)**, **Controls (new: stick, throttle pedal, push-pull cables)** |
 | `CAD/analysis/` | **New:** `trim_stability.js` (static trim, list, running trim, swamped flotation) and `compare_hulls.js` (1448 / 1652 / 1860 comparison). Run with node. |
 | `renderedImages/` | *To be re-rendered at release on the 1652 hull* (studio views, scenes, build-step renders) |
 | `reports/` | These notes, Requirements, Trim/Stability/Seating analysis, Weight Reduction Options (with the running weight log), Connection Review, and the static test plan, protocol and report template |
@@ -59,23 +59,30 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 - **Driver:** battery dry box (X 97-112 in, offset to port) with the LiFePO4 battery and power hub, slide track and marine bucket seat.
 - **Console (its own component in the assembly):** HDPE table at armrest height (Z 25 in) to the driver's starboard, a dash leaning 20 degrees back with tachometer/hour meter, temperature, fuel and volt gauges, oil-pressure and charge lights, key switch, lanyard kill switch, 6-gang switch panel and 12 V/USB outlet; a bolted 1 in angle frame down to two console mount rails. The instruments are named bodies, ready for the wiring design.
 - **Checks:** no part of either studio overlaps another or hits the hull walls, the side boxes, the front bench or the engine beds; the drivetrain stays aft of X 53.5 in. CAD weight about 122 lb against 125 lb planned. Static trim and list improve slightly (list now about zero).
-- Still analysis only: fuel tank (6.5 gal up front), steering stick, trim tab.
+- Still analysis only: fuel tank (6.5 gal up front), trim tab.
+
+### Controls: stick and foot throttle on Teleflex push-pull cables (new Part Studio "Controls (stick, throttle, cables)", Build Guide 2.20)
+- **Steering stick** on the port side of the driver seat: 1-1/8 in DOM steel stick with a T-grip, pivoting fore-aft on a clevis base on its own mount rail. A lug 4.4 in above the pivot drives a **Teleflex/SeaStar 43C push-pull cable** (3 in travel, about 9 ft) that runs aft through grommets in the storage box panels and along the old rod line, outside the drum screen, to **bellcrank pin B** on the cage. The rev7 1 in steel pushrod and its rod end are removed from the assembly.
+- **Foot-pedal throttle** on a new **footrest platform** for both feet (top at 4.5 in; the driver's feet no longer hang). The pedal is hinged at the heel; a down-arm outside the platform drives a **Teleflex/SeaStar 33C cable** (3 in travel, about 7 ft) along the starboard side of the dry box, through the storage box, to the throttle body.
+- **Checks:** no overlaps in the studio; no hits on the hull, seating, console or engine beds; the cables pass the box panels through their grommets; no cable or end fitting touches the cage or drivetrain parts. Tightest bends 8.6 in (43C allows 5 in) and 12.8 in (33C allows 8 in).
+- Weight about 22 lb against 15 lb planned (the footrest is new), so the gear allowance drops to about 81 lb. Static trim improves slightly.
 
 ### Build Guide
 - **1.1** shops for a 1652 and ends by measuring the hull for the CAD. **1.2** carries a re-layout warning (see known issues).
 - **2.1, 2.3–2.8, 2.10–2.12** rewritten for the 1652, rivnuts, the aluminum A-frame, the welded cage and the lithium battery.
 - **2.16–2.19 (new):** interior mount rails, storage box/thwart with backrest and grab bar, battery dry box and driver seat, driver console.
+- **2.20 (new):** steering stick, throttle pedal and footrest, both push-pull cables; 2.11 and 2.13 now point to it.
 - **Section 4 (new): on-water testing of both prototypes.** 4.1 requirements and test plan, 4.2 Prototype A (G13 + 3-blade), 4.3 Prototype B (G13B + 4-blade).
 
 ### Reports (new)
 - `Requirements.md`, `Trim_Stability_Seating_Analysis.md`, `Weight_Reduction_Options.md` (including the running weight log), `Connection_Review.md`.
 
 ### Weight and payload
-- Design payload: **280 lb of driver + gear** on the 1652 plate. With a 200 lb driver the **gear allowance is about 88 lb** as of this draft (see the running weight log).
+- Design payload: **280 lb of driver + gear** on the 1652 plate. With a 200 lb driver the **gear allowance is about 81 lb** as of this draft (see the running weight log).
 
 ### Build tracker totals (draft, 2026-11-02)
-- **BOM:** about **$15,490** (81 lines; includes the $4,000 placeholder boat and about $850 of welding and rivnut tools).
-- **Build Guide:** 27 tasks, **248 DIY hours**, 110.5 pro hours ≈ **$9,393** pro labor at $85/hr.
+- **BOM:** about **$15,875** (85 lines; includes the $4,000 placeholder boat and about $850 of welding and rivnut tools).
+- **Build Guide:** 28 tasks, **260 DIY hours**, 115.5 pro hours ≈ **$9,818** pro labor at $85/hr.
 
 ---
 
@@ -83,8 +90,12 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 
 1. **The hull is a parametric placeholder.** Measure the real 1652 (Build Guide 1.1 step 9) and update the CAD before cutting anything.
 2. **Hull armor not re-laid out for the 1652.** The UHMW strip layout, rib stations and cut list in Build Guide 1.2 are still from the 1448 model.
-3. **Not yet modeled:** steering stick, trim tab and fuel tank (analysis only). The rev7 steering pushrod still runs from the rudders to about X 96 in on the port side and passes about 1-2 in above the outboard edge of the passenger cushion; re-route it when the stick is designed.
-4. **Front (bow) bench kept** as factory structure and flotation; the fuel tank goes just aft of it. The mannequins' feet hang about 1 in above the floor (high seats); a footrest can be added if needed.
+3. **Not yet modeled:** trim tab and fuel tank (analysis only).
+   - **Steering cable load:** the rev7 structural check puts about 160 lb on the steering link at hard rudder. Confirm the 43C cable's rated working load with SeaStar before the first run; if it is short, use the 64C series, two cables, or a solid rod.
+   - **Throttle body position** on the G13 is a placeholder in the CAD; set the engine-end bracket on the real engine.
+   - The steering cable's aft clamp tab is welded to a short arm off the aft cage hoop at fit-up (the arm is not modeled).
+   - The rev7 pushrod is removed from the assembly only; it still exists in the imported cage Part Studio and should be removed there before the STEP export.
+4. **Front (bow) bench kept** as factory structure and flotation; the fuel tank goes just aft of it. The driver's feet now rest on the footrest; the passenger's feet hang about 1 in above the floor (high box seat).
 5. **Weights are partly estimates.** The A-frame, connection parts, seating and console have CAD weights; the rest are estimates. A full CAD weigh-in should replace the estimates before release.
 6. **Build-step 1.1 render** is still the old 1448 image.
 7. **Carried over from v1.0.0.2:** front cage post top cut angle; simplified cage tubes; nominal fastener lengths; UHMW expansion slots not modeled.

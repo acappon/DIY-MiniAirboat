@@ -192,11 +192,21 @@ export const seatingInterior = defineFeature(function(context is Context, id is 
             }
         }
         // Fore and aft panels, riveted to the frame (inside the angles), trapezoid following the hull.
-        for (var en in [[bx0 + T, "aft"], [bx1 - T - 0.05, "fwd"]])
+        // Each has two 1 in grommet holes for the push-pull cables (Controls studio): steering to port,
+        // throttle to starboard.
+        for (var en in [[bx0 + T, "aft", [[23, 13], [-10, 9]]], [bx1 - T - 0.05, "fwd", [[20, 12], [-10, 9]]]])
         {
             const yb = hw(z0 + T) - c - T - 0.05;
             const yt = hw(bz - T) - c - T - 0.05;
+            var grommets = [];
+            for (var gi = 0; gi < size(en[2]); gi += 1)
+            {
+                const gid = id + ("grommet" ~ en[1] ~ gi);
+                mkCyl(context, gid, vector(en[0] - 0.5, en[2][gi][0], en[2][gi][1]), vector(en[0] + 0.55, en[2][gi][0], en[2][gi][1]), 0.5);
+                grommets = append(grommets, qCreatedBy(gid, EntityType.BODY));
+            }
             yzPrism(context, id + ("panel" ~ en[1]), en[0], 0.05, [[-yb, z0 + T], [yb, z0 + T], [yt, bz - T], [-yt, bz - T]]);
+            doCut(context, id + ("panel" ~ en[1]) + "holes", qCreatedBy(id + ("panel" ~ en[1]), EntityType.BODY), qUnion(grommets));
             paintBody(context, qCreatedBy(id + ("panel" ~ en[1]), EntityType.BODY), "Storage box panel 0.050 5052 - " ~ en[1], color(0.82, 0.83, 0.85));
         }
         // Flotation foam on the floor, under a 1/4 in plywood false floor.

@@ -81,11 +81,14 @@ export const crewMannequins = defineFeature(function(context is Context, id is I
         annotation { "Name" : "Passenger hip point Z (box cushion top)" }
         isLength(definition.passengerZ, { (inch) : [0, 18, 40] } as LengthBoundSpec);
 
-        annotation { "Name" : "Floor height (Z) for the feet" }
+        annotation { "Name" : "Floor height (Z) for the passenger's feet" }
         isLength(definition.floorZ, { (inch) : [-2, 0, 10] } as LengthBoundSpec);
+
+        annotation { "Name" : "Footrest height (Z) for the driver's feet" }
+        isLength(definition.driverFloorZ, { (inch) : [-2, 5, 10] } as LengthBoundSpec);
     }
     {
         const f = definition.floorZ / inch;
-        seatedFigure(context, id + "driver", vector(definition.driverX / inch, 0, definition.driverZ / inch), f, "Driver mannequin", color(0.95, 0.45, 0.05));
+        seatedFigure(context, id + "driver", vector(definition.driverX / inch, 0, definition.driverZ / inch), definition.driverFloorZ / inch, "Driver mannequin", color(0.95, 0.45, 0.05));
         seatedFigure(context, id + "passenger", vector(definition.passengerX / inch, 0, definition.passengerZ / inch), f, "Passenger mannequin", color(0.95, 0.85, 0.1));
     });
