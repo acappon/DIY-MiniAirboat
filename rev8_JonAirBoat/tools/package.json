@@ -3,6 +3,7 @@
   "private": true,
   "description": "Release helpers for the DIY Jon-Air airboat docs",
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "exceljs": "^4.4.0",
+    "sharp": "^0.33.0"
   }
 }

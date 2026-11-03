@@ -16,3 +16,6 @@ desktop.ini
 # Editor settings Fusion makes when you edit a script
 .vscode/
 node_modules/
+
+# Release zips (kept locally, too large for git)
+releases/

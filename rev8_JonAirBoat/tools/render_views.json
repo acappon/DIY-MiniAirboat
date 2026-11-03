@@ -1,0 +1,9 @@
+{
+  "note": "Onshape shaded_view camera matrices for Assembly 1 (1600x1000, transparent). Render each with and without crew to raw/v<n>_crew.png and raw/v<n>_nocrew.png, then: node tools/compose_renders.js <rawDir> <outDir> v<VERSION>",
+  "v1": "0.5,0.866,0,0,-0.35,0.2,0.915,0,0.79,-0.46,0.4,0",
+  "v2": "-0.554,-0.831,0,0,0.357,-0.238,0.903,0,-0.75,0.5,0.43,0",
+  "v3": "1,0,0,0,0,0.05,0.9988,0,0,-0.9988,0.05,0",
+  "v4": "1,0,0,0,0,1,0,0,0,0,1,0",
+  "v5": "0.567,0.825,0,0,-0.126,0.087,0.988,0,0.815,-0.56,0.153,0",
+  "v6": "0.914,0.406,0,0,-0.081,0.182,0.98,0,0.398,-0.896,0.199,0"
+}

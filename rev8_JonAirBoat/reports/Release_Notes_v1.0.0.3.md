@@ -1,9 +1,7 @@
-# DIY Jon-Air Airboat — Release Notes v1.0.0.3 (in development)
+# DIY Jon-Air Airboat — Release Notes v1.0.0.3
 
-> **In development: not yet released.** This file and `Airboat Build Tracker v1.0.0.3.xlsx` carry the version in `VERSION` and are updated as the work proceeds on branch `rev8/1652-hull`. At release time the CAD exports and renders are made, the Onshape version is created, the totals below are refreshed, and `node tools/set_version.js --release <date>` removes this banner (see `RELEASING.md`).
-
-**Release date:** TBD
-**CAD source:** Onshape document "DIY Jon-Air boat", branch workspace "1652 hull", version **v1.0.0.3** (to be created at release)
+**Release date:** 2026-11-03
+**CAD source:** Onshape document "DIY Jon-Air boat", branch workspace "1652 hull", version **v1.0.0.3**
 (https://cad.onshape.com/documents/7328492526b52c17df5ca2ec)
 **Previous release:** v1.0.0.2 (2026-11-01)
 **Design rule:** everything must be buildable with DIY backyard-mechanic skills.
@@ -17,10 +15,10 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 | Location | What it is |
 |---|---|
 | `Airboat Build Tracker v1.0.0.3.xlsx` | BOM (85 lines), Build Guide (28 tasks in 4 sections) and Read Me (pro labor rate, legend) |
-| `CAD/Airboat_v1.0.0.3_*.step` | *To be exported at release:* full assembly plus the hull, drivetrain mounts, drivetrain, cage, seating, console and controls Part Studios |
+| `CAD/Airboat_v1.0.0.3_*.step` | Full assembly (Assembly, with crew) plus one file per Part Studio: Hull_1652, Drivetrain_mounts, Drivetrain_and_A-frame, Cage_and_rudders, Seating_and_interior, Console, Controls. The Part Studio files are the default configuration (`set=0`, everything), so the cage file still holds the retired rev7 steering pushrod. |
 | `CAD/FeatureScript/` | Feature source: Hull armor, Crew mannequins, Drivetrain mounts (parametric for the hull), Utility features, **Jon hull (new, parametric 1652 placeholder)**, **A-frame aluminum (new)**, **Seating (new: seating and interior mounts)**, **Console (new: driver console)**, **Controls (new: stick, throttle pedal, push-pull cables)** |
 | `CAD/analysis/` | **New:** `trim_stability.js` (static trim, list, running trim, swamped flotation) and `compare_hulls.js` (1448 / 1652 / 1860 comparison). Run with node. |
-| `renderedImages/` | *To be re-rendered at release on the 1652 hull* (studio views, scenes, build-step renders) |
+| `renderedImages/` | Re-rendered on the 1652 hull: six studio views with and without crew, four scenes, and the transparent originals. Build-step renders for the new steps 2.16 to 2.20; older build-step images are from v1.0.0.2 (1448 hull) and were not re-rendered. |
 | `reports/` | These notes, Requirements, Trim/Stability/Seating analysis, Weight Reduction Options (with the running weight log), Connection Review, and the static test plan, protocol and report template |
 
 ---
@@ -114,9 +112,7 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 7. **Carried over from v1.0.0.2:** front cage post top cut angle; simplified cage tubes; nominal fastener lengths; UHMW expansion slots not modeled.
 8. **Prices are estimates** as of 2026-11-02, before tax and shipping.
 
-## Still to do before release
-- Create the Onshape version v1.0.0.3 and export the STEP files.
-- Re-render the studio views, scenes and new build steps on the 1652 hull (including 2.16-2.19).
-- Electrical design: schematic and wire list, and every wire in CAD with color, AWG and end connectors (user request 2026-11-02).
-- Remove the v1.0.0.2 tracker and STEP files from the package (as was done for v1.0.0.1).
-- Refresh the totals and contents above, and remove the draft banner.
+## Carried to the next release
+- Electrical design: schematic and wire list, and every wire in CAD with color, AWG and end connectors (user request 2026-11-02; waits until seating and console are declared finished).
+- Re-render the older build steps (2.1 to 2.15) on the 1652 hull.
+- Choose the actual hull and replace the 1652 placeholder dimensions with measurements.
