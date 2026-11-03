@@ -109,6 +109,17 @@ Torque at the prop: about 282 lb-ft. Thrust: about 580 lbf (estimate). Belt pull
 
 **Price used:** $1,275 prop, about $100 face plate and bolts (estimate), about $250 flange: **about $1,625**.
 
+**Quieter option for builders (not a separate design):** a Warp Drive 4-blade with HP blades, cut to 66 in ($1,680, about $405 more), on a 14MGT **52T** large pulley instead of 47T, turns about 2,350 rpm (tip about 678 ft/s) for the same power. Thrust and speed are about the same; prop torque rises about 11% and the gyroscopic load about 20%, both within the shaft and bearing margins.
+
+Noise estimate (Hamilton Standard empirical prop-noise method, A-weighted, checked against Florida's finding that big airboats exceed 90 dB(A) at 50 ft at full power):
+
+| At 50 ft | 3-blade, 2,600 rpm | 4-blade, 2,350 rpm |
+|---|---|---|
+| Prop alone | about 81 dBA | about 77 dBA |
+| Prop plus a muffled bike exhaust (about 75–80 dBA, estimate) | about 82–84 dBA | about 79–82 dBA |
+
+Neither meets California's 75 dB(A) shoreline limit (SAE J1970); both are well under Florida's 90 dB(A) at 50 ft ([Fla. Stat. 327.65](https://codes.findlaw.com/fl/title-xxiv-vessels/fl-st-sect-327-65/)). The exhaust limits the total gain, so a good muffler matters as much as the prop. Decision 2026-11-03: **keep the 3-blade**; Build Guide step 2.0 (Choose your prop) tells builders how to switch.
+
 **Alternative kept:** Whirlwind CarbonMax 68, 3-blade, 66 in: published maximum 3,150 rpm, rated for 160–220 hp airboats, 6 x 1/2 in bolts on a 4.750 in circle with a 2.260 in pilot (Whirlwind installation guide, [Whirlwind](https://whirlwindpropellers.com/airboats/hp/160-220/)). Price not published (estimate about $1,800 plus the flange). Switch back if Warp Drive's rpm limit is too close to 2,600.
 
 ## 6. Layout on the 1448
