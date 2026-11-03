@@ -83,7 +83,33 @@ Torque at the prop: about 282 lb-ft. Thrust: about 580 lbf (estimate). Belt pull
 - **Gyroscopic load:** a hard turn at about 30°/s with the prop at 2,600 rpm puts a moment of about 2,700 in-lb on the shaft (about 220 lbf on each bearing); it is included in the loads above.
 - **Bearing plates:** the forward plate takes the thrust out of plane, so make it **1/2 in 6061** (about 8,700 psi at 1.5 x thrust; 3/8 in would be about 15,500 psi, too high for fatigue), about 6 in deep, bolted between the stand side frames. Both plates have vertical slots and jack bolts so the whole shaft moves up and down to tension the belt.
 - **The load ratings above come from distributor listings** and the thrust method is the generic tapered-roller formula (P = 0.4 Fr + 1.5 Fa). Confirm with the Dodge (or other maker's) catalog method for the exact unit before buying.
-- **Prop end:** a 6-bolt airboat prop hub keyed and pressed (or tapered) on the aft end.
+- **Prop end:** a steel prop flange keyed to the shaft (see Section 5a for the bolt pattern).
+
+## 5a. Prop (chosen 2026-11-03)
+
+**Whirlwind CarbonMax 68, 3-blade, 66 in**, ground-adjustable composite airboat prop (carbon spar, nickel leading-edge shield).
+
+| Item | Value | Source |
+|---|---|---|
+| Diameter range of the model | 66–68 in; **choose 66 in** | Whirlwind installation guide |
+| Maximum rpm | **3,150**; normal range 2,500–3,150 | Whirlwind installation guide |
+| Pitch | adjustable 7.5–17.5° in 2.5° steps; start at 15° | Whirlwind installation guide |
+| Hub mounting | 6 x 1/2 in grade 8 fine-thread bolts on a **4.750 in circle**, **2.260 in pilot** (SAE #2 / LXL flange); 45 ft-lb | Whirlwind installation guide |
+| Rated application | 160–220 hp airboats (the 68 series) | ([Whirlwind](https://whirlwindpropellers.com/airboats/hp/160-220/)) |
+
+**Why this prop:**
+- **Our operating point fits it:** about 2,600 prop rpm at 9,500 engine rpm is inside its 2,500–3,150 rpm range, with 550 rpm of margin to the maximum. Tip speed is Mach 0.67 at 2,600 and Mach 0.81 at the 3,150 maximum, both under 0.85.
+- **Adjustable pitch** sets the engine rpm without changing the belt: at a static full-throttle run, raise the pitch until the engine reaches its target. Whirlwind suggests a static prop rpm 100–200 below maximum for the most thrust; this design deliberately runs lower (about 2,600) for engine life, fuel and noise, which Whirlwind also allows.
+- **66 in, not 68 in:** 66 in keeps about 4 in between the lower tip and the 15 in transom top at the Z 52 axis (68 in would leave about 3 in) and a smaller cage. 68 in would add only about 4% thrust.
+- **3-blade:** absorbs about 140 hp in a 66 in disc at a moderate pitch; a 2-blade would need much more pitch.
+
+**Fitting it:**
+- **Prop flange:** a steel flange machined to the 6-bolt 4.750 in circle with a 2.260 in pilot, bored 1-1/2 in and keyed to the prop shaft, held by a shaft locknut and washer (a machine-shop job). Airboat suppliers also sell SAE #2 prop flanges that can be bored to suit.
+- **Rotation:** with the sprocket side of the engine facing aft, the prop turns the way the countershaft drove the rear wheel. Turn the engine by hand in 4th to confirm the direction, then order the hub for that rotation (the hub is marked left and right).
+- **Clearance:** at least 2 in from the blades to every part of the stand, engine and cage (Whirlwind's minimum).
+- **First runs:** start at 15° pitch, run to 2,000 prop rpm, check bolt torque and that no blade moves in the hub; recheck torque after 5 h, then every 25 h (Whirlwind's procedure).
+
+**Price:** not published online; call Whirlwind or a dealer. Planning estimate about $1,800 for the 3-blade, plus about $250 for the flange. **Budget alternative:** a Warp Drive 66 in 3-blade with its HP hub, listed at about $805–995 ([Warp Drive](https://warpdriveprops.com)); its maximum rpm is not published, so get it from Warp Drive (1-251-609-0969) before choosing it.
 
 ## 6. Layout on the 1448
 
@@ -117,5 +143,5 @@ That is about 37 lb more than the concept study assumed (180 lb engine system pl
 2. **Primary reduction** and the countershaft spline: confirm on the engine (service manual).
 3. **Belt width** from Gates DesignFlex; the pulley width follows.
 4. ~~Thrust bearing type~~: decided, a tapered-roller flange unit forward and a ball flange unit aft (Section 5).
-5. **Prop:** pick the actual 66 in 3-blade and its maximum rpm (it must exceed about 2,600 with margin).
+5. ~~Prop~~: decided, Whirlwind CarbonMax 68, 3-blade, 66 in, 3,150 rpm maximum (Section 5a). Still to do: confirm rotation, get a price, order the flange.
 6. **Cooling:** radiator position in the prop wash and the bike's thermostat and fan.

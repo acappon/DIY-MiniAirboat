@@ -88,7 +88,7 @@ For comparison: the rev8 1652 design leaves about 80 lb of driver gear, and the 
 | Smaller battery | −$50 | −$50 |
 | **Estimated total** | **about $12,000** | **about $10,750** |
 
-The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. **The v1.0.0.4 build tracker BOM for the bike engine comes to about $11,100:** it adds an inline EFI fuel pump (about $80) and keeps the v1.0.0.2 engine-bed lines until the engine stand is designed. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
+The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. **The v1.0.0.4 build tracker BOM for the bike engine comes to about $12,600** after the detailed design (Bike_Engine_Stand_and_Reduction.md): an inline EFI fuel pump, the clutch lever, a tapered-roller thrust bearing and a Whirlwind CarbonMax prop (about $2,050 with its flange; a Warp Drive prop would bring the total to about $11,500). It still carries the v1.0.0.2 engine-bed lines until the engine stand is detailed. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
 
 ## 6. What you give up
 
