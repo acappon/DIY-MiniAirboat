@@ -127,9 +127,38 @@ With the 250 lb outfit and the 15 lb prop, equipment is 433 lb and payload is **
 
 **Outfit trim (decided 2026-11-03):** UHMW strips over the wear zones only (the keel and chine areas from the bow rise aft), about 45 → 35 lb. Equipment drops to about 423 lb and payload to about **402 lb**, which meets both load cases.
 
-**Exhaust layout (Section 6a) adds about 5 lb** (tailpipe to the transom corner, heat shields, pipe guard): equipment about 428 lb, payload about **397 lb**. Driver + 150 lb of gear still fits; **driver + passenger is about 3 lb over. Offset to choose:** a thin-wall (0.035 in) stainless tailpipe, or UHMW strips ending at about 125 in instead of 135 in (about −3 lb). If the stand comes out over 45 lb, or the engine weighs more than 79 lb, take the difference out of the outfit too.
+**Exhaust layout (Section 6a) adds about 5 lb** (tailpipe to the transom corner, heat shields, pipe guard): equipment about 428 lb, payload about **397 lb**. Driver + 150 lb of gear still fits; driver + passenger is about 3 lb over.
 
-Speeds, from the model: about **35 mph** with driver + 150 lb of gear stowed amidships (34 mph with it in the bow) and **34.75 mph** with driver + passenger. Both get on plane easily, with more than 250 lbf of thrust to spare at the hump. Dock trim is 0.5–2°.
+**Allowances and cage-top lights (added 2026-11-03, about 43 lb):**
+
+| Item | lb (est.) |
+|---|---|
+| Minimal dash: tach, coolant and exhaust temperature gauges, key/DESS post, start button, panel | 3 |
+| Wiring, fuse block, switches | 3 |
+| Belt guard | 3 |
+| Radiator brackets, coolant overflow bottle | 3 |
+| Brackets, rivnuts and bolts not counted elsewhere | 5 |
+| Bilge pump and hose | 2 |
+| Passenger cushion and grab handle | 4 |
+| LED light bar, 30 in single row, on the cage top, with bracket | 10 |
+| Motorized remote searchlight (Golight Stryker LED class), on the cage top, with mount | 8 |
+| Light wiring and switches | 2 |
+| **Total** | **43** |
+
+The anchor, line and paddle are counted as part of the 150 lb of gear.
+
+**Result:** equipment about **471 lb**, payload about **354 lb** under the 825 lb plate.
+
+| Load case | Needs | Margin | Top speed |
+|---|---|---|---|
+| Driver + 150 lb of gear | 350 lb | **+4 lb** | 34.25 mph (gear in the bow) |
+| Driver + passenger | 400 lb | **−46 lb (over)** | 35 mph |
+
+Solo dock trim is about 2.3°, just over the 0.5–2° target; stow gear forward of the driver. **The passenger case does not fit; the options are in the v1.0.0.4 release notes.**
+
+**Electrical load:** the light bar (about 10.3 A), searchlight (about 3.7 A) and navigation lights come to about 15 A, about 200 W at 13.8 V. Check the 800R's spare charging output (service manual) before fitting, and size the battery for running the lights with the engine off. If the stand comes out over 45 lb, or the engine weighs more than 79 lb, take the difference out of the outfit too.
+
+Speeds, from the model before the allowances below: about **35 mph** with driver + 150 lb of gear stowed amidships (34 mph with it in the bow) and **34.75 mph** with driver + passenger. Both get on plane easily, with more than 250 lbf of thrust to spare at the hump. Dock trim is 0.5–2°.
 
 ## 9. Decisions and checks before the CAD
 

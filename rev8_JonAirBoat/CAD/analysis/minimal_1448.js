@@ -108,6 +108,19 @@ const OUTFIT = [
   ['Small trim tab and turnbuckle', 3, -2, -19, 1],
   // Added 2026-11-03 with the exhaust layout (Drivetrain_800R_ETEC.md, Section 6a): about 4-6 ft of tailpipe to an aft transom corner.
   ['Tailpipe, heat shields and pipe guard', 5, 8, -20, 25],
+  // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
+  ['Minimal dash: tach, coolant and exhaust temperature gauges, key/DESS post, start button, panel', 3, 60, 0, 30],
+  ['Wiring, fuse block, switches', 3, 40, 0, 10],
+  ['Belt guard', 3, 13, 0, 37],
+  ['Radiator brackets and coolant overflow bottle', 3, 25, 0, 40],
+  ['Brackets, rivnuts and bolts not counted in other items', 5, 40, 0, 10],
+  ['Bilge pump and hose', 2, 20, 0, 1],
+  ['Passenger cushion and grab handle', 4, 82, 0, 24],
+  // On top of the prop cage (user, 2026-11-03): 30 in single-row LED light bar (~8.6 lb, 150 W) and a motorized
+  // remote searchlight (Golight Stryker LED class, ~6-7 lb, 3.7 A), with brackets and wiring.
+  ['LED light bar on the cage top, with bracket', 10, 8, 0, 90],
+  ['Motorized remote searchlight on the cage top, with mount', 8, 6, 0, 92],
+  ['Light bar and searchlight wiring and switches', 2, 30, 0, 40],
 ];
 // [key, name, hp used, lb (engine + reduction + radiator + exhaust + mounts), prop lb, static thrust lbf, Vp mph]
 // Static thrust: power^(2/3) scaling from 440 lbf at 100 hp (64 in prop), the same rule as compare_hulls.js.
