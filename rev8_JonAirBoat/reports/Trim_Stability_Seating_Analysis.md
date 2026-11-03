@@ -152,6 +152,8 @@ The middle bench (X about 78–86) was a thwart that tied the two hull sides tog
 
 ## 9. Seating and walk-through layout (for the CAD)
 
+**Modeled in CAD 2026-11-02** (Onshape "Seating and interior mounts" and "Console" Part Studios); the CAD values replace the proposals below where they differ: storage box X 63-79 in (clear of the engine-bed ends at X 62), cushion top Z 18 in; grab bar uprights at X 58 in; driver hip point X 103, Z 17 in; dry box X 97-112 in; console table X 101-122 in at Z 25 in. `analysis/trim_stability.js` now uses the CAD weights and positions: static trim with one passenger 1.17° (was 1.29°), list about zero.
+
 | Item | Proposed position | Notes |
 |---|---|---|
 | Storage box / passenger seat | X 55–73, full width, padded top at about Z 19 | Lid hinges at the back. Box back at X 57, so the lid opens 90° clear of the bar at X 54. |

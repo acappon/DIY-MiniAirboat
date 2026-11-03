@@ -86,20 +86,21 @@ function baseItems(proto) {
     ['Prop cage (steel EMT, mesh)', 85, 5, 0, 52, 'Cage', ST],
     ['Rudders, horns, rails, bellcrank', 25, -7, 0, 45, 'Cage', AL],
     ['Steering stick and pushrods', 15, 75, 12, 14, 'Controls', AL],
-    ['Battery, Group 31 LiFePO4 dual-purpose (~27 lb) + alternator protector', 28, 100, 0, 6, 'Electrical', 0.4],
-    ['Dry box, power hub, fuses, wiring', 15, 100, 0, 8, 'Electrical', 0.3],
+    ['Battery, Group 31 LiFePO4 dual-purpose (~27 lb) + alternator protector', 28, 104.5, 6.85, 5.6, 'Electrical', 0.4],
+    ['Dry box, power hub, fuses, wiring (CAD 2026-11-02)', 19.1, 104.5, 1, 7, 'Electrical', 0.3],
+    ['Interior mount rails 1x2x1/8 6061 (CAD)', 11.9, 88, -4, 0.5, 'Seating', AL],
     ['Lights: LED bar, running lights, searchlight', 10, 30, 0, 80, 'Electrical', 0.5],
-    ['Driver bucket seat, tracks, base', 25, 100, 0, 18, 'Seating', 0.2],
-    ['Storage box (passenger seat), padded lid', 35, 64, 0, 10, 'Seating', 0.1],
-    ['Backrest / grab bar and stays', 20, 50, 0, 26, 'Seating', AL],
-    ['Table, dash panel, gauges, switches, holder', 30, 108, -20, 25, 'Controls', 0.5],
+    ['Driver bucket seat and tracks (CAD)', 15, 104, 0, 18, 'Seating', 0.2],
+    ['Storage box / thwart, foam, lid, cushion (CAD)', 45.7, 71, 0, 9, 'Seating', 0.1],
+    ['Backrest / grab bar, stays, pad (CAD)', 7.5, 55, 0, 18, 'Seating', AL],
+    ['Console: table, dash, instruments, frame (CAD)', 22.9, 112, -22, 22, 'Controls', 0.5],
     ['Trim tab (starboard) and turnbuckle', 4, -2, -19, 1, 'Hull armor', AL],
     ['Safety gear in storage box (PFDs, anchor, extinguisher, lines)', 25, 64, 0, 8, 'Gear', 0.0],
   ];
 }
 const FUEL_TANK = ['Fuel tank 6.5 gal + fuel', 0, 135, 0, 6, 'Fuel', -0.2]; // weight set per case
-const DRIVER = (dx = 0) => ['Driver (200 lb)', 200, 106 + dx, 0, 24, 'Crew', 0];
-const PASS = (y) => ['Passenger (200 lb) on box', 200, 66, y, 26, 'Crew', 0];
+const DRIVER = (dx = 0) => ['Driver (200 lb)', 200, 104 + dx, 0, 26, 'Crew', 0];
+const PASS = (y) => ['Passenger (200 lb) on box', 200, 69, y, 27, 'Crew', 0];
 
 function massProps(items) {
   let W = 0, mx = 0, my = 0, mz = 0;

@@ -100,6 +100,7 @@ Design payload is 280 lb of driver + gear on a 1652 (R1.1, R7.5). Every change b
 | 2026-11-02 | Welded cage in black steel / DOM instead of galvanized EMT (same sizes) | ~0 | ~43 lb |
 | 2026-11-02 | Rear bench center removed, foam side boxes kept. About 10–15 lb comes off the hull, which isn't counted against the capacity plate, so it gives no plate allowance back. It does help planing. | (−10 to −15 lb hull) | ~43 lb |
 | 2026-11-02 | **Battery: Group 31 LiFePO4 lithium, dual-purpose, in place of the 70 lb AGM** (user decision: more power, lighter; option 2 above). About 27 lb plus an alternator protector, about 28 lb in all. It has more usable capacity (80–90% versus about 50%) and holds starting voltage better. | −42 lb | **~85 lb** |
+| 2026-11-02 | **Seating, interior mount rails and console modeled in CAD** (tandem seating, storage box as the new thwart, grab bar, battery dry box, bucket seat, console with instruments). CAD weights: storage box/thwart with foam, lid and cushion 45.7 lb (plan 35), interior mount rails 11.9 lb (new), grab bar 7.5 lb (plan 20), dry box/power hub/wiring 19.1 lb (plan 15), seat and tracks 15 lb (plan 25), console 22.9 lb (plan 30). Total about 122 lb against 125 lb planned. | −3 lb | **~88 lb** |
 
 Notes:
 - The 100 lb steel estimate was low, so other drivetrain estimates may be off too. A full CAD weigh-in (materials assigned to every part) should replace the estimates before the next release.

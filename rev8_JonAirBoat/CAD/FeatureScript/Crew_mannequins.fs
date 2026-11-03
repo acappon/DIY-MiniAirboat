@@ -3,8 +3,9 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 
 // Simple seated crew mannequins (about 50th-percentile adult, 5'9") for renders and ergonomics checks.
 // Built from cylinders and spheres in the airboat assembly frame: X forward from the transom,
-// Y = 0 on the centerline, Z up from the hull bottom. Each figure sits facing +X with its
-// hip point on the seat surface.
+// Y = 0 on the centerline, Z up from the inside of the hull floor. Each figure sits facing +X with its
+// hip point on the seat surface. Seating is tandem on the centerline (rev8): the passenger on the
+// storage box in front of the engine, the driver on the bucket seat over the battery dry box.
 
 function cyl(context is Context, id is Id, a is Vector, b is Vector, r is number)
 {
@@ -22,8 +23,9 @@ function paint(context is Context, q is Query, name is string, c is Color)
     setProperty(context, { "entities" : q, "propertyType" : PropertyType.APPEARANCE, "value" : c });
 }
 
-// Seated figure with its hip point at H. Returns nothing; bodies are named per role.
-function seatedFigure(context is Context, id is Id, H is Vector, role is string, vest is Color)
+// Seated figure with its hip point at H. The shins drop toward the floor at `floorZ` (feet flat when
+// they reach it; at most an 18.5 in knee-to-ankle length, so on a high seat the feet hang a little).
+function seatedFigure(context is Context, id is Id, H is Vector, floorZ is number, role is string, vest is Color)
 {
     const skin = color(0.87, 0.69, 0.55);
     const pants = color(0.2, 0.27, 0.4);
@@ -33,7 +35,8 @@ function seatedFigure(context is Context, id is Id, H is Vector, role is string,
         const sid = id + (s > 0 ? "L" : "R");
         const hip = H + vector(0, s * 4, 3);
         const knee = H + vector(17, s * 4.5, 4);
-        const ankle = H + vector(20, s * 4.5, -10.5);
+        const drop = min(knee[2] - floorZ - 2.6, 18.25);
+        const ankle = knee + vector(3, 0, -drop);
         cyl(context, sid + "thigh", hip, knee, 3);
         sph(context, sid + "knee", knee, 2.6);
         cyl(context, sid + "shin", knee, ankle, 2.2);
@@ -66,19 +69,23 @@ annotation { "Feature Type Name" : "Crew mannequins" }
 export const crewMannequins = defineFeature(function(context is Context, id is Id, definition is map)
     precondition
     {
-        annotation { "Name" : "Seat height (hip point Z)" }
-        isLength(definition.seatZ, { (inch) : [0, 12.5, 60] } as LengthBoundSpec);
+        annotation { "Name" : "Driver hip point X (bucket seat)" }
+        isLength(definition.driverX, { (inch) : [0, 103, 150] } as LengthBoundSpec);
 
-        annotation { "Name" : "Seat position (hip point X)" }
-        isLength(definition.seatX, { (inch) : [0, 82, 150] } as LengthBoundSpec);
+        annotation { "Name" : "Driver hip point Z (seat cushion top)" }
+        isLength(definition.driverZ, { (inch) : [0, 17, 40] } as LengthBoundSpec);
 
-        annotation { "Name" : "Seat spacing (driver to passenger)" }
-        isLength(definition.spacing, { (inch) : [16, 22, 40] } as LengthBoundSpec);
+        annotation { "Name" : "Passenger hip point X (storage box)" }
+        isLength(definition.passengerX, { (inch) : [0, 68, 150] } as LengthBoundSpec);
+
+        annotation { "Name" : "Passenger hip point Z (box cushion top)" }
+        isLength(definition.passengerZ, { (inch) : [0, 18, 40] } as LengthBoundSpec);
+
+        annotation { "Name" : "Floor height (Z) for the feet" }
+        isLength(definition.floorZ, { (inch) : [-2, 0, 10] } as LengthBoundSpec);
     }
     {
-        const z = definition.seatZ / inch;
-        const x = definition.seatX / inch;
-        const half = definition.spacing / inch / 2;
-        seatedFigure(context, id + "driver", vector(x, half, z), "Driver mannequin", color(0.95, 0.45, 0.05));
-        seatedFigure(context, id + "passenger", vector(x, -half, z), "Passenger mannequin", color(0.95, 0.85, 0.1));
+        const f = definition.floorZ / inch;
+        seatedFigure(context, id + "driver", vector(definition.driverX / inch, 0, definition.driverZ / inch), f, "Driver mannequin", color(0.95, 0.45, 0.05));
+        seatedFigure(context, id + "passenger", vector(definition.passengerX / inch, 0, definition.passengerZ / inch), f, "Passenger mannequin", color(0.95, 0.85, 0.1));
     });
