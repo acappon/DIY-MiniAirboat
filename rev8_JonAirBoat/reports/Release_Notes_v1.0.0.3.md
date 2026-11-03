@@ -74,6 +74,8 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
 - **Throttle:** pedal revolute on its shaft; the pedal-end core rod slides 2.85 in per radian of pedal; the engine-end core rod moves out by the same amount.
 - **Seating:** driver bucket seat slider on its tracks; storage box lid + cushion revolute on the aft-rail piano hinge.
 - **Checked by driving the mates:** crank 90 deg → prop 36 deg, idler −70 deg. Stick 20 deg forward → bellcrank −22 deg, both rudders −26.5 deg (trailing edges to port: stick forward = turn left), steering core moves 1.54 in at both ends (matches the 3 in cable travel for ±20 deg). Pedal 10 deg → throttle core 0.50 in. Lid opens upward; seat slides fore-aft. All mates are left at zero (design position).
+- **Mate limits (stops):** stick ±20 deg, both rudders ±30 deg (the stick stop reaches about 26.5 deg first), throttle pedal 0 to 12 deg (pedal flat on the footrest), storage lid 0 to 100 deg open, seat ±3 in (6 in track). With limits on, Onshape's API can no longer drive these mates; drag them in the Onshape assembly instead.
+- **Rudder clearance checked:** both rudders and the tie bar swung to +30 and −30 deg hit none of the 58 cage parts they could reach.
 - **Not mated (adjustments, not motion):** engine tilt on the slotted pivot bolts and jack screw (belt tension), seat-track lock positions, cable clamps. Crew mannequins stay fixed.
 
 ### Build Guide
@@ -104,7 +106,7 @@ This release moves the design from the Lowe 1448 reference hull to a **1652-clas
    - **Throttle body position** on the G13 is a placeholder in the CAD; set the engine-end bracket on the real engine.
    - The steering cable's aft clamp tab is welded to a short arm off the aft cage hoop at fit-up (the arm is not modeled).
    - The rev7 pushrod is left out of the assembly (Motion sets); it still exists in the cage Part Studio's default view, so the per-studio cage STEP should be exported with `set=1` plus the moving sets, or the pushrod deleted there.
-   - **Mates have no limits yet.** Stops to add: rudders about ±30 deg, stick ±20 deg, pedal 0 to about 20 deg, lid 0 to about 100 deg, seat ±3 in. Rudder-to-cage clearance at full deflection has not been checked in the assembly.
+   - **Throttle pedal stroke is short.** The pedal stops at 12 deg (the toe reaches the footrest top), and with the 2.85 in down-arm that moves the throttle core only about 0.6 in. Check the G13 throttle lever's full-open travel on the real engine. If it needs more, lengthen the down-arm (it can drop to about 4.5 in before reaching the floor, about 0.95 in of travel) or use a smaller lever radius at the throttle body.
    - **Motion sets pick parts by their bounding-box centres.** If a moving part (or a fixed part a connector sits on) is resized or moved, update its centre in `Motion_sets.fs`, or the set will come out empty (the first part of that set is then renamed "MOTION SETS ERROR ...").
 4. **Front (bow) bench kept** as factory structure and flotation; the fuel tank goes just aft of it. The driver's feet now rest on the footrest; the passenger's feet hang about 1 in above the floor (high box seat).
 5. **Weights are partly estimates.** The A-frame, connection parts, seating and console have CAD weights; the rest are estimates. A full CAD weigh-in should replace the estimates before release.
