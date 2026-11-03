@@ -1,7 +1,7 @@
 # Minimal 1448 Airboat — Concept Study
 
 **Date:** 2026-11-03. **Branch:** `study/minimal-1448` (from `main`, the 1448 version v1.0.0.2). **Status:** concept study; every outfit weight is an estimate until parts are weighed.
-**Decision (2026-11-03): build around a 1000 cc sport-bike engine** (for example a Suzuki GSX-R1000) with its gearbox and a belt reduction: cheaper than the Rotax 582 at US prices, about 38 mph with any load, and about 375 lb of payload under the plate.
+**Decision (2026-11-03): build around a 1000 cc sport-bike engine** (for example a Suzuki GSX-R1000) with its gearbox and a belt reduction: cheaper than the Rotax 582 at US prices, about 38 mph with any load, and about 345 lb of payload under the plate (updated with the stand and reduction design, Bike_Engine_Stand_and_Reduction.md).
 **Model:** `CAD/analysis/minimal_1448.js` (1448 hull hydrostatics and Savitsky planing, the same method as the rev8 analyses).
 
 ## 1. Why this study
@@ -47,7 +47,7 @@ So the hull was never the problem: the outfit was. A cheap, light, one-owner air
 | | Rotax 582 (two-stroke, ultralight aircraft) | 1000 cc sport-bike engine (for example a GSX-R1000) |
 |---|---|---|
 | Power used | 65 hp | about 150 hp (derated for continuous airboat load) |
-| Weight with reduction, radiator, exhaust | **about 103 lb** with the B or C gearbox and electric start (about 90–95 lb without the starter) | about 180 lb: about 130 lb engine with its gearbox, plus a belt reduction, radiator and exhaust |
+| Weight with reduction, radiator, exhaust | **about 103 lb** with the B or C gearbox and electric start (about 90–95 lb without the starter) | about 199 lb: about 145 lb engine with gearbox, oil and coolant, plus the belt reduction (32), radiator (12) and exhaust (10); the stand and beds add about 11 lb over the Rotax stand (Bike_Engine_Stand_and_Reduction.md) |
 | Reduction | Its own gearbox (2.58–3:1), prop mounts on it | The bike gearbox (fixed gear) plus a belt reduction to get the prop down to about 2,300 rpm |
 | Used price (US) | **about $4,000–5,500 with a gearbox** in US listings; remanufactured about $6,500; new about $6,500–8,200. UK listings are much lower (about £950–1,900), but shipping and import fees close much of the gap | complete running engines list from about $2,500 to $4,800; less from a crashed bike |
 | Where to find | Ultralight aircraft sales and owner forums | Motorcycle salvage, crashed-bike auctions, eBay |
@@ -57,22 +57,22 @@ So the hull was never the problem: the outfit was. A cheap, light, one-owner air
 
 | | Rotax 582 | Bike engine |
 |---|---|---|
-| Equipment | **365 lb** | 450 lb |
-| **Payload under the plate** | **460 lb** (a 200 lb driver + 260 lb, or driver + 1 + 60 lb) | **375 lb** (driver + 175 lb, or driver + 1) |
+| Equipment | **365 lb** | 480 lb |
+| **Payload under the plate** | **460 lb** (a 200 lb driver + 260 lb, or driver + 1 + 60 lb) | **345 lb** (driver + 145 lb, or driver + 1) |
 | Static thrust (estimate) | about 330 lbf | about 580 lbf |
-| Top speed, solo / + 60 lb gear / + 150 lb gear | 29.75 / 28.5 / 27.5 mph | 38.75 / 37.5 / 36.5 mph |
+| Top speed, solo / + 60 lb gear / + 150 lb gear | 29.75 / 28.5 / 27.5 mph | 39 / 37.75 / 36.75 mph |
 | Top speed, driver + 1 | 28 mph | 37.25 mph |
-| Thrust margin at the hump, solo / driver + 1 | 151 / 126 lbf | 348 / 321 lbf |
-| Dock trim, solo (target 0.5–2°) | 1.4° | 2.1° |
-| Transom freeboard at the dock | 9.7–10.7 in | 8.6–9.7 in |
-| Running trim at top speed (target 2–4.5°) | 1.5–1.9° | 1.0–1.3° |
+| Thrust margin at the hump, solo / driver + 1 | 151 / 126 lbf | 344 / 316 lbf |
+| Dock trim, solo (target 0.5–2°) | 1.4° | 2.35° |
+| Transom freeboard at the dock | 9.7–10.7 in | 8.3–9.3 in |
+| Running trim at top speed (target 2–4.5°) | 1.5–1.9° | 1.05–1.3° |
 
 For comparison: the rev8 1652 design leaves about 80 lb of driver gear, and the 1860 with the Toyota 2GR about 137 lb.
 
 **What this means:**
 1. **Payload is three to five times what the full outfit allowed on any hull,** and cargo barely changes speed: 150 lb of gear costs the Rotax boat about 2 mph.
 2. **The Rotax 582 is the best match for "small and light":** about 30 mph solo and 28 mph with a passenger, the most payload, and the simplest drivetrain (no redrive to build). The price is engine life, noise and cost: in the US a used 582 costs more than a crashed-bike engine.
-3. **The bike engine is the performance option:** about 38 mph with any load, still about 375 lb of payload, but it needs a belt reduction and more cage and stand.
+3. **The bike engine is the performance option:** about 38 mph with any load, still about 345 lb of payload, but it needs a belt reduction and more cage and stand.
 4. **Stow gear amidships, not in the bow.** 150 lb in the bow takes the dock trim to about level (Rotax). The light engine moves the balance forward compared with the car engine.
 5. **Running trim is still flat** (1.0–1.9°): the prop axis is still high (about 53 in in the model). A shorter stand or a few degrees of down-tilt should be checked once a prop size is chosen.
 
