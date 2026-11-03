@@ -6,6 +6,8 @@
 
 Coordinates: X forward from the transom, Y + to port, Z up from the hull bottom (inches).
 
+> **Note (2026-11-03):** Sections 1–11 and `trim_stability.js` still model the 1448 hull with the steel A-frame and EMT cage. The 1652 results are in Sections 12 and 13. Port Sections 1–11 to the 1652 before the next release.
+
 ---
 
 ## 1. Summary
@@ -261,8 +263,37 @@ Equipment counted against the plate is everything except the bare hull, includin
 - Savitsky's method is least accurate near the hump, so treat the hump margins as relative rankings, not absolute values.
 - Thrust is still estimated, so the static test (3.1) will move all speeds.
 
+## 13. Prototypes A, B and C on the 1652 (added 2026-11-03)
+
+**Prototype C** is the G13B with a low-boost turbo. No airboat-specific G13B turbo kit was found, but Swift GTi car kits and parts exist (cast turbo manifolds for a T25 turbo, intercooler kits, extra injector or standalone ECU). Assumptions for C:
+- About **140 hp** at about 7–8 psi. Car kits make more at high boost, but an airboat runs near full power for long stretches (R4.8).
+- Static thrust about **550 lbf**: B's 440 lbf scaled by power^(2/3), which is momentum theory for the same 64 in prop. That is about 3.9 lbf/hp, inside the usual 3–4 lbf/hp airboat rule of thumb.
+- About **25 lb** over B for the turbo, intercooler, piping and oil lines.
+
+Model: `CAD/analysis/prototypes_1652.js`. It uses the 1652 hull from `compare_hulls.js` and the v1.0.0.3 CAD weights; Sections 2–6 above still use the 1448. Full fuel (6.5 gal at the plan position).
+
+| | A: G13, 70 hp | B: G13B, 100 hp | C: G13B turbo, ~140 hp |
+|---|---|---|---|
+| Static thrust | 330 lbf | 440 lbf | ~550 lbf |
+| Top speed, solo / +1 / +2 | 24.5 / 21 / 14.5 mph | 30 / 28.5 / 26.5 mph | 34 / 33 / 31.5 mph |
+| Thrust margin at the hump, solo / +1 / +2 | 59 / 26 / **−10 lbf (does not plane)** | 145 / 112 / 76 lbf | 231 / 197 / 160 lbf |
+| Running trim at top speed, solo (R3.7: 2–4.5°) | 3.0° | 2.2° | **1.9° (below target)** |
+| Dock trim, solo / +2 (R3.6: 0.5–2°) | 1.5 / 1.8° | 1.6 / 1.8° | 1.7 / **1.9°** |
+| Prop torque at full power | 153 ft-lb | 228 ft-lb | ~320 ft-lb |
+| Driver gear allowance (R7.5) | ~81 lb | ~64 lb | ~39 lb |
+
+**What this means:**
+1. **C is the prototype that carries passengers well.** It has the most thrust to spare over the hump with any load and holds about 31–34 mph. It still falls short of 35–40 mph; a prop that holds thrust better at speed adds about 2 mph in the model.
+2. **The high thrust line costs C running trim.** More thrust 53 in up pushes the bow down harder, so C runs below the 2° target. A lower prop axis or a few degrees of down-tilt matters more for C than for A or B.
+3. **C needs a drivetrain check** (R4.9): belt redrive rating, prop rating and maximum RPM (R2.6), shaft and bearings, A-frame and mounts, cooling with the intercooler, and the standalone ECU and fuel system.
+4. **C needs a bigger trim tab.** Prop torque is about twice A's, and the 10 x 6 in tab is already marginal for B at low speed.
+5. **C uses up most of the driver's gear allowance.** About 39 lb is left, so C most likely needs the planned weight cuts (Weight_Reduction_Options.md). Its higher fuel burn also favours a larger tank.
+
+**Caveats:** C's power, thrust and weight are estimates, not measured. As above, all speeds are ±25% until the static test (3.1) measures thrust.
+
 ## Sources and assumptions
 - Lowe L1448M specifications (max load about 825 lb, max 25 hp, hull about 260 lb, 15 in transom; the 1448T has a 20 in transom): [iboats](https://boats.iboats.com/research/2023-lowe-boats-l1448m-jon/2335347.html), [boattrader](https://resources.boattrader.com/boat/2025-lowe-1448-1448t-jon-4320060). **Check the capacity plate on the actual boat.**
 - Planing method: Savitsky, D. (1964), "Hydrodynamic Design of Planing Hulls", Marine Technology. Flap lift and drag: Savitsky & Brown (1976).
 - Hull shape: the Onshape reference hull. The bow rise and bottom taper forward of X 101 are approximated, because the mesh is incomplete there. Fresh water.
 - Thrust falls linearly from the static value to zero at about 85 mph. Air drag CdA is about 12 ft² solo, plus 3 ft² per passenger.
+- Prototype C (Section 13): G13B stock output about 101 hp ([mymotorlist](https://mymotorlist.com/engines/suzuki/g13b/)); a Swift GTi with a turbo kit made about 178 hp at the wheels at high boost ([Autospeed](https://autospeed.com.au/cms/A_2565/article.html)); G13B turbo manifold for a T25 flange ([MAMBA, eBay](https://www.ebay.es/str/mambausa)); 3–4 lbf of static thrust per hp for airboat props ([Whirlwind newsletter, 2020](https://whirlwindpropellers.com/airboats/wp-content/uploads/2020/02/WWPC-1st-Qtr-2020-Newsletter.pdf)); turbo airboat experience with standalone ECUs and turbo lag ([Southern Airboat forum](https://southernairboat.com/community/threads/new-build-2-0-turbo.64539/)).

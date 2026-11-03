@@ -1,7 +1,7 @@
 # DIY Jon-Air Airboat — Requirements (DRAFT for review)
 
 **Status:** DRAFT, 2026-11-01. Every value marked **(proposed)** is a starting point for the team to accept, change or delete. Values without that mark come from decisions already made, the CAD, or the static test plan.
-**Applies to:** Prototype A (Suzuki G13 SOHC + 3-blade prop) and Prototype B (Suzuki G13B DOHC + 4-blade prop), unless a row says otherwise.
+**Applies to:** Prototype A (Suzuki G13 SOHC + 3-blade prop), Prototype B (Suzuki G13B DOHC + 4-blade prop) and Prototype C (G13B with a low-boost turbo, added 2026-11-03), unless a row says otherwise.
 **Used by:** the static test (Build Guide 3.1) and the on-water test plan and protocol (Build Guide 4.1–4.3). Every requirement must trace to at least one test, inspection or analysis with a pass/fail criterion.
 
 **Verification methods:** **T** = test (measured), **I** = inspection (look, measure a part, check a document), **A** = analysis (calculation or CAD), **D** = demonstration (do it once, pass/fail).
@@ -27,9 +27,9 @@
 
 | ID | Requirement | Rationale / source | Method | Where |
 |---|---|---|---|---|
-| R2.1 | Static thrust at full throttle: at least **300 lbf (proposed)** for Prototype A, and at least **15% more than A (proposed)** for Prototype B. | Static test plan estimate of 300–400 lbf for a ~70–80 hp engine; Prototype B has more power and a 4-blade prop. | T | S |
+| R2.1 | Static thrust at full throttle: at least **300 lbf (proposed)** for Prototype A, at least **15% more than A (proposed)** for Prototype B, and at least **20% more than B (proposed)** for Prototype C. | Static test plan estimate of 300–400 lbf for a ~70–80 hp engine; Prototype C is estimated at about 550 lbf (140 hp, `CAD/analysis/prototypes_1652.js`); Prototype B has more power and a 4-blade prop. | T | S |
 | R2.2 | Gets on plane with the driver + 1 load within **10 s (proposed)** from idle, in calm water. | Usability; an underpowered setup shows up here first. | T | W |
-| R2.3 | Top speed: solo at least **25 mph (proposed)** for Prototype A, and record driver + 1. Record it for Prototype B and compare. | Typical small-airboat performance; the prototype comparison is a stated goal. | T (GPS) | W |
+| R2.3 | Top speed: solo at least **25 mph (proposed)** for Prototype A, and record driver + 1. Record it for Prototype B and compare. Prototype C: solo at least **30 mph (proposed)**. | 1652 model estimates (prototypes_1652.js): about 24.5 mph (A), 30 mph (B) and 34 mph (C) solo, ±25% until thrust is measured. Typical small-airboat performance; the prototype comparison is a stated goal. | T (GPS) | W |
 | R2.4 | Runs on plane in **6 in (proposed)** of water without the hull or rudders touching bottom. | The reason to build an airboat: shallow water. | D | W |
 | R2.5 | Fuel endurance of at least **1.5 h (proposed)** at cruise, keeping a 1/3 reserve. Measure fuel burn in gal/h at cruise and at full throttle. | The 6 gal tank (BOM). Burn rate is needed to set this limit. | T | W |
 | R2.6 | Prop RPM never goes above the prop maker's maximum, at any throttle setting. | Prop safety; the redrive ratio is set per prototype. | T | S, W |
@@ -45,8 +45,8 @@
 | R3.4 | At rest with the R1.1 load, transom freeboard is at least **4 in (proposed)**, and no water comes over the stern when the engine is cut quickly from cruise. | Airboats squat at the stern; stern swamping is a known risk. | T | W |
 | R3.5 | No porpoising or chine-walking that the driver cannot correct with the throttle, at any speed up to top speed. | Safe planing behavior. | D | W |
 | R3.6 | With an empty boat and a solo driver at the dock, the boat sits slightly stern-down: **0.5–2° (proposed)**. Analysis estimate: 1.1°. | Trim decision 2026-11-02. | T (inclinometer) | B, W |
-| R3.7 | With a solo driver at top speed, running trim is **2–4.5° (proposed)**. Analysis estimate: 2.7° (A) and 2.1° (B), limited by the high thrust line. | Lowest drag for a flat bottom is about 3.5–4.5°; the target is to be as close as the layout allows. | T | W |
-| R3.8 | A turnbuckle-adjustable trim tab on the starboard side of the transom cancels prop-torque roll at cruise, so the boat runs within **1° (proposed)** of level across the beam. Analysis recommends 10 x 6 in, adjustable 0–10°. | The prop turns clockwise looking aft, so its torque rolls the boat starboard side down (about 153 ft-lb for A and 228 ft-lb for B at full power). | T (inclinometer) | W |
+| R3.7 | With a solo driver at top speed, running trim is **2–4.5° (proposed)**. Analysis estimate: 2.7° (A) and 2.1° (B), limited by the high thrust line. 1652 model: 3.0° (A), 2.2° (B), **1.9° (C, below the target)**: more thrust on the high line pushes the bow down harder, so C needs a lower or down-tilted thrust line. | Lowest drag for a flat bottom is about 3.5–4.5°; the target is to be as close as the layout allows. | T | W |
+| R3.8 | A turnbuckle-adjustable trim tab on the starboard side of the transom cancels prop-torque roll at cruise, so the boat runs within **1° (proposed)** of level across the beam. Analysis recommends 10 x 6 in, adjustable 0–10°. | The prop turns clockwise looking aft, so its torque rolls the boat starboard side down (about 153 ft-lb for A, 228 ft-lb for B and about 320 ft-lb for C at full power). Size the tab for C if C is built. | T (inclinometer) | W |
 
 ## 4. Structure and drivetrain
 
@@ -59,6 +59,8 @@
 | R4.5 | Oil pressure stays within the engine maker's range at idle and at full throttle. | Static test criterion 4. | T | S, W |
 | R4.6 | The bottom does not leak: the bilge is dry after **30 min (proposed)** afloat at rest and after each run. | Hull armor uses through-bolts in the bottom. | T | B, W |
 | R4.7 | The drivetrain module can be lifted out and back in with an engine hoist without cutting anything. | Build Guide 2.8–2.10 design intent (liftable module). | D | B |
+| R4.8 | **Prototype C:** the turbo runs at no more than **8 psi boost (proposed)** on pump gas, managed by a standalone ECU with knock protection and an overboost fuel cut. Intake air temperature after the intercooler and exhaust gas temperature stay within the engine and turbo makers' limits through the R4.4 20 min full-load run. | An airboat runs near full power for long stretches, unlike a car; the stock G13B compression is high for boost. Car turbo kits make far more at high boost, but not continuously. | T | S, W |
+| R4.9 | **Prototype C:** the redrive belt and pulleys, prop, prop shaft and bearings, A-frame and engine mounts are rated for about **140 hp and the matching prop torque (about 320 ft-lb)**, with the maker's margin. | A and B sizing does not cover the turbo engine's power. | A, I | R |
 
 ## 5. Safety
 
@@ -87,16 +89,17 @@
 |---|---|---|---|---|
 | R7.1 | Every task can be done with DIY backyard-mechanic skills and common tools; any task that needs a pro, such as welding, is marked in the Build Guide with its pro hours. | Project design rule. | I | R |
 | R7.2 | Prototype A BOM total no more than **$11,000 (proposed)**, including the boat. | Current estimate is about $10,300; cost control. | A | R |
-| R7.3 | Both prototypes use the same hull, beds, mounts and cage. Only the engine, redrive pulleys and belt, prop and their fasteners change. | Two-model plan: the same structure serves both. | A, I | R, B |
+| R7.3 | All prototypes use the same hull, beds, mounts and cage. Only the engine, redrive pulleys and belt, prop and their fasteners change; Prototype C also adds the turbo, intercooler, piping, standalone ECU and fuel-system upgrades. | Prototype plan: the same structure serves all three (R4.9 checks it for C). | A, I | R, B |
 | R7.5 | Airboat equipment weight (everything except the bare hull, crew and cargo, with full fuel) is no more than the hull's plate rating minus the 280 lb design payload: **about 936 lb or less on a 1652 (about 1,216 lb plate)**. The current estimate with all planned cuts is about 870–905 lb, and the rest is the growth allowance. **Every added part reduces the driver's gear allowance pound for pound; report it when design changes add weight.** | Keeps the design payload (R1.1) within the capacity plate. | A, T (scale) | R, B |
-| R7.4 | Total weight ready to run with fuel (no crew) is recorded for each prototype; Prototype B is within **50 lb (proposed)** of Prototype A. | The plan assumes the G13B adds almost no weight. | T (scale) | B |
+| R7.4 | Total weight ready to run with fuel (no crew) is recorded for each prototype; Prototype B is within **50 lb (proposed)** of Prototype A, and Prototype C within **35 lb (proposed)** of Prototype B. | The plan assumes the G13B adds almost no weight. Estimates: B about 17 lb over A (engine and 4-blade prop), C about 25 lb over B (turbo system). Each pound comes off the driver's gear allowance (R7.5): about 81 lb for A, 64 lb for B and 39 lb for C. | T (scale) | B |
 
 ---
 
 ## Open questions for the team
 1. Accept, change or delete each **(proposed)** value.
 2. Should a target cruise speed be added (for example, a comfortable cruise at 60% throttle)?
-3. Any requirements for night use, cold-weather use or carrying cargo, such as hunting or fishing gear?
-4. Which test water will be used, and does it allow airboats (R6.3)? This decides the noise and shallow-water test setup.
+3. Is 35–40 mph a goal for Prototype C? The 1652 model gives about 34 mph solo; more would need more thrust at speed (prop) or a lighter boat.
+4. Any requirements for night use, cold-weather use or carrying cargo, such as hunting or fishing gear?
+5. Which test water will be used, and does it allow airboats (R6.3)? This decides the noise and shallow-water test setup.
 
 **Next:** once these values are agreed, write `On_Water_Test_Plan.md` and `On_Water_Test_Protocol.md` (Build Guide 4.1). Each test will list the requirement IDs it verifies, and the plan will end with a traceability table so that no requirement is left untested.
