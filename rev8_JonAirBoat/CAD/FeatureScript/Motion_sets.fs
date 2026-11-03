@@ -102,10 +102,10 @@ function studioSets(studio) returns map
     if (st == "CONTROLS")
     {
         const stick = ["c", vector(110.9805, 13.5, 19.425)];
-        const pedal = ["c", vector(125.6907, -6.375, 4.3868)];
+        const pedal = ["c", vector(125.1024, -6.375, 5.2671)];
         const sRod = ["c", vector(106.44, 13.5, 9.9)];
         const bRod = ["c", vector(0.3214, 31.3198, 28.5299)];
-        const tRod = ["c", vector(117.4, -10.4, 2)];
+        const tRod = ["c", vector(117.7788, -10.4, 1.433)];
         const eRod = ["c", vector(44.3863, -11.7281, 26.3891)];
         return {
             "groups" : [[stick], [pedal], [sRod], [bRod], [tRod], [eRod]],   // 2 stick, 3 pedal, 4-7 cable core rods
@@ -120,7 +120,7 @@ function studioSets(studio) returns map
                 ["steerRodBell", 5, bRod, ["rod", bRod]],
                 ["steerRodBell", 1, ["c", vector(4.1937, 30.648, 28.1347)], ["rod", bRod]],                    // hub, bellcrank end
                 ["throttleRodPedal", 6, tRod, ["rod", tRod]],
-                ["throttleRodPedal", 1, ["c", vector(113.5, -10.4, 2)], ["rod", tRod]],                        // hub, pedal end
+                ["throttleRodPedal", 1, ["c", vector(113.5, -10.4, 1.433)], ["rod", tRod]],                        // hub, pedal end
                 ["throttleRodEngine", 7, eRod, ["rod", eRod]],
                 ["throttleRodEngine", 1, ["c", vector(46.0773, -11.5456, 23.9178)], ["rod", eRod]]]            // hub, engine end
         };

@@ -7,9 +7,12 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //   - Steering: stick on the port side of the driver seat, pivoting fore-aft on a clevis bracket on its
 //     own mount rail. A lug 4.4 in above the pivot drives a 43C-type push-pull cable (3 in travel) that
 //     runs aft through the storage box and along the old rod line to the cage bellcrank pin B.
-//   - Throttle: pedal hinged at the heel on a footrest platform for both feet. A down-arm on the pedal
-//     shaft, outside the platform's starboard wall, drives a 33C-type push-pull cable aft along the
-//     starboard side of the dry box, through the storage box, to the engine throttle.
+//   - Throttle: pedal hinged at the heel on a footrest platform for both feet, standing 30 deg up at idle
+//     and pressed through 25 deg to a stop bolt (the steep stroke is the trick T-H Marine's Hot Foot
+//     uses). A down-arm clamped to the pedal shaft, outside the platform's starboard wall, has cable
+//     holes at 3, 3.5 and 4 in (about 1.3, 1.5 and 1.7 in of cable travel) and drives a 33C-type
+//     push-pull cable aft along the starboard side of the dry box, through the storage box, to the
+//     engine throttle. The arm leans 12.5 deg forward at idle so it passes vertical mid-stroke.
 // Cable centerlines are fitted splines through the waypoints below; the path wires are kept (named) so
 // lengths and bend radii can be measured. Cables pass the storage box through grommets in its panels.
 
@@ -175,7 +178,11 @@ export const driverControls = defineFeature(function(context is Context, id is I
         doCut(context, id + "footrest" + "cut", qCreatedBy(id + "footrest", EntityType.BODY), qCreatedBy(id + "footIn", EntityType.BODY));
         paintBody(context, qCreatedBy(id + "footrest", EntityType.BODY), "Footrest platform 1/8 6061 diamond plate, bent box (both feet)", alu);
         const hz = fTop + 0.35;                                // pedal shaft height
-        const ang = 12 * degree;
+        const ang = 30 * degree;                               // pedal angle at idle; full throttle is 5 deg
+        const lean = 12.5 * degree;                            // arm lean forward of vertical at idle (half the 25 deg stroke)
+        const armHole = 3.5;                                   // cable hole used in the model (holes at 3, 3.5, 4 in)
+        const ad = [sin(lean), -cos(lean)];                    // down the arm
+        const an = [cos(lean), sin(lean)];                     // across the arm
         {
             const pid = id + "pedal";
             const A = [px, hz];
@@ -184,10 +191,22 @@ export const driverControls = defineFeature(function(context is Context, id is I
             const D = [px - 0.25 * sin(ang), hz + 0.25 * cos(ang)];
             xzPrism(context, pid + "plate", -6.5, -2.5, [A, B, C, D]);
             mkCyl(context, pid + "shaft", vector(px, -2.5, hz), vector(px, -10.25, hz), 0.25);
-            mkBox(context, pid + "arm", px - 0.4, px + 0.4, -10.25, -10.0, 1.6, hz);
+            var arm = [];
+            for (var e in [[-0.3, -0.4], [-0.3, 0.4], [4.4, 0.4], [4.4, -0.4]])
+                arm = append(arm, [px + e[0] * ad[0] + e[1] * an[0], hz + e[0] * ad[1] + e[1] * an[1]]);
+            xzPrism(context, pid + "arm", -10.25, -10.0, arm);
+            for (var h in [[3, "hole30"], [3.5, "hole35"], [4, "hole40"]])
+            {
+                const hid = pid + h[1];
+                mkCyl(context, hid, vector(px + h[0] * ad[0], -10.5, hz + h[0] * ad[1]), vector(px + h[0] * ad[0], -9.75, hz + h[0] * ad[1]), 0.1);
+                doCut(context, hid + "cut", qCreatedBy(pid + "arm", EntityType.BODY), qCreatedBy(hid, EntityType.BODY));
+            }
             doUnite(context, pid + "join", qCreatedBy(pid, EntityType.BODY));
-            paintBody(context, qCreatedBy(pid, EntityType.BODY), "Throttle pedal weldment: 1/4 6061 plate with grip tape, 1/2 in shaft, down-arm for the cable (return spring on the shaft)", black);
+            paintBody(context, qCreatedBy(pid, EntityType.BODY), "Throttle pedal: 1/4 6061 plate with grip tape on 1/2 in shaft, down-arm clamped with a collar and through-bolt (cable holes at 3, 3.5, 4 in), torsion return spring with a choice of anchor holes", black);
         }
+        // Full-throttle stop under the pedal toe: set so the pedal stops at 5 deg, before the cable or throttle body bottoms.
+        mkCyl(context, id + "tStop", vector(px + 7.97, -4.5, fTop), vector(px + 7.97, -4.5, hz + 8 * sin(5 * degree)), 0.125);
+        paintBody(context, qCreatedBy(id + "tStop", EntityType.BODY), "Throttle full-stop bolt 1/4-20 x 1.5 with jam nut, threaded into a rivnut in the footrest top (adjust for full throttle)", ss);
         for (var pb in [[-6.4, -5.6, "inboard"], [-8.8, -8.0, "outboard"]])
         {
             const bid = id + ("pillow" ~ (pb[2] == "inboard" ? "In" : "Out"));
@@ -195,18 +214,19 @@ export const driverControls = defineFeature(function(context is Context, id is I
             paintBody(context, qCreatedBy(bid, EntityType.BODY), "Pedal shaft pillow block, nylon, bolted through the footrest top - " ~ pb[2], color(0.9, 0.9, 0.86));
         }
         // Throttle cable, pedal end: anchor plate on the footrest starboard wall, hub, core rod to the arm.
-        const tz = 2;
+        const tz = hz + armHole * ad[1];                       // cable line through the arm hole at idle
+        const tcx = px + armHole * ad[0];
         const ty = -10.4;
         {
             const aid = id + "tAnchor";
-            mkBox(context, aid + "plate", px - 8.5, px + 3, -9.125, -9.0, 1.25, 3.5);
-            mkBox(context, aid + "tab", px - 8.5, px - 8.25, -10.9, -9.125, 1.4, 2.6);
+            mkBox(context, aid + "plate", px - 8.5, px + 3, -9.125, -9.0, tz - 0.6, 3.5);
+            mkBox(context, aid + "tab", px - 8.5, px - 8.25, -10.9, -9.125, tz - 0.6, tz + 0.6);
             doUnite(context, aid + "join", qUnion([qCreatedBy(aid + "plate", EntityType.BODY), qCreatedBy(aid + "tab", EntityType.BODY)]));
             paintBody(context, qCreatedBy(aid, EntityType.BODY), "Throttle cable anchor bracket 1/8 6061, bolted to the footrest starboard wall", plateC);
         }
         mkCyl(context, id + "tHub", vector(px - 8.25, ty, tz), vector(px - 6.75, ty, tz), 0.4);
         paintBody(context, qCreatedBy(id + "tHub", EntityType.BODY), "Throttle cable end hub and clamp groove (33C type), pedal end", red);
-        mkCyl(context, id + "tRod", vector(px - 6.75, ty, tz), vector(px - 0.45, ty, tz), 0.125);
+        mkCyl(context, id + "tRod", vector(px - 6.75, ty, tz), vector(tcx - 0.45, ty, tz), 0.125);
         paintBody(context, qCreatedBy(id + "tRod", EntityType.BODY), "Throttle cable core rod 10-32 with clevis on the pedal arm", ss);
         // Throttle cable, engine end (throttle body position is approximate: confirm on the engine). The
         // end hub and core rod line up with the conduit's arrival direction; the bracket holds the hub there.
