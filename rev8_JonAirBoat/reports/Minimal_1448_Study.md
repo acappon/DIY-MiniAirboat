@@ -48,7 +48,7 @@ So the hull was never the problem: the outfit was. A cheap, light, one-owner air
 | Power used | 65 hp | about 150 hp (derated for continuous airboat load) |
 | Weight with reduction, radiator, exhaust | **about 103 lb** with the B or C gearbox and electric start (about 90–95 lb without the starter) | about 180 lb: about 130 lb engine with its gearbox, plus a belt reduction, radiator and exhaust |
 | Reduction | Its own gearbox (2.58–3:1), prop mounts on it | The bike gearbox (fixed gear) plus a belt reduction to get the prop down to about 2,300 rpm |
-| Used price | about £950–1,900 in UK listings (about $1,250–2,500); new about $9,300 | complete running engines list from about $2,500 to $4,800; less from a crashed bike |
+| Used price (US) | **about $4,000–5,500 with a gearbox** in US listings; remanufactured about $6,500; new about $6,500–8,200. UK listings are much lower (about £950–1,900), but shipping and import fees close much of the gap | complete running engines list from about $2,500 to $4,800; less from a crashed bike |
 | Where to find | Ultralight aircraft sales and owner forums | Motorcycle salvage, crashed-bike auctions, eBay |
 | Watch out for | Rebuild interval (TBO) **300 h or 5 years**; oil mixed with the fuel; loud; aircraft-part prices | About 10,000 rpm engine at sustained full load; no clutch (starts in a fixed gear); airboat use not proven at this size |
 
@@ -70,7 +70,7 @@ For comparison: the rev8 1652 design leaves about 80 lb of driver gear, and the 
 
 **What this means:**
 1. **Payload is three to five times what the full outfit allowed on any hull,** and cargo barely changes speed: 150 lb of gear costs the Rotax boat about 2 mph.
-2. **The Rotax 582 is the best match for "small, light and cheap":** about 30 mph solo and 28 mph with a passenger, the most payload, and the simplest drivetrain (no redrive to build). The price is engine life and noise.
+2. **The Rotax 582 is the best match for "small and light":** about 30 mph solo and 28 mph with a passenger, the most payload, and the simplest drivetrain (no redrive to build). The price is engine life, noise and cost: in the US a used 582 costs more than a crashed-bike engine.
 3. **The bike engine is the performance option:** about 38 mph with any load, still about 375 lb of payload, but it needs a belt reduction and more cage and stand.
 4. **Stow gear amidships, not in the bow.** 150 lb in the bow takes the dock trim to about level (Rotax). The light engine moves the balance forward compared with the car engine.
 5. **Running trim is still flat** (1.0–1.9°): the prop axis is still high (about 53 in in the model). A shorter stand or a few degrees of down-tilt should be checked once a prop size is chosen.
@@ -80,14 +80,14 @@ For comparison: the rev8 1652 design leaves about 80 lb of driver gear, and the 
 | Change to the v1.0.0.2 BOM | Rotax 582 | Bike engine |
 |---|---|---|
 | Remove the G13 engine, redrive, 64 in prop, radiator, exhaust | −$3,720 | −$3,720 |
-| Add the engine system and prop | +$2,500 (used 582 with gearbox, 2-blade prop) | +$3,750 (engine, DIY belt reduction, radiator and exhaust, 3-blade prop) |
+| Add the engine system and prop | +$5,000 (used 582 with gearbox about $4,500, 2-blade prop) | +$3,750 (engine, DIY belt reduction, radiator and exhaust, 3-blade prop) |
 | Remove chine angles, bow skin and their hardware | −$350 | −$350 |
 | Engine stand and short beds instead of the full engine beds | −$260 | −$260 |
 | Add the items v1.0.0.2 did not list yet: cage, rudders, seat frame, lights | +$1,060 | +$1,060 |
 | Smaller battery | −$50 | −$50 |
-| **Estimated total** | **about $9,500** | **about $10,750** |
+| **Estimated total** | **about $12,000** | **about $10,750** |
 
-The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $7,500–8,500. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
+The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
 
 ## 6. What you give up
 
@@ -106,6 +106,6 @@ The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 bring
 
 ## Sources
 
-- Rotax 582 weights by configuration and dry weight ([ultralightnews.ca](https://ultralightnews.ca/rotax582/rotax582specs.htm), [Wikipedia](https://en.wikipedia.org/wiki/Rotax_582)); new price ([Controller](https://www.controller.com/listing/for-sale/259472043/rotax-582-dcdi-engines)); used prices ([AFORS 582 engine, £950](https://afors.uk/engines+propellors/for-sale/standardView-64571), [AFORS 582 + E gearbox, £1,800](https://afors.uk/engines+propellors/for-sale/standardView-17896/Rotax-582-+-E-Gearbox---run-4hrs-since-rebuild)); TBO 300 h or 5 years and owner experience ([rotax-owner.com](https://www.rotax-owner.com/en/2-stroke-technical-questions/8579-582-reliability-statistics)); thin-chord props for a 582 airboat ([Southern Airboat forum](https://www.southernairboat.com/community/threads/help-needed.24618/)).
+- Rotax 582 weights by configuration and dry weight ([ultralightnews.ca](https://ultralightnews.ca/rotax582/rotax582specs.htm), [Wikipedia](https://en.wikipedia.org/wiki/Rotax_582)); new price ([Controller](https://www.controller.com/listings/for-sale/rotax/engines/30120), [Motive Aero](https://motive.aero/engine-details/rotax-582ul/317)); US used prices ([Craigslist Dallas, $4,000](https://www.craigslist.org/view/d/dallas-rotax/xj7TFw812d8Wp1NnRYywJV), [eBay 582 + 2.58 gearbox, $5,000](https://www.ebay.com/itm/196630422811), [eBay listings](https://www.ebay.com/shop/rotax-582-engine?_nkw=rotax+582+engine), [Karting Classifieds](https://kartingclassifieds.com/rotax-582-engine-2/)); UK used prices for comparison ([AFORS 582 engine, £950](https://afors.uk/engines+propellors/for-sale/standardView-64571), [AFORS 582 + E gearbox, £1,800](https://afors.uk/engines+propellors/for-sale/standardView-17896/Rotax-582-+-E-Gearbox---run-4hrs-since-rebuild)); TBO 300 h or 5 years and owner experience ([rotax-owner.com](https://www.rotax-owner.com/en/2-stroke-technical-questions/8579-582-reliability-statistics)); thin-chord props for a 582 airboat ([Southern Airboat forum](https://www.southernairboat.com/community/threads/help-needed.24618/)).
 - GSX-R1000 engine weight about 130 lb ([suzukicycles.org](https://www.suzukicycles.org/GSX-R-series/GSX-R1000a.shtml)); used engine listings ([eBay](https://www.ebay.com/p/19002612287), [for-sale.co.uk](https://www.for-sale.co.uk/gsxr-1000-engine)); reduction ratios and full-load cautions for high-rpm engines ([Southern Airboat forum](https://www.southernairboat.com/community/threads/belt-or-dd.27539/)).
 - 1448 hull data and the v1.0.0.2 BOM: `main` (Release_Notes_v1.0.0.2.md, the v1.0.0.2 build tracker).

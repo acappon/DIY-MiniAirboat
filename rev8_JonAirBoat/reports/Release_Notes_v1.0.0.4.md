@@ -8,8 +8,8 @@
 ## What changed since v1.0.0.2
 - `VERSION` file added (1.0.0.4): the next release from this line of work carries that number. (Versions 1.0.0.3 and the 1652/1860 work live on the `rev8/1652-hull` and `rev8/1860-hull` branches.)
 - **Minimal 1448 concept study** (`reports/Minimal_1448_Study.md`, model `CAD/analysis/minimal_1448.js`). Keep the 1448's factory benches and replace the car-engine outfit with a light engine on a stand, a smaller cage, a simple cockpit and thin armor. Estimates: 365–450 lb of equipment and **375–460 lb of payload** under the 825 lb plate, against about 80 lb of driver gear on the rev8 1652 design.
-  - **Rotax 582 with gearbox:** about 30 mph solo, 28 mph with a passenger, about $9,500 total (about $7,500–8,500 with a cheaper hull).
-  - **1000 cc sport-bike engine with a belt reduction:** about 38 mph with any load, about $10,750.
+  - **Rotax 582 with gearbox:** about 30 mph solo, 28 mph with a passenger, about $12,000 total at US used-engine prices (about $10,000–11,000 with a cheaper hull).
+  - **1000 cc sport-bike engine with a belt reduction:** about 38 mph with any load, about $10,750 (about $9,000–10,000 with a cheaper hull).
 
 ## Known issues and open items
 - Outfit weights, thrust and prices are estimates; nothing is modeled in CAD yet.
