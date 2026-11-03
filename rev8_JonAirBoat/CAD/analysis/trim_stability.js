@@ -86,7 +86,7 @@ function baseItems(proto) {
     ['Prop cage (steel EMT, mesh)', 85, 5, 0, 52, 'Cage', ST],
     ['Rudders, horns, rails, bellcrank', 25, -7, 0, 45, 'Cage', AL],
     ['Steering stick and pushrods', 15, 75, 12, 14, 'Controls', AL],
-    ['Battery, Group 31 AGM', 70, 100, 0, 6, 'Electrical', 0.57],
+    ['Battery, Group 31 LiFePO4 dual-purpose (~27 lb) + alternator protector', 28, 100, 0, 6, 'Electrical', 0.4],
     ['Dry box, power hub, fuses, wiring', 15, 100, 0, 8, 'Electrical', 0.3],
     ['Lights: LED bar, running lights, searchlight', 10, 30, 0, 80, 'Electrical', 0.5],
     ['Driver bucket seat, tracks, base', 25, 100, 0, 18, 'Seating', 0.2],

@@ -34,7 +34,7 @@ Coordinates: X forward from the transom, Y + to port, Z up from the hull bottom 
 | Drivetrain (A) | 420 | Engine 185 lb (X 38, Z 18), steel A-frame 100 lb, redrive 55 lb, radiator 25 lb at Z 66, prop 20 lb at Z 53 |
 | Cage and rudders | 110 | Steel EMT cage 85 lb (X 5, Z 52), rudders and linkage |
 | Controls | 45 | Stick and pushrods (port), table and dash 30 lb (X 108, starboard) |
-| Electrical | 95 | Group 31 AGM battery 70 lb under the driver seat (X 100, Z 6), power hub, lights |
+| Electrical | 53 | Group 31 LiFePO4 battery about 28 lb under the driver seat (X 100, Z 6), power hub, lights. (A 70 lb AGM until 2026-11-02; the lighter battery adds about 0.2° of bow-up static trim and takes about 0.07 in off the transom freeboard. Running trim is almost unchanged.) |
 | Seating | 80 | Driver bucket seat on tracks, storage box and padded lid, backrest/grab bar |
 | Gear in storage box | 25 | PFDs, anchor, extinguisher, lines |
 | Fuel, 6.5 gal full | 47 | Front floor, X 135 |
@@ -114,12 +114,12 @@ The seat track mainly sets driver comfort and reach. Its trim effect is small, a
 
 - Tab lift falls with speed squared, so one fixed turnbuckle setting is a compromise. Set it for normal cruise. **Start at about 4° (A) or 6° (B)** with the 10 x 6 tab, then fine-tune with the inclinometer on the water.
 - The tab also pushes the bow down slightly: about −0.1° per 2° of tab. That is acceptable, but it is another reason not to oversize it.
-- **Static list at the dock:** the starboard table and dash give a 0.16 in starboard TCG, about 0.3° of list. Offset the battery about 3 in to port inside the dry box to zero it. That also helps a little against torque under power.
+- **Static list at the dock:** the starboard table and dash give a 0.16 in starboard TCG, about 0.3° of list. Offset the battery about 7–8 in to port inside the dry box to zero it (the lithium battery is lighter than the AGM, which only needed about 3 in). That also helps a little against torque under power.
 - **One passenger:** sitting about 9 in to port cancels Prototype A's torque at full power. That puts about 2° of port list at rest, so treat it as an option, not a rule.
 
 ## 7. Swamped flotation (requirement: must not sink)
 
-The analysis assumes the hull is completely swamped, the crew are in the water wearing PFDs, and all equipment is aboard. Each item keeps only its weight-in-water fraction: aluminum 0.63, steel 0.87, the engine about 0.80 and the AGM battery about 0.57. UHMW and the fuel tank are slightly buoyant.
+The analysis assumes the hull is completely swamped, the crew are in the water wearing PFDs, and all equipment is aboard. Each item keeps only its weight-in-water fraction: aluminum 0.63, steel 0.87, the engine about 0.80 and the lithium battery about 0.4 (the AGM was 0.57). UHMW and the fuel tank are slightly buoyant.
 
 | | Prototype B (the heavier) |
 |---|---|
@@ -157,7 +157,7 @@ The middle bench (X about 78–86) was a thwart that tied the two hull sides tog
 | Storage box / passenger seat | X 55–73, full width, padded top at about Z 19 | Lid hinges at the back. Box back at X 57, so the lid opens 90° clear of the bar at X 54. |
 | Backrest/grab bar | Uprights at X 54 at the box corners; crossbar about 15 in above the seat (Z about 34) | Stays angle down and aft beside the engine to the bed flanges. Pad the crossbar. |
 | Driver bucket seat | Seat back about X 90, H-point about X 100, cushion about Z 16 on the battery dry box | Tracks with ±3 in travel. Keep the passengers' knee room (about 20 in) aft of the seat back. |
-| Battery dry box | Under the seat, X 92–108, offset about 3 in to port | Group 31 AGM is about 13 x 6.8 x 9.4 in; box about 12 in tall. |
+| Battery dry box | Under the seat, X 92–108, battery offset about 7–8 in to port | Group 31 LiFePO4 is about 13 x 6.8 x 9 in, the same footprint as the AGM; box about 12 in tall. |
 | Control stick | Port side of the seat, base at about Y +11 | Leaves a **walkway of about 13–14 in clear on the port side**. The grip can angle inboard to widen it. |
 | Table and dash | Starboard of the driver, X 100–118, table at armrest height (about Z 25) | Fills to the starboard side: no passage there. Fiddle edge; front grip edge about 6 in long, then the dash turns up. |
 | Fuel tank, 6.5 gal | Front floor or front bench, about X 130–140 | Strap it down. Fill and vent outside the cockpit. |

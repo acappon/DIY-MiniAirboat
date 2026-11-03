@@ -99,6 +99,7 @@ Design payload is 280 lb of driver + gear on a 1652 (R1.1, R7.5). Every change b
 | 2026-11-02 | **Connection-review fixes in CAD.** 4 engine-mount plates, 1/4 in 6061, ~6.3 lb, plus 1/2-13 nylocks: **+6.4**. Cage-post knee clips and post trim: **+0.5**. Exhaust hangers bolted to the A-frame mount plates (no separate stands): **+0.1**. A-frame crossbar shelf clips, longer braces and the bolts for every drawn-but-unbolted joint, net of the 4 lb already carried: **+1.5**. 3/8-16 rivnuts in place of the captive nuts: **+0.4**. | +8.9 lb | **~43 lb** |
 | 2026-11-02 | Welded cage in black steel / DOM instead of galvanized EMT (same sizes) | ~0 | ~43 lb |
 | 2026-11-02 | Rear bench center removed, foam side boxes kept. About 10–15 lb comes off the hull, which isn't counted against the capacity plate, so it gives no plate allowance back. It does help planing. | (−10 to −15 lb hull) | ~43 lb |
+| 2026-11-02 | **Battery: Group 31 LiFePO4 lithium, dual-purpose, in place of the 70 lb AGM** (user decision: more power, lighter; option 2 above). About 27 lb plus an alternator protector, about 28 lb in all. It has more usable capacity (80–90% versus about 50%) and holds starting voltage better. | −42 lb | **~85 lb** |
 
 Notes:
 - The 100 lb steel estimate was low, so other drivetrain estimates may be off too. A full CAD weigh-in (materials assigned to every part) should replace the estimates before the next release.
