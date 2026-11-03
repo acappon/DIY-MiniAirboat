@@ -64,8 +64,33 @@ const PROP_Z = 52, BASE = 36;                  // prop axis height above the bot
 out.stand = { thrustLbf: THRUST, propAxisZ: PROP_Z, overturnInLb: THRUST * PROP_Z, footBase: BASE,
   footLoadEachSideLbf: Math.round(THRUST * PROP_Z / BASE / 2), propTorqueLbFt: Math.round(torqueIn / 12) };
 
+// ---------------- Prop-shaft bearings ----------------
+// Straddle mount: aft bearing X 8, belt pulley X 13, forward (thrust) bearing X 20, prop at X 5.
+// Forward: 4-bolt tapered-roller flange unit (Dodge F4B-E-108R class, C about 7,070 lbf radial dynamic).
+// Aft: UCF208-24 ball flange unit (C about 6,542 lbf), radial only.
+const XA = 8, XP = 13, XF = 20, XPROP = 5, SPAN = XF - XA;
+const beltLoad = sel.shaftLoadLbf;
+const PROP_I = 20 / 32.2 * 2.75 ** 2 / 3;          // slug ft^2, blades as rods from the hub
+const gyro = PROP_I * (sel.propRpm * Math.PI / 30) * (30 * Math.PI / 180) * 12;   // in-lb at a 30 deg/s yaw rate
+const life = (C, P, n) => Math.pow(C / P, 10 / 3) * 1e6 / (60 * n);
+const ballLife = (C, P, n) => Math.pow(C / P, 3) * 1e6 / (60 * n);
+const frAft = beltLoad * (XF - XP) / SPAN + gyro / SPAN + PROP_LB * (XF - XPROP) / SPAN;
+const frFwd = beltLoad * (XP - XA) / SPAN + gyro / SPAN;
+out.bearings = { gyroInLb: Math.round(gyro), frAftLbf: Math.round(frAft), frFwdLbf: Math.round(frFwd), cases: [] };
+// Tapered roller equivalent load P = 0.4 Fr + 1.5 Fa (generic; confirm with the Dodge catalog method).
+for (const [lbl, fa] of [['static thrust (hole shot)', THRUST], ['1.5 x static thrust (design)', 1.5 * THRUST], ['cruise thrust about 320 lbf', 320]]) {
+  const P = 0.4 * frFwd + 1.5 * fa;
+  out.bearings.cases.push({ case: lbl, thrustLbf: Math.round(fa), fwdEquivLoadLbf: Math.round(P), fwdL10Hours: Math.round(life(7070, P, sel.propRpm)) });
+}
+out.bearings.aftL10Hours = Math.round(ballLife(6542, frAft, sel.propRpm));
+// Forward bearing plate: thrust at the center of a plate spanning 10 in between the stand side frames, 6 in deep.
+for (const t of [0.375, 0.5]) {
+  const M = 1.5 * THRUST * 10 / 4, S = 6 * t * t / 6;
+  out.bearings['plateStressPsi_' + t] = Math.round(M / S);
+}
+
 // ---------------- Weight ----------------
-const W = { 'Engine with gearbox, oil and coolant': 145, 'Belt, pulleys, prop shaft, bearings, tensioner': 32,
+const W = { 'Engine with gearbox, oil and coolant': 145, 'Belt, pulleys, prop shaft, bearings, tensioner': 39,
   'Radiator and hoses': 12, 'Exhaust': 10, 'Engine stand (6061 tube and plates)': 41, 'Short beds and doublers': 15 };
 out.weight = { ...W, total: Object.values(W).reduce((a, b) => a + b, 0) };
 console.log(JSON.stringify(out, null, 1));

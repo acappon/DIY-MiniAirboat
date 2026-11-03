@@ -111,8 +111,8 @@ const OUTFIT = [
 const T = hp => Math.round(440 * Math.pow(hp / 100, 2 / 3));
 const ENGINES = [
   ['rotax', 'Rotax 582 + B/C gearbox, electric start (65 hp)', 65, 103, 12, T(65), 75],
-  // gsxr: 199 lb engine system from bike_reduction.js, plus 11 lb for its heavier stand and beds (56 lb against the 45 lb in OUTFIT).
-  ['gsxr', 'GSX-R1000-class bike engine + its gearbox + belt reduction (150 hp used)', 150, 210, 20, T(150), 85],
+  // gsxr: 206 lb engine system from bike_reduction.js, plus 11 lb for its heavier stand and beds (56 lb against the 45 lb in OUTFIT).
+  ['gsxr', 'GSX-R1000-class bike engine + its gearbox + belt reduction (150 hp used)', 150, 217, 20, T(150), 85],
 ];
 const CREW = {
   solo: [['Driver', 200, 58, 0, 30]],

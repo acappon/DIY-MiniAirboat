@@ -65,7 +65,24 @@ Torque at the prop: about 282 lb-ft. Thrust: about 580 lbf (estimate). Belt pull
 | 1-3/8 in | 15,700 psi | 1.9 |
 | **1-1/2 in (chosen)** | **12,100 psi** | **2.5** |
 
-- **Bearings:** two bearings about 10 in apart. The **forward bearing carries the thrust**: a pair of tapered rollers (a trailer-hub style housing) or an angular-contact flange unit. Do not rely on set-screw collars for thrust: use a shaft shoulder and a locknut.
+- **Layout (straddle mount):** aft bearing at X 8, belt pulley at X 13 between the bearings, forward bearing at X 20; the prop hub overhangs about 3 in aft of the aft bearing. With the pulley between the bearings, the shaft bending is lower than the overhung case in the table above, so 1-1/2 in has extra margin.
+
+**Thrust bearing (decided 2026-11-03):**
+
+| | **Forward: thrust bearing** | **Aft: radial only** |
+|---|---|---|
+| Unit | 4-bolt **tapered-roller** flange unit, 1-1/2 in bore (Dodge F4B-E-108R class) | 4-bolt **ball** flange unit, UCF208-24 |
+| Rating (dynamic, radial) | about 7,070 lbf ([listing](https://mro-pt.com/bearings/mounted-bearings/mounted-tapered-roller-bearings/075478-dodge-f4b-e-108r-dry/)) | about 6,542 lbf ([Timken](https://www.mrosupply.com/bearings/5100834_ucf208-24_timken/)) |
+| Weight | about 9.5 lb | about 4.2 lb |
+| Radial load | about 770 lbf (belt share and prop gyroscopic load) | about 1,016 lbf (belt share, gyroscopic load, prop weight) |
+| Thrust | all of it: about 580 lbf static | none |
+| L10 life | about 2,500 h at full static thrust held continuously; about 9,600 h at cruise thrust (about 320 lbf); about 880 h at 1.5 x static thrust | about 1,700 h at full belt load |
+
+- **Why tapered rollers:** they are made for combined radial and thrust load and carry thrust in both directions (the Type E unit has two cone rows). A plain ball insert unit held by set screws should not carry the prop thrust.
+- **Holding the shaft for thrust:** prop thrust pushes the shaft **forward**. A heavy-duty **two-piece steel clamp collar** sits hard against the aft face of the forward bearing's inner ring and passes the thrust into it; a second clamp collar on the forward side takes any reverse load (windmilling, a bump). The unit's own set screws then only locate it. Choose collars rated at least about 1,750 lbf axial (twice the design thrust). No shaft machining is needed.
+- **Gyroscopic load:** a hard turn at about 30°/s with the prop at 2,600 rpm puts a moment of about 2,700 in-lb on the shaft (about 220 lbf on each bearing); it is included in the loads above.
+- **Bearing plates:** the forward plate takes the thrust out of plane, so make it **1/2 in 6061** (about 8,700 psi at 1.5 x thrust; 3/8 in would be about 15,500 psi, too high for fatigue), about 6 in deep, bolted between the stand side frames. Both plates have vertical slots and jack bolts so the whole shaft moves up and down to tension the belt.
+- **The load ratings above come from distributor listings** and the thrust method is the generic tapered-roller formula (P = 0.4 Fr + 1.5 Fa). Confirm with the Dodge (or other maker's) catalog method for the exact unit before buying.
 - **Prop end:** a 6-bolt airboat prop hub keyed and pressed (or tapered) on the aft end.
 
 ## 6. Layout on the 1448
@@ -85,20 +102,20 @@ Torque at the prop: about 282 lb-ft. Thrust: about 580 lbf (estimate). Belt pull
 | Item | lb |
 |---|---|
 | Engine with gearbox, oil and coolant | 145 |
-| Belt, pulleys, prop shaft, bearings, tensioner | 32 |
+| Belt, pulleys, prop shaft, bearings and collars, tensioner | 39 |
 | Radiator and hoses | 12 |
 | Exhaust | 10 |
 | Engine stand (6061 tube and plates) | 41 |
 | Short beds and doublers | 15 |
-| **Total** | **255** |
+| **Total** | **262** |
 
-That is about 30 lb more than the concept study assumed (180 lb engine system plus a 45 lb stand). With it, the minimal 1448 has about **480 lb of equipment and about 345 lb of payload** under the 825 lb plate (was 375 lb). Solo dock trim rises to about 2.35° (target 0.5–2°); carry gear forward of the driver or lighten the stand. Speeds are unchanged: about 39 mph solo, 37.5 mph with a passenger.
+That is about 37 lb more than the concept study assumed (180 lb engine system plus a 45 lb stand). With it, the minimal 1448 has about **487 lb of equipment and about 338 lb of payload** under the 825 lb plate (was 375 lb). Solo dock trim rises to about 2.4° (target 0.5–2°); carry gear forward of the driver or lighten the stand. Speeds are unchanged: about 39 mph solo, 37.5 mph with a passenger.
 
 ## 8. Decisions and checks before the CAD
 
 1. ~~Start-up method~~: decided, the bike clutch with a lever on the steering stick (Section 3).
 2. **Primary reduction** and the countershaft spline: confirm on the engine (service manual).
 3. **Belt width** from Gates DesignFlex; the pulley width follows.
-4. **Thrust bearing type:** tapered-roller housing or angular-contact flange unit.
+4. ~~Thrust bearing type~~: decided, a tapered-roller flange unit forward and a ball flange unit aft (Section 5).
 5. **Prop:** pick the actual 66 in 3-blade and its maximum rpm (it must exceed about 2,600 with margin).
 6. **Cooling:** radiator position in the prop wash and the bike's thermostat and fan.
