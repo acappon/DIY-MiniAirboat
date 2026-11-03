@@ -106,6 +106,8 @@ const OUTFIT = [
   // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
   ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 35, 62, 0, -0.1],
   ['Small trim tab and turnbuckle', 3, -2, -19, 1],
+  // Added 2026-11-03 with the exhaust layout (Drivetrain_800R_ETEC.md, Section 6a): about 4-6 ft of tailpipe to an aft transom corner.
+  ['Tailpipe, heat shields and pipe guard', 5, 8, -20, 25],
 ];
 // [key, name, hp used, lb (engine + reduction + radiator + exhaust + mounts), prop lb, static thrust lbf, Vp mph]
 // Static thrust: power^(2/3) scaling from 440 lbf at 100 hp (64 in prop), the same rule as compare_hulls.js.

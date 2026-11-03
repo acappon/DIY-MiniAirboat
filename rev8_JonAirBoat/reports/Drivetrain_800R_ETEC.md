@@ -68,13 +68,39 @@ Carried over from the bike design. All the loads are lower now:
 ## 6. Engine systems
 
 - **Cooling:** a sled cools through heat exchangers in the tunnel, so the boat needs a **radiator in the prop wash**, with the engine's thermostat and the coolant hoses from the sled. About 15 lb with coolant. Size it for about 120 hp continuous; mount it where the prop wash reaches it at idle too.
-- **Exhaust:** keep the stock tuned pipe and silencer; the pipe's length sets the power, so don't shorten it. Route the pipe in CAD early: it's the bulkiest part of the engine. Keep it away from the fuel line, the belt and the driver.
+- **Exhaust and intake:** see Section 6a. Keep the sled's **airbox (intake silencer)**: on an open engine, two-stroke intake roar is about as loud as the exhaust.
 - **Oil:** E-TEC engines inject oil from the sled's oil tank with an electric oil pump. Keep the oil tank, mount it upright, and run the engine on straight gasoline.
 - **Fuel:** use the sled's in-tank fuel pump module (or one of the same pressure) in the boat's tank. Estimated burn about **10.8 gal/h at full power** and **5.4 gal/h at a 60 hp cruise**: a 6 gal tank lasts about 33 minutes flat out, or about 1.1 hours cruising. Measure it on the static test.
 - **Electrical:** the ECU, harness and DESS key from the sled; the lanyard kill switch wired into the ECU's stop circuit; the small lithium battery for starting and the lights.
 - **Throttle:** the sled's throttle cable to a hand lever or foot pedal.
-- **Noise:** US snowmobiles are built to meet about 78 dB(A) at 50 ft at full throttle with the stock silencer (to confirm for the model year). With the prop (about 81 dBA at 2,590 rpm), expect about 82–84 dBA at 50 ft, about the same as the bike engine. California's 75 dB(A) shoreline limit is still out of reach.
+- **Noise:** US snowmobiles are built to meet about 78 dB(A) at 50 ft at full throttle with the stock silencer and airbox (to confirm for the model year), and that figure includes the track. With the prop (about 81 dBA at 2,590 rpm) the loudest source, expect about 82–84 dBA at 50 ft, about the same as the bike engine. California's 75 dB(A) shoreline limit is still out of reach. The 4-blade prop (Build Guide 2.0) lowers the total more than a bigger muffler does.
 - **Engine life:** budget a top-end rebuild (pistons, rings) at the interval in the service manual; a top-end kit is about $1,300.
+
+## 6a. Exhaust layout (decided 2026-11-03)
+
+**Parts, in order:** the engine's exhaust manifold → **stock tuned pipe (expansion chamber)** → **stock silencer** → optional second muffler (space reserved, fitted only if needed) → **tailpipe** over an aft corner of the transom.
+
+**The tuned pipe stays stock.** BRP tuned its length and cone shapes for the 800R's port timing, and a lot of the engine's power depends on them. Don't cut, reshape or zigzag it; a custom pipe would be expensive and would likely lose power. With the crank running fore and aft, the exhaust ports face one side of the boat, so the pipe starts low on that side and loops about as it does in the sled. **Choose the engine's roll angle on the stand so the stock pipe fits.** That's a CAD job with the real pipe measured: expect roughly 3–4 ft of centerline and a belly about 5 in across.
+
+**Muffling:**
+- **Start with the stock silencer.** It is already a large, low-restriction part, and the prop (about 81 dBA at 50 ft) is louder than the exhaust: cutting the exhaust from about 76 to about 70 dBA lowers the total only from about 82 to about 81.5 dBA (estimates).
+- **Reserve space for a second muffler** above the engine (about 6 in diameter x 18 in, to size), but fit it only if the static test's sound readings call for it.
+- **If you add one:** a large straight-through, packed muffler with flow at least equal to the stock silencer. A tuned two-stroke is sensitive to restriction after the pipe: too much costs power and raises the exhaust temperature, which can burn a piston. Read the spark plugs after the first runs.
+- **Weight:** a second muffler and its mounts are about 8–12 lb. The payload margin is only 2 lb (Section 8), so take the same weight out of the outfit before fitting it.
+
+**Where it goes (air flows from the bow aft into the prop):**
+- **Pipe and silencer above and beside the engine,** inside the area the engine and the bearing stand already block, near the prop axis: about X 14–30, Z 35–55. The center of the disc around the hub makes little thrust, so parts there cost almost nothing.
+- **Not across the front of the cage.** Anything wide ahead of the outer half of the disc blocks thrust and makes a beat each time a blade passes (more noise).
+- **Not upstream of the radiator.** The radiator gets clean air, alongside or forward of the exhaust parts, never behind them.
+- **Belt and bearings:** keep the pipe at least 4–6 in from the belt (X about 13, Z 22–52) and the prop-shaft bearings, with a sheet-aluminum heat shield between. Use heat shields, not wrap, on the pipe itself.
+- **Mounting:** the engine is on rubber mounts and the stand is not. Keep the sled's springs and ball joint at the pipe connections, and use a flexible joint between anything mounted on the engine and anything mounted on the stand.
+
+**Tailpipe:**
+- **Over an aft corner of the transom, not the center.** At the center the prop tips pass about Z 19 above a 15 in transom top: only about 4 in, so a pipe there can't keep the 2 in blade clearance and sits right at the tips. At an aft corner (about Y ±28 in, Z 15) the tips are about 13 in away.
+- **Route:** from the silencer down the side of the stand, along the inside of the hull side, and out over the corner. Point the outlet aft and slightly outboard, **never into the prop**: hot gas is bad for the carbon blades.
+- **Water:** transom freeboard at the dock is only about 9 in. A following wake or a swamping could push water up the tailpipe and into the cylinders and lock the engine. Keep the outlet at the transom top or higher; consider a flapper or a short upturn.
+
+**Burns:** the pipe sits about 30–40 in behind the driver's seat, where people climb in and out. Put a guard or a perforated shield wherever a hand, knee or passenger could touch it.
 
 ## 7. Layout on the 1448
 
@@ -99,7 +125,9 @@ Carried over from the bike design. All the loads are lower now:
 
 With the 250 lb outfit and the 15 lb prop, equipment is 433 lb and payload is **392 lb** under the 825 lb plate: **8 lb short** of the 400 lb that driver + passenger or driver + 150 lb of gear needs.
 
-**Outfit trim (decided 2026-11-03):** UHMW strips over the wear zones only (the keel and chine areas from the bow rise aft), about 45 → 35 lb. Equipment drops to about 423 lb and payload to about **402 lb**, which meets both load cases. If the stand comes out over 45 lb, or the engine weighs more than 79 lb, take the difference out of the outfit too.
+**Outfit trim (decided 2026-11-03):** UHMW strips over the wear zones only (the keel and chine areas from the bow rise aft), about 45 → 35 lb. Equipment drops to about 423 lb and payload to about **402 lb**, which meets both load cases.
+
+**Exhaust layout (Section 6a) adds about 5 lb** (tailpipe to the transom corner, heat shields, pipe guard): equipment about 428 lb, payload about **397 lb**. Driver + 150 lb of gear still fits; **driver + passenger is about 3 lb over. Offset to choose:** a thin-wall (0.035 in) stainless tailpipe, or UHMW strips ending at about 125 in instead of 135 in (about −3 lb). If the stand comes out over 45 lb, or the engine weighs more than 79 lb, take the difference out of the outfit too.
 
 Speeds, from the model: about **35 mph** with driver + 150 lb of gear stowed amidships (34 mph with it in the bow) and **34.75 mph** with driver + passenger. Both get on plane easily, with more than 250 lbf of thrust to spare at the hump. Dock trim is 0.5–2°.
 
@@ -109,5 +137,6 @@ Speeds, from the model: about **35 mph** with driver + 150 lb of gear stowed ami
 2. **Belt width** from Gates DesignFlex.
 3. **Prop maximum rpm** from Warp Drive.
 4. **Radiator** size and position in the prop wash.
-5. **Tuned pipe routing** on the stand.
-6. **Weigh the engine** with its pipe when it's bought, and update `minimal_1448.js`.
+5. **Exhaust (Section 6a):** measure the stock pipe and silencer, set the engine's roll angle so they fit, reserve the second-muffler space, and route the tailpipe to an aft transom corner.
+6. **Sound readings on the static test** (at 50 ft and at the driver's seat) to decide on the second muffler.
+7. **Weigh the engine** with its pipe when it's bought, and update `minimal_1448.js`.
