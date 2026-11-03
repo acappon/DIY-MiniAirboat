@@ -1,6 +1,7 @@
 # Minimal 1448 Airboat — Concept Study
 
 **Date:** 2026-11-03. **Branch:** `study/minimal-1448` (from `main`, the 1448 version v1.0.0.2). **Status:** concept study; every outfit weight is an estimate until parts are weighed.
+**Decision (2026-11-03): build around a 1000 cc sport-bike engine** (for example a Suzuki GSX-R1000) with its gearbox and a belt reduction: cheaper than the Rotax 582 at US prices, about 38 mph with any load, and about 375 lb of payload under the plate.
 **Model:** `CAD/analysis/minimal_1448.js` (1448 hull hydrostatics and Savitsky planing, the same method as the rev8 analyses).
 
 ## 1. Why this study
@@ -87,7 +88,7 @@ For comparison: the rev8 1652 design leaves about 80 lb of driver gear, and the 
 | Smaller battery | −$50 | −$50 |
 | **Estimated total** | **about $12,000** | **about $10,750** |
 
-The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
+The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 brings the Rotax build to roughly $10,000–11,000 and the bike-engine build to roughly $9,000–10,000. **The v1.0.0.4 build tracker BOM for the bike engine comes to about $11,100:** it adds an inline EFI fuel pump (about $80) and keeps the v1.0.0.2 engine-bed lines until the engine stand is designed. These are planning numbers, not quotes; the v1.0.0.2 BOM also has no cage or rudder lines yet, so the "full outfit" designs cost more than their BOMs showed.
 
 ## 6. What you give up
 
@@ -102,7 +103,7 @@ The hull is $4,000 of that (the v1.0.0.2 placeholder). A cheaper used 1448 bring
 - **Weigh-in:** the outfit weights are estimates; weigh the real parts as they are chosen.
 - **Prop:** pick a prop for the 582 (thin-chord blades suit it) or the bike engine, then redo the thrust, cage size and running trim.
 - **Thrust test:** the static test protocol on `main` applies; the thrust figures above are rule-of-thumb estimates (±25%).
-- **Decision:** Rotax 582 or bike engine, and which rev8 features (if any) come back.
+- **Decision made:** the bike engine (2026-11-03). Still open: which rev8 features, if any, come back; the specific engine (year and model) and its reduction ratio.
 
 ## Sources
 

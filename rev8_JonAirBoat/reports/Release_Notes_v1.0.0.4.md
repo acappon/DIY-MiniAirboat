@@ -7,6 +7,8 @@
 
 ## What changed since v1.0.0.2
 - `VERSION` file added (1.0.0.4): the next release from this line of work carries that number. (Versions 1.0.0.3 and the 1652/1860 work live on the `rev8/1652-hull` and `rev8/1860-hull` branches.)
+- **Decision: the minimal build uses a 1000 cc sport-bike engine** (for example a GSX-R1000 K5–K8) with its gearbox and a belt reduction.
+- **Build tracker v1.0.0.4** (from v1.0.0.2): BOM line 30 bike engine ($2,000), 31 belt reduction ($600), 32 3-blade prop, 33 radiator, 34 exhaust, 35 fuel system with an inline EFI pump, 36 small lithium battery; lines 9–16 (chine angles, bow skin, their hardware, deck ports) set to qty 0; new lines 43–46 (cage, rudders and linkage, raised seat, navigation lights). BOM total about $11,100. Build Guide 1.3 and 1.4 marked not in the minimal build; the Section 2 header explains that steps 2.1–2.15 still describe the G13 module.
 - **Minimal 1448 concept study** (`reports/Minimal_1448_Study.md`, model `CAD/analysis/minimal_1448.js`). Keep the 1448's factory benches and replace the car-engine outfit with a light engine on a stand, a smaller cage, a simple cockpit and thin armor. Estimates: 365–450 lb of equipment and **375–460 lb of payload** under the 825 lb plate, against about 80 lb of driver gear on the rev8 1652 design.
   - **Rotax 582 with gearbox:** about 30 mph solo, 28 mph with a passenger, about $12,000 total at US used-engine prices (about $10,000–11,000 with a cheaper hull).
   - **1000 cc sport-bike engine with a belt reduction:** about 38 mph with any load, about $10,750 (about $9,000–10,000 with a cheaper hull).
@@ -18,5 +20,5 @@
 - The Rotax 582 has a 300 h / 5 year rebuild interval.
 
 ## Still to do before release
-- Choose the engine (Rotax 582 or bike engine) and which rev8 features, if any, come back.
-- Update the build tracker (BOM and Build Guide) and the CAD for the chosen concept.
+- Choose the specific bike engine and which rev8 features, if any, come back.
+- Design the engine stand, belt reduction, cage and radiator mounting, then rewrite Build Guide steps 2.1–2.15 and update the CAD.
