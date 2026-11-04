@@ -6,7 +6,7 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //   - Dry box set into the middle bench: lithium battery and power distribution fuse block
 //   - Steering stick to port on the rib at X 95.25, with a push-pull cable along the port side and across the rear bench
 //   - Throttle pedal with two half-round heel rests, with a push-pull cable ahead of the toes and along the starboard side
-//   - Console to starboard, on a tube frame clear above the knees of two people side by side
+//   - Console frame to starboard, clear above the knees of two people side by side (the pod is in Minimal dash)
 //   - Fuel tank on the front deck step with its gauge sender, straps and fuel line
 // Sizes are placeholders until the real parts are bought, and the cable and line routes are provisional.
 
@@ -100,7 +100,6 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         const caseC = color(0.95, 0.75, 0.15, 0.35);
         const tankC = color(0.8, 0.12, 0.1, 0.55);
         const lineC = color(0.1, 0.1, 0.1);
-        const gaugeC = color(0.2, 0.25, 0.3);
 
         // ---- Dry box, lid forward, set into the bench through its forward panel ----
         mkBox(context, id + "dryBox", 82.6, 89.5, -5.3, 5.3, 2, 11.7);
@@ -145,19 +144,6 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         paintBody(context, qCreatedBy(id + "consolePost", EntityType.BODY), "Console post 1 x 0.065 6061", alu);
         mkPipe(context, id + "consoleArm", [vector(CONSOLE_X, -5, CONSOLE_Z), vector(CONSOLE_X, -21, CONSOLE_Z), vector(CONSOLE_X, -33.4, 19.3)], 0.5);
         paintBody(context, qCreatedBy(id + "consoleArm", EntityType.BODY), "Console arm 1 x 0.065 6061, to the gunwale", alu);
-        const px = CONSOLE_X - 2.5;   // aft edge of the pod at its bottom
-        mkPolyXZ(context, id + "pod", [[px, CONSOLE_Z + 0.5], [px + 5.3, CONSOLE_Z + 0.5], [px + 5.3, CONSOLE_Z + 4], [px + 3.2, CONSOLE_Z + 7.5], [px + 2.6, CONSOLE_Z + 7.5], [px, CONSOLE_Z + 1.2], [px, CONSOLE_Z + 0.5]], -21.25, -4.75);
-        paintBody(context, qCreatedBy(id + "pod", EntityType.BODY), "Dash pod 0.063 aluminum sheet", color(0.55, 0.58, 0.62));
-        const faceC = vector(px + 1.3, 0, CONSOLE_Z + 4.35);
-        const faceN = normalize(vector(-6.3, 0, 2.6));
-        const dash = [[-7, 1.05, "Tachometer"], [-10, 1.05, "Coolant temperature gauge"], [-13, 1.05, "Exhaust temperature gauge"], [-16, 1.05, "Fuel gauge"], [-19, 0.6, "Key and DESS post"]];
-        for (var i = 0; i < size(dash); i += 1)
-        {
-            const gid = id + ("gauge" ~ i);
-            const c = faceC + vector(0, dash[i][0], 0);
-            mkCyl(context, gid, c, c + faceN * 0.3, dash[i][1]);
-            paintBody(context, qCreatedBy(gid, EntityType.BODY), dash[i][2], gaugeC);
-        }
         mkCyl(context, id + "extinguisher", vector(99, -26, 8), vector(99, -26, 22), 1.75);
         paintBody(context, qCreatedBy(id + "extinguisher", EntityType.BODY), "Fire extinguisher B-I envelope", color(0.8, 0.1, 0.1));
 

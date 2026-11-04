@@ -123,7 +123,9 @@ const OUTFIT = [
   // Added 2026-11-03: two 1 x 0.065 in cage struts 1.1, two 1 x 1/8 in stand cross-straps 0.9, brackets 0.5.
   ['Cage struts and stand cross-straps', 2.5, 25, 0, 50],
   // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
-  ['Dash: tach, coolant and exhaust temperature gauges, key/DESS post, start button, panel', 3, 105, -13, 28],
+  // Gauges, kill switch, joystick, switches, key, USB port and 12 V outlet (Minimal_dash.fs).
+  ['Dash: gas, tach and temperature gauges, switches, joystick, key, USB port, 12 V outlet, panel', 3.8, 103, -13, 28],
+  ['Marine tablet holder, without the tablet', 1.5, 100, 0, 28],
   // 1 in x 0.065 tube frame 1.2, rib foot 0.2, sheet pod 1.2.
   ['Console frame and pod, starboard, clear above two sets of knees', 2.6, 105, -18, 24],
   ['Wiring, fuse block, switches', 3, 40, 0, 10],

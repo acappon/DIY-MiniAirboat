@@ -338,3 +338,19 @@ A 3/4 x 0.065 in shaft failed this check, at a factor of 0.4. The friction figur
 **Clearances (hand figures):** tie bar to aft hoop about 0.13 in at center, opening as the rudders swing; rudder cable under the aft hoop about 0.5 in. Check the tie bar at full rudder on the real parts, because it is tight.
 
 **Weight:** no change to the model: itemized, the rudders and linkage come to 9.4 lb against the 12 lb allowance, and the stick, pedal and cables to 6.1 lb against 10 lb. The margin stays at about **+7.4 lb**. I kept the allowances until real parts are weighed; if the items hold, about 6 lb more could be freed.
+
+## 9e. Dash panel (2026-11-03)
+
+Onshape: part studio "Minimal dash" (master `CAD/FeatureScript/Minimal_dash.fs`), in the tab Main assembly. Render: `renderedImages/Minimal_dash_v1.0.0.4.png`. This replaces the gauges in Section 9c. It is a panel layout only: the wiring waits for the electrical plan.
+
+- **Top row, left to right:** USB charging port, gas gauge, tach, temperature gauge. All gauges are analog.
+- **Bottom row, left to right:** lanyard kill switch, searchlight joystick, searchlight on/off switch, three-way lights switch (off, running, LED bar), key switch, 12 V / 20 A outlet.
+- **Tablet holder:** a heavy marine ball-and-arm mount through-bolted to the left side of the pod, holding an 8 x 5.5 in tablet just left of the panel. It sits out far enough that it does not cover the kill switch or the USB port from the driver's eye.
+
+**Changes from Section 9c:**
+- **Exhaust temperature gauge removed:** the panel has one temperature gauge, which reads coolant. There is no exhaust temperature reading on the dash now.
+- **No separate start button:** the key starts the engine.
+
+**Weight:** the dash goes from 3 to 3.8 lb, and the holder adds 1.5 lb without a tablet: equipment **469.9 lb**, payload **355.1 lb**, about **+5.1 lb of margin** with driver + 150 lb of gear. A tablet counts as gear.
+
+**To check:** how the sled's DESS key and ECU work with a plain key switch and lanyard switch, and what signals the tach and temperature gauges can read from the 800R. The 12 V / 20 A outlet adds up to 20 A on top of the 15 A of lights in Section 8, which matters when the electrical plan sizes the charging system.
