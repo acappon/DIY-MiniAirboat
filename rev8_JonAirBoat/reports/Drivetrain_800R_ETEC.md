@@ -171,3 +171,56 @@ Speeds, from the model before the allowances below: about **35 mph** with driver
 5. **Exhaust (Section 6a):** measure the stock pipe and silencer, set the engine's roll angle so they fit, reserve the second-muffler space, and route the tailpipe to an aft transom corner.
 6. **Sound readings on the static test** (at 50 ft and at the driver's seat) to decide on the second muffler.
 7. **Weigh the engine** with its pipe when it's bought, and update `minimal_1448.js`.
+
+## 9a. First CAD layout (2026-11-03)
+
+Onshape workspace `Minimal 1448`, part studio "Minimal 800R layout"; master `CAD/FeatureScript/Minimal_layout.fs`. Engine, pipe, silencer and radiator are placeholder envelopes, the engine roll angle is 0, and the exhaust is assumed on the port side. The blade sweep (X 4–6) and hub (3.5 in radius) are assumed.
+
+**Choices the layout adds (provisional):**
+- **Stand (trimmed to the 45 lb target, `CAD/analysis/stand_800r.js`):** side frames at Y ±8.5 on 2 x 3 x 1/8 in beds, X 7–42. Aft posts and engine rails (Z 14) are 2 x 2 x 1/8 in. Forward posts on the rails, diagonals from the top of the forward posts to the beds at X 40, top rails and three ties are 1-1/2 x 1-1/2 x 1/8 in. The fourth tie, across the forward end of the beds, was removed: the hull bottom ties them there.
+- **Heat shields:** three 0.040 in aluminum sheets on standoffs. One runs along the outside of the port side frame (X 11–31, Z 35–58), between the exhaust and the stand, belt and bearings. Two more guard the forward post and the diagonal where the pipe passes through the side frame. The pipe moved to X 25.5 there, and the silencer moved outboard to Y 15.5.
+- **Stand cross-straps:** two 1 x 1/8 in flat straps in an X on the forward face of the diagonals, from Z 37 down to Z 8, tension only. The X stops below the cylinders, because a full-height X runs through the engine envelope.
+- **Cage:** two 1-1/4 in hoops of 36 in radius at X 1 and X 11, four legs to pads at Y ±30.5, Z 16.9, eight stringers. Two 1 x 0.065 in round struts run from the forward hoop (45° up each side) to the top of the stand at X 21, so the cage bolts to both the hull and the stand. Rigid struts are used instead of guy wires: a failed wire ahead of the disc can be drawn into the prop. Fit rubber isolators at the strut ends if vibration calls for them.
+- **Radiator:** 16 x 20 x 2 in on the starboard side at X 32–34, Z 44–64, forward of the exhaust and off the hub center, where the wash is weak.
+- **Tailpipe:** it leaves the silencer outboard at X 15, runs outside the hoops and inside the cage legs, and exits at about Y 28, Z 16.5.
+- **Flag:** whip to Z 132, flag at Z 120–130.
+
+**Clearances measured:**
+
+| Between | Inches | Target |
+|---|---|---|
+| Blade sweep to stand and bearing plates | 2.0 | at least 2 |
+| Blade sweep to aft bearing corners | 1.0 | at least 2: **depends on the real hub**; these corners sit at the hub radius |
+| Blade sweep to the cage | 2.6 | at least 2 |
+| Tuned pipe and silencer to the bearing plates | 4.0 / 4.1 | 4–6 |
+| Tuned pipe and silencer to the belt | over 4.5 | 4–6 |
+| Tuned pipe to stand | 1.1 | shielded |
+| Silencer to stand | 2.7 | shielded |
+| Engine envelope to stand | 0.75 | check with the real engine |
+| Tailpipe to cage leg | 0.9 | tight |
+| Tailpipe to hoop | 1.9 | none set |
+| Tailpipe to transom | 0.7 | none set |
+| Aft hoop to transom | 0.5 | tight |
+| Forward hoop to stand | 0.4 | tight |
+
+**Weight:** the first stand came to about 55 lb. Trimmed, it is **45.0 lb** with an estimated 4 lb of gussets. The exhaust items now total about 7 lb (41 in of steel tailpipe 3.6 lb, shields and standoffs 2.2 lb, guard 1 lb), up from the 5 lb allowance. The cage struts and stand straps add about 2.5 lb with brackets. The UHMW allowance drops from 35 to **32 lb**, using the modeled strips: 864 in³ at 0.034 lb/in³ is 29.4 lb, plus 1.4 lb for the 56 screw sets, 0.4 lb of sealant and 0.8 lb of reserve. The passenger cushion and grab handle in Section 8 are removed (−4 lb): a passenger sits on the bare factory bench with nothing to hold, so the boat is treated as single-seat. Equipment is **470.5 lb** and payload **354.5 lb**: driver + 150 lb of gear has about **+4.5 lb of margin**. Solo dock trim is about 2.4°, over the 0.5–2° target: stow gear forward. The cage is still held to its 45 lb allowance.
+
+**Stand load check (`CAD/analysis/stand_800r.js`, static, full power):**
+
+| Member | Load | Limit | Factor |
+|---|---|---|---|
+| Engine rail bending | 3,360 psi | 7,000 psi | 2.1 |
+| Diagonal buckling | 918 lbf | 6,830 lbf | 7.4 |
+| Forward post buckling | 379 lbf | 11,660 lbf | 30.8 |
+| Aft post buckling | 462 lbf | 18,760 lbf | 40.6 |
+
+This is a first hand check. It assumes the engine mounts sit at X 17 and X 27, and it does not cover two-stroke vibration, the joints, the gussets or the bolts.
+
+**Side-to-side vibration:**
+
+| Stage | Stiffness | Frequency | Prop matches at |
+|---|---|---|---|
+| Stand alone, cage on the hull | 1,040–2,080 lb/in | 13–18 Hz | 2,300–3,250 engine rpm |
+| With straps, cage strutted on | 3,050–5,340 lb/in | **18–24 Hz** | **3,150–4,200 engine rpm** |
+
+The ranges run from half-fixed to rigid joints. Pass through that rpm band rather than holding in it, and measure the real frequency with a tap test. The cage's own side sway was about 6 Hz before the struts; the struts should raise it toward the stand's frequency, but the hoop between the strut points was not calculated. Strut load at 3 g fore and aft is about 140 lbf, against a buckling limit of about 2,500 lbf.

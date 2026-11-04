@@ -108,10 +108,14 @@ const OUTFIT = [
   ['Florida airboat flag (10 x 12 in orange) on a whip at least 10 ft above the bottom, with mount', 3, -4, 0, 100],
   ['Navigation lights', 5, 30, 0, 50],
   // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
-  ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 35, 62, 0, -0.1],
+  // 35 -> 32 lb (2026-11-03) from the CAD strips: 864 in^3 at 0.034 lb/in^3 is 29.4 lb, 56 #10 screw sets 1.4, sealant 0.4, 0.8 reserve.
+  ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 32, 62, 0, -0.1],
   ['Small trim tab and turnbuckle', 3, -2, -19, 1],
   // Added 2026-11-03 with the exhaust layout (Drivetrain_800R_ETEC.md, Section 6a): about 4-6 ft of tailpipe to an aft transom corner.
-  ['Tailpipe, heat shields and pipe guard', 5, 8, -20, 25],
+  // Itemized 2026-11-03 from the CAD layout: 41 in of 2 in x 0.049 steel tailpipe 3.6, three 0.040 in shields with standoffs 2.2, pipe guard 1.
+  ['Tailpipe, heat shields and pipe guard', 7, 12, 14, 32],
+  // Added 2026-11-03: two 1 x 0.065 in cage struts 1.1, two 1 x 1/8 in stand cross-straps 0.9, brackets 0.5.
+  ['Cage struts and stand cross-straps', 2.5, 25, 0, 50],
   // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
   ['Minimal dash: tach, coolant and exhaust temperature gauges, key/DESS post, start button, panel', 3, 60, 0, 30],
   ['Wiring, fuse block, switches', 3, 40, 0, 10],
@@ -119,7 +123,6 @@ const OUTFIT = [
   ['Radiator brackets and coolant overflow bottle', 3, 25, 0, 40],
   ['Brackets, rivnuts and bolts not counted in other items', 5, 40, 0, 10],
   ['Bilge pump and hose', 2, 20, 0, 1],
-  ['Passenger cushion and grab handle', 4, 82, 0, 24],
   // On top of the prop cage (user, 2026-11-03): 30 in single-row LED light bar (~8.6 lb, 150 W) and a motorized
   // remote searchlight (Golight Stryker LED class, ~6-7 lb, 3.7 A), with brackets and wiring.
   ['LED light bar on the cage top, with bracket', 10, 8, 0, 90],
