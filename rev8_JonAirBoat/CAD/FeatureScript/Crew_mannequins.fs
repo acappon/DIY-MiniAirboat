@@ -22,6 +22,15 @@ function paint(context is Context, q is Query, name is string, c is Color)
     setProperty(context, { "entities" : q, "propertyType" : PropertyType.APPEARANCE, "value" : c });
 }
 
+// Lean a point on the upper body back around the hips, to meet the sling backrest (12 degrees in all).
+function leanBack(H is Vector, p is Vector) returns Vector
+{
+    const a = 7 * degree;
+    const o = H + vector(0, 0, 3);
+    const r = p - o;
+    return o + vector(r[0] * cos(a) - r[2] * sin(a), r[1], r[0] * sin(a) + r[2] * cos(a));
+}
+
 // Seated figure with its hip point at H. Returns nothing; bodies are named per role.
 function seatedFigure(context is Context, id is Id, H is Vector, role is string, vest is Color)
 {
@@ -41,7 +50,7 @@ function seatedFigure(context is Context, id is Id, H is Vector, role is string,
         paint(context, qUnion([qCreatedBy(sid + "thigh", EntityType.BODY), qCreatedBy(sid + "knee", EntityType.BODY), qCreatedBy(sid + "shin", EntityType.BODY)]), role ~ " - leg", pants);
         paint(context, qCreatedBy(sid + "foot", EntityType.BODY), role ~ " - shoe", shoes);
 
-        const shoulder = H + vector(-2, s * 8, 24);
+        const shoulder = leanBack(H, H + vector(-2, s * 8, 24));
         const elbow = H + vector(5, s * 9.5, 12.5);
         const hand = H + vector(15, s * 7.5, 15);
         cyl(context, sid + "upperArm", shoulder, elbow, 2);
@@ -52,13 +61,13 @@ function seatedFigure(context is Context, id is Id, H is Vector, role is string,
     }
     cyl(context, id + "pelvis", H + vector(0, -5.5, 3), H + vector(0, 5.5, 3), 3.4);
     paint(context, qCreatedBy(id + "pelvis", EntityType.BODY), role ~ " - pelvis", pants);
-    cyl(context, id + "torso", H + vector(0, 0, 2), H + vector(-2, 0, 25), 6.8);
+    cyl(context, id + "torso", H + vector(0, 0, 2), leanBack(H, H + vector(-2, 0, 25)), 6.8);
     paint(context, qCreatedBy(id + "torso", EntityType.BODY), role ~ " - torso (life vest)", vest);
-    cyl(context, id + "neck", H + vector(-2, 0, 24), H + vector(-1.5, 0, 28.5), 2.2);
-    sph(context, id + "head", H + vector(-1, 0, 32.5), 4.4);
+    cyl(context, id + "neck", leanBack(H, H + vector(-2, 0, 24)), leanBack(H, H + vector(-1.5, 0, 28.5)), 2.2);
+    sph(context, id + "head", leanBack(H, H + vector(-1, 0, 32.5)), 4.4);
     paint(context, qUnion([qCreatedBy(id + "neck", EntityType.BODY), qCreatedBy(id + "head", EntityType.BODY)]), role ~ " - head", skin);
     // Hearing protection: airboat props are loud.
-    cyl(context, id + "muffs", H + vector(-1, -5, 32.5), H + vector(-1, 5, 32.5), 2.1);
+    cyl(context, id + "muffs", leanBack(H, H + vector(-1, -5, 32.5)), leanBack(H, H + vector(-1, 5, 32.5)), 2.1);
     paint(context, qCreatedBy(id + "muffs", EntityType.BODY), role ~ " - ear muffs", color(0.1, 0.1, 0.1));
 }
 

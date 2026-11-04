@@ -108,11 +108,11 @@ const OUTFIT = [
   // Sender 0.3, gauge 0.3, tie-down straps 0.4, 10 ft of extra fuel line 1.
   ['Fuel gauge sender and gauge, tank straps, longer fuel line', 2, 110, -10, 15],
   // Safety and regulatory gear, itemized 2026-11-03 (was one 15 lb line):
-  ['PFDs (2) and dock lines', 8, 85, 0, 8],
+  ['Inflatable PFDs (2) and dock lines', 6, 85, 0, 8],
   ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver', 4, 98, -24, 12],
-  ['Air horn with bracket, at the console', 2, 105, -14, 25],
-  ['Florida airboat flag (10 x 12 in orange) on a whip at least 10 ft above the bottom, with mount', 3, -4, 0, 100],
-  ['Navigation lights', 5, 30, 0, 50],
+  ['Compact can air horn in a clip, at the console', 0.5, 105, -14, 25],
+  ['Florida airboat flag (10 x 12 in orange) on a fiberglass whip at least 10 ft above the bottom, with mount', 2, -4, 0, 100],
+  ['Navigation lights: two LED sidelights and an all-round white', 1.5, 60, 0, 50],
   // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
   // 35 -> 32 lb (2026-11-03) from the CAD strips: 864 in^3 at 0.034 lb/in^3 is 29.4 lb, 56 #10 screw sets 1.4, sealant 0.4, 0.8 reserve.
   ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 32, 62, 0, -0.1],
@@ -125,18 +125,23 @@ const OUTFIT = [
   // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
   // Gauges, lanyard kill switch, joystick, switches, key, USB port and 12 V outlet (Minimal_dash.fs); exhaust gauge and probe 0.3.
   ['Dash: gas, tach, temperature and exhaust gauges, switches, joystick, key, USB port, 12 V outlet, panel', 4.1, 103, -13, 28],
-  ['Adjustable marine phone or tablet holder, without the device', 1.5, 100, 0, 28],
-  // 1 in x 0.065 tube frame 1.2, rib foot 0.2, sheet pod 1.2.
-  ['Console frame and pod, starboard, clear above two sets of knees', 2.6, 105, -18, 24],
-  // electrical/wire_list.py: wire 8.7 (1/0 cable 4.7), connectors and glands 0.8, relays 0.5, fuse block 0.6, main fuse and bus strips 0.2.
-  ['Harness: all wire, connectors, relays, fuse block', 10.8, 62, 0, 7],
+  ['Adjustable marine phone or tablet holder, without the device', 0.8, 100, 0, 28],
+  // 1 in x 0.095 tube frame 1.5, rib foot 0.2, sheet pod 1.2.
+  ['Console frame and pod, starboard, clear above two sets of knees', 2.9, 105, -18, 24],
+  // Removable, on four pins (grab_rail.js): hoop 2.8, stays 1.1, saddles 0.4, cables 0.6, clips 0.65, pins 0.4, fasteners 0.3, sling 0.5.
+  ['Grab rail and sling backrest behind the middle bench, removable', 6.8, 66, 0, 18],
+  // Capsize flotation (flotation_inverted.js): 1.94 ft^3 of 2 lb/ft^3 foam, added to the foam in the benches.
+  ['Flotation foam, bow wedge', 0.8, 155, 0, 12],
+  ['Flotation foam, two aft corner blocks', 3.1, 8, 0, 6],
+  // electrical/wire_list.py: wire 8.3 (2 AWG cable 2.8, 16 AWG per the E-11 review), connectors and glands 0.8, relays 0.5, fuse block 0.6, main fuse, inline fuse and bus strips 0.3, battery switch 0.5, marine starter solenoid 0.6, floor conduit and bench sleeve 0.6.
+  ['Harness: all wire, connectors, relays, fuse block, battery switch, solenoid, conduit', 12.2, 62, 0, 7],
   ['Belt guard', 3, 13, 0, 37],
   ['Radiator brackets and coolant overflow bottle', 3, 25, 0, 40],
   ['Brackets, rivnuts and bolts not counted in other items', 5, 40, 0, 10],
   ['Bilge pump and hose', 2, 20, 0, 1],
-  // On top of the prop cage (user, 2026-11-03): 30 in single-row LED light bar (~8.6 lb, 150 W) and a motorized
+  // On top of the prop cage (user, 2026-11-03): 20 in single-row LED light bar (~5 lb, 100 W) and a motorized
   // remote searchlight (Golight Stryker LED class, ~6-7 lb, 3.7 A), with brackets and wiring.
-  ['LED light bar on the cage top, with bracket', 10, 8, 0, 90],
+  ['LED light bar, 20 in, on the cage top, with bracket', 6, 8, 0, 90],
   ['Motorized remote searchlight on the cage top, with mount', 8, 6, 0, 92],
 ];
 // [key, name, hp used, lb (engine + reduction + radiator + exhaust + mounts), prop lb, static thrust lbf, Vp mph]
@@ -146,9 +151,9 @@ const ENGINES = [
   ['rotax', 'Rotax 582 + B/C gearbox, electric start (65 hp)', 65, 103, 12, T(65), 75],
   // gsxr: 206 lb engine system from archive/rev8_JonAirBoat/bike_reduction.js, plus 11 lb for its heavier stand and beds (56 lb against the 45 lb in OUTFIT).
   ['gsxr', 'GSX-R1000-class bike engine + its gearbox + belt reduction (150 hp used)', 150, 217, 20, T(150), 85],
-  // etec800: 79 lb bare (unverified) + exhaust 20, radiator 15, belt/shaft/bearings 39, oil tank/ECU/harness 10, mounts 5
-  // (Engine_Selection_1448.md, Section 4a); about 120 hp at the prop.
-  ['etec800', 'Rotax 800R E-TEC snowmobile two-stroke + 3:1 belt reduction (120 hp used)', 120, 168, 15, T(120), 82],
+  // etec800: 79 lb bare (unverified) + exhaust 20, radiator 16.5, belt/shaft/bearings 36.3 (petal bearing plates), oil tank/ECU/harness 10, mounts 5
+  // (archive/Engine_Selection_1448.md, Section 4a); about 120 hp at the prop.
+  ['etec800', 'Rotax 800R E-TEC snowmobile two-stroke + 3:1 belt reduction (120 hp used)', 120, 166.8, 15, T(120), 82],
 ];
 const CREW = {
   solo: [['Driver', 200, 82, 0, 26]],
@@ -203,3 +208,5 @@ for (const sysLb of [100, 125, 150, 175, 200]) {
 }
 console.log('Engine budget: worst-case top mph / hump margin lbf (payload must be at least 350 lb)');
 console.table(budget);
+
+module.exports = { h, OUTFIT, ENGINES, hullItem, mass, floatAt, top, humpMargin };

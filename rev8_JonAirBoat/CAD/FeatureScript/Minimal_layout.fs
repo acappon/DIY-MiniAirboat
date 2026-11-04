@@ -14,9 +14,9 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 // is assumed on the port side and the engine roll angle is 0. The cage is a proposal. The reference
 // transom is square at X 0; the real one rakes from about X 1.5 at Z 2 to about X -1.7 at Z 14.
 
-const CRANK_Z = 22;
+const CRANK_Z = 22.72;       // raised 0.72 in so the stock 8MGT-2000 belt fits at 29.28 in centers
 const PROP_Z = 52;
-const BELT_X = [12, 14];        // 2 in wide (Gates sizing still open)
+const BELT_X = [12, 14];        // 2 in envelope: 36 mm belt, about 1.4 in, between pulley flanges
 const R_SMALL = 1.605;          // 32T 8MGT pitch radius
 const R_LARGE = 4.71;           // 94T 8MGT pitch radius
 const PROP_R = 33;              // 66 in
@@ -98,6 +98,20 @@ function mkPipe(context is Context, id is Id, pts is array, r is number)
 {
     for (var i = 0; i < size(pts) - 1; i += 1)
         mkCyl(context, id + ("seg" ~ i), pts[i], pts[i + 1], r);
+}
+
+// Rounded rectangle in the Y-Z plane, as polygon points.
+function roundRect(y0 is number, y1 is number, z0 is number, z1 is number, r is number) returns array
+{
+    var pts = [];
+    const corners = [[y1 - r, z1 - r, 0], [y0 + r, z1 - r, 90], [y0 + r, z0 + r, 180], [y1 - r, z0 + r, 270]];
+    for (var c in corners)
+        for (var i = 0; i <= 6; i += 1)
+        {
+            const a = (c[2] + 15 * i) * degree;
+            pts = append(pts, [c[0] + r * cos(a), c[1] + r * sin(a)]);
+        }
+    return append(pts, pts[0]);
 }
 
 // Closed X-Z polygon extruded along Y from y0 to y1.
@@ -203,7 +217,7 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
         const bl = id + "belt";
         mkPoly(context, bl + "outer", beltOutline(0.12), BELT_X[0], BELT_X[1]);
         opBoolean(context, bl + "hollow", { "targets" : qCreatedBy(bl + "outer", EntityType.BODY), "tools" : qCreatedBy(id + "beltCore", EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
-        paintBody(context, qCreatedBy(bl, EntityType.BODY), "Belt 8MGT 2 in wide (width open)", beltC);
+        paintBody(context, qCreatedBy(bl, EntityType.BODY), "Belt 8MGT-2000-36, shown in its 2 in pulley envelope", beltC);
         mkCyl(context, id + "pSmall", vector(BELT_X[0], 0, CRANK_Z), vector(BELT_X[1], 0, CRANK_Z), R_SMALL);
         paintBody(context, qCreatedBy(id + "pSmall", EntityType.BODY), "Pulley 32T on the crank PTO", steelC);
         mkCyl(context, id + "pLarge", vector(BELT_X[0], 0, PROP_Z), vector(BELT_X[1], 0, PROP_Z), R_LARGE);
@@ -218,11 +232,25 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
             mkBox(context, bid, b[0], b[1], -b[2], b[2], PROP_Z - b[2], PROP_Z + b[2]);
             paintBody(context, qCreatedBy(bid, EntityType.BODY), b[3], plateC);
         }
-        for (var bp in [[8, 7.5], [20, 7.75]])
+        // Two petals each side of the bearing, a 1/2 in rib between them, a 1 in border, and solid ends for the
+        // tensioning slots (CAD/analysis/bearing_plate.js).
+        for (var bp in [[8, 7.5, 0.375, "3/8"], [20, 7.75, 0.5, "1/2"]])
         {
             const pid = id + ("bplate" ~ bp[0]);
-            mkBox(context, pid, bp[0], bp[0] + 0.5, -bp[1], bp[1], PROP_Z - 3, PROP_Z + 3);
-            paintBody(context, qCreatedBy(pid, EntityType.BODY), "Bearing plate 1/2 6061 at X " ~ bp[0], plateC);
+            mkBox(context, pid, bp[0], bp[0] + bp[2], -bp[1], bp[1], PROP_Z - 3, PROP_Z + 3);
+            const zone = bp[1] - 1.5 - 3.1;
+            const w = (zone - 0.5) / 2;
+            var tools = [];
+            for (var s in [1, -1])
+                for (var k = 0; k < 2; k += 1)
+                {
+                    const a = 3.1 + k * (w + 0.5);
+                    const cid = id + ("petal" ~ bp[0] ~ (s > 0 ? "P" : "S") ~ k);
+                    mkPoly(context, cid, roundRect(s > 0 ? a : -a - w, s > 0 ? a + w : -a, PROP_Z - 2, PROP_Z + 2, 0.5), bp[0] - 0.1, bp[0] + bp[2] + 0.1);
+                    tools = append(tools, qCreatedBy(cid, EntityType.BODY));
+                }
+            opBoolean(context, id + ("bcut" ~ bp[0]), { "targets" : qCreatedBy(pid, EntityType.BODY), "tools" : qUnion(tools), "operationType" : BooleanOperationType.SUBTRACTION });
+            paintBody(context, qCreatedBy(pid, EntityType.BODY), "Bearing plate " ~ bp[3] ~ " 6061 with petal cutouts at X " ~ bp[0], plateC);
         }
 
         // ---- Prop ----
@@ -317,9 +345,9 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
         mkPipe(context, id + "tail", [vector(15, 15.5, 45), vector(15, 26, 26), vector(13, 27.5, 23), vector(-1, 28, 16.5)], 1);
         paintBody(context, qCreatedBy(id + "tail", EntityType.BODY), "Tailpipe to the port transom corner", hotC);
 
-        // ---- Radiator, starboard, forward of the exhaust parts ----
-        mkBox(context, id + "radiator", 32, 34, -21, -5, 44, 64);
-        paintBody(context, qCreatedBy(id + "radiator", EntityType.BODY), "Envelope - radiator 16 x 20 x 2", color(0.3, 0.45, 0.7));
+        // ---- Radiator, starboard, just ahead of the prop where the inflow is strong, clear of the exhaust ----
+        mkBox(context, id + "radiator", 15, 17, -28, -10, 34, 56);
+        paintBody(context, qCreatedBy(id + "radiator", EntityType.BODY), "Envelope - radiator 18 x 22 x 2", color(0.3, 0.45, 0.7));
 
         // ---- Cage, rudders, lights, flag ----
         if (definition.showCage)
@@ -370,8 +398,8 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
                 paintBody(context, qCreatedBy(rid, EntityType.BODY), "Envelope - rudder", plateC);
             }
             const topCage = PROP_Z + CAGE_R + 0.625;
-            mkBox(context, id + "lightBar", 7, 9, -15, 15, topCage, topCage + 3);
-            paintBody(context, qCreatedBy(id + "lightBar", EntityType.BODY), "Envelope - LED light bar 30 in", steelC);
+            mkBox(context, id + "lightBar", 7, 9, -10, 10, topCage, topCage + 3);
+            paintBody(context, qCreatedBy(id + "lightBar", EntityType.BODY), "Envelope - LED light bar 20 in", steelC);
             mkBox(context, id + "searchlight", 3, 7, -4, 4, topCage, topCage + 8);
             paintBody(context, qCreatedBy(id + "searchlight", EntityType.BODY), "Envelope - remote searchlight", steelC);
             mkCyl(context, id + "whip", vector(-0.5, 0, topCage - 1), vector(-0.5, 0, 132), 0.25);

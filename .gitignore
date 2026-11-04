@@ -15,3 +15,9 @@ desktop.ini
 
 # Editor settings Fusion makes when you edit a script
 .vscode/
+
+# Windows thumbnail streams on the network share
+Thumbs.db:encryptable
+
+# Release zips: upload them to the release, don't commit them
+rev8_JonAirBoat/release/

@@ -197,3 +197,5 @@ const fastening = [
 let fastLb = 0;
 for (const [name, w] of fastening) { fastLb += w; console.log(`${name}: ${w.toFixed(2)} lb`); }
 console.log(`Hull fastening total: ${fastLb.toFixed(1)} lb`);
+
+module.exports = { solveFrame, NODES, FWD_PIN };

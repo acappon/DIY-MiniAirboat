@@ -76,7 +76,7 @@ const gph = hp => +(hp * 0.55 / 6.1).toFixed(1);
 out.fuel = { fullPowerGph: gph(HP), cruiseGph60hp: gph(60), minutesOn6galFull: Math.round(6 / gph(HP) * 60), hoursOn6galCruise: +(6 / gph(60)).toFixed(1) };
 
 // ---------------- Weight (engine bare weight unverified) ----------------
-const W = { 'Engine, bare (reported, unverified)': 79, 'Tuned pipe and stock silencer': 20, 'Radiator, hoses and coolant': 15,
-  'Belt, pulleys, prop shaft, bearings, collars, plates': 39, 'Oil tank and oil, ECU, harness': 10, 'Engine mounts': 5 };
+const W = { 'Engine, bare (reported, unverified)': 79, 'Tuned pipe and stock silencer': 20, 'Radiator, hoses and coolant': 16.5,
+  'Belt, pulleys, prop shaft, bearings, collars, plates': 36.3, 'Oil tank and oil, ECU, harness': 10, 'Engine mounts': 5 };
 out.weight = { ...W, engineSystem: Object.values(W).reduce((a, b) => a + b, 0), standAndBedsTarget: 45 };
 console.log(JSON.stringify(out, null, 1));

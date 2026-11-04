@@ -1,7 +1,7 @@
 # Rotax 800R E-TEC Drivetrain — Design Note
 
 **Date:** 2026-11-03. **Branch:** `main`. **Status:** first design, for review before CAD. It replaces the GSX-R1000 design (archived: `archive/rev8_JonAirBoat/Bike_Engine_Stand_and_Reduction.md`). Engine figures must be confirmed on the engine you buy (BRP service manual, a weighed engine).
-**Why this engine:** `reports/Engine_Selection_1448.md`. **Calculations:** `CAD/analysis/etec_reduction.js`, `CAD/analysis/minimal_1448.js`.
+**Why this engine:** `reports/archive/Engine_Selection_1448.md`. **Calculations:** `CAD/analysis/etec_reduction.js`, `CAD/analysis/minimal_1448.js`.
 **Frame:** X forward from the transom, Y + to port, Z up from the hull bottom (inches).
 
 ## 1. Drive train in one line
@@ -32,7 +32,10 @@ Rotax 800R E-TEC two-stroke twin → **8MGT synchronous belt, 32T on the crank P
 | Shaft load (about 1.6 × tension) | about 993 lbf | about 882 lbf | about 648 lbf |
 
 - **Why 8MGT 32T:** it keeps the belt at or under about 6,500 ft/min, the usual limit for pulleys that aren't dynamically balanced. The bigger pulleys lower the belt pull but need balanced pulleys; 14MGT is far too fast at crank speed.
-- **Width is not yet sized.** Size it in Gates DesignFlex: 120 hp, 7,600 rpm, 8MGT 32T/94T, center distance about 28–30 in, service factor at least 1.5. Expect a Poly Chain GT Carbon 8MGT in the 36–62 mm range.
+- **Width: 36 mm, belt 8MGT-2000-36** (Poly Chain GT Carbon, 250 teeth, 78.74 in). From the Gates manual at 32 grooves, with the 1.22 length factor, it rates about 239 hp at 7,600 rpm: a service factor of 2.0 at 120 hp, and 1.5 if the engine ever makes 160 hp. The published table stops at 5,500 rpm, so that figure is extended; confirm it in Gates DesignFlex. 62 mm (about 412 hp) is the fallback and fits between the bearings. `CAD/analysis/radiator_800r.js`.
+- **Center distance 29.28 in:** the stock belt needs the crank at Z 22.72, so the engine sits 0.72 in higher on its mounts; prop axis stays at Z 52.
+- **Pulleys:** flange both, since the centers exceed 8 small-pulley diameters. Have them dynamically balanced: the belt runs 6,383 ft/min at 7,600 rpm, and 6,635 ft/min at the 7,900 rpm limit, over the 6,500 ft/min stock limit.
+- **Torsional check still open:** a two-cylinder engine with no clutch or damper drives this belt and prop directly. Ask Gates about torsional vibration, and watch for belt flutter at some speeds on the static test.
 - **Small pulley on the crank PTO:** the sled's drive clutch sits on a tapered PTO end with a center bolt. Use a pulley hub machined to the same taper (or a clutch-taper adapter) and the stock bolt. **Confirm the taper from the service manual.**
 - **Side load on the crank: open item.** The belt puts about 1,000 lbf of side load on the PTO end, about 2,500 in-lb at the PTO main bearing with the pulley 2.5 in out. The sled's drive clutch also loads this bearing, but differently. If the service manual or BRP can't confirm it, add an **outboard support bearing** for the small pulley on the engine mounts (about +5 lb, about $60).
 - **Tension:** slotted prop-shaft bearing plates with jack bolts, as before (no idler).
@@ -54,7 +57,7 @@ Carried over from the bike design. All the loads are lower now:
 - **Layout (straddle mount):** aft bearing at X 8, belt pulley at X 13, forward bearing at X 20; the prop hub overhangs about 3 in aft of the aft bearing.
 - **Forward (thrust) bearing:** a 4-bolt tapered-roller flange unit, 1-1/2 in bore (Dodge F4B-E-108R class). Two heavy-duty two-piece steel clamp collars, one each side of its inner ring, carry the thrust (forward) and any reverse load; the set screws only locate it. Collars rated at least 1,750 lbf axial.
 - **Aft bearing:** UCF208-24 ball flange unit, radial only.
-- **Bearing plates:** 1/2 in 6061, about 6 in deep, bolted between the stand side frames, with vertical slots and jack bolts for belt tension.
+- **Bearing plates:** 6061, about 6 in deep, bolted between the stand side frames, with vertical slots and jack bolts for belt tension. Aft 3/8 in, forward 1/2 in. Each is CNC or waterjet cut with two petals either side of the bearing, a 1/2 in rib, a 1 in border and solid ends, 0.5 in corner radius, about 6.3 lb the pair (`CAD/analysis/bearing_plate.js`). Round and polish every cut edge. The forward plate carries the thrust: peak stress about 14 ksi, fatigue factor about 1.5, thrust deflection about 0.09 in, by hand calculation. A brick-element check at three mesh sizes (`CAD/analysis/bearing_plate_fea.py`) gives a peak of about 13.5 ksi at the cutouts with simple end supports and 8 ksi with fixed ends, and 0.06 in of thrust deflection. The peak still rises with refinement because the mesh stair-steps the rounded corners, so the hand figure of 14 ksi stays the design number.
 - Ratings are from distributor listings and the generic tapered-roller formula (P = 0.4 Fr + 1.5 Fa); confirm with the maker's catalog before buying.
 
 ## 5. Prop (unchanged: Warp Drive 3-blade with HP blades, 66 in)
@@ -67,9 +70,9 @@ Carried over from the bike design. All the loads are lower now:
 
 ## 6. Engine systems
 
-- **Cooling:** a sled cools through heat exchangers in the tunnel, so the boat needs a **radiator in the prop wash**, with the engine's thermostat and the coolant hoses from the sled. About 15 lb with coolant. Size it for about 120 hp continuous; mount it where the prop wash reaches it at idle too.
+- **Cooling:** a sled cools through heat exchangers in the tunnel, so the boat needs a **radiator**, with the engine's thermostat and the coolant hoses from the sled. It is **18 x 22 x 2 in, about 16.5 lb with coolant**, on the starboard side at X 15–17, Y -28 to -10, Z 34–56, in the strong inflow just ahead of the prop. Estimates (`CAD/analysis/radiator_800r.js`): 76–89 kW of heat at 120 hp and 38–45 kW at 60 hp; the radiator sheds about 81 kW at 35 mph and about 61 kW tied to the dock. At full throttle on the dock, limit runs to about 1 minute and watch the temperature. The old 16 x 20 position at X 33 would have shed only about 25 kW at the dock.
 - **Exhaust and intake:** see Section 6a. Keep the sled's **airbox (intake silencer)**: on an open engine, two-stroke intake roar is about as loud as the exhaust.
-- **Oil:** E-TEC engines inject oil from the sled's oil tank with an electric oil pump. Keep the oil tank, mount it upright, and run the engine on straight gasoline.
+- **Oil:** E-TEC engines inject oil from the sled's oil tank with an electric oil pump. Keep the oil tank, mount it upright, and run the engine on straight gasoline. The tank sits on the starboard side frame of the stand, X 12.6-22.4, Y -17 to -10.5, Z 17-26, away from the exhaust, with its filler on top (envelope in `CAD/FeatureScript/Minimal_cockpit.fs`; measure the real tank). Oil line routing and the pump wiring come from the service manual.
 - **Fuel:** use the sled's in-tank fuel pump module (or one of the same pressure) in the boat's tank. Estimated burn about **10.8 gal/h at full power** and **5.4 gal/h at a 60 hp cruise**: a 6 gal tank lasts about 33 minutes flat out, or about 1.1 hours cruising. Measure it on the static test.
 - **Electrical:** the ECU, harness and DESS key from the sled; the lanyard kill switch wired into the ECU's stop circuit; the small lithium battery for starting and the lights.
 - **Throttle:** the sled's throttle cable to a hand lever or foot pedal.
@@ -86,7 +89,7 @@ Carried over from the bike design. All the loads are lower now:
 - **Start with the stock silencer.** It is already a large, low-restriction part, and the prop (about 81 dBA at 50 ft) is louder than the exhaust: cutting the exhaust from about 76 to about 70 dBA lowers the total only from about 82 to about 81.5 dBA (estimates).
 - **Reserve space for a second muffler** above the engine (about 6 in diameter x 18 in, to size), but fit it only if the static test's sound readings call for it.
 - **If you add one:** a large straight-through, packed muffler with flow at least equal to the stock silencer. A tuned two-stroke is sensitive to restriction after the pipe: too much costs power and raises the exhaust temperature, which can burn a piston. Read the spark plugs after the first runs.
-- **Weight:** a second muffler and its mounts are about 8–12 lb. The payload margin is only 2 lb (Section 8), so take the same weight out of the outfit before fitting it.
+- **Weight:** a second muffler and its mounts are about 8–12 lb. The payload margin is about 7 lb (Section 8), so one needs an offsetting cut.
 
 **Where it goes (air flows from the bow aft into the prop):**
 - **Pipe and silencer above and beside the engine,** inside the area the engine and the bearing stand already block, near the prop axis: about X 14–30, Z 35–55. The center of the disc around the hub makes little thrust, so parts there cost almost nothing.
@@ -116,11 +119,11 @@ Carried over from the bike design. All the loads are lower now:
 |---|---|
 | Engine, bare (unverified) | 79 |
 | Tuned pipe and silencer | 20 |
-| Radiator, hoses and coolant | 15 |
-| Belt, pulleys, prop shaft, bearings, collars, plates | 39 |
+| Radiator, hoses and coolant | 16.5 |
+| Belt, pulleys, prop shaft, bearings, collars, plates | 36.3 |
 | Oil tank and oil, ECU, harness | 10 |
 | Engine mounts | 5 |
-| **Engine system** | **168** |
+| **Engine system** | **166.8** |
 | Stand and beds (in the outfit) | 45 (target) |
 
 With the 250 lb outfit and the 15 lb prop, equipment is 433 lb and payload is **392 lb** under the 825 lb plate: **8 lb short** of the 400 lb that driver + passenger or driver + 150 lb of gear needs.
@@ -165,9 +168,9 @@ Speeds, from the model before the allowances below: about **35 mph** with driver
 ## 9. Decisions and checks before the CAD
 
 1. **PTO taper and side load:** from the service manual. Decide whether the small pulley needs an outboard bearing.
-2. **Belt width** from Gates DesignFlex.
+2. **Belt width:** 36 mm chosen (Section 3); confirm in Gates DesignFlex.
 3. **Prop maximum rpm** from Warp Drive.
-4. **Radiator** size and position in the prop wash.
+4. **Radiator:** 18 x 22 x 2 in chosen (Section 6); confirm on the static test.
 5. **Exhaust (Section 6a):** measure the stock pipe and silencer, set the engine's roll angle so they fit, reserve the second-muffler space, and route the tailpipe to an aft transom corner.
 6. **Sound readings on the static test** (at 50 ft and at the driver's seat) to decide on the second muffler.
 7. **Weigh the engine** with its pipe when it's bought, and update `minimal_1448.js`.
@@ -181,7 +184,7 @@ Onshape workspace Main (merged from `Minimal 1448`, 2026-11-03), part studio "Mi
 - **Heat shields:** three 0.040 in aluminum sheets on standoffs. One runs along the outside of the port side frame (X 11–31, Z 35–58), between the exhaust and the stand, belt and bearings. Two more guard the forward post and the diagonal where the pipe passes through the side frame. The pipe moved to X 25.5 there, and the silencer moved outboard to Y 15.5.
 - **Stand cross-straps:** two 1 x 1/8 in flat straps in an X on the forward face of the diagonals, from Z 37 down to Z 8, tension only. The X stops below the cylinders, because a full-height X runs through the engine envelope.
 - **Cage:** two 1-1/4 in hoops of 36 in radius at X 1 and X 11, four legs at Y ±30.5 (feet in Section 9b), eight stringers. Two 1 x 0.065 in round struts run from the forward hoop (45° up each side) to the top of the stand at X 21, so the cage bolts to both the hull and the stand. Rigid struts are used instead of guy wires: a failed wire ahead of the disc can be drawn into the prop. Fit rubber isolators at the strut ends if vibration calls for them.
-- **Radiator:** 16 x 20 x 2 in on the starboard side at X 32–34, Z 44–64, forward of the exhaust and off the hub center, where the wash is weak.
+- **Radiator:** moved in v1.0.1.0 to 18 x 22 x 2 in on the starboard side at X 15–17, Z 34–56, clear of the exhaust (Section 6).
 - **Tailpipe:** it leaves the silencer outboard at X 15, runs outside the hoops and inside the cage legs, and exits at about Y 28, Z 16.5.
 - **Flag:** whip to Z 132, flag at Z 120–130.
 
@@ -281,12 +284,14 @@ Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpi
 
 - **Driver:** on the factory middle bench, centered, at X 82. The raised seat (15 lb) is gone. The passenger figure is removed.
 - **Dry box:** a waterproof case about 10.6 x 9.7 x 6.9 in, set into the middle bench through its forward panel with the lid facing forward, X 82.6–89.5, Z 2–11.7. It holds the lithium battery and the power distribution fuse block. A sealed case keeps about the same flotation as the foam it replaces.
-- **Steering stick:** to port at Y 21, on the rib at X 95.25, with its grip at Z 31.5. A push-pull cable runs aft along the port side above the benches.
+- **Steering stick:** 1-1/2 x 0.120 in 6061, to port at Y 21, on the rib at X 95.25, with its grip at Z 31.5, and a stop on the pivot cheeks so a hard pull can't load the rudder cable (`reports/Structural_Analysis_v1.0.1.0.md`). A push-pull cable runs aft along the port side above the benches.
 - **Throttle pedal:** at Y -2.5, hinged at the heel on the floor, with the rib at X 108 as its full-throttle stop. A push-pull cable runs along the floor to the starboard side, then aft above the benches.
 - **Heel rests:** two 1 in half-rounds, 6 in long, at X 100.9 and 102.7. They are held by the UHMW strip screws, so they add no new holes through the bottom.
-- **Console:** to starboard, on a 1 x 0.065 in tube post from the rib at X 108 and an arm out to the gunwale. The pod runs Y -4.75 to -21.25 with its underside at Z 24, and holds the tach, coolant, exhaust and fuel gauges and the key post.
+- **Console:** to starboard, on a 1 x 0.095 in tube post from the rib at X 108 and an arm out to the gunwale. The pod runs Y -4.75 to -21.25 with its underside at Z 24, and holds the tach, coolant, exhaust and fuel gauges and the key post.
 - **Two side by side (hand check):** with hip points at Y ±11, knees top out at about Z 19, leaving 5 in under the console. The passenger's shin clears the console post by about 3 in, and the driver's thigh clears the stick by about 2 in. The driver's right foot stretches about 9 in to the pedal. The pedal sits only about 0.5 in from where the passenger's left foot would rest, so that foot must stay clear of it.
-- **Fuel tank:** a 6 gal tank on the front deck step, X 134–152, strapped down, with the sled pump module, a top-mount gauge sender and a fuel line along the starboard side above the benches.
+- **Grab rail and sling backrest:** a removable 1-1/2 x 0.083 in 6061 hoop behind the driver, 20 in wide with 4 in corners, which leaves about 14 in or more to each side. Each leg runs forward from the rib at X 70.65 to a mandrel bend just aft of the bench (X 74.6, Z 12.5), then leans back 12° to the top at Z 32. That bend must not be a welded miter: the factor falls from 2.2 to 0.7. The top is bowed 2 in aft, so the back rests on the sling and not on the bar. Open PVC-coated polyester mesh wraps the upper legs from about Z 14 to Z 28 and laces across the back with non-stretch cord, with a reinforced slot at each stay. The corners and top bar stay bare to grip, and the sling carries none of the grab load. Two 1 x 0.065 in stays run from 1-1/2 in below the corners down to the rib at X 54.75, at about 55°. The hull has no stringers here, only these crosswise ribs. Two crossed 1/8 in stainless cables run in the plane of the stays, behind the sling, so they are clear when it sags. Hoop and stays are one welded unit, with a 3 in saddle at each stay joint. It lifts out on four 5/16 in stainless pins, each on a lanyard, with the sling and cables still attached. Angle clips bolt to the rib tops with rivnuts, so there are no welds to the hull and no new holes through the bottom. About 6.8 lb. Leaning back 12° takes the reach to the stick grip from 20.7 to 22.9 in. At 300 lbf: stays 339 lbf each, buckling factor 7.0; cable factor 3.4; at the center of the bar, a factor of 5.5 to yield. The tightest case is 300 lbf on one top corner, a factor of 1.14 to weld-zone yield and 2.5 to rupture (`CAD/analysis/grab_rail.js`).
+- **Flotation foam:** 1.94 ft³, 3.9 lb, added to the foam in the two benches: a small wedge under the front shelf and two corner blocks aft of the rear bench. The boat floats level upside down, about 3.9 in clear of the water (`reports/Flotation_Inverted_v1.0.1.0.md`).
+- **Fuel tank:** a 6 gal tank on the front deck step, X 134–152, strapped down, with the sled pump module, a top-mount gauge sender and a fuel line along the starboard side above the benches. The throttle cable and fuel line follow the hull taper forward of about X 75, about 0.65 in clear of the hull at the closest point.
 - **Fire extinguisher:** it can no longer be both near the tank and within reach, so it moved to the starboard side next to the driver's right knee, at X 99.
 
 **Weight:** the seat comes out (−15 lb) and the cockpit adds 8 lb: dry box and battery cable 3.4, console frame and pod 2.6, sender, gauge, straps and fuel line 2. Equipment is **467.6 lb** and payload **357.4 lb**: about **+7.4 lb of margin** with driver + 150 lb of gear. Weights are estimates.
@@ -304,6 +309,7 @@ Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpi
 1. What is inside the middle bench, and whether the forward panel can take the opening.
 2. Front deck strength under 45 lb of fuel, and how to fasten the straps.
 3. Rib height where the stick base and console foot land.
+3a. Rib top width, thickness and attachment at X 54.75 and X 70.65, which carry the grab rail: up to about 478 lbf of uplift on one stay foot.
 
 **Not covered:** there is no seat back, so hard acceleration pushes the driver aft against nothing but their own legs. The stick and pedal loads, the cable sizes and the electrical design are still open. A long battery cable run needs checking for voltage drop at start.
 
@@ -358,35 +364,60 @@ Onshape: part studio "Minimal dash" (master `CAD/FeatureScript/Minimal_dash.fs`)
 
 All of this is generated from one file, `electrical/wire_list.py`: the schematic `electrical/Minimal_1448_Electrical_Schematic.pdf`, the table `electrical/Wire_List.csv`, and the CAD in `CAD/FeatureScript/Minimal_wiring.fs` (part studio "Minimal wiring", in the tab Main assembly). Change the list and regenerate; do not edit the outputs. Render: `renderedImages/Minimal_wiring_v1.0.0.4.png`.
 
-**Rules:** chassis ground is used only inside the engine. Battery negative goes to the engine by 1/0 AWG black, and battery positive to the starter solenoid by 1/0 AWG red with a fusible link. All other power is a red/black pair of one AWG from the hub to the device. Red is power, black is return, and every other color is a signal or sensor.
+**Rules:** chassis ground is used only inside the engine. Battery negative goes to the engine by 2 AWG black, and battery positive through the battery switch to the starter solenoid by 2 AWG red with a fusible link. All other power is a feed and a black return of one AWG from the hub to the device. Colors follow ABYC E-11 (`reports/ABYC_E11_Review_v1.0.1.0.md`): red is main DC positive, black is return, and feeds and signals use their function colors.
 
 **Fuses and wire size:**
 
 | Fuse | Circuit | Wire | Load | Run | Drop |
 |---|---|---|---|---|---|
-| MF1 60 A | Battery to hub | 6 AWG | 45 A at most | 1 ft | small |
+| MF1 60 A, on the switch output stud | Battery switch to hub | 6 AWG | 45 A at most | 1 ft | small |
 | F1 20 A | 12 V outlet | 12 AWG | 20 A | 5 ft | 2.1% |
-| F2 15 A | LED bar, through K3 | **12 AWG** | 10.3 A | 17 ft | 4.0% |
-| F3 10 A | Searchlight, through K4 | 18 AWG | 3.7 A | 17 ft | 5.9% |
-| F4 10 A | Stern and bow lights, through K2 | 18 AWG | 1 A | 18 and 10 ft | under 1% |
-| F5 10 A | Dash switch bus | 18 AWG | 6 A | 5 ft | 2.5% |
-| F6 10 A | Gauges and USB, through K1 | 18 AWG | 3.5 A | 5 ft | 1.6% |
-| F7 10 A | Bilge pump | 18 AWG | 2 A | 7 ft | 1.3% |
+| F2 10 A | LED bar, through K3 | **12 AWG** | 7.2 A | 17 ft | 2.8% |
+| F3 10 A | Searchlight, through K4 | 16 AWG | 3.7 A | 17 ft | 3.7% |
+| F4 10 A | Stern and side lights, through K2 | 16 AWG | 1 A | 18 and 5 ft | under 1% |
+| F5 10 A | Dash switch bus | 16 AWG | 6 A | 5 ft | 1.6% |
+| F6 10 A | Gauges and USB, through K1 | 16 AWG | 3.5 A | 5 ft | 1.0% |
+| F7 10 A, inline at the battery | Bilge pump, ahead of the switch | 16 AWG | 2 A | 7 ft | 0.8% |
 | F8 15 A | Fuel pump, through K5 | **12 AWG** | 6 A, estimate | 9 ft | 1.2% |
 
-**Two circuits need 12 AWG beyond the outlet:** the LED bar, because it draws more than a 10 A fuse allows and 18 AWG would drop 16%; and the fuel pump, because 18 AWG would drop 4.9% on the circuit the engine depends on.
+**Wire size:** 16 AWG is the ABYC E-11 minimum for general wiring. 18 AWG stays only on W46 to W50: thermocouple extension, sled DESS harness and the supplied searchlight cable.
+
+**Two circuits use 12 AWG beyond the outlet:** the 20 in LED bar, to keep its long run under 3%; and the fuel pump, because 16 AWG would drop 3.2% on the circuit the engine depends on.
 
 **Choices the rules left open:**
+- **Battery switch:** on the middle bench forward panel, port of the dry box, in the positive feed. It cuts everything except the automatic bilge pump, which is fused at the battery. Under E-11 it is required only above 800 CCA; it is fitted so power can be cut quickly in a fire and for prop work.
+- **Low oil light:** the sled's stock oil level sensor (part 515176508 on 2008-2014 800R models) drives a red LED on the dash between the temperature and exhaust gauges. The sled gauge that normally shows this is not used. W62 feeds the LED from the key-on bus, W60 runs to the sensor, and W61 returns to the bus. It assumes the sensor closes on low oil; confirm that, and the pinout, from the service manual.
+- **Navigation lights:** a red and a green sidelight on the hull sides at X 108, Z 17, with the all-round white on the cage. There is no bow light: at X 157 it would sit about 5 in from the tank, and no bi-color light with a published ignition protection rating was found. The sidelights are about 3 ft from the tank and its fittings, in open air, which meets E-11 isolation. Each needs a wedge to stand vertical on the flared hull side and a sealed gland through the side.
+- **Starter solenoid:** Cole Hersee 24059-08-BP, UL listed and insulated, in place of the sled part, for E-11 ignition protection. It is limited to 10 s on and 30 min off, so crank in short bursts. Its coil return is a short jumper to the engine ground stud.
+- **Dash bars:** TB1 is a 6-screw bar, and TB2 is a pair of 8-screw bars, with one ring terminal on each screw.
 - **Relays:** K1 to K5 sit in the dry box, so the dash switches carry only low-current signals and the power pairs run straight from the hub to each device.
 - **Switch feed:** the dash switch bus (W15) is red with no black, because a switch has no return.
 - **Lights switch:** RUN turns on the navigation lights, and LED keeps them on and adds the bar.
 - **Lanyard kill:** the sled's DESS post, on its cord, is used as the kill switch, since the ECM expects it. It would replace the plain lanyard switch shown on the dash.
 - **Dash bus:** TB1 and TB2 are small bus strips behind the dash, so gauges share one pair from the hub.
-- **Harness:** the engine and cage wires leave the dry box through a gland in its aft face, run through the bench foam to the floor, and follow the centerline aft in split loom, clear of the ribs. This keeps the 1/0 cables to about 7 ft each, and the wiring on the opposite side of the hull from the fuel line where they run forward.
+- **Harness:** the engine and cage wires leave the dry box through a gland in its aft face, pass through a rigid aluminum sleeve in the bench foam, so the harness can be inspected and replaced, and follow the centerline aft at Z 4 in 2 in self-draining conduit on rib standoffs, with its underside about Z 3, clear of the ribs and about 1 in above an assumed 2 in bilge level. Stow gear beside the conduit, not on it. This keeps the 2 AWG cables to about 7 ft each, and the wiring on the opposite side of the hull from the fuel line where they run forward.
 - **Exhaust probe wire:** type K extension has a red conductor by standard, which is thermocouple negative and not power.
 
-**Weight:** the harness itemizes to 10.8 lb, of which the 1/0 cables are 4.7 lb. With a 4.5 lb battery, the old battery, cable and wiring lines come down by 0.7 lb. Equipment **469.5 lb**, payload **355.5 lb**, about **+5.5 lb of margin**.
+**Weight (updated in v1.0.1.0):** the harness itemizes to 12.2 lb, of which the 2 AWG cables are 2.8 lb. With a 4.5 lb battery, the old battery, cable and wiring lines come down by 0.7 lb. Equipment **468.0 lb**, payload **357.0 lb**, about **+7.0 lb of margin**, with the 6.8 lb grab rail and 3.9 lb of flotation foam in place.
 
 **Not designed from engine data:** no 800R wiring source was found, so everything marked "confirm" on the schematic comes from the service manual once it is in hand: the J1 pinout, the pump drive, the charging output and the DESS wiring. The charging system is the main risk. With everything but the outlet on, the boat draws about 19 A plus the engine's own load, and the outlet can add 20 A.
 
 **CAD limits:** connectors are shown as markers at the correct locations, not as true shapes. The branch from W35 to the K1 coil and the regulator's connection to the solenoid stud are on the schematic but not modeled.
+
+## 9g. Maker data found for v1.0.1.0 (2026-11-04)
+
+**Prop (Warp Drive manual 091-01-23, 3-Blade HP):**
+- Limits: 3,200 prop rpm, 160 hp, 62–72 in. At 66 in and 2,590 rpm we are at 81% of the rpm limit, and 84% at the 7,900 rpm engine limit (2,687 rpm). Tip speed is about 745 ft/s and 775 ft/s.
+- The manual's engine list is incomplete and doesn't include the 800R, so confirm the combination (`reports/Supplier_Questions_v1.0.1.0.md`).
+- **Static rpm:** the maker recommends setting it 400–500 rpm under the engine maximum, so **7,400–7,500 rpm**, in 1° steps within the 6–18° range. That is about 113 hp and 480 lbf tied down. Engine rpm rises as the boat moves. This replaces the earlier 7,600 rpm static target.
+- Torque: 3/8 in mounting bolts 30 ft-lb in 5 ft-lb steps; 1/4 in clamping bolts 10 ft-lb in 2 ft-lb steps, at the nuts. A face plate is required: 3/8 in for 3/8 or 1/2 in bolts.
+- Check bolt torque at 5 hours, at 50 hours, then at least yearly.
+
+**Belt (Gates Poly Chain GT Carbon drive design manual, `CAD/analysis/belt_tension.js`):**
+- New belt: 457–499 lb static tension, which is 33–36 lb to deflect the 29.1 in span 0.45 in. Used belt: 332–374 lb.
+- Static side load on the shafts is about 1,000 lb, matching the PTO figure in Section 3.
+- The rating tables stop at 5,500 rpm, and the manual sends faster drives to DesignFlex Pro, which could not be reached. The 239 hp rating stays an extension until Gates confirms it.
+
+**Oil sensor:** owners on Ski-Doo forums describe a float and magnet closing the sensor at about a quarter tank. That fits the planned circuit, but it is not a manual figure.
+
+**Florida law:** s. 327.391 requires a muffler or similar manufactured device, and a 10 ft flag. The statute gives no decibel figure, so the "90 dB(A) at 50 ft" quoted earlier is withdrawn. The stock silencer meets the muffler rule, and the second muffler stays unfitted unless the sound readings make you want one.
