@@ -1,9 +1,16 @@
 # DIY Jon-Air Airboat — Release Notes v1.0.0.4
 
-> **In development: not yet released.** Branch `main` (Lowe 1448 hull); the next release, v1.0.0.4, comes from `main`. The minimal 1448 work was started on `study/minimal-1448` and merged into `main` on 2026-11-03. Updated as the work proceeds.
+Released from branch `main` (Lowe 1448 hull). The minimal 1448 work was started on `study/minimal-1448` and merged into `main` on 2026-11-03.
 
-**Release date:** TBD
-**CAD source:** Onshape document "DIY Jon-Air boat", version **v1.0.0.4** (to be created at release)
+**Release date:** 2026-11-03
+**CAD source:** Onshape document "DIY Jon-Air boat", version **v1.0.0.4**
+
+## Package contents
+- **Tracker:** `Airboat Build Tracker v1.0.0.4.xlsx` (BOM total about **$14,460**).
+- **CAD:** `CAD/Airboat_v1.0.0.4_*.step` (Assembly, Stand_engine_cage, Cockpit, Controls, Dash, Wiring), FeatureScript masters in `CAD/FeatureScript/`, and the weight, trim and load calcs in `CAD/analysis/`.
+- **Electrical:** `electrical/Minimal_1448_Electrical_Schematic.pdf`, `electrical/Wire_List.csv` and the generator `electrical/wire_list.py`.
+- **Renders:** `renderedImages/buildSteps/` (build steps), `renderedImages/scenes/` (dock, underway and snake hunt, with and without crew, and two with a passenger; stylized backgrounds), `renderedImages/studio/` (including the driver's-eye dash) and `renderedImages/transparent/`.
+- **Status at release:** equipment about **469.5 lb**, payload about **355.5 lb**, about **+5.5 lb of margin** with driver + 150 lb of gear; solo dock trim about 0.93°; about 34.5 mph (estimates).
 
 ## What changed since v1.0.0.2
 - `VERSION` file added (1.0.0.4): the next release from `main` carries that number. (Versions 1.0.0.3 and the 1652/1860 work live on the `rev8/1652-hull` and `rev8/1860-hull` branches.)
@@ -42,8 +49,8 @@
 - Running trim is flat (1.1–1.4°) with the prop axis where the model puts it; check a lower or tilted axis.
 - Two-stroke engine life: budget a top-end rebuild at the service manual's interval (top-end kit about $1,300).
 
-## Still to do before release
-- **Release gate:** create Onshape version v1.0.0.4 and release only when all features are implemented and the weight and trim work.
-- Settle the open items in `reports/Drivetrain_800R_ETEC.md` Section 9 (PTO taper and side load, belt width, prop maximum rpm, radiator, tuned pipe routing).
+## Carried forward to the next version
+- **Build Guide text is out of date:** steps 2.1–2.15 still describe earlier parts. Use the v1.0.0.4 renders, CAD and BOM, not that text, until it is rewritten. Steps 1.3 and 1.4 are not in the minimal build, and their images are older. The new image `step2.11_systems_connected.png` is not yet linked from the Build Guide.
+- **Wire clips the hull:** a short wire run pokes through the starboard hull side near midship in the CAD, and shows as a small dark streak in the starboard renders. Reroute it in `electrical/wire_list.py`.
+- **Open engineering items** in `reports/Drivetrain_800R_ETEC.md` Section 9: PTO taper and side load, belt width, prop maximum rpm, radiator, tuned pipe routing, and the engine-side wiring from the 800R service manual.
 - Decide which rev8 features, if any, come back.
-- Design the stand, cage and radiator mounting, then rewrite Build Guide steps 2.1–2.15 and model it in CAD.
