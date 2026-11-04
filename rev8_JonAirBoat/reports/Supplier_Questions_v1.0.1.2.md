@@ -1,4 +1,4 @@
-# Questions for suppliers — v1.0.1.1
+# Questions for suppliers — v1.0.1.2
 
 These can only be answered by the makers. Each is written so it can be sent as it stands. Record the answer in `reports/Drivetrain_800R_ETEC.md` Section 9g.
 

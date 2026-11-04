@@ -3,7 +3,7 @@
 > **STATUS: TEMPLATE — THE STATIC TEST HAS NOT BEEN RUN YET.**
 > Every result field below is blank on purpose. Fill it in from the completed protocol data sheets after the test. The "Planning estimate" column contains rules of thumb for comparison only; they are not measured results.
 
-**Project:** DIY Jon-Air airboat **Design version tested:** ________ (e.g. v1.0.1.1 + changes)
+**Project:** DIY Jon-Air airboat **Design version tested:** ________ (e.g. v1.0.1.2 + changes)
 **Test date:** ________ **Location:** ________________ **Weather / temp / wind:** ________________
 **Test lead:** ________ **Operator:** ________ **Data recorder:** ________ **Safety officer:** ________
 **Engine:** ________ **Belt ratio:** ________ **Prop (make / diameter / pitch / blades / max RPM):** ________________

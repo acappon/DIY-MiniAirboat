@@ -1,6 +1,6 @@
-# Capsized Flotation Analysis — v1.0.1.1
+# Capsized Flotation Analysis — v1.0.1.2
 
-**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.1-beta
+**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.2
 **Condition:** upside down in fresh water, driver swimming, 6 gal tank full, 200 lb of gear strapped behind the driver
 **Model:** `CAD/analysis/flotation_inverted.js`
 **Status:** a hobby design calculation from estimated weights, with the bench foam as reported from inspection: both benches full and sound. It has not been checked by a licensed professional or tested in the water. Use it at your own risk.

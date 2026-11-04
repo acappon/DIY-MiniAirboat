@@ -1,4 +1,4 @@
-# ABYC E-11 Review of the Electrical Plan — v1.0.1.1
+# ABYC E-11 Review of the Electrical Plan — v1.0.1.2
 
 **Reviewed:** `electrical/wire_list.py`, `electrical/Wire_List.csv`, `reports/Drivetrain_800R_ETEC.md` Section 9f, BOM lines 36 and 57–75, and the harness routes in CAD.
 **Status:** desk review of the design. Nothing is built, so workmanship items can't be checked yet. Findings 1, 3, 4 and 5 are now applied to the plan. Finding 2 is applied except for the sled engine electrics, which stay a known deviation.
@@ -10,7 +10,7 @@
 | Result | Count |
 |---|---|
 | Did not meet E-11 as first drawn | 4 (3 fixed, 1 fixed except the sled engine electrics) |
-| Can't be confirmed yet, or depends on parts | 8 (see "Closed out for v1.0.1.1": 2 closed, the rest set by spec and waiting on the service manual or the build) |
+| Can't be confirmed yet, or depends on parts | 8 (see "Closed out for v1.0.1.2": 2 closed, the rest set by spec and waiting on the service manual or the build) |
 | Meets E-11 | 9 |
 | Not applicable | All AC sections: the boat has no AC system |
 
@@ -38,7 +38,7 @@ The overall architecture is sound. The fuse sizing, voltage drop, exhaust cleara
 | 11 | 11.16.3.4 | **Spade terminals.** Friction terminals are allowed only up to 20 A, with limits on rating and voltage drop. W05 and W06 run at exactly 20 A. | Use ring terminals on the 12 V outlet. Choose rated terminals for the relays and switches. |
 | 12 | 11.17.2.4 | **Gas sender.** If the sender is grounded through a metal tank, its return must run directly to the negative bus and be shared with nothing else. | Confirm the sender type. W44 and W45 are fine for an isolated two-wire sender. |
 
-## Closed out for v1.0.1.1
+## Closed out for v1.0.1.2
 
 | # | Decision | State |
 |---|---|---|

@@ -7,7 +7,7 @@ negative to the engine, 2 AWG red with a fusible link from battery positive thro
 starter solenoid. The automatic bilge pump is fused at the battery, ahead of the switch, so it stays on.
 Everything else is a feed and a black return of one AWG from the hub to the device. 12 AWG with a 20 A fuse
 to the 12 V outlet, 16 AWG with a 10 A fuse elsewhere unless the voltage drop below says otherwise.
-Colors follow ABYC E-11 Tables XIV and XV (reports/ABYC_E11_Review_v1.0.1.1.md): red is main DC positive, black is
+Colors follow ABYC E-11 Tables XIV and XV (reports/ABYC_E11_Review_v1.0.1.2.md): red is main DC positive, black is
 return, and feeds and signals use their function colors. 18 AWG is kept only for W46 to W50: thermocouple extension,
 sled DESS harness and the supplied searchlight cable.
 """
@@ -234,7 +234,7 @@ def tag(x, y, wire, size=''):
 def titleblock(n, title):
     return (f'<rect x="10" y="10" width="{SW - 20}" height="{SH - 20}" fill="none" stroke="#222" stroke-width="2"/>'
             + text(30, 42, f'Minimal 1448 airboat electrical schematic: {title}', 22, 'start', 'bold')
-            + text(SW - 30, 42, f'Sheet {n} of 4   v1.0.1.1 draft', 14, 'end')
+            + text(SW - 30, 42, f'Sheet {n} of 4   v1.0.1.2 draft', 14, 'end')
             + text(30, 62, 'Generated from electrical/wire_list.py. Colors per ABYC E-11: red is main DC positive, black is return, other colors show function. Chassis ground only inside the engine.', 13))
 
 

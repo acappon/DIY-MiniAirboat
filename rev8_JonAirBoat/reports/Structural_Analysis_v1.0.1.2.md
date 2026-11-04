@@ -1,6 +1,6 @@
-# Structural Analysis — v1.0.1.1
+# Structural Analysis — v1.0.1.2
 
-**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.1-beta
+**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.2
 **Model:** `CAD/analysis/structural_check.js`, with `stand_800r.js`, `bearing_plate.js`, `grab_rail.js` and `controls_800r.js`
 **Status:** a hobby design calculation by hand and simple frame analysis. It has not been checked by a licensed professional, and nothing has been load tested. Use it at your own risk.
 

@@ -1,6 +1,6 @@
-# Stability Analysis — v1.0.1.1
+# Stability Analysis — v1.0.1.2
 
-**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.1-beta
+**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.2
 **Model:** `CAD/analysis/stability_upright.js`
 **Status:** a hobby design calculation from estimated weights and an analytic hull shape. It has not been checked by a licensed professional, and nothing here has been tested on the water. Use it at your own risk.
 
@@ -95,4 +95,4 @@ Tripping needs the chine to catch something. A flat hull skids on open water lon
 - **Waves:** this is calm-water, static stability, without wave capsize or broaching.
 - **Rules:** no formal stability standard was applied.
 
-Capsized flotation is in `reports/Flotation_Inverted_v1.0.1.1.md`.
+Capsized flotation is in `reports/Flotation_Inverted_v1.0.1.2.md`.
