@@ -10,7 +10,7 @@
 - **Build Guide:** `Airboat Build Guide v1.0.1.0.pdf`, made from the tracker's Build Guide tab by `reports/make_build_guide.py`. About 199 DIY hours and 95 pro hours.
 - **CAD:** `CAD/Airboat_v1.0.1.0_*.step` (Assembly, Stand_engine_cage, Cockpit, Controls, Dash, Wiring), FeatureScript masters in `CAD/FeatureScript/`, and the calcs in `CAD/analysis/`.
 - **Electrical:** `electrical/Minimal_1448_Electrical_Schematic.pdf`, `electrical/Wire_List.csv` and the generator `electrical/wire_list.py`.
-- **Reports:** structural, stability, flotation and electrical compliance reports, the ABYC E-11 review, the drivetrain report, the static test plan, protocol and report, and the questions for makers, in `reports/`, in `reports/`. Earlier reports, older trackers and older STEP files are in `reports/archive/`.
+- **Reports:** structural, stability, flotation and electrical compliance reports, the ABYC E-11 review, the drivetrain report, the static test plan, protocol and report, and the questions for makers, in `reports/`, in `reports/`. Previous release notes and the two early design studies are in `reports/archive/`.
 - **Renders:** `renderedImages/buildSteps/` and `renderedImages/studio/`. Studio views v1 to v6 are new for this release, with and without the driver.
 - **Status at release:** equipment about **468.0 lb**, payload about **357.0 lb**, about **+7.0 lb of margin** with driver + 150 lb of gear; about 34.5 mph; about 497 lbf of static thrust (estimates).
 
