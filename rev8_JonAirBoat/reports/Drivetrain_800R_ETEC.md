@@ -277,7 +277,7 @@ The aft foot lifts about 394 lbf per side at full power: about 137 lbf into the 
 
 ## 9c. Cockpit (2026-11-03)
 
-Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpit.fs`) and the new tab **Minimal 1448 assembly**, which holds the hull mesh, the 800R layout, the cockpit and the driver. Render: `renderedImages/Minimal_cockpit_v1.0.0.4.png`. Sizes are placeholders and the cable and line routes are provisional.
+Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpit.fs`) and the tab **Main assembly**, which holds the hull mesh, the 800R layout, the cockpit and the driver. Render: `renderedImages/Minimal_cockpit_v1.0.0.4.png`. Sizes are placeholders and the cable and line routes are provisional.
 
 - **Driver:** on the factory middle bench, centered, at X 82. The raised seat (15 lb) is gone. The passenger figure is removed.
 - **Dry box:** a waterproof case about 10.6 x 9.7 x 6.9 in, set into the middle bench through its forward panel with the lid facing forward, X 82.6–89.5, Z 2–11.7. It holds the lithium battery and the power distribution fuse block. A sealed case keeps about the same flotation as the foam it replaces.
@@ -309,7 +309,7 @@ Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpi
 
 ## 9d. Steering and throttle controls (2026-11-03)
 
-Onshape: part studio "Minimal controls" (master `CAD/FeatureScript/Minimal_controls.fs`), in the tab Minimal 1448 assembly. Check: `CAD/analysis/controls_800r.js`. Render: `renderedImages/Minimal_controls_v1.0.0.4.png`. This replaces the cable routes in Section 9c.
+Onshape: part studio "Minimal controls" (master `CAD/FeatureScript/Minimal_controls.fs`), in the tab Main assembly. Check: `CAD/analysis/controls_800r.js`. Render: `renderedImages/Minimal_controls_v1.0.0.4.png`. This replaces the cable routes in Section 9c.
 
 **Steering:**
 - **Direction:** stick forward turns left, stick back turns right. This is the usual stick-steering habit reported for other stick-steered boats; I could not find an airboat source that confirms it. Swapping the cable to the other side of the rudder shaft reverses it.
