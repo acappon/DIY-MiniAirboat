@@ -3,14 +3,16 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 
 // Provisional layout of the minimal 1448 with the Rotax 800R E-TEC, in the airboat assembly frame:
 // X forward from the transom, Y + to port, Z up from the hull bottom (reports/Drivetrain_800R_ETEC.md).
-//   - Reference hull section and transom, three 3/16 in UHMW wear strips
+//   - Reference hull section, transom, rear bench and rib, three 3/16 in UHMW wear strips
 //   - Engine, pipe, silencer, second-muffler space, tailpipe and radiator as envelopes
 //   - 8MGT 32T/94T belt, prop shaft, bearings, bearing plates, 66 in prop disc
-//   - Bolted stand with cross-straps and two short beds (solid placeholders for the tube sizes in their part names)
+//   - Bolted stand with cross-straps on four separate shoes (solid placeholders for the tube sizes in their part names)
+//   - Hull mounts: shoe doublers, transom and bench clips, cage foot pads
 //   - Exhaust heat shields
 //   - Smaller cage, rudders, cage-top lights and the Florida flag
 // Engine, pipe and radiator sizes are placeholders until the real parts are measured. The exhaust
-// is assumed on the port side and the engine roll angle is 0. The cage is a proposal.
+// is assumed on the port side and the engine roll angle is 0. The cage is a proposal. The reference
+// transom is square at X 0; the real one rakes from about X 1.5 at Z 2 to about X -1.7 at Z 14.
 
 const CRANK_Z = 22;
 const PROP_Z = 52;
@@ -23,7 +25,11 @@ const HUB_R = 3.5;
 const STAND_Y = 8.5;            // side frame centerlines
 const CAGE_R = 36;              // 2 in or more outside the tips, plus the tube
 const CAGE_X = [1, 11];
-const CAGE_PAD_Z = 16.9;        // matches the cage support top plates in Drivetrain mounts
+const CAGE_FOOT = [[1, 17.975], [14.5, 13.825]]; // [X, Z] of the aft (corner cap) and forward (bench top) feet
+const CAGE_Y = 30.5;
+const BENCH = [13, 33, 2.4, 13.7]; // rear bench X and Z range, from the reference mesh
+const RIB_X = [36, 37, 38.5, 39.5]; // rib hat at the stand's forward foot, from the reference mesh
+const RIB_TOP = 1.52;
 const TRANSOM_Z = 15;
 const HW_BOTTOM = 24.03;
 const SIDE_FLARE = 0.515;
@@ -165,6 +171,12 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
             paintBody(context, qCreatedBy(id + "hullSec", EntityType.BODY), "Reference - hull section at the transom", hullC);
             mkPoly(context, id + "transom", [[-HW_BOTTOM, 0], [HW_BOTTOM, 0], [wT, TRANSOM_Z], [-wT, TRANSOM_Z], [-HW_BOTTOM, 0]], -0.125, 0);
             paintBody(context, qCreatedBy(id + "transom", EntityType.BODY), "Reference - transom", hullC);
+            const wB0 = HW_BOTTOM + SIDE_FLARE * BENCH[2];
+            const wB1 = HW_BOTTOM + SIDE_FLARE * BENCH[3];
+            mkPoly(context, id + "bench", [[-wB0, BENCH[2]], [wB0, BENCH[2]], [wB1, BENCH[3]], [-wB1, BENCH[3]], [-wB0, BENCH[2]]], BENCH[0], BENCH[1]);
+            paintBody(context, qCreatedBy(id + "bench", EntityType.BODY), "Reference - rear bench", hullC);
+            mkPolyXZ(context, id + "rib", [[RIB_X[0], 0], [RIB_X[3], 0], [RIB_X[3], 0.1], [RIB_X[2], 0.1], [RIB_X[2], RIB_TOP], [RIB_X[1], RIB_TOP], [RIB_X[1], 0.1], [RIB_X[0], 0.1], [RIB_X[0], 0]], -HW_BOTTOM, HW_BOTTOM);
+            paintBody(context, qCreatedBy(id + "rib", EntityType.BODY), "Reference - rib at X 37.75", hullC);
         }
 
         // ---- UHMW wear strips: centerline and both chines, 3/16 x 12 in ----
@@ -222,10 +234,11 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
         mkCyl(context, id + "hub", vector(SWEEP_X[0] - 1, 0, PROP_Z), vector(SWEEP_X[1] + 1, 0, PROP_Z), HUB_R);
         paintBody(context, qCreatedBy(id + "hub", EntityType.BODY), "Prop hub and flange", steelC);
 
-        // ---- Stand, trimmed to 45 lb (CAD/analysis/stand_800r.js) ----
+        // ---- Stand and hull mounts (CAD/analysis/stand_800r.js) ----
+        // No bed runs under the rear bench: the rail closes the side frame above it and the feet stand on separate shoes.
         const bedTop = 3.125;
         const topZ = 56;
-        const railZ = 14;
+        const railZ = 14.9; // between the bench top (0.2 in below) and the forward hoop (0.25 in above)
         const railEnd = 21 + 19 * (topZ - railZ) / (topZ - bedTop);
         const frames = [
             ["postAft", [9, bedTop], [9, topZ + 1], 2],
@@ -238,8 +251,24 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
         {
             const side = s > 0 ? "Port" : "Stbd";
             const yc = s * STAND_Y;
-            mkBox(context, id + ("bed" ~ side), 7, 42, yc - 1, yc + 1, 0.125, bedTop);
-            paintBody(context, qCreatedBy(id + ("bed" ~ side), EntityType.BODY), "Stand bed 2x3x1/8 6061 - " ~ side, alu);
+            mkBox(context, id + ("shoeAft" ~ side), 2, 12.75, yc - 1, yc + 1, 0.125, bedTop);
+            paintBody(context, qCreatedBy(id + ("shoeAft" ~ side), EntityType.BODY), "Aft shoe 2x3x1/8 6061 - " ~ side, alu);
+            const nA = RIB_X[0] - 0.15;
+            const nB = RIB_X[3] + 0.15;
+            mkPolyXZ(context, id + ("shoeFwd" ~ side), [[34, 0.125], [nA, 0.125], [nA, RIB_TOP + 0.08], [nB, RIB_TOP + 0.08], [nB, 0.125], [44, 0.125], [44, bedTop], [34, bedTop], [34, 0.125]], yc - 1, yc + 1);
+            paintBody(context, qCreatedBy(id + ("shoeFwd" ~ side), EntityType.BODY), "Forward shoe 2x3x1/8 6061, notched over the rib - " ~ side, alu);
+            mkBox(context, id + ("dblAft" ~ side), 2.25, 12.75, yc - 2.5, yc + 2.5, 0, 0.125);
+            paintBody(context, qCreatedBy(id + ("dblAft" ~ side), EntityType.BODY), "Bottom doubler 1/8 5052 - aft " ~ side, plateC);
+            mkBox(context, id + ("dblFwdA" ~ side), 33.5, nA, yc - 3, yc + 3, 0, 0.125);
+            paintBody(context, qCreatedBy(id + ("dblFwdA" ~ side), EntityType.BODY), "Bottom doubler 1/8 5052 - forward A " ~ side, plateC);
+            mkBox(context, id + ("dblFwdB" ~ side), nB, 44.5, yc - 3, yc + 3, 0, 0.125);
+            paintBody(context, qCreatedBy(id + ("dblFwdB" ~ side), EntityType.BODY), "Bottom doubler 1/8 5052 - forward B " ~ side, plateC);
+            // 2 x 2 x 1/8 angle clips, 3 in wide: the aft shoe hangs between the transom and the rear bench's aft panel,
+            // so uplift at the aft post goes into those panels and not into the bottom skin.
+            mkPolyXZ(context, id + ("clipT" ~ side), [[1.1, bedTop], [3.1, bedTop], [3.1, bedTop + 0.125], [1.225, bedTop + 0.125], [1.225, bedTop + 2], [1.1, bedTop + 2], [1.1, bedTop]], yc - 1.5, yc + 1.5);
+            paintBody(context, qCreatedBy(id + ("clipT" ~ side), EntityType.BODY), "Transom clip 2x2x1/8 angle - " ~ side, plateC);
+            mkPolyXZ(context, id + ("clipB" ~ side), [[11, bedTop], [13, bedTop], [13, bedTop + 2], [12.875, bedTop + 2], [12.875, bedTop + 0.125], [11, bedTop + 0.125], [11, bedTop]], yc - 1.5, yc + 1.5);
+            paintBody(context, qCreatedBy(id + ("clipB" ~ side), EntityType.BODY), "Bench clip 2x2x1/8 angle - " ~ side, plateC);
             for (var f in frames)
             {
                 const fid = id + (f[0] ~ side);
@@ -302,12 +331,23 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
                 mkCyl(context, hid + "c", vector(cx - 0.625, 0, PROP_Z), vector(cx + 0.625, 0, PROP_Z), CAGE_R + 0.625);
                 opBoolean(context, hid + "bore", { "targets" : qCreatedBy(hid + "c", EntityType.BODY), "tools" : qCreatedBy(id + ("hoopCore" ~ cx), EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
                 paintBody(context, qCreatedBy(hid, EntityType.BODY), "Cage hoop at X " ~ cx, cageC);
+                const ft = cx == CAGE_X[0] ? CAGE_FOOT[0] : CAGE_FOOT[1];
                 for (var s in [1, -1])
                 {
                     const lid = id + ("leg" ~ cx ~ (s > 0 ? "P" : "S"));
-                    mkBar(context, lid, vector(cx, s * 30.5, CAGE_PAD_Z), vector(cx, s * 30.5, PROP_Z - sqrt(CAGE_R * CAGE_R - 30.5 * 30.5)), 1.25);
+                    mkBar(context, lid, vector(ft[0], s * CAGE_Y, ft[1]), vector(cx, s * CAGE_Y, PROP_Z - sqrt(CAGE_R * CAGE_R - CAGE_Y * CAGE_Y)), 1.25);
                     paintBody(context, qCreatedBy(lid, EntityType.BODY), "Cage leg at X " ~ cx, cageC);
                 }
+            }
+            // Foot pads, 1/8 in 6061 with a matching backing plate: aft legs on the transom corner caps,
+            // forward legs on the bench top next to the hull side.
+            for (var s in [1, -1])
+            {
+                const side = s > 0 ? "Port" : "Stbd";
+                mkBox(context, id + ("padAft" ~ side), -1, 3, s * 29.75, s * 32.75, CAGE_FOOT[0][1] - 0.125, CAGE_FOOT[0][1]);
+                paintBody(context, qCreatedBy(id + ("padAft" ~ side), EntityType.BODY), "Cage foot pad, corner cap - " ~ side, plateC);
+                mkBox(context, id + ("padFwd" ~ side), 13.25, 18.25, s * 27.5, s * 31.5, BENCH[3], CAGE_FOOT[1][1]);
+                paintBody(context, qCreatedBy(id + ("padFwd" ~ side), EntityType.BODY), "Cage foot pad, bench top - " ~ side, plateC);
             }
             // Struts from the forward hoop to the top of the stand: the hoops alone stand on a 10 in base.
             for (var s in [1, -1])

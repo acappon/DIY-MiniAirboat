@@ -94,7 +94,8 @@ function humpMargin(h, mp, p, CdA) {
 // [name, lb, X, Y, Z]; weights are estimates until parts are weighed.
 const h = HULLS['1448'];
 const OUTFIT = [
-  ['Engine stand (bolted aluminum) and two short beds across the ribs', 45, 18, 0, 22],
+  // 41.5 lb stand on four separate shoes, plus 7.6 lb of hull fastening (stand_800r.js, 2026-11-03).
+  ['Engine stand (bolted aluminum) on four shoes, with doublers, clips, cage foot pads and their bolts', 49.1, 18, 0, 22],
   ['Prop cage, thin-wall aluminum tube, with mesh guard', 45, 4, 0, 38],
   ['Twin rudders and linkage', 12, -6, 0, 36],
   ['Stick, rudder linkage, throttle cable and lever', 10, 62, 9, 10],

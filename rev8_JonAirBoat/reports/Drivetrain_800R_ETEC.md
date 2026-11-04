@@ -174,13 +174,13 @@ Speeds, from the model before the allowances below: about **35 mph** with driver
 
 ## 9a. First CAD layout (2026-11-03)
 
-Onshape workspace `Minimal 1448`, part studio "Minimal 800R layout"; master `CAD/FeatureScript/Minimal_layout.fs`. Engine, pipe, silencer and radiator are placeholder envelopes, the engine roll angle is 0, and the exhaust is assumed on the port side. The blade sweep (X 4–6) and hub (3.5 in radius) are assumed.
+Onshape workspace Main (merged from `Minimal 1448`, 2026-11-03), part studio "Minimal 800R layout"; master `CAD/FeatureScript/Minimal_layout.fs`. Engine, pipe, silencer and radiator are placeholder envelopes, the engine roll angle is 0, and the exhaust is assumed on the port side. The blade sweep (X 4–6) and hub (3.5 in radius) are assumed.
 
 **Choices the layout adds (provisional):**
-- **Stand (trimmed to the 45 lb target, `CAD/analysis/stand_800r.js`):** side frames at Y ±8.5 on 2 x 3 x 1/8 in beds, X 7–42. Aft posts and engine rails (Z 14) are 2 x 2 x 1/8 in. Forward posts on the rails, diagonals from the top of the forward posts to the beds at X 40, top rails and three ties are 1-1/2 x 1-1/2 x 1/8 in. The fourth tie, across the forward end of the beds, was removed: the hull bottom ties them there.
+- **Stand (trimmed to the 45 lb target, `CAD/analysis/stand_800r.js`; **beds replaced by four shoes and the rail raised to Z 14.9 in Section 9b**):** side frames at Y ±8.5 on 2 x 3 x 1/8 in beds, X 7–42. Aft posts and engine rails (Z 14) are 2 x 2 x 1/8 in. Forward posts on the rails, diagonals from the top of the forward posts to the beds at X 40, top rails and three ties are 1-1/2 x 1-1/2 x 1/8 in. The fourth tie, across the forward end of the beds, was removed: the hull bottom ties them there.
 - **Heat shields:** three 0.040 in aluminum sheets on standoffs. One runs along the outside of the port side frame (X 11–31, Z 35–58), between the exhaust and the stand, belt and bearings. Two more guard the forward post and the diagonal where the pipe passes through the side frame. The pipe moved to X 25.5 there, and the silencer moved outboard to Y 15.5.
 - **Stand cross-straps:** two 1 x 1/8 in flat straps in an X on the forward face of the diagonals, from Z 37 down to Z 8, tension only. The X stops below the cylinders, because a full-height X runs through the engine envelope.
-- **Cage:** two 1-1/4 in hoops of 36 in radius at X 1 and X 11, four legs to pads at Y ±30.5, Z 16.9, eight stringers. Two 1 x 0.065 in round struts run from the forward hoop (45° up each side) to the top of the stand at X 21, so the cage bolts to both the hull and the stand. Rigid struts are used instead of guy wires: a failed wire ahead of the disc can be drawn into the prop. Fit rubber isolators at the strut ends if vibration calls for them.
+- **Cage:** two 1-1/4 in hoops of 36 in radius at X 1 and X 11, four legs at Y ±30.5 (feet in Section 9b), eight stringers. Two 1 x 0.065 in round struts run from the forward hoop (45° up each side) to the top of the stand at X 21, so the cage bolts to both the hull and the stand. Rigid struts are used instead of guy wires: a failed wire ahead of the disc can be drawn into the prop. Fit rubber isolators at the strut ends if vibration calls for them.
 - **Radiator:** 16 x 20 x 2 in on the starboard side at X 32–34, Z 44–64, forward of the exhaust and off the hub center, where the wash is weak.
 - **Tailpipe:** it leaves the silencer outboard at X 15, runs outside the hoops and inside the cage legs, and exits at about Y 28, Z 16.5.
 - **Flag:** whip to Z 132, flag at Z 120–130.
@@ -205,6 +205,8 @@ Onshape workspace `Minimal 1448`, part studio "Minimal 800R layout"; master `CAD
 
 **Weight:** the first stand came to about 55 lb. Trimmed, it is **45.0 lb** with an estimated 4 lb of gussets. The exhaust items now total about 7 lb (41 in of steel tailpipe 3.6 lb, shields and standoffs 2.2 lb, guard 1 lb), up from the 5 lb allowance. The cage struts and stand straps add about 2.5 lb with brackets. The UHMW allowance drops from 35 to **32 lb**, using the modeled strips: 864 in³ at 0.034 lb/in³ is 29.4 lb, plus 1.4 lb for the 56 screw sets, 0.4 lb of sealant and 0.8 lb of reserve. The passenger cushion and grab handle in Section 8 are removed (−4 lb): a passenger sits on the bare factory bench with nothing to hold, so the boat is treated as single-seat. Equipment is **470.5 lb** and payload **354.5 lb**: driver + 150 lb of gear has about **+4.5 lb of margin**. Solo dock trim is about 2.4°, over the 0.5–2° target: stow gear forward. The cage is still held to its 45 lb allowance.
 
+**Hull fastening:** counted and designed, see Section 9b. Equipment is now **474.6 lb** and payload **350.4 lb**: about **+0.4 lb of margin**.
+
 **Stand load check (`CAD/analysis/stand_800r.js`, static, full power):**
 
 | Member | Load | Limit | Factor |
@@ -224,3 +226,51 @@ This is a first hand check. It assumes the engine mounts sit at X 17 and X 27, a
 | With straps, cage strutted on | 3,050–5,340 lb/in | **18–24 Hz** | **3,150–4,200 engine rpm** |
 
 The ranges run from half-fixed to rigid joints. Pass through that rpm band rather than holding in it, and measure the real frequency with a tap test. The cage's own side sway was about 6 Hz before the struts; the struts should raise it toward the stand's frequency, but the hoop between the strut points was not calculated. Strut load at 3 g fore and aft is about 140 lbf, against a buckling limit of about 2,500 lbf.
+
+## 9b. Hull mounts (2026-11-03)
+
+Checking the layout against the reference mesh showed three clashes the first layout missed, because its reference hull had no bench or ribs: the engine rails hit the rear bench top (Z 13.7) by 0.7 in, the beds ran through the bench panels (which reach down to Z 2.4), and the beds hit the rib at X 37.75, whose top is at Z 1.52. The design below fixes all three without cutting the bench, so its flotation foam stays intact. Render: `renderedImages/Minimal_800R_hull_mounts_v1.0.0.4.png`.
+
+**Stand:**
+- **No continuous beds.** The rail closes the side frame above the bench, so each side stands on two separate shoes of the same 2 x 3 x 1/8 in tube.
+- **Rail height:** moved from Z 14 to Z 14.9, which leaves 0.2 in over the bench top and 0.25 in under the forward hoop.
+- **Aft shoes (X 2–12.75):** a short beam between the transom and the rear bench's aft panel, held by a 3 in wide 2 x 2 x 1/8 in clip at each end, so uplift at the aft post goes into those panels and not into the bottom skin. Six 1/4-20 bolts through the shoe and bottom add shear and sealing, with a 5 x 10.5 x 1/8 in 5052 doubler.
+- **Forward shoes (X 34–44):** notched over the rib, with 0.08 in over the rib top, so a hard landing bears on the rib. Six 1/4-20 bolts through 1/8 in 5052 doublers, 6 in wide, cut around the rib.
+- **Bottom bolts:** at Y ±8.5 they pass between the centerline and chine UHMW strips. Use truss heads (under the 3/16 in strip thickness) with sealant, and a crush sleeve inside the tube.
+
+**Cage feet:**
+- **Aft legs:** stand on the transom corner caps at about Z 17.9.
+- **Forward legs:** slant forward from the hoop at X 11 to the bench top at X 14.5, next to the hull side, which widens the leg base from 10 in to 13.5 in.
+- **Pads:** 1/8 in pads with matching backing plates and four 1/4-20 bolts each. The backing plates under the bench top need a small access pocket through the aft panel into the foam, refilled and sealed afterward.
+
+**Load check (`CAD/analysis/stand_800r.js`, 2D frame per side, worst of rigid and pinned aft feet):**
+
+| Item | Load | Limit | Factor |
+|---|---|---|---|
+| Rail X 9–17, full power | 4,910 psi | 7,000 psi | **1.4** |
+| Aft shoe bending | 980 psi | 7,000 psi | 7.1 |
+| Bench clip, two 1/4-20 | 128 lbf each | 950 lbf | 7.4 |
+| Shoe bolts in shear | 25 lbf each | 950 lbf | 37 |
+
+The aft foot lifts about 394 lbf per side at full power: about 137 lbf into the transom clip and 256 lbf into the bench clip. The forward foot presses down about 485 lbf. The rail's 1.4 is lower than the 2.1 in Section 9a because it now carries axial load as well as bending, and it assumes engine mounts at X 17 and X 27. Recheck it when the real mount points are known. This check does not cover vibration or the strength of the hull sheet itself.
+
+**Clearances measured:**
+
+| Between | Inches | Note |
+|---|---|---|
+| Rail to bench top | 0.2 | tight; fit a rubber strip if they touch under load |
+| Rail to forward hoop | 0.25 | tight |
+| Rail to engine envelope | 0.5 | check with the real engine |
+| Forward shoe to rib top | 0.08 | meant to bear when loaded |
+| Tailpipe to corner cap pad | 0.85 | shield if the pad runs hot |
+| Tailpipe to aft leg | 1.0 | was 0.9 |
+| Tailpipe to forward leg | 1.35 | |
+
+**Weight:** the stand and shoes come to **41.5 lb**, down from 45. Fastening adds **7.6 lb** (doublers 2.3, clips 0.6, cage pads and backing 1.6, 56 bolt sets 2.8, sealant 0.3), so the model carries 49.1 lb in place of 45. Top speed and trim barely change: solo dock trim is about 2.44°, 0.86° with driver + 150 lb of gear. The clip and pad weights assume no extra parts appear in the fit-up.
+
+**Check on the real hull before cutting metal:**
+1. Bench panels: their gauge, how they are fastened to the hull, and whether they really stop at Z 2.4.
+2. Whether the corner caps are aluminum and strong enough to carry a leg. This comes from the mesh only.
+3. What is inside the rear bench, and whether the access pocket is practical.
+4. Rib height at Y ±8.5 and the hull bottom gauge.
+5. Transom condition: the clips bolt low on it, at about Z 4.5.
