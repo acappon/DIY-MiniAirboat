@@ -16,6 +16,7 @@
   - **1000 cc sport-bike engine with a belt reduction:** about 38 mph with any load, about $10,750 (about $9,000–10,000 with a cheaper hull).
 
 ## Known issues and open items
+- **Engine decision reopened (2026-11-03, `reports/Engine_Selection_1448.md`).** The GSX-R1000 build leaves 338 lb under the 825 lb plate, so driver + passenger is 62 lb over and driver + 150 lb of gear is 12 lb over. New requirements: driver + 150 lb gear or driver + passenger within the plate, planes easily, at least 33 mph. That needs about 110 hp at the prop from an engine system of about 160 lb or less; 600- and 800-class snowmobile two-strokes are the lead candidates, pending real weights. `CAD/analysis/minimal_1448.js` now reports pounds over the plate and the engine budget sweep. The model uses 150 hp for the bike engine; the stand note's operating point is 140 hp.
 - Outfit weights, thrust and prices are estimates; nothing is modeled in CAD yet.
 - Both engines exceed the 1448 plate's 25 hp outboard rating (registration and insurance).
 - Running trim is flat (1.0–1.9°) with the prop axis where the model puts it; check a lower or tilted axis once a prop is chosen.

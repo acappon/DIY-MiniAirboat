@@ -131,9 +131,39 @@ for (const [ek, en, hp, lb, propLb, T0, Vp] of ENGINES) {
     const fl = floatAt(h, mp.W, mp.LCG);
     const CdA = 9 + 3 * (crew.length - 1);
     const t = top(h, mp, { T0, Vp }, CdA);
-    out.push({ engine: ek, load: ck, equipmentLb: eqLb, payloadUnderPlate: h.plate - eqLb, staticThrust: T0,
+    const crewLb = crew.reduce((s, r) => s + r[1], 0);
+    out.push({ engine: ek, load: ck, equipmentLb: eqLb, payloadUnderPlate: h.plate - eqLb, overPlateLb: Math.max(0, eqLb + crewLb - h.plate), staticThrust: T0,
       weightLb: Math.round(mp.W), dockTrim: +fl.trim.toFixed(2), transomFreeboard: +(h.transom - fl.Tst).toFixed(1),
       topMph: t.mph, topTrim: +t.s.tau.toFixed(2), humpMarginLbf: Math.round(humpMargin(h, mp, { T0, Vp }, CdA)) });
   }
 }
 console.table(out);
+
+// ---------------- Engine budget (2026-11-03 targets) ----------------
+// Targets: solo + 150 lb gear, or driver + passenger, within the 825 lb plate; planes easily; at least 33 mph.
+// Sweep the engine system weight (engine, reduction, radiator, exhaust, extra stand over the 45 lb in OUTFIT;
+// prop 15 lb) and the power used at the prop. Each cell: worst-case top mph / worst hump margin (lbf).
+// Top speed depends almost only on power; the plate sets the weight limit.
+const CASES = {
+  soloGear150: [['Driver', 200, 58, 0, 30], ['Gear amidships', 150, 80, 0, 10]],
+  plus1: CREW.plus1,
+};
+const outfitLb = OUTFIT.reduce((s, r) => s + r[1], 0);
+const budget = [];
+for (const sysLb of [100, 125, 150, 175, 200]) {
+  const row = { systemLb: sysLb, payloadUnderPlate: h.plate - outfitLb - sysLb - 15 };
+  for (const hp of [60, 70, 80, 90, 100, 110, 120]) {
+    let mph = 1e9, hump = 1e9;
+    for (const crew of Object.values(CASES)) {
+      const mp = mass([hullItem, ...OUTFIT, ['Engine system', sysLb, 20, 0, 22], ['Prop', 15, 4, 0, 42], ...crew]);
+      const p = { T0: T(hp), Vp: 70 + hp / 10 };
+      const CdA = 9 + 3 * (crew.length - 1);
+      mph = Math.min(mph, top(h, mp, p, CdA).mph);
+      hump = Math.min(hump, Math.round(humpMargin(h, mp, p, CdA)));
+    }
+    row[hp + ' hp'] = mph + ' / ' + hump;
+  }
+  budget.push(row);
+}
+console.log('Engine budget: worst-case top mph / hump margin lbf (payload must be at least 400 lb)');
+console.table(budget);
