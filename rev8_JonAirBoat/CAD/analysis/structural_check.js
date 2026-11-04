@@ -101,7 +101,7 @@ const Mhull = 1066 * 130 / 8;
 row('Hull', 'Hull girder bending, sheer', 'Dock, full load', Mhull / Shull, F5052, 'psi');
 row('Hull', 'Hull girder bending, sheer', `${G_SLAM} g hard landing`, G_SLAM * Mhull / Shull, F5052, 'psi');
 const pSlam = 5, span = 7;
-row('Hull', 'Bottom panel between formed keels, 7 in span', '5 psi slam at speed', pSlam * span * span / 12 / (0.1 * 0.1 / 6), F5052, 'psi', 'Span and gauge assumed; UHMW strips help');
+row('Hull', 'Bottom panel between formed keels, 7 in span', '5 psi slam at speed', pSlam * span * span / 12 / (0.1 * 0.1 / 6), F5052, 'psi', 'Span and gauge assumed; UHMW sheet helps');
 row('Hull', 'Forward shoe on the rib, one side', 'Full power', fr.down, 2400, 'lbf', 'Rib crippling estimate, two walls 1.5 in tall');
 row('Hull', 'Forward shoe on the rib, one side', `${G_SLAM} g hard landing`, G_SLAM * (W_ENGINE + W_STAND) / 4, 2400, 'lbf');
 row('Hull', 'Bench clip, two 1/4-20 in panel', 'Full power', fr.up * 0.65 / 2, 950, 'lbf each');

@@ -11,8 +11,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ '6aeb876d6d784a2f27e2b09b',
-/* time_stamp */ '2026-11-04T19:28:49Z',
+/* name */ '6aeb9ebd90d414b86c902c16',
+/* time_stamp */ '2026-11-04T21:08:27Z',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20',
@@ -7870,7 +7870,7 @@ DATA;
 #7854=SPHERICAL_SURFACE('',#106591,0.001398397);
 #7855=SPHERICAL_SURFACE('',#106597,0.001398397);
 #7856=SPHERICAL_SURFACE('',#106603,0.001398397);
-#7857=SPHERICAL_SURFACE('',#106605,0.004064);
+#7857=SPHERICAL_SURFACE('',#106605,0.006096);
 #7858=SPHERICAL_SURFACE('',#106614,0.006096);
 #7859=SPHERICAL_SURFACE('',#106643,0.001398397);
 #7860=SPHERICAL_SURFACE('',#106646,0.001398397);
@@ -96582,8 +96582,7 @@ DATA;
 #95995=MANIFOLD_SOLID_BREP('W30 Tach return 16 AWG black',#95143);
 #95996=MANIFOLD_SOLID_BREP(
 'W31 Accessory bus to temperature gauge 16 AWG purple',#95144);
-#95997=MANIFOLD_SOLID_BREP(
-'OUTLET connector, 1/4 in female spade, sealed',#95145);
+#95997=MANIFOLD_SOLID_BREP('OUTLET connector, Ring terminal, sealed',#95145);
 #95998=MANIFOLD_SOLID_BREP('Port side light',#95146);
 #95999=MANIFOLD_SOLID_BREP('TB1 connector, Ring terminal, sealed',#95147);
 #96000=MANIFOLD_SOLID_BREP(
@@ -96846,8 +96845,8 @@ DATA;
 #96203=SHAPE_REPRESENTATION('W30 Tach return 16 AWG black',(#106580),#188520);
 #96204=SHAPE_REPRESENTATION(
 'W31 Accessory bus to temperature gauge 16 AWG purple',(#106592),#188521);
-#96205=SHAPE_REPRESENTATION(
-'OUTLET connector, 1/4 in female spade, sealed',(#106604),#188522);
+#96205=SHAPE_REPRESENTATION('OUTLET connector, Ring terminal, sealed',(#106604),
+#188522);
 #96206=SHAPE_REPRESENTATION('Port side light',(#106606),#188523);
 #96207=SHAPE_REPRESENTATION('TB1 connector, Ring terminal, sealed',(#106613),
 #188524);
@@ -174123,7 +174122,7 @@ DATA;
 #173437=CARTESIAN_POINT('',(2.59842,-0.41656,0.74676));
 #173438=CARTESIAN_POINT('',(0.,0.,0.));
 #173439=CARTESIAN_POINT('',(2.56794,-0.50038,0.67564));
-#173440=CARTESIAN_POINT('',(2.56794,-0.50038,0.671576));
+#173440=CARTESIAN_POINT('',(2.56794,-0.50038,0.669544));
 #173441=CARTESIAN_POINT('',(0.,0.,0.));
 #173442=CARTESIAN_POINT('',(2.73558,0.7874,0.43942));
 #173443=CARTESIAN_POINT('',(2.73558,0.7874,0.42418));
@@ -189610,7 +189609,7 @@ REPRESENTATION_CONTEXT(
 GEOMETRIC_REPRESENTATION_CONTEXT(3)
 GLOBAL_UNCERTAINTY_ASSIGNED_CONTEXT((#188626))
 GLOBAL_UNIT_ASSIGNED_CONTEXT((#188938,#188834,#188730))
-REPRESENTATION_CONTEXT('OUTLET connector, 1/4 in female spade, sealed',
+REPRESENTATION_CONTEXT('OUTLET connector, Ring terminal, sealed',
 'TOP_LEVEL_ASSEMBLY_PART')
 );
 #188523=(
@@ -192518,9 +192517,9 @@ SI_UNIT($,.METRE.)
 #189561=PRODUCT('W31 Accessory bus to temperature gauge 16 AWG purple',
 'W31 Accessory bus to temperature gauge 16 AWG purple',
 'W31 Accessory bus to temperature gauge 16 AWG purple',(#189769));
-#189562=PRODUCT('OUTLET connector, 1/4 in female spade, sealed',
-'OUTLET connector, 1/4 in female spade, sealed',
-'OUTLET connector, 1/4 in female spade, sealed',(#189770));
+#189562=PRODUCT('OUTLET connector, Ring terminal, sealed',
+'OUTLET connector, Ring terminal, sealed',
+'OUTLET connector, Ring terminal, sealed',(#189770));
 #189563=PRODUCT('Port side light','Port side light','Port side light',(#189771));
 #189564=PRODUCT('TB1 connector, Ring terminal, sealed',
 'TB1 connector, Ring terminal, sealed',

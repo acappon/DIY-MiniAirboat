@@ -3,7 +3,7 @@
 **Project:** DIY Jon-Air airboat
 **Applies to:** Build Guide task 3.1 (after tasks 2.1–2.17)
 **Companion documents:** `Static_Test_Protocol_Drivetrain.md` (step-by-step procedure and data sheets), `Static_Test_Performance_Report.md` (results)
-**Build:** minimal 1448, Rotax 800R E-TEC two-stroke, 8MGT belt, 2.94:1, 66 in prop (v1.0.1.0). Oil is injected from a separate tank, so there is no oil pressure to read.
+**Build:** minimal 1448, Rotax 800R E-TEC two-stroke, 8MGT belt, 2.94:1, 66 in prop (v1.0.1.1). Oil is injected from a separate tank, so there is no oil pressure to read.
 **Status:** Draft for the first static test. Values marked *planning estimate* are model estimates, not measurements. Replace them with service manual and maker data where available.
 
 ---

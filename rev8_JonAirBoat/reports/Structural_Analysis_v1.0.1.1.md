@@ -1,6 +1,6 @@
-# Structural Analysis — v1.0.1.0
+# Structural Analysis — v1.0.1.1
 
-**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.0-structural
+**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.1-beta
 **Model:** `CAD/analysis/structural_check.js`, with `stand_800r.js`, `bearing_plate.js`, `grab_rail.js` and `controls_800r.js`
 **Status:** a hobby design calculation by hand and simple frame analysis. It has not been checked by a licensed professional, and nothing has been load tested. Use it at your own risk.
 
@@ -17,7 +17,7 @@ The primary structure holds up. The stand, cage, drive line and hull girder all 
 | Stand gusset joints | Three 5/16 in bolts each side | Four | 1.7 on the running limit | About nil |
 | Cage mesh | Not specified | Front and rim only, none in the prop wake | Saves about 220 lbf of thrust | None |
 
-The stick and pedal fit inside the weight allowance already carried, so only the console adds to the weight model. **Equipment is 468.0 lb, payload 357.0 lb, margin +7.0 lb.**
+The stick and pedal fit inside the weight allowance already carried, so only the console adds to the weight model. **Equipment is 471.9 lb, payload 353.1 lb, margin +3.1 lb.**
 
 ## How the checks were done
 
@@ -101,7 +101,7 @@ The stick and pedal fit inside the weight allowance already carried, so only the
 |---|---|---|---|---|---|
 | Hull girder bending, sheer | Dock, full load | 630 psi | 23000 psi | 36.4 |  |
 | Hull girder bending, sheer | 4 g hard landing | 2530 psi | 23000 psi | 9.1 |  |
-| Bottom panel between formed keels, 7 in span | 5 psi slam at speed | 12250 psi | 23000 psi | 1.9 | Span and gauge assumed; UHMW strips help |
+| Bottom panel between formed keels, 7 in span | 5 psi slam at speed | 12250 psi | 23000 psi | 1.9 | Span and gauge assumed; UHMW sheet helps |
 | Forward shoe on the rib, one side | Full power | 485 lbf | 2400 lbf | 4.9 | Rib crippling estimate, two walls 1.5 in tall |
 | Forward shoe on the rib, one side | 4 g hard landing | 228 lbf | 2400 lbf | 10.5 |  |
 | Bench clip, two 1/4-20 in panel | Full power | 128 lbf each | 950 lbf each | 7.4 |  |

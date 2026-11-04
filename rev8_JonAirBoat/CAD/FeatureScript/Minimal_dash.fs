@@ -8,6 +8,7 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //     rotary lights switch (off, running, LED bar), key switch (off, on, start), 12 V / 20 A outlet
 //   - The USB port and 12 V outlet have rubber weather flaps, shown partway open
 //   - Adjustable marine holder on the left side of the pod, shown with a phone in landscape; it opens for a tablet
+//   - On a shelf on top of the pod: round bubble level for list and trim, and the maximum load label beside it
 // Sizes are placeholders until the real parts are bought.
 
 const POD_X = 100;      // aft edge of the pod at its bottom
@@ -20,6 +21,10 @@ const LABEL_H = 0.26;
 const LIGHTS_Y = -14.3;
 const KEY_Y = -17;
 const FLAP_DEG = 55;    // how far the weather flaps are shown open
+const SHELF_Y = [-14.7, -4.9];
+// Text of the load label and its letter height. The numbers come from CAD/analysis/minimal_1448.js.
+const LOAD_LABEL = [["MAXIMUM LOAD 395 LB", 0.33], ["PEOPLE + GEAR + FUEL", 0.24], ["FULL TANK 45 LB (EMPTY 8 LB) LEAVES 350 LB", 0.19],
+    ["KEEPS YOU WITHIN THE 825 LB CAPACITY PLATE", 0.19], ["SHIFT GEAR TO CENTER BUBBLE. TIE DOWN", 0.19]];
 
 function mkCyl(context is Context, id is Id, a is Vector, b is Vector, r is number)
 {
@@ -222,6 +227,50 @@ export const minimalDash = defineFeature(function(context is Context, id is Id, 
         paintBody(context, qCreatedBy(id + "outletBore", EntityType.BODY), "12 V socket", black);
         mkFlap(context, id + "outletFlap", outlet + N * 0.16, T, N, 0.72);
         paintBody(context, qCreatedBy(id + "outletFlap", EntityType.BODY), "12 V rubber weather flap", rubber);
+
+        // ---- Level shelf on top of the pod ----
+        // A level must lie flat, so it can't go on the sloped face. Bent 0.063 sheet (drawn thicker), on the pod ridge and its forward corner.
+        const shelfZ = pz + 7.6;
+        mkPolyXZ(context, id + "shelf", [[px + 2.6, shelfZ], [px + 5.4, shelfZ], [px + 5.4, pz + 4], [px + 5.3, pz + 4], [px + 5.3, pz + 7.5], [px + 2.6, pz + 7.5], [px + 2.6, shelfZ]], SHELF_Y[0], SHELF_Y[1]);
+        paintBody(context, qCreatedBy(id + "shelf", EntityType.BODY), "Level shelf, 0.063 aluminum sheet", podC);
+
+        // Two-axis round bubble level, 2-3/4 in, shimmed at setup so a centered bubble is the design trim.
+        const lvl = vector(px + 4, -6.4, shelfZ);
+        mkCyl(context, id + "lvlBody", lvl, lvl + vector(0, 0, 0.4), 1.375);
+        paintBody(context, qCreatedBy(id + "lvlBody", EntityType.BODY), "Round bubble level, body", black);
+        mkCyl(context, id + "lvlVial", lvl + vector(0, 0, 0.4), lvl + vector(0, 0, 0.42), 1.2);
+        paintBody(context, qCreatedBy(id + "lvlVial", EntityType.BODY), "Round bubble level, vial", color(0.75, 0.9, 0.35));
+        mkCyl(context, id + "lvlRing", lvl + vector(0, 0, 0.42), lvl + vector(0, 0, 0.43), 0.55);
+        paintBody(context, qCreatedBy(id + "lvlRing", EntityType.BODY), "Round bubble level, center ring", black);
+        mkCyl(context, id + "lvlDisk", lvl + vector(0, 0, 0.43), lvl + vector(0, 0, 0.44), 0.5);
+        paintBody(context, qCreatedBy(id + "lvlDisk", EntityType.BODY), "Round bubble level, center", color(0.75, 0.9, 0.35));
+        mkCyl(context, id + "lvlBubble", lvl + vector(0, 0, 0.44), lvl + vector(0, 0, 0.45), 0.34);
+        paintBody(context, qCreatedBy(id + "lvlBubble", EntityType.BODY), "Round bubble level, bubble", color(0.97, 0.98, 0.9));
+
+        // Maximum load label. Reads from the driver's seat: up the label is forward, the driver's left is port.
+        const lc = vector(px + 4, -11.4, shelfZ);
+        fCuboid(context, id + "tag", { "corner1" : (lc + vector(-1.25, -3.25, 0)) * inch, "corner2" : (lc + vector(1.25, 3.25, 0.02)) * inch });
+        paintBody(context, qCreatedBy(id + "tag", EntityType.BODY), "Maximum load label", color(0.97, 0.97, 0.94));
+        const tagSk = newSketchOnPlane(context, id + "tagSk", { "sketchPlane" : plane((lc + vector(0, 0, 0.02)) * inch, vector(0, 0, 1), vector(0, -1, 0)) });
+        var ty = 1.02;
+        for (var i = 0; i < size(LOAD_LABEL); i += 1)
+        {
+            const ln = LOAD_LABEL[i];
+            ty -= ln[1];
+            const w = length(ln[0]) * ln[1] * 0.77;
+            skText(tagSk, "line" ~ i, { "text" : ln[0], "fontName" : "OpenSans-Bold.ttf",
+                        "firstCorner" : vector(-w / 2, ty) * inch, "secondCorner" : vector(w / 2, ty + ln[1]) * inch });
+            ty -= 0.16;
+        }
+        skSolve(tagSk);
+        opExtrude(context, id + "tagText", {
+                    "entities" : qSketchRegion(id + "tagSk", true),
+                    "direction" : vector(0, 0, 1),
+                    "endBound" : BoundingType.BLIND,
+                    "endDepth" : 0.01 * inch
+                });
+        opDeleteBodies(context, id + "tagDel", { "entities" : qCreatedBy(id + "tagSk", EntityType.BODY) });
+        paintBody(context, qCreatedBy(id + "tagText", EntityType.BODY), "Maximum load label text", black);
 
         // ---- Adjustable holder on the left side of the pod ----
         const armA = vector(px + 2, POD_Y[1], pz + 3.2);

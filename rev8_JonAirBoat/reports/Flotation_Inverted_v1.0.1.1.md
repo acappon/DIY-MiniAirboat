@@ -1,6 +1,6 @@
-# Capsized Flotation Analysis — v1.0.1.0
+# Capsized Flotation Analysis — v1.0.1.1
 
-**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.0-structural
+**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.1-beta
 **Condition:** upside down in fresh water, driver swimming, 6 gal tank full, 200 lb of gear strapped behind the driver
 **Model:** `CAD/analysis/flotation_inverted.js`
 **Status:** a hobby design calculation from estimated weights, with the bench foam as reported from inspection: both benches full and sound. It has not been checked by a licensed professional or tested in the water. Use it at your own risk.
@@ -19,11 +19,11 @@ No foam goes outside the hull, so there's no drag, no extra width, and nothing t
 
 | Effect on the boat | Before | With foam |
 |---|---|---|
-| Equipment | 464.1 lb | 468.0 lb |
-| Payload against the 350 lb needed | 360.9 lb | 357.0 lb, **7.0 lb spare** |
+| Equipment | 464.1 lb | 471.9 lb |
+| Payload against the 350 lb needed | 360.9 lb | 353.1 lb, **3.1 lb spare** |
 | Top speed | 34.5 mph | 34.5 mph |
 | Dock trim, with 150 lb of gear | 0.95° | 0.97° |
-| BOM | about $15,575 | about $15,655 |
+| BOM | about $15,575 | about $15,755 |
 
 ![Foam layout, upside down](Flotation_Inverted_Layout.png)
 
@@ -42,12 +42,12 @@ Foam has to reach the surface for the boat to hold a level float height. The ben
 | Hull and benches | 248 |
 | Engine, exhaust, belt, prop | 182 |
 | Stand, cage, rudders, brackets | 127 |
-| Outfit, wiring, strips, rail | 110 |
+| Outfit, wiring, UHMW sheet, rail | 114 |
 | Fuel and tank | 45 |
 | Gear, no credit for its volume | 200 |
 | New foam | 4 |
 | Bench foam, counted again to be safe | 23 |
-| **Total** | **939** |
+| **Total** | **943** |
 
 The hull figure probably already includes the bench foam, so counting it again adds a little margin. The center of gravity is at about X 48.5, Z 18.4.
 
@@ -69,7 +69,7 @@ All are positive and nearly even from side to side and end to end, so the boat r
 
 ## Reserve and sensitivity
 
-Total lift with everything under water is about 1,174 lb against 939 lb of weight, which leaves about **235 lb of reserve**.
+Total lift with everything under water is about 1,178 lb against 943 lb of weight, which leaves about **235 lb of reserve**.
 
 | Change | Effect |
 |---|---|

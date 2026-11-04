@@ -1,6 +1,6 @@
-# Stability Analysis — v1.0.1.0
+# Stability Analysis — v1.0.1.1
 
-**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.0-structural
+**Boat:** minimal 1448, Rotax 800R E-TEC, Onshape version v1.0.1.1-beta
 **Model:** `CAD/analysis/stability_upright.js`
 **Status:** a hobby design calculation from estimated weights and an analytic hull shape. It has not been checked by a licensed professional, and nothing here has been tested on the water. Use it at your own risk.
 
@@ -10,18 +10,18 @@ The boat is very stiff at rest in all three load cases, and it passes every stea
 
 | | 1. Driver only | 2. Driver + 150 lb tied down | 3a. Driver + 150 lb loose |
 |---|---|---|---|
-| Weight, lb | 916 | 1,066 | 1,066 |
-| CG forward of the transom, in | 54.5 | 55.2 | 57.0 |
-| CG above the bottom, in | 20.0 | 18.6 | 18.4 |
-| Draft at the dock, in | 5.1 | 5.8 | 5.5 |
-| Dock trim, stern down | 0.87° | 0.97° | 0.68° |
-| Transom freeboard, in | 9.9 | 9.2 | 9.5 |
+| Weight, lb | 920 | 1,070 | 1,070 |
+| CG forward of the transom, in | 55.1 | 55.8 | 57.5 |
+| CG above the bottom, in | 19.9 | 18.5 | 18.4 |
+| Draft at the dock, in | 5.0 | 5.7 | 5.4 |
+| Dock trim, stern down | 0.78° | 0.88° | 0.60° |
+| Transom freeboard, in | 10.0 | 9.3 | 9.6 |
 | GM, in | 44.0 | 39.7 | 40.3 |
-| Water comes aboard at | 21° | 18.5° | 19.5° |
+| Water comes aboard at | 21° | 19° | 19.5° |
 | Top speed, mph | 35 | 34.5 | 34.25 |
 | Thrust margin at the hump, lbf | 280 | 259 | 260 |
 
-Load case 2 is the heaviest design case, and it stays under the 825 lb plate: 468 lb of equipment plus 350 lb of driver and gear is 818 lb.
+Load case 2 is the heaviest design case, and it stays under the 825 lb plate: 472 lb of equipment plus 350 lb of driver and gear is 822 lb.
 
 The boat has so much GM because a flat 48 in bottom resists heel strongly. CG height barely matters at this draft. Adding gear low even lowers the CG, so the boat gets a little stiffer but sits deeper.
 
@@ -31,10 +31,10 @@ Case 3a starts with 150 lb in six bundles around the boat. Then it asks what hap
 
 | Loose gear | List | Trim | Transom freeboard | Water aboard at | Worst steady heel | Top speed |
 |---|---|---|---|---|---|---|
-| 3a. As scattered | 0° | 0.68° | 9.5 in | 19.5° | 9.6° | 34.25 mph |
-| 3b. All slid to one side | **4.4°** | 0.68° | 9.5 in | 19.5° | **13.8°** | 34.25 mph |
-| 3c. All slid forward | 0° | -0.31° | 10.7 in | 22.5° | 9.2° | 33.25 mph |
-| 3d. All slid aft | 0° | 1.41° | 8.7 in | 17.5° | 9.7° | 35 mph |
+| 3a. As scattered | 0° | 0.60° | 9.6 in | 19.5° | 9.6° | 34.25 mph |
+| 3b. All slid to one side | **4.4°** | 0.60° | 9.6 in | 19.5° | **13.8°** | 34.25 mph |
+| 3c. All slid forward | 0° | -0.38° | 10.7 in | 22.5° | 9.2° | 33.25 mph |
+| 3d. All slid aft | 0° | 1.32° | 8.8 in | 17.5° | 9.7° | 34.75 mph |
 
 - **To one side:** the most serious case, because gear tends to slide during a turn, which is when the boat is already leaning on it.
 - **Forward:** the bow runs wetter, which cost 1 mph and takes the boat outside its normal planing shape. It's the one case where the model no longer shows a clean plane.
@@ -46,9 +46,9 @@ Righting arm in inches, positive pushes the boat back upright. Port and starboar
 
 | Heel | 5° | 10° | 15° | 20° | 25° | 30° |
 |---|---|---|---|---|---|---|
-| 1. Driver only | 3.9 | 7.6 | 9.8 | 10.6 | 10.8 | 10.6 |
-| 2. Tied down | 3.5 | 7.0 | 9.5 | 10.6 | 11.1 | 11.2 |
-| 3b. Slid to one side, leaning that way | 0.4 | 4.0 | 6.6 | 7.8 | 8.5 | 8.7 |
+| 1. Driver only | 3.9 | 7.7 | 9.8 | 10.6 | 10.8 | 10.7 |
+| 2. Tied down | 3.6 | 7.0 | 9.5 | 10.7 | 11.1 | 11.3 |
+| 3b. Slid to one side, leaning that way | 0.4 | 4.0 | 6.6 | 7.9 | 8.5 | 8.8 |
 
 The arms keep growing past the angle where water comes aboard, so flooding sets the limit, not the curve. Each case has about 1,000 lb of hull behind a 10 in arm at that point.
 
@@ -58,9 +58,9 @@ The arms keep growing past the angle where water comes aboard, so flooding sets 
 |---|---|---|---|
 | Prop torque at full power, 244 lb-ft | 4.0 | 3.8 | 8.2 |
 | 30 mph beam wind | 1.8 | 1.8 | 6.2 |
-| Prop torque, wind and driver leaning 15 in, all one way | 10.2 | 9.7 | 13.8 |
+| Prop torque, wind and driver leaning 15 in, all one way | 10.1 | 9.7 | 13.8 |
 | 200 lb person stepping on the gunwale | 9.0 | 8.75 | 12.75 |
-| Freeboard left at that step | 4.8 in | 4.2 in | 2.5 in |
+| Freeboard left at that step | 4.9 in | 4.3 in | 2.5 in |
 
 Prop torque is the biggest steady force. It's why the boat will sit about 4° over at full throttle at the dock, and you'll see that on the static test. Which way it leans depends on prop rotation.
 
@@ -81,10 +81,11 @@ Tripping needs the chine to catch something. A flat hull skids on open water lon
 ## Operating limits to adopt
 
 1. Tie all gear down, low and on the centerline, behind the driver.
-2. Keep total load under the 825 lb plate. Equipment is 468 lb, so that leaves 357 lb for driver and gear.
-3. Don't step on the gunwale with gear piled on that side. Board over the centerline.
-4. Keep the transom clear at the dock: full throttle and following waves are worst at 8.7 to 9.9 in of freeboard.
-5. Avoid fast skids near banks or shallow edges.
+2. Keep total load under the 825 lb plate. Equipment is 472 lb including a full 45 lb fuel tank, so that leaves 353 lb for driver and gear. The label on the dash gives this as 395 lb for people, gear and fuel, rounded down from 398.1 lb. Two 200 lb adults and a full tank come to 445 lb, which is over. A passenger was not part of these load cases.
+3. Trim at rest with the round bubble level on the dash: move gear until the bubble is centered, then tie it down. Don't trim by the level under way, because acceleration moves the bubble.
+4. Don't step on the gunwale with gear piled on that side. Board over the centerline.
+5. Keep the transom clear at the dock: full throttle and following waves are worst at 8.8 to 10 in of freeboard.
+6. Avoid fast skids near banks or shallow edges.
 
 ## Limits of this analysis
 
@@ -94,4 +95,4 @@ Tripping needs the chine to catch something. A flat hull skids on open water lon
 - **Waves:** this is calm-water, static stability, without wave capsize or broaching.
 - **Rules:** no formal stability standard was applied.
 
-Capsized flotation is in `reports/Flotation_Inverted_v1.0.1.0.md`.
+Capsized flotation is in `reports/Flotation_Inverted_v1.0.1.1.md`.

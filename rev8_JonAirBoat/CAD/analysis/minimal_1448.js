@@ -90,7 +90,7 @@ function humpMargin(h, mp, p, CdA) {
 
 // ---------------- Minimal solo-first airboat on the 1448 ----------------
 // The factory benches stay (structure, flotation, the passenger seat); no storage box, console, dry box or
-// A-frame. A light engine stand on two short beds, a smaller cage, thin UHMW strips only.
+// A-frame. A light engine stand on two short beds, a smaller cage, thin UHMW only.
 // [name, lb, X, Y, Z]; weights are estimates until parts are weighed.
 const h = HULLS['1448'];
 const OUTFIT = [
@@ -115,7 +115,9 @@ const OUTFIT = [
   ['Navigation lights: two LED sidelights and an all-round white', 1.5, 60, 0, 50],
   // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
   // 35 -> 32 lb (2026-11-03) from the CAD strips: 864 in^3 at 0.034 lb/in^3 is 29.4 lb, 56 #10 screw sets 1.4, sealant 0.4, 0.8 reserve.
-  ['UHMW bottom strips 3/16 in over the wear zones, and fasteners (no chine angles or bow skin)', 32, 62, 0, -0.1],
+  // 32 -> 35.6 lb (user, 2026-11-04): whole bottom to X 157, 1/8 in, in place of the 3/16 in strips. 924 in^3 at 0.034 lb/in^3 is 31.4 lb,
+  // 80 #10 screw sets 2.0, sealant 0.5, two 44 in backing bars forward of the last rib 1.1, 0.6 reserve.
+  ['UHMW 1/8 in over the whole bottom, and fasteners (no chine angles or bow skin)', 35.6, 77, 0, 1.2],
   ['Small trim tab and turnbuckle', 3, -2, -19, 1],
   // Added 2026-11-03 with the exhaust layout (Drivetrain_800R_ETEC.md, Section 6a): about 4-6 ft of tailpipe to an aft transom corner.
   // Itemized 2026-11-03 from the CAD layout: 41 in of 2 in x 0.049 steel tailpipe 3.6, three 0.040 in shields with standoffs 2.2, pipe guard 1.
@@ -123,8 +125,8 @@ const OUTFIT = [
   // Added 2026-11-03: two 1 x 0.065 in cage struts 1.1, two 1 x 1/8 in stand cross-straps 0.9, brackets 0.5.
   ['Cage struts and stand cross-straps', 2.5, 25, 0, 50],
   // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
-  // Gauges, lanyard kill switch, joystick, switches, key, USB port and 12 V outlet (Minimal_dash.fs); exhaust gauge and probe 0.3.
-  ['Dash: gas, tach, temperature and exhaust gauges, switches, joystick, key, USB port, 12 V outlet, panel', 4.1, 103, -13, 28],
+  // Gauges, lanyard kill switch, joystick, switches, key, USB port and 12 V outlet (Minimal_dash.fs); exhaust gauge and probe 0.3; round bubble level 0.15, shelf 0.1 and load label 0.05.
+  ['Dash: gas, tach, temperature and exhaust gauges, bubble level, load label, switches, joystick, key, USB port, 12 V outlet, panel', 4.4, 103, -13, 28],
   ['Adjustable marine phone or tablet holder, without the device', 0.8, 100, 0, 28],
   // 1 in x 0.095 tube frame 1.5, rib foot 0.2, sheet pod 1.2.
   ['Console frame and pod, starboard, clear above two sets of knees', 2.9, 105, -18, 24],

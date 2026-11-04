@@ -3,7 +3,7 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 
 // Provisional layout of the minimal 1448 with the Rotax 800R E-TEC, in the airboat assembly frame:
 // X forward from the transom, Y + to port, Z up from the hull bottom (reports/Drivetrain_800R_ETEC.md).
-//   - Reference hull section, transom, rear bench and rib, three 3/16 in UHMW wear strips
+//   - Reference hull section, transom, rear bench and rib, 1/8 in UHMW sheet over the whole bottom
 //   - Engine, pipe, silencer, second-muffler space, tailpipe and radiator as envelopes
 //   - 8MGT 32T/94T belt, prop shaft, bearings, bearing plates, 66 in prop disc
 //   - Bolted stand with cross-straps on four separate shoes (solid placeholders for the tube sizes in their part names)
@@ -33,8 +33,10 @@ const RIB_TOP = 1.52;
 const TRANSOM_Z = 15;
 const HW_BOTTOM = 24.03;
 const SIDE_FLARE = 0.515;
-const BOTTOM = [[0, 0], [101, 0], [112, 1.25], [128, 3.75]]; // flat bottom and bow rise, same as Hull armor
-const STRIP_T = 0.1875;
+const BOTTOM = [[0, 0], [101, 0], [112, 1.25], [128, 3.75], [143, 6.1], [157, 8.9]]; // flat bottom and bow rise, same as Hull armor forward to X 128
+const SHEET_T = 0.125;
+const SHEET_HW = 24;
+const SHEET_TRIM = [[112, 24.03], [128, 23.05], [143, 21.1], [157, 18.6], [160, 18.6], [160, 30], [112, 30], [112, 24.03]]; // the bottom narrows toward the bow
 
 function mkBox(context is Context, id is Id, x0 is number, x1 is number, y0 is number, y1 is number, z0 is number, z1 is number)
 {
@@ -193,18 +195,26 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
             paintBody(context, qCreatedBy(id + "rib", EntityType.BODY), "Reference - rib at X 37.75", hullC);
         }
 
-        // ---- UHMW wear strips: centerline and both chines, 3/16 x 12 in ----
-        const stripC = color(0.12, 0.12, 0.12);
-        var stripPts = BOTTOM;
+        // ---- UHMW sheet: 1/8 in, the whole bottom from the transom to the bow, trimmed to the narrowing bottom ----
+        var sheetPts = BOTTOM;
         for (var i = size(BOTTOM) - 1; i >= 0; i -= 1)
-            stripPts = append(stripPts, [BOTTOM[i][0], BOTTOM[i][1] - STRIP_T]);
-        stripPts = append(stripPts, BOTTOM[0]);
-        for (var st in [[-6, 6, "centerline"], [12.03, 24.03, "port chine"], [-24.03, -12.03, "stbd chine"]])
+            sheetPts = append(sheetPts, [BOTTOM[i][0], BOTTOM[i][1] - SHEET_T]);
+        sheetPts = append(sheetPts, BOTTOM[0]);
+        mkPolyXZ(context, id + "sheet", sheetPts, -SHEET_HW, SHEET_HW);
+        for (var side in [1, -1])
         {
-            const sid = id + ("strip" ~ round(st[0] + 30));
-            mkPolyXZ(context, sid, stripPts, st[0], st[1]);
-            paintBody(context, qCreatedBy(sid, EntityType.BODY), "UHMW strip 3/16 - " ~ st[2], stripC);
+            const tid = id + ("sheetTrim" ~ (side + 1));
+            const sk = newSketchOnPlane(context, tid + "sk", { "sketchPlane" : plane(vector(0, 0, -2) * inch, vector(0, 0, 1), vector(1, 0, 0)) });
+            var trimPts = [];
+            for (var q in SHEET_TRIM)
+                trimPts = append(trimPts, vector(q[0], side * q[1]) * inch);
+            skPolyline(sk, "poly", { "points" : trimPts });
+            skSolve(sk);
+            opExtrude(context, tid + "ex", { "entities" : qSketchRegion(tid + "sk"), "direction" : vector(0, 0, 1), "endBound" : BoundingType.BLIND, "endDepth" : 16 * inch });
+            opBoolean(context, tid + "cut", { "targets" : qCreatedBy(id + "sheet", EntityType.BODY), "tools" : qCreatedBy(tid + "ex", EntityType.BODY), "operationType" : BooleanOperationType.SUBTRACTION });
+            opDeleteBodies(context, tid + "del", { "entities" : qCreatedBy(tid + "sk", EntityType.BODY) });
         }
+        paintBody(context, qCreatedBy(id + "sheet", EntityType.BODY), "UHMW sheet 1/8 - whole bottom", color(0.12, 0.12, 0.12));
 
         // ---- Engine, crank along X, cylinders up, PTO aft ----
         mkBox(context, id + "case", 14, 30, -7, 7, CRANK_Z - 6, CRANK_Z + 6);
