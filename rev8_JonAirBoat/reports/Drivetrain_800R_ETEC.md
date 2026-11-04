@@ -343,14 +343,50 @@ A 3/4 x 0.065 in shaft failed this check, at a factor of 0.4. The friction figur
 
 Onshape: part studio "Minimal dash" (master `CAD/FeatureScript/Minimal_dash.fs`), in the tab Main assembly. Render: `renderedImages/Minimal_dash_v1.0.0.4.png`. This replaces the gauges in Section 9c. It is a panel layout only: the wiring waits for the electrical plan.
 
-- **Top row, left to right:** USB charging port, gas gauge, tach, temperature gauge. All gauges are analog.
-- **Bottom row, left to right:** lanyard kill switch, searchlight joystick, searchlight on/off switch, three-way lights switch (off, running, LED bar), key switch, 12 V / 20 A outlet.
-- **Tablet holder:** a heavy marine ball-and-arm mount through-bolted to the left side of the pod, holding an 8 x 5.5 in tablet just left of the panel. It sits out far enough that it does not cover the kill switch or the USB port from the driver's eye.
+- **Top row, left to right:** USB charging port, gas gauge, tach, temperature gauge, exhaust temperature gauge. All gauges are analog.
+- **Bottom row, left to right:** lanyard kill switch with a coiled lanyard and clip, searchlight joystick, searchlight on/off switch, three-position rotary lights switch with a pointer (off, running, LED bar), key switch with a vertical slot (off at 12 o'clock, on at 1:30, start at 3:00), 12 V / 20 A outlet.
+- **Weather flaps:** the USB port and the 12 V outlet each have a rubber flap, shown partway open.
+- **Phone or tablet holder:** a heavy marine ball-and-arm mount through-bolted to the left side of the pod, with a sliding clamp cradle. It is shown with a phone in landscape and opens for a tablet up to 8 x 5.5 in. It sits out far enough that a tablet would not cover the kill switch or the USB port from the driver's eye.
 
-**Changes from Section 9c:**
-- **Exhaust temperature gauge removed:** the panel has one temperature gauge, which reads coolant. There is no exhaust temperature reading on the dash now.
-- **No separate start button:** the key starts the engine.
+**Change from Section 9c:** there is no separate start button; the key starts the engine.
 
-**Weight:** the dash goes from 3 to 3.8 lb, and the holder adds 1.5 lb without a tablet: equipment **469.9 lb**, payload **355.1 lb**, about **+5.1 lb of margin** with driver + 150 lb of gear. A tablet counts as gear.
+**Weight:** the dash goes from 3 to 4.1 lb, and the holder adds 1.5 lb without a device: equipment **470.2 lb**, payload **354.8 lb**, about **+4.8 lb of margin** with driver + 150 lb of gear. A phone or tablet counts as gear.
 
 **To check:** how the sled's DESS key and ECU work with a plain key switch and lanyard switch, and what signals the tach and temperature gauges can read from the 800R. The 12 V / 20 A outlet adds up to 20 A on top of the 15 A of lights in Section 8, which matters when the electrical plan sizes the charging system.
+
+## 9f. Electrical plan (2026-11-03)
+
+All of this is generated from one file, `electrical/wire_list.py`: the schematic `electrical/Minimal_1448_Electrical_Schematic.pdf`, the table `electrical/Wire_List.csv`, and the CAD in `CAD/FeatureScript/Minimal_wiring.fs` (part studio "Minimal wiring", in the tab Main assembly). Change the list and regenerate; do not edit the outputs. Render: `renderedImages/Minimal_wiring_v1.0.0.4.png`.
+
+**Rules:** chassis ground is used only inside the engine. Battery negative goes to the engine by 1/0 AWG black, and battery positive to the starter solenoid by 1/0 AWG red with a fusible link. All other power is a red/black pair of one AWG from the hub to the device. Red is power, black is return, and every other color is a signal or sensor.
+
+**Fuses and wire size:**
+
+| Fuse | Circuit | Wire | Load | Run | Drop |
+|---|---|---|---|---|---|
+| MF1 60 A | Battery to hub | 6 AWG | 45 A at most | 1 ft | small |
+| F1 20 A | 12 V outlet | 12 AWG | 20 A | 5 ft | 2.1% |
+| F2 15 A | LED bar, through K3 | **12 AWG** | 10.3 A | 17 ft | 4.0% |
+| F3 10 A | Searchlight, through K4 | 18 AWG | 3.7 A | 17 ft | 5.9% |
+| F4 10 A | Stern and bow lights, through K2 | 18 AWG | 1 A | 18 and 10 ft | under 1% |
+| F5 10 A | Dash switch bus | 18 AWG | 6 A | 5 ft | 2.5% |
+| F6 10 A | Gauges and USB, through K1 | 18 AWG | 3.5 A | 5 ft | 1.6% |
+| F7 10 A | Bilge pump | 18 AWG | 2 A | 7 ft | 1.3% |
+| F8 15 A | Fuel pump, through K5 | **12 AWG** | 6 A, estimate | 9 ft | 1.2% |
+
+**Two circuits need 12 AWG beyond the outlet:** the LED bar, because it draws more than a 10 A fuse allows and 18 AWG would drop 16%; and the fuel pump, because 18 AWG would drop 4.9% on the circuit the engine depends on.
+
+**Choices the rules left open:**
+- **Relays:** K1 to K5 sit in the dry box, so the dash switches carry only low-current signals and the power pairs run straight from the hub to each device.
+- **Switch feed:** the dash switch bus (W15) is red with no black, because a switch has no return.
+- **Lights switch:** RUN turns on the navigation lights, and LED keeps them on and adds the bar.
+- **Lanyard kill:** the sled's DESS post, on its cord, is used as the kill switch, since the ECM expects it. It would replace the plain lanyard switch shown on the dash.
+- **Dash bus:** TB1 and TB2 are small bus strips behind the dash, so gauges share one pair from the hub.
+- **Harness:** the engine and cage wires leave the dry box through a gland in its aft face, run through the bench foam to the floor, and follow the centerline aft in split loom, clear of the ribs. This keeps the 1/0 cables to about 7 ft each, and the wiring on the opposite side of the hull from the fuel line where they run forward.
+- **Exhaust probe wire:** type K extension has a red conductor by standard, which is thermocouple negative and not power.
+
+**Weight:** the harness itemizes to 10.8 lb, of which the 1/0 cables are 4.7 lb. With a 4.5 lb battery, the old battery, cable and wiring lines come down by 0.7 lb. Equipment **469.5 lb**, payload **355.5 lb**, about **+5.5 lb of margin**.
+
+**Not designed from engine data:** no 800R wiring source was found, so everything marked "confirm" on the schematic comes from the service manual once it is in hand: the J1 pinout, the pump drive, the charging output and the DESS wiring. The charging system is the main risk. With everything but the outlet on, the boat draws about 19 A plus the engine's own load, and the outlet can add 20 A.
+
+**CAD limits:** connectors are shown as markers at the correct locations, not as true shapes. The branch from W35 to the K1 coil and the regulator's connection to the solenoid stud are on the schematic but not modeled.

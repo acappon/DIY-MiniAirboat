@@ -100,9 +100,9 @@ const OUTFIT = [
   ['Twin rudders and linkage', 12, -6, 0, 36],
   // Cockpit, 2026-11-03: driver on the middle bench, stick to port on the rib at X 95, throttle pedal with heel rests, push-pull cables along the hull sides.
   ['Stick, rudder cable, throttle pedal and cable, heel rests', 10, 70, 8, 8],
-  ['Small lithium battery (electric start), cables, kill switch', 10, 86, 0, 7],
-  // Waterproof case set into the middle bench 2.1, panel trim 0.3, extra starter cable run 1.
-  ['Dry box in the middle bench, with panel trim and the longer battery cable', 3.4, 80, 0, 7],
+  ['Small lithium battery', 4.5, 86, 0, 5],
+  // Waterproof case set into the middle bench 2.1, panel trim 0.3.
+  ['Dry box in the middle bench, with panel trim', 2.4, 86, 0, 7],
   // On the front deck step (top at Z 16.55).
   ['Fuel, 6 gal portable tank, full', 45, 143, 0, 21],
   // Sender 0.3, gauge 0.3, tie-down straps 0.4, 10 ft of extra fuel line 1.
@@ -123,12 +123,13 @@ const OUTFIT = [
   // Added 2026-11-03: two 1 x 0.065 in cage struts 1.1, two 1 x 1/8 in stand cross-straps 0.9, brackets 0.5.
   ['Cage struts and stand cross-straps', 2.5, 25, 0, 50],
   // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
-  // Gauges, kill switch, joystick, switches, key, USB port and 12 V outlet (Minimal_dash.fs).
-  ['Dash: gas, tach and temperature gauges, switches, joystick, key, USB port, 12 V outlet, panel', 3.8, 103, -13, 28],
-  ['Marine tablet holder, without the tablet', 1.5, 100, 0, 28],
+  // Gauges, lanyard kill switch, joystick, switches, key, USB port and 12 V outlet (Minimal_dash.fs); exhaust gauge and probe 0.3.
+  ['Dash: gas, tach, temperature and exhaust gauges, switches, joystick, key, USB port, 12 V outlet, panel', 4.1, 103, -13, 28],
+  ['Adjustable marine phone or tablet holder, without the device', 1.5, 100, 0, 28],
   // 1 in x 0.065 tube frame 1.2, rib foot 0.2, sheet pod 1.2.
   ['Console frame and pod, starboard, clear above two sets of knees', 2.6, 105, -18, 24],
-  ['Wiring, fuse block, switches', 3, 40, 0, 10],
+  // electrical/wire_list.py: wire 8.7 (1/0 cable 4.7), connectors and glands 0.8, relays 0.5, fuse block 0.6, main fuse and bus strips 0.2.
+  ['Harness: all wire, connectors, relays, fuse block', 10.8, 62, 0, 7],
   ['Belt guard', 3, 13, 0, 37],
   ['Radiator brackets and coolant overflow bottle', 3, 25, 0, 40],
   ['Brackets, rivnuts and bolts not counted in other items', 5, 40, 0, 10],
@@ -137,7 +138,6 @@ const OUTFIT = [
   // remote searchlight (Golight Stryker LED class, ~6-7 lb, 3.7 A), with brackets and wiring.
   ['LED light bar on the cage top, with bracket', 10, 8, 0, 90],
   ['Motorized remote searchlight on the cage top, with mount', 8, 6, 0, 92],
-  ['Light bar and searchlight wiring and switches', 2, 30, 0, 40],
 ];
 // [key, name, hp used, lb (engine + reduction + radiator + exhaust + mounts), prop lb, static thrust lbf, Vp mph]
 // Static thrust: power^(2/3) scaling from 440 lbf at 100 hp (64 in prop), the same rule as compare_hulls.js.
