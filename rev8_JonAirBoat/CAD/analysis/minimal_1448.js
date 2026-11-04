@@ -113,6 +113,9 @@ const ENGINES = [
   ['rotax', 'Rotax 582 + B/C gearbox, electric start (65 hp)', 65, 103, 12, T(65), 75],
   // gsxr: 206 lb engine system from bike_reduction.js, plus 11 lb for its heavier stand and beds (56 lb against the 45 lb in OUTFIT).
   ['gsxr', 'GSX-R1000-class bike engine + its gearbox + belt reduction (150 hp used)', 150, 217, 20, T(150), 85],
+  // etec800: 79 lb bare (unverified) + exhaust 20, radiator 15, belt/shaft/bearings 39, oil tank/ECU/harness 10, mounts 5
+  // (Engine_Selection_1448.md, Section 4a); about 120 hp at the prop.
+  ['etec800', 'Rotax 800R E-TEC snowmobile two-stroke + 3:1 belt reduction (120 hp used)', 120, 168, 15, T(120), 82],
 ];
 const CREW = {
   solo: [['Driver', 200, 58, 0, 30]],

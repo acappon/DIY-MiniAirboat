@@ -1,6 +1,6 @@
 # Engine Selection for the Minimal 1448 — Requirements and Budget
 
-**Date:** 2026-11-03. **Branch:** `main`. **Status:** research in progress; the engine decision is reopened. The GSX-R1000 choice (Minimal_1448_Study.md, Bike_Engine_Stand_and_Reduction.md) does not meet these requirements.
+**Date:** 2026-11-03. **Branch:** `main`. **Status:** research done; the lead candidate is the Rotax 800R E-TEC snowmobile two-stroke (Section 4a), awaiting the user's decision. The GSX-R1000 choice (Minimal_1448_Study.md, Bike_Engine_Stand_and_Reduction.md) does not meet these requirements.
 **Model:** `CAD/analysis/minimal_1448.js` (the "Engine budget" section at the end).
 
 ## 1. Requirements (user, 2026-11-03)
@@ -46,10 +46,30 @@ Worst case of E1 and E2, from the model (top mph / thrust margin at the 12–16 
 | Rotax 582 + gearbox | 65 hp | 103 lb | **No:** 28–30 mph | ~$4,000–5,500 used | Planes easily, most payload; too slow. |
 | GSX-R1000 + belt | 140 hp | 206 lb + 11 lb stand | **No:** 62 lb over the plate | ~$2,000–4,800 | Current BOM choice. |
 | Hirth 3701 + gearbox | 100 hp | ~140 lb (127 lb with gearbox, starter and exhaust, plus radiator) ([Wikipedia](https://en.wikipedia.org/wiki/Hirth_3701)) | **Borderline:** ~32.75 mph, 420 lb payload | ~$10,000 new (old estimate) | Aircraft engine with its own gearbox; fails E5 on price. |
-| **600-class snowmobile two-stroke** (Rotax 600 E-TEC, Polaris 600) + belt | ~100–110 hp (110–120 hp rated) | **~130–150 lb: unverified** | **Borderline to yes** | used engines likely ~$1,000–2,500: **unverified** | Built for long full-throttle runs. Airboat builders report 110 hp 600s on belt or Rotax C/E gearbox reductions ([Southern Airboat](https://www.southernairboat.com/community/threads/using-a-115hp-snowmobile-engine.46522/)). |
-| **800-class snowmobile two-stroke** (Rotax 800/850 E-TEC, Polaris 800) + belt | ~120–130 hp (150–165 hp rated) | **~145–165 lb: unverified** | **Likely yes:** ~34–35 mph if under 160 lb | used, **unverified** | Most margin on speed; weight is the question. |
+| 600-class snowmobile two-stroke + belt | ~95–100 hp | ~164–171 lb | **No:** 32.25–33.25 mph and 389–396 lb payload | not found | See Section 4a. |
+| **Rotax 800R E-TEC + belt** | ~120 hp | ~168 lb | **Yes on speed** (~35 mph); 8 lb short on payload | **~$1,100–2,500 used** (asking) | **Lead candidate.** See Section 4a. |
+| Rotax 850 E-TEC + belt | ~135 hp | ~182 lb | **No:** 378 lb payload | not checked | Heavier for power the boat doesn't need. |
 
-Bare-engine weights for snowmobile engines are not published the way aircraft engine weights are; BRP lists only whole-sled dry weights. **The first job is to weigh, or find a documented weight for, a bare 600 and 800 engine with its stock exhaust.**
+## 4a. Snowmobile two-strokes, researched 2026-11-03
+
+**Bare-engine weights** (reported by [PowersportsGuide](https://powersportsguide.com/snowmobile-weight/); no source is cited and it doesn't say what's included, so weigh the real engine): 600 HO E-TEC 75 lb, 600R E-TEC 82 lb, **800R E-TEC 79 lb**, 850 E-TEC 93 lb. BRP publishes only whole-sled dry weights ([Ski-Doo MXZ](https://ski-doo.brp.com/us/en/models/previous-models/2022/mxz.html)). Polaris weights weren't found; the Patriot 850 is reported only about 6.5 lb heavier than the Liberty 800 ([Supertrax](https://www.supertraxmag.com/features/hypersled-engines-polaris-patriot-850/)).
+
+**Installed estimate** = bare engine + exhaust and silencer 20 + radiator and coolant 15 + belt, pulleys, prop shaft and bearings 39 (as in the bike design) + oil tank, ECU and harness 10 + mounts 5 = **bare + 89 lb**. Power at the prop is taken at about 75–80% of the rated power, for continuous load and belt losses.
+
+| Engine | System lb | hp at prop | Payload | Solo + 150 lb: mph / hump lbf | Driver + 1: mph / hump lbf | Dock trim |
+|---|---|---|---|---|---|---|
+| 600 HO E-TEC | 164 | 95 | 396 | 32.5 / 202 | 32.25 / 196 | 1.2–1.4° |
+| 600R E-TEC | 171 | 100 | 389 | 33.25 / 213 | 32.75 / 207 | 1.2–1.5° |
+| **800R E-TEC** | **168** | **120** | **392** | **35 / 262** | **34.75 / 256** | **1.2–1.4°** |
+| 850 E-TEC | 182 | 135 | 378 | 36.5 / 294 | 36 / 288 | 1.3–1.5° |
+
+- **The 800R E-TEC meets E3 and E4 with about 2 mph to spare,** and dock trim is now inside the 0.5–2° target (the GSX-R1000 was 2.4°). It is **8 lb short on E1/E2**. Close the gap by trimming the outfit: UHMW strips over the wear zones only (45 → about 35 lb), or a 5 gal tank instead of 6 (−7.5 lb).
+- **Price:** complete used 800R E-TEC engines list at about $1,100–2,500 (asking prices on [eBay](https://www.ebay.com/shop/skidoo-800-etec-engine?_nkw=skidoo+800+etec+engine)); a whole running 2013 MXZ TNT 800R listed at $2,900 ([Snowmobile Trader](https://www.snowmobiletrader.com/Used-Ski-Doo-Engines/snowmobiles-for-sale?make=Ski-Doo%7C326747&category=Engines&condition=U)). That is about the same as the GSX-R1000 budget ($2,000).
+- **Buying a whole running sled may be the better deal:** it comes with the ECU, harness, DESS key, oil tank, exhaust, gauges and a known-running engine, and the rest of the sled can be resold.
+- **E-TEC electronics:** the engine needs its own ECU, harness and the matching **DESS key** to run. Buy an engine with all three, or a whole sled. Older carbureted 800s are simpler to wire but weren't researched.
+- **Starting:** choose one with electric start or BRP's SHOT start, or plan on a pull start.
+
+**What changes from the bike design:** a single belt stage of about 3:1 (engine peak about 8,000 rpm to about 2,600 at the prop), against 1.57:1 behind the bike gearbox. Belt torque is lower (about 80 lb-ft at the engine against 180 lb-ft at the bike countershaft), so the belt is narrower, but the large pulley grows to about 15 in. The bike gearbox lock, the clutch lever and the clutch start switch are dropped.
 
 ## 5. Things that change with a snowmobile two-stroke
 
@@ -66,6 +86,7 @@ Bare-engine weights for snowmobile engines are not published the way aircraft en
 
 ## 7. Next steps
 
-1. Get documented weights and used prices for bare 600- and 800-class snowmobile two-strokes, with exhaust and an EFI or carburetor setup, from salvage listings or builder data.
-2. Check E1–E4 in the model for each candidate with real weights.
-3. Decide the engine, then update the stand, reduction and BOM (engine, reduction, clutch line, fuel tank size).
+1. ~~Weights and prices for 600- and 800-class engines~~: done (Section 4a); the weights are still unverified.
+2. **Decide:** the Rotax 800R E-TEC, plus an outfit trim of at least 8 lb.
+3. Then redesign the reduction for about 3:1, check the prop rating at about 120 hp, and update the stand, BOM (engine, reduction, clutch line, fuel tank) and the model's engine entry.
+4. Weigh the real engine with its exhaust when it's bought.
