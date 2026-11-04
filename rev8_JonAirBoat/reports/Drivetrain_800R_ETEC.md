@@ -306,3 +306,35 @@ Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpi
 3. Rib height where the stick base and console foot land.
 
 **Not covered:** there is no seat back, so hard acceleration pushes the driver aft against nothing but their own legs. The stick and pedal loads, the cable sizes and the electrical design are still open. A long battery cable run needs checking for voltage drop at start.
+
+## 9d. Steering and throttle controls (2026-11-03)
+
+Onshape: part studio "Minimal controls" (master `CAD/FeatureScript/Minimal_controls.fs`), in the tab Minimal 1448 assembly. Check: `CAD/analysis/controls_800r.js`. Render: `renderedImages/Minimal_controls_v1.0.0.4.png`. This replaces the cable routes in Section 9c.
+
+**Steering:**
+- **Direction:** stick forward turns left, stick back turns right. This is the usual stick-steering habit reported for other stick-steered boats; I could not find an airboat source that confirms it. Swapping the cable to the other side of the rudder shaft reverses it.
+- **Stick:** the cable attaches 8 in above the pivot. At 25° of rudder, the stick swings ±13° and the grip moves about ±5.9 in.
+- **Cable:** about 14 ft, along the port side, then across the top of the rear bench to Y 18, under the hoops, to a clamp on the aft hoop.
+- **Rudders:** hinged at 25% chord on 1 x 0.125 in shafts, with a lower bracket on the aft hoop and an upper 1 x 0.065 in arm out to the hoop.
+- **Linkage:** the cable pulls a 4.3 in outboard arm on the port shaft. A forward horn on each shaft carries a tie bar at X 0, so both rudders move together. Rudder stops are still to be set.
+
+**Throttle:**
+- **Pedal:** a crank on the hinge rod stands up between the driver's feet. Pressing the pedal swings it forward and pulls the cable about 1.16 in for 20° of pedal travel.
+- **Cable:** about 16 ft. It stops on a post on the rib at X 108, passes ahead of the toes, and runs along the starboard side to a bracket at the engine, so it stays out of the passenger's footwell.
+- **Return:** the pedal has its own return spring, in addition to the spring at the throttle body. Confirm the real throttle travel from the engine.
+
+**Load check at full power (42 lbf on each rudder at the stall):**
+
+| Item | Result |
+|---|---|
+| Prop wake at the rudders | about 90 mph (133 ft/s) |
+| Hinge moment, both rudders | 100 in-lb |
+| Cable load | 23 lbf |
+| Force at the grip, including 5 lbf of friction | about 12 lbf |
+| Shaft bending, 1 x 0.125 in | 5,190 psi, factor 1.3 on 7,000 psi |
+
+A 3/4 x 0.065 in shaft failed this check, at a factor of 0.4. The friction figure is a round estimate.
+
+**Clearances (hand figures):** tie bar to aft hoop about 0.13 in at center, opening as the rudders swing; rudder cable under the aft hoop about 0.5 in. Check the tie bar at full rudder on the real parts, because it is tight.
+
+**Weight:** no change to the model: itemized, the rudders and linkage come to 9.4 lb against the 12 lb allowance, and the stick, pedal and cables to 6.1 lb against 10 lb. The margin stays at about **+7.4 lb**. I kept the allowances until real parts are weighed; if the items hold, about 6 lb more could be freed.

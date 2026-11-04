@@ -4,8 +4,8 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 // Cockpit of the minimal 1448, in the airboat assembly frame: X forward from the transom, Y + to port,
 // Z up from the hull bottom. The driver sits on the middle bench (Crew mannequins).
 //   - Dry box set into the middle bench: lithium battery and power distribution fuse block
-//   - Steering stick to port on the rib at X 95.25, with a push-pull cable along the port side
-//   - Throttle pedal with two half-round heel rests, with a push-pull cable along the starboard side
+//   - Steering stick to port on the rib at X 95.25, with a push-pull cable along the port side and across the rear bench
+//   - Throttle pedal with two half-round heel rests, with a push-pull cable ahead of the toes and along the starboard side
 //   - Console to starboard, on a tube frame clear above the knees of two people side by side
 //   - Fuel tank on the front deck step with its gauge sender, straps and fuel line
 // Sizes are placeholders until the real parts are bought, and the cable and line routes are provisional.
@@ -123,7 +123,7 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         paintBody(context, qCreatedBy(id + "stick", EntityType.BODY), "Steering stick 1-1/8 x 0.065 6061", alu);
         mkCyl(context, id + "grip", vector(STICK[0], STICK[1], 27.5), vector(STICK[0], STICK[1], 31.5), 0.7);
         paintBody(context, qCreatedBy(id + "grip", EntityType.BODY), "Stick grip", dark);
-        mkPipe(context, id + "rudderCable", [vector(STICK[0], 21.6, 9.5), vector(90, 29.5, 13.5), vector(75, 30.8, 14.6), vector(20, 31.5, 15), vector(3, 31.5, 15)], 0.2);
+        mkPipe(context, id + "rudderCable", [vector(STICK[0], 21.6, 11.5), vector(90, 29.5, 13.5), vector(75, 30.8, 14.6), vector(40, 30.8, 15), vector(30, 24, 15.2), vector(20, 18.5, 16.5), vector(3, 18, 19.6)], 0.2);
         paintBody(context, qCreatedBy(id + "rudderCable", EntityType.BODY), "Rudder push-pull cable", lineC);
 
         // ---- Throttle pedal and heel rests ----
@@ -135,7 +135,7 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         paintBody(context, qCreatedBy(id + "pedalBase", EntityType.BODY), "Pedal hinge base", alu);
         mkPolyXZ(context, id + "pedal", [[103.8, 0.8], [110, 5.2], [109.93, 5.3], [103.73, 0.9], [103.8, 0.8]], PEDAL_Y - 1.75, PEDAL_Y + 1.75);
         paintBody(context, qCreatedBy(id + "pedal", EntityType.BODY), "Throttle pedal 1/8 6061", alu);
-        mkPipe(context, id + "throttleCable", [vector(104, PEDAL_Y, 1.8), vector(101, -12, 1.9), vector(100, -22, 2.2), vector(92, -30, 10), vector(89, -30.6, 14), vector(75, -30.8, 15), vector(22, -31.2, 15), vector(27, -12, 26), vector(27, -7.5, 31)], 0.2);
+        mkPipe(context, id + "throttleCable", [vector(109, 0.33, 4.2), vector(113, -1, 4.4), vector(116, -6, 4.5), vector(118, -22, 6), vector(112, -29, 14.4), vector(100, -31, 14.6), vector(89, -30.6, 14.8), vector(75, -30.8, 15), vector(22, -31.2, 15), vector(27, -12, 26), vector(27, -7.5, 31)], 0.2);
         paintBody(context, qCreatedBy(id + "throttleCable", EntityType.BODY), "Throttle push-pull cable", lineC);
 
         // ---- Console, starboard: open underneath, on a rib foot and the gunwale ----
