@@ -1,6 +1,6 @@
 # Minimal 1448 Airboat — Concept Study
 
-**Date:** 2026-11-03. **Branch:** `study/minimal-1448` (from `main`, the 1448 version v1.0.0.2). **Status:** concept study; every outfit weight is an estimate until parts are weighed.
+**Date:** 2026-11-03. **Branch:** `main` (started on `study/minimal-1448` from v1.0.0.2, merged into `main` 2026-11-03). **Status:** concept study; every outfit weight is an estimate until parts are weighed.
 **Decision (2026-11-03): build around a 1000 cc sport-bike engine** (for example a Suzuki GSX-R1000) with its gearbox and a belt reduction: cheaper than the Rotax 582 at US prices, about 38 mph with any load, and about 338 lb of payload under the plate (updated with the stand and reduction design, Bike_Engine_Stand_and_Reduction.md).
 **Model:** `CAD/analysis/minimal_1448.js` (1448 hull hydrostatics and Savitsky planing, the same method as the rev8 analyses).
 

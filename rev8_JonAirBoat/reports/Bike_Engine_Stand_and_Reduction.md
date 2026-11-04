@@ -1,6 +1,6 @@
 # Bike Engine Stand and Belt Reduction — Design Note
 
-**Date:** 2026-11-03. **Branch:** `study/minimal-1448`. **Status:** first design, for review before CAD. Engine figures must be confirmed on the engine you buy (service manual, a measured engine).
+**Date:** 2026-11-03. **Branch:** `main` (started on `study/minimal-1448`). **Status:** first design, for review before CAD. Engine figures must be confirmed on the engine you buy (service manual, a measured engine).
 **Calculations:** `CAD/analysis/bike_reduction.js`. **Concept:** `reports/Minimal_1448_Study.md`.
 **Frame:** X forward from the transom, Y + to port, Z up from the hull bottom (inches), as in the rest of the project.
 
