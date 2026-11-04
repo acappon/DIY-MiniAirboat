@@ -274,3 +274,35 @@ The aft foot lifts about 394 lbf per side at full power: about 137 lbf into the 
 3. What is inside the rear bench, and whether the access pocket is practical.
 4. Rib height at Y ±8.5 and the hull bottom gauge.
 5. Transom condition: the clips bolt low on it, at about Z 4.5.
+
+## 9c. Cockpit (2026-11-03)
+
+Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpit.fs`) and the new tab **Minimal 1448 assembly**, which holds the hull mesh, the 800R layout, the cockpit and the driver. Render: `renderedImages/Minimal_cockpit_v1.0.0.4.png`. Sizes are placeholders and the cable and line routes are provisional.
+
+- **Driver:** on the factory middle bench, centered, at X 82. The raised seat (15 lb) is gone. The passenger figure is removed.
+- **Dry box:** a waterproof case about 10.6 x 9.7 x 6.9 in, set into the middle bench through its forward panel with the lid facing forward, X 82.6–89.5, Z 2–11.7. It holds the lithium battery and the power distribution fuse block. A sealed case keeps about the same flotation as the foam it replaces.
+- **Steering stick:** to port at Y 21, on the rib at X 95.25, with its grip at Z 31.5. A push-pull cable runs aft along the port side above the benches.
+- **Throttle pedal:** at Y -2.5, hinged at the heel on the floor, with the rib at X 108 as its full-throttle stop. A push-pull cable runs along the floor to the starboard side, then aft above the benches.
+- **Heel rests:** two 1 in half-rounds, 6 in long, at X 100.9 and 102.7. They are held by the UHMW strip screws, so they add no new holes through the bottom.
+- **Console:** to starboard, on a 1 x 0.065 in tube post from the rib at X 108 and an arm out to the gunwale. The pod runs Y -4.75 to -21.25 with its underside at Z 24, and holds the tach, coolant, exhaust and fuel gauges and the key post.
+- **Two side by side (hand check):** with hip points at Y ±11, knees top out at about Z 19, leaving 5 in under the console. The passenger's shin clears the console post by about 3 in, and the driver's thigh clears the stick by about 2 in. The driver's right foot stretches about 9 in to the pedal. The pedal sits only about 0.5 in from where the passenger's left foot would rest, so that foot must stay clear of it.
+- **Fuel tank:** a 6 gal tank on the front deck step, X 134–152, strapped down, with the sled pump module, a top-mount gauge sender and a fuel line along the starboard side above the benches.
+- **Fire extinguisher:** it can no longer be both near the tank and within reach, so it moved to the starboard side next to the driver's right knee, at X 99.
+
+**Weight:** the seat comes out (−15 lb) and the cockpit adds 8 lb: dry box and battery cable 3.4, console frame and pod 2.6, sender, gauge, straps and fuel line 2. Equipment is **467.6 lb** and payload **357.4 lb**: about **+7.4 lb of margin** with driver + 150 lb of gear. Weights are estimates.
+
+**Trim and speed with driver + 150 lb of gear:** moving the driver and the tank forward fixes the solo dock trim, now about **0.94°**, inside the 0.5–2° target. It also means gear must not go in the bow:
+
+| Gear stowed at | Dock trim | Top speed |
+|---|---|---|
+| X 120 (bow) | −0.3° (bow down) | 33.25 mph |
+| X 100 | 0.12° | 33.75 mph |
+| **X 60 (between the benches, design case)** | **1.03°** | **34.5 mph** |
+| X 40 | 1.53° | 35 mph |
+
+**Check on the real hull:**
+1. What is inside the middle bench, and whether the forward panel can take the opening.
+2. Front deck strength under 45 lb of fuel, and how to fasten the straps.
+3. Rib height where the stick base and console foot land.
+
+**Not covered:** there is no seat back, so hard acceleration pushes the driver aft against nothing but their own legs. The stick and pedal loads, the cable sizes and the electrical design are still open. A long battery cable run needs checking for voltage drop at start.

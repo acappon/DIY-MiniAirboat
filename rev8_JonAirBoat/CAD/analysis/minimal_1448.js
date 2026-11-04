@@ -98,14 +98,19 @@ const OUTFIT = [
   ['Engine stand (bolted aluminum) on four shoes, with doublers, clips, cage foot pads and their bolts', 49.1, 18, 0, 22],
   ['Prop cage, thin-wall aluminum tube, with mesh guard', 45, 4, 0, 38],
   ['Twin rudders and linkage', 12, -6, 0, 36],
-  ['Stick, rudder linkage, throttle cable and lever', 10, 62, 9, 10],
-  ['Small lithium battery (electric start), cables, kill switch', 10, 40, 0, 6],
-  ['Fuel, 6 gal portable tank, full', 45, 100, 0, 6],
-  ['Raised driver seat on an aluminum frame', 15, 58, 0, 20],
+  // Cockpit, 2026-11-03: driver on the middle bench, stick to port on the rib at X 95, throttle pedal with heel rests, push-pull cables along the hull sides.
+  ['Stick, rudder cable, throttle pedal and cable, heel rests', 10, 70, 8, 8],
+  ['Small lithium battery (electric start), cables, kill switch', 10, 86, 0, 7],
+  // Waterproof case set into the middle bench 2.1, panel trim 0.3, extra starter cable run 1.
+  ['Dry box in the middle bench, with panel trim and the longer battery cable', 3.4, 80, 0, 7],
+  // On the front deck step (top at Z 16.55).
+  ['Fuel, 6 gal portable tank, full', 45, 143, 0, 21],
+  // Sender 0.3, gauge 0.3, tie-down straps 0.4, 10 ft of extra fuel line 1.
+  ['Fuel gauge sender and gauge, tank straps, longer fuel line', 2, 110, -10, 15],
   // Safety and regulatory gear, itemized 2026-11-03 (was one 15 lb line):
   ['PFDs (2) and dock lines', 8, 85, 0, 8],
-  ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver near the fuel tank', 4, 80, -20, 12],
-  ['Air horn with bracket, at the driver', 2, 62, 15, 25],
+  ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver', 4, 98, -24, 12],
+  ['Air horn with bracket, at the console', 2, 105, -14, 25],
   ['Florida airboat flag (10 x 12 in orange) on a whip at least 10 ft above the bottom, with mount', 3, -4, 0, 100],
   ['Navigation lights', 5, 30, 0, 50],
   // 45 -> 35 lb (2026-11-03): strips over the wear zones only, to keep 400 lb of payload with the 800R E-TEC.
@@ -118,7 +123,9 @@ const OUTFIT = [
   // Added 2026-11-03: two 1 x 0.065 in cage struts 1.1, two 1 x 1/8 in stand cross-straps 0.9, brackets 0.5.
   ['Cage struts and stand cross-straps', 2.5, 25, 0, 50],
   // Allowance added 2026-11-03 for items the concept study left out (estimates until weighed):
-  ['Minimal dash: tach, coolant and exhaust temperature gauges, key/DESS post, start button, panel', 3, 60, 0, 30],
+  ['Dash: tach, coolant and exhaust temperature gauges, key/DESS post, start button, panel', 3, 105, -13, 28],
+  // 1 in x 0.065 tube frame 1.2, rib foot 0.2, sheet pod 1.2.
+  ['Console frame and pod, starboard, clear above two sets of knees', 2.6, 105, -18, 24],
   ['Wiring, fuse block, switches', 3, 40, 0, 10],
   ['Belt guard', 3, 13, 0, 37],
   ['Radiator brackets and coolant overflow bottle', 3, 25, 0, 40],
@@ -142,10 +149,10 @@ const ENGINES = [
   ['etec800', 'Rotax 800R E-TEC snowmobile two-stroke + 3:1 belt reduction (120 hp used)', 120, 168, 15, T(120), 82],
 ];
 const CREW = {
-  solo: [['Driver', 200, 58, 0, 30]],
-  soloGear60: [['Driver', 200, 58, 0, 30], ['Gear (bow)', 60, 120, 0, 10]],
-  soloGear150: [['Driver', 200, 58, 0, 30], ['Gear (bow)', 150, 120, 0, 10]],
-  plus1: [['Driver', 200, 58, 0, 30], ['Passenger on the middle bench', 200, 82, 0, 22]],
+  solo: [['Driver', 200, 82, 0, 26]],
+  soloGear60: [['Driver', 200, 82, 0, 26], ['Gear between the benches', 60, 60, 0, 10]],
+  soloGear150: [['Driver', 200, 82, 0, 26], ['Gear between the benches', 150, 60, 0, 10]],
+  plus1: [['Driver', 200, 82, 11, 26], ['Passenger on the middle bench', 200, 82, -11, 26]],
 };
 const hullItem = ['Hull, Lowe 1448 with its benches', h.hullLb, h.hullX, 0, 7];
 const out = [];
@@ -173,7 +180,7 @@ console.table(out);
 // prop 15 lb) and the power used at the prop. Each cell: worst-case top mph / worst hump margin (lbf).
 // Top speed depends almost only on power; the plate sets the weight limit.
 const CASES = {
-  soloGear150: [['Driver', 200, 58, 0, 30], ['Gear amidships', 150, 80, 0, 10]],
+  soloGear150: [['Driver', 200, 82, 0, 26], ['Gear amidships', 150, 60, 0, 10]],
 };
 const outfitLb = OUTFIT.reduce((s, r) => s + r[1], 0);
 const budget = [];

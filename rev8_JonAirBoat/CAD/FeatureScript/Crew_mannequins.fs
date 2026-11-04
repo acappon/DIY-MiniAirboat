@@ -1,9 +1,9 @@
 FeatureScript 3112;
 import(path : "onshape/std/geometry.fs", version : "3112.0");
 
-// Simple seated crew mannequins (about 50th-percentile adult, 5'9") for renders and ergonomics checks.
+// Simple seated driver mannequin (about 50th-percentile adult, 5'9") for renders and ergonomics checks.
 // Built from cylinders and spheres in the airboat assembly frame: X forward from the transom,
-// Y = 0 on the centerline, Z up from the hull bottom. Each figure sits facing +X with its
+// Y = 0 on the centerline, Z up from the hull bottom. The figure sits facing +X with its
 // hip point on the seat surface.
 
 function cyl(context is Context, id is Id, a is Vector, b is Vector, r is number)
@@ -71,14 +71,9 @@ export const crewMannequins = defineFeature(function(context is Context, id is I
 
         annotation { "Name" : "Seat position (hip point X)" }
         isLength(definition.seatX, { (inch) : [0, 82, 150] } as LengthBoundSpec);
-
-        annotation { "Name" : "Seat spacing (driver to passenger)" }
-        isLength(definition.spacing, { (inch) : [16, 22, 40] } as LengthBoundSpec);
     }
     {
         const z = definition.seatZ / inch;
         const x = definition.seatX / inch;
-        const half = definition.spacing / inch / 2;
-        seatedFigure(context, id + "driver", vector(x, half, z), "Driver mannequin", color(0.95, 0.45, 0.05));
-        seatedFigure(context, id + "passenger", vector(x, -half, z), "Passenger mannequin", color(0.95, 0.85, 0.1));
+        seatedFigure(context, id + "driver", vector(x, 0, z), "Driver mannequin", color(0.95, 0.45, 0.05));
     });
