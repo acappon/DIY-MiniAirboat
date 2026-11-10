@@ -87,12 +87,6 @@ const arm1 = round(1, 0.095);
 row('Controls', 'Console arm 1 x 0.095', '150 lb pull on the dash', 150 * 8 / arm1.S, FY, 'psi', 'Was 1 x 0.065, factor 1.2');
 row('Controls', 'Console post, buckling', '150 lb on the dash', 150, euler(arm1, 22), 'lbf');
 
-// ---- Grab rail, from grab_rail.js ----
-row('Rail', 'Stays, buckling', '300 lbf at the top', 339, 339 * 7.0, 'lbf');
-row('Rail', 'Leg bend, one side', '300 lbf at the top', 1004 * 2, 4343, 'in-lb');
-row('Rail', 'Leg at the saddle end', '300 lbf on one corner', 1200, 1365, 'in-lb', 'To weld-zone yield; 2.5 to rupture');
-row('Rail', 'Cable 1/8 in 7x19', '300 lbf sideways', 523, 1760, 'lbf');
-
 // ---- Hull, assumed bottom 0.100 and sides 0.080 in 5052; confirm by measuring ----
 const sideI = 2 * 0.08 * 19 ** 3 / 12, Ab = 48 * 0.1, As = 2 * 19 * 0.08, Ag = 0.6;
 const na = (As * 9.5 + Ag * 19) / (Ab + As + Ag);

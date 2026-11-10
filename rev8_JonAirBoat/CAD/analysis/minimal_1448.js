@@ -130,8 +130,6 @@ const OUTFIT = [
   ['Adjustable marine phone or tablet holder, without the device', 0.8, 100, 0, 28],
   // 1 in x 0.095 tube frame 1.5, rib foot 0.2, sheet pod 1.2.
   ['Console frame and pod, starboard, clear above two sets of knees', 2.9, 105, -18, 24],
-  // Removable, on four pins (grab_rail.js): hoop 2.8, stays 1.1, saddles 0.4, cables 0.6, clips 0.65, pins 0.4, fasteners 0.3, sling 0.5.
-  ['Grab rail and sling backrest behind the middle bench, removable', 6.8, 66, 0, 18],
   // Capsize flotation (flotation_inverted.js): 1.94 ft^3 of 2 lb/ft^3 foam, added to the foam in the benches.
   ['Flotation foam, bow wedge', 0.8, 155, 0, 12],
   ['Flotation foam, two aft corner blocks', 3.1, 8, 0, 6],

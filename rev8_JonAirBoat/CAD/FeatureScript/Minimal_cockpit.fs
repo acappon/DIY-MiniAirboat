@@ -9,7 +9,6 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //   - Console frame to starboard, clear above the knees of two people side by side (the pod is in Minimal dash)
 //   - Fuel tank on the front deck step with its gauge sender, straps and fuel line
 //   - Harness sleeve through the middle bench foam, and floor conduit on the centerline to the engine
-//   - Removable grab rail and backrest behind the middle bench, pinned to the ribs at X 54.75 and X 70.65
 //   - Sled oil tank upright on the starboard side frame of the stand, away from the exhaust; envelope until it is measured
 //   - Capsize flotation foam: bow wedge under the shelf and two aft corner blocks, sized in CAD/analysis/flotation_inverted.js
 // Sizes are placeholders until the real parts are bought, and the cable and line routes are provisional.
@@ -92,37 +91,6 @@ function mkHalfRound(context is Context, id is Id, cx is number, y0 is number, y
         pts = append(pts, [cx + r * cos(a * radian), FLOOR_Z + r * sin(a * radian)]);
     }
     mkPolyXZ(context, id, append(pts, pts[0]), y0, y1);
-}
-
-// One 6061 angle clip, section in Y-Z, cheek inner face at y, flange running away from the pin. d is +1 or -1.
-function mkClip(context is Context, id is Id, x is number, w is number, y is number, d is number, z is number, t is number)
-{
-    mkPoly(context, id, [[y, z], [y, z + 2], [y + d * t, z + 2], [y + d * t, z + t], [y + d * 2, z + t], [y + d * 2, z], [y, z]], x - w / 2, x + w / 2);
-}
-
-// Sweep a 1-1/2 in round along a path that starts at start, heading along dir.
-function sweepRail(context is Context, id is Id, path is Query, start is Vector, dir is Vector)
-{
-    const prof = newSketchOnPlane(context, id + "prof", { "sketchPlane" : plane(start * inch, dir) });
-    skCircle(prof, "c", { "center" : vector(0, 0) * inch, "radius" : 0.75 * inch });
-    skSolve(prof);
-    opSweep(context, id + "sw", { "profiles" : qSketchRegion(id + "prof"), "path" : path });
-    opDeleteBodies(context, id + "delProf", { "entities" : qCreatedBy(id + "prof", EntityType.BODY) });
-}
-
-// Grab rail side: lower leg, dog-leg bend, upper leg, all in the plane at this Y.
-function mkRailSide(context is Context, id is Id, y is number, pts is array)
-{
-    const sk = newSketchOnPlane(context, id + "path", { "sketchPlane" : plane(vector(0, y, 0) * inch, vector(0, -1, 0), vector(1, 0, 0)) });
-    var q = [];
-    for (var p in pts)
-        q = append(q, vector(p[0], p[2]) * inch);
-    skLineSegment(sk, "l0", { "start" : q[0], "end" : q[1] });
-    skArc(sk, "a0", { "start" : q[1], "mid" : q[2], "end" : q[3] });
-    skLineSegment(sk, "l1", { "start" : q[3], "end" : q[4] });
-    skSolve(sk);
-    sweepRail(context, id, qCreatedBy(id + "path", EntityType.EDGE), pts[0] + vector(0, y, 0), normalize(pts[1] - pts[0]));
-    opDeleteBodies(context, id + "delPath", { "entities" : qCreatedBy(id + "path", EntityType.BODY) });
 }
 
 annotation { "Feature Type Name" : "Minimal cockpit" }
@@ -216,103 +184,6 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         paintBody(context, qCreatedBy(id + "oilTank", EntityType.BODY), "Envelope - sled oil tank", color(0.85, 0.7, 0.3, 0.55));
         mkCyl(context, id + "oilFiller", vector(17.5, -13.75, 26), vector(17.5, -13.75, 26.8), 1);
         paintBody(context, qCreatedBy(id + "oilFiller", EntityType.BODY), "Oil tank filler cap", dark);
-
-        // ---- Grab rail and backrest: lifts out on four pins. 20 in wide overall. The legs run forward from the rib to just behind
-        // the bench, then lean back 12 degrees, with a 2 in aft bow across the top so the back rests on the sling, not the bar.
-        // Stays from just below the corners to the next rib aft; crossed cables in the plane of the stays, behind the sling.
-        // CAD/analysis/grab_rail.js has the sizing.
-        const RAIL_Y = 9.25;                    // leg and stay centerlines
-        const CORNER_R = 4;
-        const BOW = 2;
-        const LEAN = 12 * degree;
-        const footPin = vector(70.65, 0, 2.5);  // on the rib at X 70.65 (top Z 1.62)
-        const stayPin = vector(54.75, 0, 2.5);  // on the rib at X 54.75
-        const kink = vector(74.6, 0, 12.5);     // just aft of the bench panel
-        const d1 = normalize(kink - footPin);
-        const d2 = vector(-sin(LEAN), 0, cos(LEAN));
-        const aft = vector(-cos(LEAN), 0, -sin(LEAN));
-        const railTop = kink + d2 * ((32 - 12.5) / cos(LEAN));
-        const tang = CORNER_R * tan(acos(dot(d1, d2)) / 2);
-        const b0 = kink - d1 * tang;
-        const b1 = kink + d2 * tang;
-        const bc = b0 + normalize(d2 - d1 * dot(d1, d2)) * CORNER_R;
-        const bm = bc + normalize(kink - bc) * CORNER_R;
-        const u0 = railTop - d2 * CORNER_R;     // where the corner bend starts
-        const joint = railTop - d2 * 5.5;       // stay joint, 1-1/2 in below the corner
-        const start = footPin - d1 * 0.65;
-        const railC = color(0.72, 0.74, 0.78);
-        mkRailSide(context, id + "railSideP", RAIL_Y, [start, b0, bm, b1, u0]);
-        mkRailSide(context, id + "railSideS", -RAIL_Y, [start, b0, bm, b1, u0]);
-
-        // Corners and bowed top as one smooth path. In the leaning plane the corners are 4 in radius; the bow is added aft of that plane.
-        var topPts = [];
-        var along = [];
-        for (var t = 0; t <= 90; t += 15)
-            along = append(along, [5.25 + CORNER_R * cos(t * degree), CORNER_R - CORNER_R * sin(t * degree)]);
-        for (var yy in [3.5, 1.75, 0, -1.75, -3.5])
-            along = append(along, [yy, 0]);
-        for (var t = 90; t >= 0; t -= 15)
-            along = append(along, [-5.25 - CORNER_R * cos(t * degree), CORNER_R - CORNER_R * sin(t * degree)]);
-        for (var q in along)
-        {
-            const c = cos(PI * q[0] / (2 * RAIL_Y) * radian);
-            topPts = append(topPts, (railTop + vector(0, q[0], 0) - d2 * q[1] + aft * (BOW * c * c)) * inch);
-        }
-        opFitSpline(context, id + "railTopPath", { "points" : topPts, "startDerivative" : d2 * 24 * inch, "endDerivative" : -d2 * 24 * inch });
-        sweepRail(context, id + "railTop", qCreatedBy(id + "railTopPath", EntityType.EDGE), u0 + vector(0, RAIL_Y, 0), d2);
-        opDeleteBodies(context, id + "railTopDel", { "entities" : qCreatedBy(id + "railTopPath", EntityType.BODY) });
-
-        const stayDir = normalize(joint - stayPin);
-        var railBodies = [qCreatedBy(id + "railTop", EntityType.BODY), qCreatedBy(id + "railSideP", EntityType.BODY), qCreatedBy(id + "railSideS", EntityType.BODY)];
-        for (var s in [1, -1])
-        {
-            const sn = s > 0 ? "P" : "S";
-            const y = vector(0, s * RAIL_Y, 0);
-            mkCyl(context, id + ("railStay" ~ sn), stayPin + y - stayDir * 0.6, joint + y, 0.5);
-            mkCyl(context, id + ("railSaddle" ~ sn), joint + y - d2 * 1.5, joint + y + d2 * 1.5, 0.875);
-            railBodies = append(append(railBodies, qCreatedBy(id + ("railStay" ~ sn), EntityType.BODY)), qCreatedBy(id + ("railSaddle" ~ sn), EntityType.BODY));
-        }
-        opBoolean(context, id + "railJoin", { "tools" : qUnion(railBodies), "operationType" : BooleanOperationType.UNION });
-        paintBody(context, qUnion(railBodies), "Grab rail weldment, 1-1/2 x 0.083 hoop, 1 x 0.065 stays, 6061", railC);
-
-        // Sling: mesh across the front of the upper legs only, so the corners and the top bar stay bare to grip.
-        // Shown as a flat sheet; in the build it wraps both legs and laces across the back, with a slot at each stay.
-        const f0 = b1 - aft * 0.75;
-        const f1 = u0 - aft * 0.75;
-        const th = aft * -0.04;
-        mkPolyXZ(context, id + "railSling", [[f0[0], f0[2]], [f1[0], f1[2]], [f1[0] + th[0], f1[2] + th[2]], [f0[0] + th[0], f0[2] + th[2]], [f0[0], f0[2]]], -10, 10);
-        paintBody(context, qCreatedBy(id + "railSling", EntityType.BODY), "Grab rail sling, PVC-coated polyester mesh, laced", color(0.1, 0.32, 0.34, 0.6));
-
-        // Crossed 1/8 in cables in the plane of the stays, clear of the sling when it sags. They stay on the rail when it comes out.
-        var nCable = 0;
-        const cableOff = cross(stayDir, vector(0, 1, 0));
-        for (var s in [1, -1])
-        {
-            const off = cableOff * (s * 0.1);
-            const p0 = joint - stayDir * 1.5 + vector(0, s * RAIL_Y, 0) + off;
-            const p1 = stayPin + stayDir * 1.5 - vector(0, s * RAIL_Y, 0) + off;
-            mkCyl(context, id + ("railCable" ~ nCable), p0, p1, 0.0625);
-            paintBody(context, qCreatedBy(id + ("railCable" ~ nCable), EntityType.BODY), "Grab rail brace cable, 1/8 7x19 stainless, " ~ (s > 0 ? "port top" : "starboard top"), lineC);
-            nCable += 1;
-        }
-
-        // Two angle clips per mount, bolted to the rib top, with a 5/16 in stainless clevis pin through both cheeks and the tube.
-        // The cables bring the side load to the stay feet, so those clips are the heavier ones.
-        for (var m in [["Foot", footPin[0], 0.76, 1.5, 0.125, "2x2x1/8"], ["Stay", stayPin[0], 0.51, 1.25, 0.1875, "2x2x3/16"]])
-            for (var s in [1, -1])
-            {
-                const sn = m[0] ~ (s > 0 ? "P" : "S");
-                const yc = s * RAIL_Y;
-                for (var d in [1, -1])
-                {
-                    const cid = id + ("railClip" ~ sn ~ (d > 0 ? "A" : "B"));
-                    mkClip(context, cid, m[1], m[3], yc + d * m[2], d, 1.62, m[4]);
-                    paintBody(context, qCreatedBy(cid, EntityType.BODY), "Grab rail mount clip " ~ m[5] ~ " 6061 - " ~ sn ~ (d > 0 ? " A" : " B"), railC);
-                }
-                const half = m[2] + m[4] + 0.35;
-                mkCyl(context, id + ("railPin" ~ sn), vector(m[1], yc - half, 2.5), vector(m[1], yc + half, 2.5), 0.15625);
-                paintBody(context, qCreatedBy(id + ("railPin" ~ sn), EntityType.BODY), "Grab rail pin 5/16 stainless with clip and lanyard - " ~ sn, color(0.85, 0.85, 0.88));
-            }
 
         // ---- Capsize flotation foam, added to the foam in the two benches. CAD/analysis/flotation_inverted.js has the sizing. ----
         const foamC = color(0.18, 0.56, 0.51, 0.6);
