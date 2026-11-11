@@ -84,3 +84,4 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
   - **Night snake hunting:** operator rowing facing aft along a bank, searchlight aimed at the bank. Gear aboard (cooler, duffel bag, life jackets) so the oars read as carried gear, plus a snake tong / noose pole.
   - **25 mph:** one render with the oars and gear aboard, one without.
   - **Top speed:** solo rider only, no gear or oars.
+  - **Oars at the dock:** operator rowing near a dock. The oars are the boat's reverse gear, and the way to turn it when other boats or obstacles are close.
