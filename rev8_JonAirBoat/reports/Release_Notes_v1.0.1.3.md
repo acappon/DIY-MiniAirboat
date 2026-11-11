@@ -80,3 +80,7 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 ## Still to do before release
 - Update the electrical documents for the new dry box, rewrite the stability and flotation reports for v1.0.1.3, re-render the build step images, and regenerate the Build Guide PDF.
 - Update the CAD in Onshape, create version v1.0.1.3, export the STEP files and re-render.
+- New renders (user, 2026-11-10):
+  - **Night snake hunting:** operator rowing facing aft along a bank, searchlight aimed at the bank. Gear aboard (cooler, duffel bag, life jackets) so the oars read as carried gear, plus a snake tong / noose pole.
+  - **25 mph:** one render with the oars and gear aboard, one without.
+  - **Top speed:** solo rider only, no gear or oars.
