@@ -1,5 +1,7 @@
 """Makes the concept scenes in renderedImages/scenes: a CAD render of the boat, composited onto a drawn background.
-  python make_scenes.py <render with driver.png> <render without driver.png> <version>
+  python make_scenes.py <driver + gear.png> <driver, no gear or oars.png> <rowing + gear.png> <version>
+The renders come from the Main assembly with the "Scene props" Part Studio inserted (CAD/FeatureScript/Scene_props.fs),
+switching the "Rowing - " and "Gear - " sets, the driver mannequin, the upright seatback and the shipped oars per scene.
 Renders are transparent PNGs from Onshape, starboard view, stern left. Needs numpy and Pillow.
 """
 import math
@@ -98,12 +100,12 @@ def night(rng):
     return img
 
 
-def boat(path, scale, cx, wl_y):
+def boat(path, scale, cx, wl_y, extent=EXTENT):
     """Boat image placed with its waterline at wl_y, trimmed to the hull, with its lower part cut at the water."""
     im = Image.open(path).convert('RGBA')
     x0, y0, x1, y1 = im.getbbox()
     im = im.crop((x0, y0, x1, y1))
-    pts = [proj(p) for p in EXTENT]
+    pts = [proj(p) for p in extent]
     umin, umax = min(p[0] for p in pts), max(p[0] for p in pts)
     vmin, vmax = min(p[1] for p in pts), max(p[1] for p in pts)
     w = int(im.width * scale)
@@ -146,13 +148,13 @@ def caption(img, text):
     d.text((28, H - 50), text, fill=(255, 255, 255), font=f)
 
 
-def spray(img, wl):
+def spray(img, wl, n=16, size=70, alpha=210):
     s = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(s)
     x, y = wl[0], wl[1]
-    for i in range(16):
-        r = 70 - i * 3
-        d.ellipse((x - 40 - i * 34 - r * 2, y - 70 - r / 2, x - 40 - i * 34 + r * 2, y - 40 + r / 2), fill=(255, 255, 255, 210))
+    for i in range(n):
+        r = size - i * 3
+        d.ellipse((x - 40 - i * 34 - r * 2, y - 70 - r / 2, x - 40 - i * 34 + r * 2, y - 40 + r / 2), fill=(255, 255, 255, alpha))
     s = s.filter(ImageFilter.GaussianBlur(22))
     img.paste(s, (0, 0), s)
 
@@ -191,43 +193,88 @@ def beam(img, x0, y0):
     img.paste(b, (0, 0), b)
 
 
+# The rowing render also reaches out to both oar blade tips (pins at X 66, 60 in outboard, dipping 22 degrees).
+EXTENT_ROW = EXTENT + [(66, 90.1, 3.0), (66, -90.1, 3.0)]
+
+
+def streaks(img, wl, n):
+    d = ImageDraw.Draw(img)
+    rng = random.Random(5)
+    for _ in range(n):
+        y = rng.randrange(int(wl[1]) - 260, int(wl[1]) + 60)
+        x = rng.randrange(0, int(wl[0]) + 200)
+        d.line((x, y, x + rng.randrange(80, 260), y), fill=(255, 255, 255), width=2)
+
+
+def arrow(img, x0, y0, x1, y1, label):
+    d = ImageDraw.Draw(img)
+    d.line((x0, y0, x1, y1), fill=(255, 230, 60), width=7)
+    ang = math.atan2(y1 - y0, x1 - x0)
+    for da in (2.6, -2.6):
+        d.line((x1, y1, x1 + 34 * math.cos(ang + da), y1 + 34 * math.sin(ang + da)), fill=(255, 230, 60), width=7)
+    try:
+        f = ImageFont.truetype('segoeuib.ttf', 30)
+    except OSError:
+        f = ImageFont.load_default()
+    d.text((min(x0, x1), min(y0, y1) - 46), label, fill=(255, 255, 255), font=f, stroke_width=3, stroke_fill=(0, 0, 0))
+
+
 def main():
-    crew, none, ver = sys.argv[1:4]
+    gear, solo, row, ver = sys.argv[1:5]
     out = os.path.join(HERE, 'scenes')
-    for tag, path in (('solo', crew), ('no-crew', none)):
+
+    # Underway at about 25 mph, with the oars shipped and gear aboard, and without.
+    for tag, path, cap in (('gear', gear, 'oars shipped and gear aboard (cooler, duffel, life jackets, snake tong)'),
+                           ('solo', solo, 'solo, no oars or gear')):
         rng = random.Random(7)
-        cap = 'with the driver' if tag == 'solo' else 'no crew'
         img = day(rng)
         im, ox, oy, wl = boat(path, 0.62, 960, 880)
         spray(img, wl)
         place(img, im, ox, oy, wl)
-        caption(img, f'DIY Jon-Air airboat {ver} - underway, {cap} (concept render, stylized background)')
-        img.convert('RGB').save(os.path.join(out, f'underway_{tag}.png'))
+        caption(img, f'DIY Jon-Air airboat {ver} - underway at about 25 mph, {cap} (concept render)')
+        img.convert('RGB').save(os.path.join(out, f'underway-25mph_{tag}.png'))
 
-        rng = random.Random(11)
-        img = day(rng, reed=False)
-        docks(img, 800)
-        im, ox, oy, wl = boat(path, 0.62, 960, 860)
-        place(img, im, ox, oy, wl)
-        caption(img, f'DIY Jon-Air airboat {ver} - docked, {cap} (concept render, stylized background)')
-        img.convert('RGB').save(os.path.join(out, f'docked_{tag}.png'))
+    # Top speed, about 34 mph: solo rider, nothing else aboard.
+    rng = random.Random(9)
+    img = day(rng)
+    im, ox, oy, wl = boat(solo, 0.62, 1010, 880)
+    streaks(img, wl, 60)
+    spray(img, wl, n=24, size=95, alpha=235)
+    place(img, im, ox, oy, wl)
+    caption(img, f'DIY Jon-Air airboat {ver} - top speed, about 34 mph, solo rider, no oars or gear (concept render)')
+    img.convert('RGB').save(os.path.join(out, 'top-speed_solo.png'))
 
-        rng = random.Random(23)
-        img = night(rng)
-        im, ox, oy, wl = boat(path, 0.56, 640, 900)
-        dark = np.array(im).astype('float32')
-        dark[..., :3] *= (0.62, 0.62, 0.72)
-        im = Image.fromarray(dark.astype('uint8'))
-        place(img, im, ox, oy, wl, reflect=0.14)
-        snake(img)
-        lx = ox + int((proj((6, 0, 92))[0] - min(proj(p)[0] for p in EXTENT)) * im.width / (max(proj(p)[0] for p in EXTENT) - min(proj(p)[0] for p in EXTENT)))
-        ly = oy + int((max(proj(p)[1] for p in EXTENT) - proj((6, 0, 92))[1]) * im.height / (max(proj(p)[1] for p in EXTENT) - min(proj(p)[1] for p in EXTENT)))
-        beam(img, lx, ly)
-        d = ImageDraw.Draw(img)
-        reeds(d, 0, 380, 1040, 90, 240, 170, [(24, 50, 36), (38, 74, 48)], rng)
-        reeds(d, 1720, 1920, 1060, 100, 210, 110, [(24, 50, 36), (38, 74, 48)], rng)
-        caption(img, f'DIY Jon-Air airboat {ver} - hunting for snakes, {cap} (concept render, stylized background)')
-        img.convert('RGB').save(os.path.join(out, f'snake-hunt_{tag}.png'))
+    # Night snake hunting: rowing quietly along the bank, engine off, searchlight on the bank.
+    rng = random.Random(23)
+    img = night(rng)
+    im, ox, oy, wl = boat(row, 0.5, 620, 900, EXTENT_ROW)
+    dark = np.array(im).astype('float32')
+    dark[..., :3] *= (0.62, 0.62, 0.72)
+    im = Image.fromarray(dark.astype('uint8'))
+    place(img, im, ox, oy, wl, reflect=0.14)
+    snake(img)
+    pts = [proj(p) for p in EXTENT_ROW]
+    umin, umax = min(p[0] for p in pts), max(p[0] for p in pts)
+    vmin, vmax = min(p[1] for p in pts), max(p[1] for p in pts)
+    lx = ox + int((proj((6, 0, 92))[0] - umin) * im.width / (umax - umin))
+    ly = oy + int((vmax - proj((6, 0, 92))[1]) * im.height / (vmax - vmin))
+    beam(img, lx, ly)
+    d = ImageDraw.Draw(img)
+    reeds(d, 0, 380, 1040, 90, 240, 170, [(24, 50, 36), (38, 74, 48)], rng)
+    reeds(d, 1720, 1920, 1060, 100, 210, 110, [(24, 50, 36), (38, 74, 48)], rng)
+    caption(img, f'DIY Jon-Air airboat {ver} - snake hunting at night: rowing quietly along the bank, engine off, searchlight on the bank (concept render)')
+    img.convert('RGB').save(os.path.join(out, 'snake-hunt_rowing.png'))
+
+    # At the dock: the oars are the reverse gear, and how to turn in close quarters.
+    rng = random.Random(11)
+    img = day(rng, reed=False)
+    docks(img, 800)
+    im, ox, oy, wl = boat(row, 0.5, 900, 880, EXTENT_ROW)
+    place(img, im, ox, oy, wl)
+    arrow(img, 1180, 600, 1500, 600, 'Pull: the boat moves bow first')
+    arrow(img, 700, 520, 400, 520, 'Push: reverse, stern first')
+    caption(img, f'DIY Jon-Air airboat {ver} - at the dock: the oars are the reverse gear and turn the boat near other boats (concept render)')
+    img.convert('RGB').save(os.path.join(out, 'dock_rowing.png'))
 
 
 if __name__ == '__main__':

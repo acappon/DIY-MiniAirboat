@@ -8,21 +8,38 @@ import os
 import re
 import subprocess
 import tempfile
+import base64
+import shutil
 import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EDGE = r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 
 
+SHARED = []
+
+
+def load_shared(z):
+    """Shared strings, joining rich-text runs. exceljs saves text this way; Excel may save it inline."""
+    SHARED.clear()
+    if 'xl/sharedStrings.xml' in z.namelist():
+        xml = z.read('xl/sharedStrings.xml').decode('utf-8')
+        for si in re.finditer(r'<si>(.*?)</si>', xml, re.S):
+            SHARED.append(html.unescape(''.join(re.findall(r'<t[^>]*>(.*?)</t>', si.group(1), re.S))))
+
+
 def rows_of(xml):
     rows = []
     for m in re.finditer(r'<row r="(\d+)"[^>]*>(.*?)</row>', xml, re.S):
         cells = {}
-        for c in re.finditer(r'<c r="([A-Z]+)\d+"[^>]*?(?:/>|>(.*?)</c>)', m.group(2), re.S):
-            v = c.group(2) or ''
-            t = re.search(r'<t[^>]*>(.*?)</t>', v, re.S)
+        for c in re.finditer(r'<c r="([A-Z]+)\d+"([^>]*?)(?:/>|>(.*?)</c>)', m.group(2), re.S):
+            v = c.group(3) or ''
+            t = re.findall(r'<t[^>]*>(.*?)</t>', v, re.S)
             n = re.search(r'<v>(.+?)</v>', v)
-            cells[c.group(1)] = html.unescape(t.group(1)) if t else (n.group(1) if n else '')
+            if 't="s"' in c.group(2) and n:
+                cells[c.group(1)] = SHARED[int(n.group(1))]
+            else:
+                cells[c.group(1)] = html.unescape(''.join(t)) if t else (n.group(1) if n else '')
         rows.append(cells)
     return rows
 
@@ -55,6 +72,7 @@ def main():
     tracker = max(glob.glob(os.path.join(ROOT, 'Airboat Build Tracker v*.xlsx')), key=key)
     version = re.search(r'v([\d.]+)\.xlsx', tracker).group(1)
     with zipfile.ZipFile(tracker) as z:
+        load_shared(z)
         rows = rows_of(z.read('xl/worksheets/sheet3.xml').decode('utf-8'))
         bom = rows_of(z.read('xl/worksheets/sheet2.xml').decode('utf-8'))
         rate = float(next(c['B'] for c in rows_of(z.read('xl/worksheets/sheet1.xml').decode('utf-8')) if c.get('A', '').startswith('Pro labor rate')))
@@ -83,7 +101,9 @@ def main():
         img = r.get('N', '')
         pic = ''
         if img and os.path.exists(os.path.join(ROOT, img)):
-            pic = '<img src="%s">' % ('file:///' + os.path.join(ROOT, img).replace('\\', '/'))
+            # Embedded, so Edge needs no access to the project folder (it can't reach a mapped network drive).
+            with open(os.path.join(ROOT, img), 'rb') as fh:
+                pic = '<img src="data:image/png;base64,%s">' % base64.b64encode(fh.read()).decode('ascii')
         meta = 'Depends on: %s &nbsp;|&nbsp; Alongside: %s' % (html.escape(r.get('C', '-')), html.escape(r.get('D', '-')))
         skills = '<p class="skills">Skills: %s</p>' % html.escape(r['F']) if r.get('F') else ''
         parts.append('<section><h3>%s &nbsp; %s</h3>%s<p class="meta">%s</p>%s%s%s</section>' % (a, html.escape(r.get('B', '')), sheet([('Step ' + a, mat, g, h, h * rate, False)]), meta, body(r.get('E', '')), pic, skills))
@@ -107,13 +127,23 @@ table.sheet tr.tot td {{ background: #f1f3f6; font-weight: bold; }}
 </style></head><body><h1>DIY Jon-Air Airboat: Build Guide</h1><p>Version {version}, minimal 1448 build, Rotax 800R E-TEC. All costs and hours are estimates. Each step and section shows what it costs if you do it yourself (materials and DIY hours) or hire it out (pro cost, at ${rate:g}/h, on top of materials). Done entirely DIY, the build is about ${round(mat_all):,} and {diy:g} hours. With every step hired out, it is about ${round(mat_all + cost):,}. Steps with 0 pro hours, such as buying the boat and choosing the prop, are yours to do either way. Generated from the Build Guide tab of the tracker; BOM line numbers refer to that tracker.</p>{summary}{''.join(parts)}</body></html>'''
 
     pdf = os.path.join(ROOT, f'Airboat Build Guide v{version}.pdf')
-    with tempfile.TemporaryDirectory() as tmp:
-        page = os.path.join(tmp, 'guide.html')
-        with open(page, 'w', encoding='utf-8') as f:
-            f.write(doc)
-        subprocess.run([EDGE, '--headless=new', '--disable-gpu', '--no-pdf-header-footer', '--allow-file-access-from-files',
-                        '--user-data-dir=' + os.path.join(tmp, 'edge'), '--print-to-pdf=' + pdf, 'file:///' + page.replace('\\', '/')],
-                       capture_output=True, timeout=120)
+    # Edge prints into a plain folder under %TEMP% with a kept profile: a brand-new profile sets itself up on its
+    # first run and prints nothing, so it is tried twice. Images are embedded, as Edge can't read a mapped network drive.
+    tmp = os.path.join(tempfile.gettempdir(), 'airboat_build_guide')
+    shutil.rmtree(tmp, ignore_errors=True)
+    os.makedirs(tmp)
+    page = os.path.join(tmp, 'guide.html')
+    out = os.path.join(tmp, 'guide.pdf')
+    with open(page, 'w', encoding='utf-8') as f:
+        f.write(doc)
+    args = [EDGE, '--headless=new', '--disable-gpu', '--no-pdf-header-footer',
+            '--user-data-dir=' + os.path.join(tempfile.gettempdir(), 'airboat_edge_profile'),
+            '--print-to-pdf=' + out, 'file:///' + page.replace('\\', '/')]
+    for _ in range(2):
+        subprocess.run(args, capture_output=True, timeout=180)
+        if os.path.exists(out):
+            break
+    shutil.copyfile(out, pdf)
     print(os.path.basename(pdf), os.path.getsize(pdf), 'bytes', diy, 'DIY h', pro, 'pro h', round(mat_all, 2), 'materials')
 
 

@@ -7,7 +7,7 @@ negative to the engine, 2 AWG red with a fusible link from battery positive thro
 starter solenoid. The automatic bilge pump is fused at the battery, ahead of the switch, so it stays on.
 Everything else is a feed and a black return of one AWG from the hub to the device. 12 AWG with a 20 A fuse
 to the 12 V outlet, 16 AWG with a 10 A fuse elsewhere unless the voltage drop below says otherwise.
-Colors follow ABYC E-11 Tables XIV and XV (reports/ABYC_E11_Review_v1.0.1.2.md): red is main DC positive, black is
+Colors follow ABYC E-11 Tables XIV and XV (reports/ABYC_E11_Review_v1.0.1.3.md): red is main DC positive, black is
 return, and feeds and signals use their function colors. 18 AWG is kept only for W46 to W50: thermocouple extension,
 sled DESS harness and the supplied searchlight cable.
 """

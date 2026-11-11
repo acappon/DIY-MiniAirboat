@@ -123,4 +123,4 @@ E-11 allows other schemes if they're documented, and these are all in the wire l
 5. W57 (battery to switch) shows in Onshape as separate segments, because its short bends inside the box fail the CAD union. Its length and weight are correct.
 6. Buy the 2025 E-11 and E-13 if you want this checked against the current text.
 
-Full findings are in `reports/ABYC_E11_Review_v1.0.1.2.md`; nothing in that review changes with the v1.0.1.3 relocation. The schematic PDF (`electrical/Minimal_1448_Electrical_Schematic.pdf`) is regenerated from `Schematic.html` at release.
+Full findings are in `reports/ABYC_E11_Review_v1.0.1.3.md`; nothing in that review changes with the v1.0.1.3 relocation. The schematic PDF (`electrical/Minimal_1448_Electrical_Schematic.pdf`) is regenerated from `Schematic.html` at release.

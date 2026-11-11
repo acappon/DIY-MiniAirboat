@@ -1,9 +1,9 @@
 # DIY Jon-Air Airboat — Release Notes v1.0.1.3
 
-> **In development: not yet released.** Branch `main` (Lowe 1448 hull). Updated as the work proceeds.
+> **Released 2026-11-10.** Branch `main` (Lowe 1448 hull).
 
-**Release date:** TBD
-**CAD source:** Onshape document "DIY Jon-Air boat", version **v1.0.1.3** (to be created at release)
+**Release date:** 2026-11-10
+**CAD source:** Onshape document "DIY Jon-Air boat", version **v1.0.1.3**
 
 ## What changed since v1.0.1.2
 
@@ -93,12 +93,44 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
   - **Label text and assemblies:** every load-label text change regenerates the label glyph parts, which leaves a few dangling instances in assemblies that insert the dash part by part. After the 380 / 335 upload the dash was re-inserted whole in the Main assembly. The Build steps assembly will have 4 dangling label-glyph instances until the build-step re-render.
   - **Not uploaded:** "Minimal 800R layout" (only the rudder envelope name changed, to honeycomb). Upload it with the release.
 
-## Still to do before release
-- Re-render the build step images (add the seat module, oars and oarlocks to the Build steps assembly), regenerate the schematic PDF and the Build Guide PDF.
-- Upload "Minimal 800R layout" (rudder name), create version v1.0.1.3, export the STEP files and re-render (add the cockpit to Render stages).
-- `Fuel_tank.fs` (in the older C: copy only) is the tank and hold-down for the abandoned 1652 hull study (6.6 gal tank across the beam on floor rails). Its Onshape counterpart is in the "1652 hull" workspace. It is not used by the 1448 design, whose 6 gal tank, straps, sender and line are in `Minimal_cockpit.fs`. Not needed for this release.
-- New renders (user, 2026-11-10):
-  - **Night snake hunting:** operator rowing facing aft along a bank, searchlight aimed at the bank. Gear aboard (cooler, duffel bag, life jackets) so the oars read as carried gear, plus a snake tong / noose pole.
-  - **25 mph:** one render with the oars and gear aboard, one without.
-  - **Top speed:** solo rider only, no gear or oars.
-  - **Oars at the dock:** operator rowing near a dock. The oars are the boat's reverse gear, and the way to turn it when other boats or obstacles are close.
+## Release outputs
+
+**Onshape version v1.0.1.3:** created 2026-11-10.
+
+**STEP files:** in `CAD/`:
+- `Airboat_v1.0.1.3_Assembly.step`
+- `Airboat_v1.0.1.3_Cockpit.step`
+- `Airboat_v1.0.1.3_Controls.step`
+- `Airboat_v1.0.1.3_Dash.step`
+- `Airboat_v1.0.1.3_Stand_engine_cage.step`
+- `Airboat_v1.0.1.3_Wiring.step`
+
+**Concept scenes:** in `renderedImages/scenes/`. They replace the six v1.0.1.2 scenes.
+- `underway-25mph_gear.png`: oars shipped, with cooler, duffel, life jackets and snake tong aboard.
+- `underway-25mph_solo.png`: no oars or gear.
+- `top-speed_solo.png`: solo rider at about 34 mph.
+- `snake-hunt_rowing.png`: at night, rowing facing aft along the bank with the searchlight on the bank.
+- `dock_rowing.png`: the oars as reverse gear and for turning at the dock.
+
+How the scenes were made:
+- **Composited** by `renderedImages/make_scenes.py` from three Main-assembly renders.
+- **Props:** a new Onshape tab "Scene props" (master `CAD/FeatureScript/Scene_props.fs`) holds the rower facing aft, the folded seatback, the oars out and the gear. It was inserted into the Main assembly for the renders, with sets switched off per scene, and removed again afterwards.
+
+**Images:**
+- `renderedImages/Minimal_cockpit_v1.0.1.3.png`, `Minimal_dash_v1.0.1.3.png` and `Minimal_wiring_v1.0.1.3.png` re-rendered; the other studio images renamed.
+- Build Guide step images: new for 2.17 (seat module) and 2.18 (oarlocks, rowing); 2.11 (systems connected) re-rendered.
+- `step2.5_bench_openings.png` retired.
+
+**PDFs and files:**
+- `Airboat Build Guide v1.0.1.3.pdf` and `electrical/Minimal_1448_Electrical_Schematic.pdf` regenerated.
+- v1.0.1.2 tracker, guide, STEP files and reports retired: the reports moved to `reports/archive/`.
+- `ABYC_E11_Review` and `Supplier_Questions` renamed to v1.0.1.3.
+
+## Known limits of this release
+
+- **Build Guide step images 2.10, 2.12, 2.13 and 2.15** still come from the v1.0.1.2 build-stage renders, so they show the old middle bench and grab rail. The Build steps assembly has no staging to re-render them from: it holds the finished boat, and 4 load-label glyph instances in it are dangling.
+- **Rudder envelope name:** in Onshape, "Minimal 800R layout" still calls the rudder envelope by its old name. The repo master has the honeycomb name; only the name differs.
+- **`reports/make_build_guide.py`:**
+  - It now reads shared strings (the tracker as saved by exceljs) and embeds its images, because Edge can't read the mapped Z: drive.
+  - On this machine its own Edge call still printed nothing, so the v1.0.1.3 PDF was printed with Edge run directly on the same page.
+  - Edge has to run outside the Claude Code sandbox.

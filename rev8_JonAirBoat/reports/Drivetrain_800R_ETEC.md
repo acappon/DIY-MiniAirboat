@@ -234,7 +234,7 @@ The ranges run from half-fixed to rigid joints. Pass through that rpm band rathe
 
 ## 9b. Hull mounts (2026-11-03)
 
-Checking the layout against the reference mesh showed three clashes the first layout missed, because its reference hull had no bench or ribs: the engine rails hit the rear bench top (Z 13.7) by 0.7 in, the beds ran through the bench panels (which reach down to Z 2.4), and the beds hit the rib at X 37.75, whose top is at Z 1.52. The design below fixes all three without cutting the bench, so its flotation foam stays intact. Render: `renderedImages/Minimal_800R_hull_mounts_v1.0.1.2.png`.
+Checking the layout against the reference mesh showed three clashes the first layout missed, because its reference hull had no bench or ribs: the engine rails hit the rear bench top (Z 13.7) by 0.7 in, the beds ran through the bench panels (which reach down to Z 2.4), and the beds hit the rib at X 37.75, whose top is at Z 1.52. The design below fixes all three without cutting the bench, so its flotation foam stays intact. Render: `renderedImages/Minimal_800R_hull_mounts_v1.0.1.3.png`.
 
 **Stand:**
 - **No continuous beds.** The rail closes the side frame above the bench, so each side stands on two separate shoes of the same 2 x 3 x 1/8 in tube.
@@ -282,17 +282,17 @@ The aft foot lifts about 394 lbf per side at full power: about 137 lbf into the 
 
 ## 9c. Cockpit (2026-11-03)
 
-Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpit.fs`) and the tab **Main assembly**, which holds the hull mesh, the 800R layout, the cockpit and the driver. Render: `renderedImages/Minimal_cockpit_v1.0.1.2.png`. Sizes are placeholders and the cable and line routes are provisional.
+Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpit.fs`) and the tab **Main assembly**, which holds the hull mesh, the 800R layout, the cockpit and the driver. Render: `renderedImages/Minimal_cockpit_v1.0.1.3.png`. Sizes are placeholders and the cable and line routes are provisional.
 
 - **Driver:** on the factory middle bench, centered, at X 82. The raised seat (15 lb) is gone. The passenger figure is removed.
 - **Dry box:** a waterproof case about 10.6 x 9.7 x 6.9 in, set into the middle bench through its forward panel with the lid facing forward, X 82.6–89.5, Z 2–11.7. It holds the lithium battery and the power distribution fuse block. A sealed case keeps about the same flotation as the foam it replaces.
-- **Steering stick:** 1-1/2 x 0.120 in 6061, to port at Y 21, on the rib at X 95.25, with its grip at Z 31.5, and a stop on the pivot cheeks so a hard pull can't load the rudder cable (`reports/Structural_Analysis_v1.0.1.2.md`). A push-pull cable runs aft along the port side above the benches.
+- **Steering stick:** 1-1/2 x 0.120 in 6061, to port at Y 21, on the rib at X 95.25, with its grip at Z 31.5, and a stop on the pivot cheeks so a hard pull can't load the rudder cable (`reports/Structural_Analysis_v1.0.1.3.md`). A push-pull cable runs aft along the port side above the benches.
 - **Throttle pedal:** at Y -2.5, hinged at the heel on the floor, with the rib at X 108 as its full-throttle stop. A push-pull cable runs along the floor to the starboard side, then aft above the benches.
 - **Heel rests:** two 1 in half-rounds, 6 in long, at X 100.9 and 102.7. They are held by the UHMW screws, so they add no new holes through the bottom.
 - **Console:** to starboard, on a 1 x 0.095 in tube post from the rib at X 108 and an arm out to the gunwale. The pod runs Y -4.75 to -21.25 with its underside at Z 24, and holds the tach, coolant, exhaust and fuel gauges and the key post.
 - **Two side by side (hand check):** with hip points at Y ±11, knees top out at about Z 19, leaving 5 in under the console. The passenger's shin clears the console post by about 3 in, and the driver's thigh clears the stick by about 2 in. The driver's right foot stretches about 9 in to the pedal. The pedal sits only about 0.5 in from where the passenger's left foot would rest, so that foot must stay clear of it.
 - **Grab rail and sling backrest:** a removable 1-1/2 x 0.083 in 6061 hoop behind the driver, 20 in wide with 4 in corners, which leaves about 14 in or more to each side. Each leg runs forward from the rib at X 70.65 to a mandrel bend just aft of the bench (X 74.6, Z 12.5), then leans back 12° to the top at Z 32. That bend must not be a welded miter: the factor falls from 2.2 to 0.7. The top is bowed 2 in aft, so the back rests on the sling and not on the bar. Open PVC-coated polyester mesh wraps the upper legs from about Z 14 to Z 28 and laces across the back with non-stretch cord, with a reinforced slot at each stay. The corners and top bar stay bare to grip, and the sling carries none of the grab load. Two 1 x 0.065 in stays run from 1-1/2 in below the corners down to the rib at X 54.75, at about 55°. The hull has no stringers here, only these crosswise ribs. Two crossed 1/8 in stainless cables run in the plane of the stays, behind the sling, so they are clear when it sags. Hoop and stays are one welded unit, with a 3 in saddle at each stay joint. It lifts out on four 5/16 in stainless pins, each on a lanyard, with the sling and cables still attached. Angle clips bolt to the rib tops with rivnuts, so there are no welds to the hull and no new holes through the bottom. About 6.8 lb. Leaning back 12° takes the reach to the stick grip from 20.7 to 22.9 in. At 300 lbf: stays 339 lbf each, buckling factor 7.0; cable factor 3.4; at the center of the bar, a factor of 5.5 to yield. The tightest case is 300 lbf on one top corner, a factor of 1.14 to weld-zone yield and 2.5 to rupture (`CAD/analysis/grab_rail.js`).
-- **Flotation foam:** 1.94 ft³, 3.9 lb, added to the foam in the two benches: a small wedge under the front shelf and two corner blocks aft of the rear bench. The boat floats level upside down, about 3.9 in clear of the water (`reports/Flotation_Inverted_v1.0.1.2.md`).
+- **Flotation foam:** 1.94 ft³, 3.9 lb, added to the foam in the two benches: a small wedge under the front shelf and two corner blocks aft of the rear bench. The boat floats level upside down, about 3.9 in clear of the water (`reports/Flotation_Inverted_v1.0.1.3.md`).
 - **Fuel tank:** a 6 gal tank on the front deck step, X 134–152, strapped down, with the sled pump module, a top-mount gauge sender and a fuel line along the starboard side above the benches. The throttle cable and fuel line follow the hull taper forward of about X 75, about 0.65 in clear of the hull at the closest point.
 - **Fire extinguisher:** it can no longer be both near the tank and within reach, so it moved to the starboard side next to the driver's right knee, at X 99.
 
@@ -317,7 +317,7 @@ Onshape: part studio "Minimal cockpit" (master `CAD/FeatureScript/Minimal_cockpi
 
 ## 9d. Steering and throttle controls (2026-11-03)
 
-Onshape: part studio "Minimal controls" (master `CAD/FeatureScript/Minimal_controls.fs`), in the tab Main assembly. Check: `CAD/analysis/controls_800r.js`. Render: `renderedImages/Minimal_controls_v1.0.1.2.png`. This replaces the cable routes in Section 9c.
+Onshape: part studio "Minimal controls" (master `CAD/FeatureScript/Minimal_controls.fs`), in the tab Main assembly. Check: `CAD/analysis/controls_800r.js`. Render: `renderedImages/Minimal_controls_v1.0.1.3.png`. This replaces the cable routes in Section 9c.
 
 **Steering:**
 - **Direction:** stick forward turns left, stick back turns right. This is the usual stick-steering habit reported for other stick-steered boats; I could not find an airboat source that confirms it. Swapping the cable to the other side of the rudder shaft reverses it.
@@ -349,7 +349,7 @@ A 3/4 x 0.065 in shaft failed this check, at a factor of 0.4. The friction figur
 
 ## 9e. Dash panel (2026-11-03)
 
-Onshape: part studio "Minimal dash" (master `CAD/FeatureScript/Minimal_dash.fs`), in the tab Main assembly. Render: `renderedImages/Minimal_dash_v1.0.1.2.png`. This replaces the gauges in Section 9c. It is a panel layout only: the wiring waits for the electrical plan.
+Onshape: part studio "Minimal dash" (master `CAD/FeatureScript/Minimal_dash.fs`), in the tab Main assembly. Render: `renderedImages/Minimal_dash_v1.0.1.3.png`. This replaces the gauges in Section 9c. It is a panel layout only: the wiring waits for the electrical plan.
 
 - **Top row, left to right:** USB charging port, gas gauge, tach, temperature gauge, exhaust temperature gauge. All gauges are analog.
 - **Bottom row, left to right:** lanyard kill switch with a coiled lanyard and clip, searchlight joystick, searchlight on/off switch, three-position rotary lights switch with a pointer (off, running, LED bar), key switch with a vertical slot (off at 12 o'clock, on at 1:30, start at 3:00), 12 V / 20 A outlet.
@@ -366,9 +366,9 @@ Onshape: part studio "Minimal dash" (master `CAD/FeatureScript/Minimal_dash.fs`)
 
 ## 9f. Electrical plan (2026-11-03)
 
-All of this is generated from one file, `electrical/wire_list.py`: the schematic `electrical/Minimal_1448_Electrical_Schematic.pdf`, the table `electrical/Wire_List.csv`, and the CAD in `CAD/FeatureScript/Minimal_wiring.fs` (part studio "Minimal wiring", in the tab Main assembly). Change the list and regenerate; do not edit the outputs. Render: `renderedImages/Minimal_wiring_v1.0.1.2.png`.
+All of this is generated from one file, `electrical/wire_list.py`: the schematic `electrical/Minimal_1448_Electrical_Schematic.pdf`, the table `electrical/Wire_List.csv`, and the CAD in `CAD/FeatureScript/Minimal_wiring.fs` (part studio "Minimal wiring", in the tab Main assembly). Change the list and regenerate; do not edit the outputs. Render: `renderedImages/Minimal_wiring_v1.0.1.3.png`.
 
-**Rules:** chassis ground is used only inside the engine. Battery negative goes to the engine by 2 AWG black, and battery positive through the battery switch to the starter solenoid by 2 AWG red with a fusible link. All other power is a feed and a black return of one AWG from the hub to the device. Colors follow ABYC E-11 (`reports/ABYC_E11_Review_v1.0.1.2.md`): red is main DC positive, black is return, and feeds and signals use their function colors.
+**Rules:** chassis ground is used only inside the engine. Battery negative goes to the engine by 2 AWG black, and battery positive through the battery switch to the starter solenoid by 2 AWG red with a fusible link. All other power is a feed and a black return of one AWG from the hub to the device. Colors follow ABYC E-11 (`reports/ABYC_E11_Review_v1.0.1.3.md`): red is main DC positive, black is return, and feeds and signals use their function colors.
 
 **Fuses and wire size:**
 
@@ -412,7 +412,7 @@ All of this is generated from one file, `electrical/wire_list.py`: the schematic
 
 **Prop (Warp Drive manual 091-01-23, 3-Blade HP):**
 - Limits: 3,200 prop rpm, 160 hp, 62–72 in. At 66 in and 2,590 rpm we are at 81% of the rpm limit, and 84% at the 7,900 rpm engine limit (2,687 rpm). Tip speed is about 745 ft/s and 775 ft/s.
-- The manual's engine list is incomplete and doesn't include the 800R, so confirm the combination (`reports/Supplier_Questions_v1.0.1.2.md`).
+- The manual's engine list is incomplete and doesn't include the 800R, so confirm the combination (`reports/Supplier_Questions_v1.0.1.3.md`).
 - **Static rpm:** the maker recommends setting it 400–500 rpm under the engine maximum, so **7,400–7,500 rpm**, in 1° steps within the 6–18° range. That is about 113 hp and 480 lbf tied down. Engine rpm rises as the boat moves. This replaces the earlier 7,600 rpm static target.
 - Torque: 3/8 in mounting bolts 30 ft-lb in 5 ft-lb steps; 1/4 in clamping bolts 10 ft-lb in 2 ft-lb steps, at the nuts. A face plate is required: 3/8 in for 3/8 or 1/2 in bolts.
 - Check bolt torque at 5 hours, at 50 hours, then at least yearly.
