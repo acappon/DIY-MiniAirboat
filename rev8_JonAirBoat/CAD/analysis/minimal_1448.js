@@ -165,10 +165,10 @@ const ENGINES = [
   ['etec800', 'Rotax 800R E-TEC snowmobile two-stroke + 3:1 belt reduction (120 hp used)', 120, 166.8, 15, T(120), 82],
 ];
 const CREW = {
-  solo: [['Driver', 200, 82, 0, 27]],
-  soloGear60: [['Driver', 200, 82, 0, 27], ['Gear between the benches', 60, 60, 0, 10]],
-  soloGear150: [['Driver', 200, 82, 0, 27], ['Gear between the benches', 150, 60, 0, 10]],
-  plus1: [['Driver', 200, 82, 11, 27], ['Passenger on the seat', 200, 82, -11, 27]],
+  solo: [['Driver', 200, 83.5, 0, 27]],
+  soloGear60: [['Driver', 200, 83.5, 0, 27], ['Gear between the benches', 60, 60, 0, 10]],
+  soloGear150: [['Driver', 200, 83.5, 0, 27], ['Gear between the benches', 150, 60, 0, 10]],
+  plus1: [['Driver', 200, 83.5, 11, 27], ['Passenger on the seat', 200, 83.5, -11, 27]],
 };
 const hullItem = ['Hull, Lowe 1448 with its benches', h.hullLb, h.hullX, 0, 7];
 const out = [];
@@ -196,7 +196,7 @@ console.table(out);
 // prop 15 lb) and the power used at the prop. Each cell: worst-case top mph / worst hump margin (lbf).
 // Top speed depends almost only on power; the plate sets the weight limit.
 const CASES = {
-  soloGear150: [['Driver', 200, 82, 0, 27], ['Gear amidships', 150, 60, 0, 10]],
+  soloGear150: [['Driver', 200, 83.5, 0, 27], ['Gear amidships', 150, 60, 0, 10]],
 };
 const outfitLb = OUTFIT.reduce((s, r) => s + r[1], 0);
 const budget = [];

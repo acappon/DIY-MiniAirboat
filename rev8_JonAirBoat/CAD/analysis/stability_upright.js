@@ -9,7 +9,7 @@ const { h, OUTFIT, ENGINES, hullItem, mass, floatAt, top, humpMargin } = m;
 
 const eng = ENGINES.find(e => e[0] === 'etec800');
 const EQUIP = [...OUTFIT, ['Engine system', eng[3], 20, 0, 22], ['Prop', eng[4], 4, 0, 42]];
-const DRIVER = ['Driver', 200, 82, 0, 27];
+const DRIVER = ['Driver', 200, 83.5, 0, 27];
 const thrust = eng[5], Vp = eng[6];
 const SHEER = 19, TRANSOM = 15;
 

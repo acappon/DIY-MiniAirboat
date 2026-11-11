@@ -126,21 +126,21 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         const seatC = color(0.85, 0.85, 0.8);
         const foamC0 = color(0.18, 0.56, 0.51, 0.6);
         // Two struts across the boat at the fore and aft edges of the dry box: the thwart the bench used to be.
-        for (var sx in [[STRUT_X[0], "aft"], [STRUT_X[1], "forward"]])
+        for (var st in [[STRUT_X[0], "aft"], [STRUT_X[1], "forward"]])
         {
-            const yEnd = hullHalf(sx[0] + 0.5, STRUT_Z[0] + 1) - 0.4;
-            const sid = id + ("strut" ~ sx[1]);
-            mkBox(context, sid, sx[0], sx[0] + 1, -yEnd, yEnd, STRUT_Z[0], STRUT_Z[1]);
-            paintBody(context, qCreatedBy(sid, EntityType.BODY), "Seat strut 1 x 2 x 1/8 6061 tube, hull side to hull side - " ~ sx[1], strutC);
+            const yEnd = hullHalf(st[0] + 0.5, STRUT_Z[0] + 1) - 0.4;
+            const sid = id + ("strut" ~ st[1]);
+            mkBox(context, sid, st[0], st[0] + 1, -yEnd, yEnd, STRUT_Z[0], STRUT_Z[1]);
+            paintBody(context, qCreatedBy(sid, EntityType.BODY), "Seat strut 1 x 2 x 1/8 6061 tube, hull side to hull side - " ~ st[1], strutC);
             for (var sd in [1, -1])
             {
-                const cid = id + ("strutClip" ~ sx[1] ~ (sd > 0 ? "P" : "S"));
+                const cid = id + ("strutClip" ~ st[1] ~ (sd > 0 ? "P" : "S"));
                 const y0 = yEnd - 1.75;
                 const y1 = yEnd + 0.25;
                 const y2 = yEnd + 0.375;
                 const z0 = STRUT_Z[0] - 0.125;
-                mkPoly(context, cid, [[sd * y0, z0], [sd * y2, z0], [sd * y2, STRUT_Z[1]], [sd * y1, STRUT_Z[1]], [sd * y1, STRUT_Z[0]], [sd * y0, STRUT_Z[0]], [sd * y0, z0]], sx[0], sx[0] + 1);
-                paintBody(context, qCreatedBy(cid, EntityType.BODY), "Strut end clip 2 x 2 x 1/8 6061 angle, opened to the side flare, bolted through the hull side - " ~ sx[1] ~ (sd > 0 ? " port" : " starboard"), strutC);
+                mkPoly(context, cid, [[sd * y0, z0], [sd * y2, z0], [sd * y2, STRUT_Z[1]], [sd * y1, STRUT_Z[1]], [sd * y1, STRUT_Z[0]], [sd * y0, STRUT_Z[0]], [sd * y0, z0]], st[0], st[0] + 1);
+                paintBody(context, qCreatedBy(cid, EntityType.BODY), "Strut end clip 2 x 2 x 1/8 6061 angle, opened to the side flare, bolted through the hull side - " ~ st[1] ~ (sd > 0 ? " port" : " starboard"), strutC);
             }
         }
         // Electrical dry box: 0.063 5052, riveted and sealed corners, hung from the struts; gasketed lid bolted into rivnuts.
@@ -159,7 +159,7 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         // Battery switch on a plate under the forward strut, port of the box, reachable without unbolting the seat.
         mkBox(context, id + "switchPlate", STRUT_X[1] + 1, STRUT_X[1] + 1.125, 6.5, 9.5, 6, STRUT_Z[0]);
         paintBody(context, qCreatedBy(id + "switchPlate", EntityType.BODY), "Battery switch plate 1/8 6061, bolted to the forward strut", strutC);
-        mkCyl(context, id + "batterySwitch", vector(STRUT_X[1] - 0.5, 8, 7.5), vector(STRUT_X[1] + 2.9, 8, 7.5), 1.5);
+        mkCyl(context, id + "batterySwitch", vector(STRUT_X[1] + 1.125, 8, 7.5), vector(STRUT_X[1] + 3.1, 8, 7.5), 1.5);
         paintBody(context, qCreatedBy(id + "batterySwitch", EntityType.BODY), "Battery switch, on/off, knob forward", color(0.8, 0.1, 0.1));
         // Dry storage each side: 0.032 5052 walls riveted under the struts, stopped 1-1/2 in above the floor so bilge water
         // runs under; closed-cell foam in the bottom (flotation); aft-hinged lid outboard of the seat.
@@ -191,11 +191,11 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         paintBody(context, qCreatedBy(id + "seatPad", EntityType.BODY), "Seat pad 38 x 15 x 2-1/2 closed-cell polyethylene, marine vinyl cover", seatC);
         // Folding seatback: hinged just above the foam on two brackets bolted to the aft strut, 12 degree recline against
         // a stop, folds flat forward onto the seat. Padded on the back too, so you can sit facing aft on it (engine off).
-        for (var sd in [1, -1])
+        for (var sb in [1, -1])
         {
-            const bid = id + ("backBracket" ~ (sd > 0 ? "P" : "S"));
-            mkBox(context, bid, STRUT_X[0] - 1.25, STRUT_X[0], sd * 9.4, sd * 9.525, STRUT_Z[0], PIVOT[1] + 0.5);
-            paintBody(context, qCreatedBy(bid, EntityType.BODY), "Seatback hinge bracket 1/8 6061 with recline stop, bolted to the aft strut - " ~ (sd > 0 ? "port" : "starboard"), strutC);
+            const bid = id + ("backBracket" ~ (sb > 0 ? "P" : "S"));
+            mkBox(context, bid, STRUT_X[0] - 1.25, STRUT_X[0], sb * 9.4, sb * 9.525, STRUT_Z[0], PIVOT[1] + 0.5);
+            paintBody(context, qCreatedBy(bid, EntityType.BODY), "Seatback hinge bracket 1/8 6061 with recline stop, bolted to the aft strut - " ~ (sb > 0 ? "port" : "starboard"), strutC);
         }
         mkCyl(context, id + "backPivot", vector(PIVOT[0], -9.7, PIVOT[1]), vector(PIVOT[0], 9.7, PIVOT[1]), 0.1875);
         paintBody(context, qCreatedBy(id + "backPivot", EntityType.BODY), "Seatback pivot bolt 3/8 stainless with nylon washers", color(0.85, 0.85, 0.88));
