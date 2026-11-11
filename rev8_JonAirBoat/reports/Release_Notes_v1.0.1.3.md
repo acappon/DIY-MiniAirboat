@@ -61,14 +61,22 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
     - Dash load label now **MAXIMUM LOAD 380 LB** ... **LEAVES 335 LB**.
     - Capsized flotation **3.9 in** clear, **190 lb** reserve, now counting the folding seatback's closed-cell foam as the float it is (0.35 ft³; it had been booked as nearly neutral). GM 43.6 in, dock trim 0.6°.
 11. **Design load changed** (user, 2026-11-10): **200 lb operator + 135 lb of gear = 335 lb** (was 200 + 150 = 350). Payload is **335.1 lb**, so the requirement is met with only **0.1 lb of margin**: any part that weighs in heavy at build takes the label down. `minimal_1448.js` and `stability_upright.js` now use 135 lb of gear (top speed 34.25 mph and hump margin 259 lbf with the design load; GM 39.8 in tied down, 3.9° list with the loose gear slid to one side). The capsize check keeps its heavier 200 lb of strapped gear as a conservative case.
+12. **Wiring pass for the seat-module dry box** (`electrical/wire_list.py`, `CAD/FeatureScript/Minimal_wiring.fs`, `reports/Electrical_Compliance_v1.0.1.3.md`, Build Guide step 2.11).
+    - **Terminals:** the battery, fuse block, relays and switch now sit where the seat module puts them. The battery switch is on its plate on the forward strut.
+    - **Forward runs:** they leave through a new gland in the box forward wall (Y 3.8, Z 8), pass under the forward strut, stay at Z 10 or lower under the seat base, and climb to the hull side only outboard of the seat edge. The old routes passed through the seat base.
+    - **Aft runs:** they leave through the aft gland into the floor conduit. The bench sleeve is gone.
+    - **Checks:** a script finds no wire crossing the seat base, struts, battery, fuse block, relays or switch body. Voltage drops all pass (largest 3.7%, searchlight, limit 10%).
+    - **Weight:** wire 8.7 lb (was 8.3); harness 12.4 lb (was 12.2), net of the bench sleeve.
+    - **Totals:** equipment **490.1 lb**, payload **334.9 lb**, **0.1 lb under** the 335 lb design load. By the rounding rule the dash label drops to **MAXIMUM LOAD 375 LB** ... **LEAVES 330 LB**.
+    - **CAD:** in Onshape, W57 (battery to switch, 2 AWG) shows as 10 separate segments, because its short bends in the box fail the CAD union. Wiring feature unions are now tolerant of that, instead of failing the whole feature.
+13. **Reports for v1.0.1.3:** `Stability_Analysis_v1.0.1.3.md`, `Flotation_Inverted_v1.0.1.3.md`, `Structural_Analysis_v1.0.1.3.md` and `Electrical_Compliance_v1.0.1.3.md` supersede the v1.0.1.2 reports (kept as the record).
 
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
-- **Payload margin is 0.1 lb** over the 335 lb design load (200 lb operator + 135 lb gear, oars included when aboard). The rudder and controls allowances (8.5 lb each) and the brackets allowance (5 lb) are the only cushion: weigh in step 2.13 and at the end of the build, and lower the label if the boat comes in heavy.
+- **Payload is 0.1 lb under** the 335 lb design load (200 lb operator + 135 lb gear, oars included when aboard), after the wiring pass added 0.2 lb. The label reads 375 / 330. The rudder and controls allowances (8.5 lb each) and the brackets allowance (5 lb) are the only cushion: weigh in step 2.13 and at the end of the build.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
-- **Wiring:** the wire routes in `CAD/FeatureScript/Minimal_wiring.fs` (from `electrical/wire_list.py`) still end at the old dry box points; the new box keeps the battery, fuse block, relays and switch within about 1–4 in of them, but the routes, the wire list and the schematic need a pass for the new box exits and the switch plate.
 - Capsized float height is about 3.9 in (v1.0.1.2: 4.0 in), with the seatback foam counted. It depends on the seatback being closed-cell foam and staying attached.
-- `reports/Structural_Analysis_v1.0.1.2.md` and `reports/Drivetrain_800R_ETEC.md` still describe the grab rail; they are the v1.0.1.2 record and will be superseded at release.
+- `reports/Drivetrain_800R_ETEC.md` still describes the grab rail and the middle bench in places; the v1.0.1.3 reports supersede it on those points.
 
 ## Onshape (Main workspace)
 - "Minimal cockpit (FeatureScript)" uploaded; the "Minimal cockpit" Part Studio regenerates with 87 parts.
@@ -76,11 +84,17 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 - "Crew mannequins": hip point X 83.5, Z 14.
 - "Main assembly": the whole cockpit Part Studio re-inserted and the 71 old cockpit instances deleted (18 of them were left dangling by the removed grab rail, bench sleeve and dry box case). No mates were affected.
 - "Minimal cockpit (FeatureScript)" uploaded again with the oarlocks, rests and shipped oars; the Part Studio regenerates with 123 parts. Preview: `renderedImages/wip_oars_shipped.png`.
-- **Not yet:** the carbon strut and sandwich seat base part names and colors, and the honeycomb rudder envelope name in "Minimal 800R layout" (repo masters only; geometry unchanged), and the dash load label ("Minimal dash (FeatureScript)", now 380 / 335 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
+- **Group-1 close-out (2026-11-10):**
+  - **Uploads:** cockpit (123 parts: carbon strut and sandwich seat base names), dash (load label 375 / 330, 179 parts) and wiring (the v1.0.1.3 routes, 113 bodies).
+  - **Main assembly:** the cockpit, wiring and dash studios re-inserted whole, and the 370 old instances deleted. 2 of them were dangling load-label text, and the oars, oarlocks and extra W57 segments had never been added. 543 instances, none dangling, no mates affected.
+  - **Build steps assembly:** 20 dangling instances deleted (grab rail, old dry box case, bench sleeve, 2 label text bodies). It does not yet show the seat module, oars or oarlocks; that comes with the build-step re-render.
+  - **Render stages assembly:** no dangling instances. It holds only the reference mesh and the 800R layout, so the cockpit has to be added for the new scenes.
+  - **Not uploaded:** "Minimal 800R layout" (only the rudder envelope name changed, to honeycomb). Upload it with the release.
 
 ## Still to do before release
-- Update the electrical documents for the new dry box, rewrite the stability and flotation reports for v1.0.1.3, re-render the build step images, and regenerate the Build Guide PDF.
-- Update the CAD in Onshape, create version v1.0.1.3, export the STEP files and re-render.
+- Re-render the build step images (add the seat module, oars and oarlocks to the Build steps assembly), regenerate the schematic PDF and the Build Guide PDF.
+- Upload "Minimal 800R layout" (rudder name), create version v1.0.1.3, export the STEP files and re-render (add the cockpit to Render stages).
+- Decide the passenger handhold and whether `Fuel_tank.fs` (older C: copy only; a "Fuel tank" Feature Studio also exists in the Onshape "1652 hull" workspace) is kept.
 - New renders (user, 2026-11-10):
   - **Night snake hunting:** operator rowing facing aft along a bank, searchlight aimed at the bank. Gear aboard (cooler, duffel bag, life jackets) so the oars read as carried gear, plus a snake tong / noose pole.
   - **25 mph:** one render with the oars and gear aboard, one without.

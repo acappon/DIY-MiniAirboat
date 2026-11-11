@@ -1,25 +1,25 @@
 Wire,Function,From,To,AWG,Color,Amps,Length ft,Drop V (pair),Drop %,End A,End B,Note
-W01,Battery switch to starter solenoid,SWITCH,SOL,2,red,150,7.4,0.35,2.5,"Ring terminal, sealed","Ring terminal, sealed",Regulator output lands on the solenoid stud.
-W02,Battery negative to engine ground,BAT-,GND,2,black,150,7.1,0.33,2.4,"Ring terminal, sealed","Ring terminal, sealed",The only tie between the battery and chassis ground.
+W01,Battery switch to starter solenoid,SWITCH,SOL,2,red,150,7.1,0.33,2.4,"Ring terminal, sealed","Ring terminal, sealed",Regulator output lands on the solenoid stud.
+W02,Battery negative to engine ground,BAT-,GND,2,black,150,7.4,0.34,2.5,"Ring terminal, sealed","Ring terminal, sealed",The only tie between the battery and chassis ground.
 W03,Battery switch to hub,SWITCH,HUB,6,red,45,1.3,0.05,0.4,"Ring terminal, sealed","Ring terminal, sealed","Through MF1, 60 A, on the switch output stud."
-W04,Battery negative to hub,BAT-,HUB,6,black,45,0.8,0.03,0.2,"Ring terminal, sealed","Ring terminal, sealed",
-W05,F1 to 12 V outlet,HUB,OUTLET,12,red,20,4.6,0.3,2.1,"Fuse block screw, ring","Ring terminal, sealed","F1 20 A, always on. Ring terminal on a stud-type outlet: E-11 limits friction terminals at 20 A."
-W06,12 V outlet return,OUTLET,HUB,12,black,20,4.6,0.3,2.2,"Ring terminal, sealed","Ring terminal, sealed",
-W07,K3 to LED bar,K,LED,12,red,7.2,16.8,0.39,2.8,"1/4 in female spade, sealed",Deutsch DT,F2 10 A through K3. 12 AWG keeps the drop under 3%.
-W08,LED bar return,LED,HUB,12,black,7.2,16.6,0.38,2.8,Deutsch DT,"Ring terminal, sealed",
-W09,K4 to searchlight,K,SEARCH,16,red,3.7,17.2,0.51,3.7,"1/4 in female spade, sealed",Deutsch DT,F3 10 A through K4
-W10,Searchlight return,SEARCH,HUB,16,black,3.7,17.0,0.5,3.6,Deutsch DT,"Ring terminal, sealed",
+W04,Battery negative to hub,BAT-,HUB,6,black,45,2.1,0.08,0.6,"Ring terminal, sealed","Ring terminal, sealed",
+W05,F1 to 12 V outlet,HUB,OUTLET,12,red,20,5.7,0.37,2.7,"Fuse block screw, ring","Ring terminal, sealed","F1 20 A, always on. Ring terminal on a stud-type outlet: E-11 limits friction terminals at 20 A."
+W06,12 V outlet return,OUTLET,HUB,12,black,20,5.7,0.37,2.7,"Ring terminal, sealed","Ring terminal, sealed",
+W07,K3 to LED bar,K,LED,12,red,7.2,16.9,0.39,2.8,"1/4 in female spade, sealed",Deutsch DT,F2 10 A through K3. 12 AWG keeps the drop under 3%.
+W08,LED bar return,LED,HUB,12,black,7.2,17.1,0.39,2.9,Deutsch DT,"Ring terminal, sealed",
+W09,K4 to searchlight,K,SEARCH,16,red,3.7,17.3,0.51,3.7,"1/4 in female spade, sealed",Deutsch DT,F3 10 A through K4
+W10,Searchlight return,SEARCH,HUB,16,black,3.7,17.4,0.52,3.7,Deutsch DT,"Ring terminal, sealed",
 W11,K2 to stern light,K,STERN,16,dark gray,0.5,17.7,0.07,0.5,"1/4 in female spade, sealed",Deutsch DT,F4 10 A through K2
-W12,Stern light return,STERN,HUB,16,black,0.5,17.4,0.07,0.5,Deutsch DT,"Ring terminal, sealed",
-W13,K2 to port side light,K,NAVP,16,dark gray,0.25,4.7,0.01,0.1,"1/4 in female spade, sealed",Deutsch DT,F4 10 A through K2
-W14,Port side light return,NAVP,HUB,16,black,0.25,4.7,0.01,0.1,Deutsch DT,"Ring terminal, sealed",
-W15,F5 to dash switch bus,HUB,TB1,16,orange,6,4.5,0.22,1.6,"Fuse block screw, ring","Ring terminal, sealed","F5 10 A, always on. Feeds the key and both light switches."
-W16,K1 to dash accessory bus,K,TB2,16,purple,3.5,4.9,0.14,1.0,"1/4 in female spade, sealed","Ring terminal, sealed","F6 10 A through K1. Gauges and USB, key on."
-W17,Dash accessory return,TB2,HUB,16,black,3.5,4.6,0.13,0.9,"Ring terminal, sealed","Ring terminal, sealed",
-W18,F7 to bilge pump,BAT+,BILGE,16,brown,2,7.2,0.12,0.8,"Ring terminal, sealed",Deutsch DT,"F7 5 A inline within 7 in of the battery, ahead of the switch. Automatic pump, always on."
-W19,Bilge pump return,BILGE,HUB,16,black,2,7.2,0.12,0.8,Deutsch DT,"Ring terminal, sealed",
-W20,K5 to fuel pump,K,PUMP,12,brown,6,9.3,0.18,1.3,"1/4 in female spade, sealed",Deutsch DT,F8 15 A through K5. Fuel pump current is an estimate.
-W21,Fuel pump return,PUMP,HUB,12,black,6,9.3,0.18,1.3,Deutsch DT,"Ring terminal, sealed",
+W12,Stern light return,STERN,HUB,16,black,0.5,17.9,0.07,0.5,Deutsch DT,"Ring terminal, sealed",
+W13,K2 to port side light,K,NAVP,16,dark gray,0.25,5.3,0.01,0.1,"1/4 in female spade, sealed",Deutsch DT,F4 10 A through K2
+W14,Port side light return,NAVP,HUB,16,black,0.25,5.2,0.01,0.1,Deutsch DT,"Ring terminal, sealed",
+W15,F5 to dash switch bus,HUB,TB1,16,orange,6,5.6,0.27,2.0,"Fuse block screw, ring","Ring terminal, sealed","F5 10 A, always on. Feeds the key and both light switches."
+W16,K1 to dash accessory bus,K,TB2,16,purple,3.5,5.8,0.16,1.2,"1/4 in female spade, sealed","Ring terminal, sealed","F6 10 A through K1. Gauges and USB, key on."
+W17,Dash accessory return,TB2,HUB,16,black,3.5,5.7,0.16,1.2,"Ring terminal, sealed","Ring terminal, sealed",
+W18,F7 to bilge pump,BAT+,BILGE,16,brown,2,7.5,0.12,0.9,"Ring terminal, sealed",Deutsch DT,"F7 5 A inline within 7 in of the battery, ahead of the switch. Automatic pump, always on."
+W19,Bilge pump return,BILGE,HUB,16,black,2,7.7,0.12,0.9,Deutsch DT,"Ring terminal, sealed",
+W20,K5 to fuel pump,K,PUMP,12,brown,6,9.9,0.19,1.4,"1/4 in female spade, sealed",Deutsch DT,F8 15 A through K5. Fuel pump current is an estimate.
+W21,Fuel pump return,PUMP,HUB,12,black,6,9.8,0.19,1.4,Deutsch DT,"Ring terminal, sealed",
 W22,Switch bus to key,TB1,KEY,16,orange,6,0.8,0.04,0.3,"Ring terminal, sealed","1/4 in female spade, sealed",
 W23,Switch bus to lights switch,TB1,ROT,16,orange,1,1.0,0.01,0.1,"Ring terminal, sealed","1/4 in female spade, sealed",
 W24,Switch bus to searchlight switch,TB1,SW,16,orange,1,1.2,0.01,0.1,"Ring terminal, sealed","1/4 in female spade, sealed",
@@ -33,31 +33,31 @@ W31,Accessory bus to temperature gauge,TB2,TEMP,16,purple,0.3,0.8,0.0,0.0,"Ring 
 W32,Temperature gauge return,TEMP,TB2,16,black,0.3,0.8,0.0,0.0,"Ring terminal, sealed","Ring terminal, sealed",
 W33,Accessory bus to exhaust gauge,TB2,EGTG,16,purple,0.3,0.7,0.0,0.0,"Ring terminal, sealed","Ring terminal, sealed",
 W34,Exhaust gauge return,EGTG,TB2,16,black,0.3,0.7,0.0,0.0,"Ring terminal, sealed","Ring terminal, sealed",
-W35,Key ON to K1 coil and engine,KEY,J1,16,purple,0.5,11.1,0.04,0.3,"1/4 in female spade, sealed",Deutsch DT,Ignition on signal. Branches to the K1 coil in the dry box.
-W36,Key START to solenoid,KEY,SOL,16,yellow/red,5,10.9,0.44,3.2,"1/4 in female spade, sealed","Ring terminal, sealed","Start signal. Cole Hersee 24059-08-BP solenoid: 10 s on, 30 min off. Coil return is a short jumper to the engine ground stud."
-W37,Lights switch RUN to K2 coil,ROT,K,16,dark gray,0.2,5.2,0.01,0.1,"1/4 in female spade, sealed","1/4 in female spade, sealed",On in both RUN and LED positions
-W38,Lights switch LED to K3 coil,ROT,K,16,gray/blue,0.2,5.2,0.01,0.1,"1/4 in female spade, sealed","1/4 in female spade, sealed",
-W39,Searchlight switch to K4 coil,SW,K,16,gray/red,0.2,5.4,0.01,0.1,"1/4 in female spade, sealed","1/4 in female spade, sealed",
-W40,Engine pump signal to K5 coil,J1,K,16,brown/white,0.2,6.9,0.01,0.1,Deutsch DT,"1/4 in female spade, sealed",Confirm the ECM drives the pump on and off.
-W41,Tach signal,J1,TACH,16,dark gray,0.05,11.5,0.0,0.0,Deutsch DT,"Ring terminal, sealed",Confirm the signal from the service manual.
-W42,Temperature sender signal,CTS,TEMP,16,tan,0.05,12.2,0.0,0.0,Deutsch DT,"Ring terminal, sealed",Separate two-wire sender. The ECM keeps its own sensor.
-W43,Temperature sender return,CTS,TEMP,16,black,0.05,12.2,0.0,0.0,Deutsch DT,"Ring terminal, sealed",
+W35,Key ON to K1 coil and engine,KEY,J1,16,purple,0.5,11.7,0.05,0.3,"1/4 in female spade, sealed",Deutsch DT,Ignition on signal. Branches to the K1 coil in the dry box.
+W36,Key START to solenoid,KEY,SOL,16,yellow/red,5,11.5,0.46,3.3,"1/4 in female spade, sealed","Ring terminal, sealed","Start signal. Cole Hersee 24059-08-BP solenoid: 10 s on, 30 min off. Coil return is a short jumper to the engine ground stud."
+W37,Lights switch RUN to K2 coil,ROT,K,16,dark gray,0.2,6.2,0.01,0.1,"1/4 in female spade, sealed","1/4 in female spade, sealed",On in both RUN and LED positions
+W38,Lights switch LED to K3 coil,ROT,K,16,gray/blue,0.2,6.2,0.01,0.1,"1/4 in female spade, sealed","1/4 in female spade, sealed",
+W39,Searchlight switch to K4 coil,SW,K,16,gray/red,0.2,6.4,0.01,0.1,"1/4 in female spade, sealed","1/4 in female spade, sealed",
+W40,Engine pump signal to K5 coil,J1,K,16,brown/white,0.2,7.0,0.01,0.1,Deutsch DT,"1/4 in female spade, sealed",Confirm the ECM drives the pump on and off.
+W41,Tach signal,J1,TACH,16,dark gray,0.05,12.1,0.0,0.0,Deutsch DT,"Ring terminal, sealed",Confirm the signal from the service manual.
+W42,Temperature sender signal,CTS,TEMP,16,tan,0.05,12.8,0.01,0.0,Deutsch DT,"Ring terminal, sealed",Separate two-wire sender. The ECM keeps its own sensor.
+W43,Temperature sender return,CTS,TEMP,16,black,0.05,12.8,0.01,0.0,Deutsch DT,"Ring terminal, sealed",
 W44,Gas sender signal,SENDER,GAS,16,pink,0.05,13.6,0.01,0.0,Deutsch DT,"Ring terminal, sealed",
 W45,Gas sender return,SENDER,GAS,16,black,0.05,13.6,0.01,0.0,Deutsch DT,"Ring terminal, sealed",
-W46,"Exhaust probe, type K extension",EGT,EGTG,18,K yellow,0.0,14.0,0.0,0.0,Type K mini plug,Type K mini plug,"Thermocouple pair. Its red conductor is type K negative, not power."
-W47,"DESS post to ECM, wire 1",DESS,J1,18,white,0.05,12.0,0.01,0.1,Deutsch DT,Deutsch DT,Sled DESS post used as the lanyard kill. Colors to be matched to the sled harness.
-W48,"DESS post to ECM, wire 2",DESS,J1,18,white/blue,0.05,12.0,0.01,0.1,Deutsch DT,Deutsch DT,Sled DESS post used as the lanyard kill. Colors to be matched to the sled harness.
-W49,"DESS post to ECM, wire 3",DESS,J1,18,white/green,0.05,12.0,0.01,0.1,Deutsch DT,Deutsch DT,Sled DESS post used as the lanyard kill. Colors to be matched to the sled harness.
-W50,Searchlight remote cable,JOY,SEARCH,18,gray,0.1,22.0,0.03,0.2,As supplied,As supplied,Supplied with the searchlight. Length to be checked.
-W51,Hub fuse to relay K1 accessory,HUB,K,16,red,3.5,0.9,0.03,0.2,"Fuse block screw, ring","1/4 in female spade, sealed",
-W52,Hub fuse to relay K2 navigation,HUB,K,16,dark gray,1,0.9,0.01,0.1,"Fuse block screw, ring","1/4 in female spade, sealed",
-W53,Hub fuse to relay K3 LED bar,HUB,K,12,red,7.2,0.9,0.02,0.2,"Fuse block screw, ring","1/4 in female spade, sealed",
-W54,Hub fuse to relay K4 searchlight,HUB,K,16,red,3.7,0.9,0.03,0.2,"Fuse block screw, ring","1/4 in female spade, sealed",
-W55,Hub fuse to relay K5 fuel pump,HUB,K,12,brown,6,0.9,0.02,0.1,"Fuse block screw, ring","1/4 in female spade, sealed",
-W56,"Relay coil returns (5, daisy chain)",K,HUB,16,black,1,0.9,0.01,0.1,"1/4 in female spade, sealed","Ring terminal, sealed",
-W57,Battery positive to battery switch,BAT+,SWITCH,2,red,150,1.2,0.06,0.4,"Ring terminal, sealed","Ring terminal, sealed",Fusible link within 7 in of the battery.
-W58,K2 to starboard side light,K,NAVS,16,dark gray,0.25,4.7,0.01,0.1,"1/4 in female spade, sealed",Deutsch DT,F4 10 A through K2
-W59,Starboard side light return,NAVS,HUB,16,black,0.25,4.5,0.01,0.1,Deutsch DT,"Ring terminal, sealed",
-W60,Low oil sensor to dash LED,OILS,OILED,16,white/blue,0.02,12.0,0.0,0.0,Deutsch DT,"1/4 in female spade, sealed",Stock sled oil level sensor. Confirm it closes on low oil.
-W61,Low oil sensor return,OILS,TB2,16,black,0.02,11.8,0.0,0.0,Deutsch DT,"Ring terminal, sealed",
+W46,"Exhaust probe, type K extension",EGT,EGTG,18,K yellow,0.0,14.6,0.0,0.0,Type K mini plug,Type K mini plug,"Thermocouple pair. Its red conductor is type K negative, not power."
+W47,"DESS post to ECM, wire 1",DESS,J1,18,white,0.05,12.6,0.01,0.1,Deutsch DT,Deutsch DT,Sled DESS post used as the lanyard kill. Colors to be matched to the sled harness.
+W48,"DESS post to ECM, wire 2",DESS,J1,18,white/blue,0.05,12.5,0.01,0.1,Deutsch DT,Deutsch DT,Sled DESS post used as the lanyard kill. Colors to be matched to the sled harness.
+W49,"DESS post to ECM, wire 3",DESS,J1,18,white/green,0.05,12.5,0.01,0.1,Deutsch DT,Deutsch DT,Sled DESS post used as the lanyard kill. Colors to be matched to the sled harness.
+W50,Searchlight remote cable,JOY,SEARCH,18,gray,0.1,22.6,0.03,0.2,As supplied,As supplied,Supplied with the searchlight. Length to be checked.
+W51,Hub fuse to relay K1 accessory,HUB,K,16,red,3.5,1.4,0.04,0.3,"Fuse block screw, ring","1/4 in female spade, sealed",
+W52,Hub fuse to relay K2 navigation,HUB,K,16,dark gray,1,1.4,0.01,0.1,"Fuse block screw, ring","1/4 in female spade, sealed",
+W53,Hub fuse to relay K3 LED bar,HUB,K,12,red,7.2,1.4,0.03,0.2,"Fuse block screw, ring","1/4 in female spade, sealed",
+W54,Hub fuse to relay K4 searchlight,HUB,K,16,red,3.7,1.4,0.04,0.3,"Fuse block screw, ring","1/4 in female spade, sealed",
+W55,Hub fuse to relay K5 fuel pump,HUB,K,12,brown,6,1.4,0.03,0.2,"Fuse block screw, ring","1/4 in female spade, sealed",
+W56,"Relay coil returns (5, daisy chain)",K,HUB,16,black,1,1.4,0.01,0.1,"1/4 in female spade, sealed","Ring terminal, sealed",
+W57,Battery positive to battery switch,BAT+,SWITCH,2,red,150,1.1,0.05,0.4,"Ring terminal, sealed","Ring terminal, sealed",Fusible link within 7 in of the battery.
+W58,K2 to starboard side light,K,NAVS,16,dark gray,0.25,5.7,0.01,0.1,"1/4 in female spade, sealed",Deutsch DT,F4 10 A through K2
+W59,Starboard side light return,NAVS,HUB,16,black,0.25,5.6,0.01,0.1,Deutsch DT,"Ring terminal, sealed",
+W60,Low oil sensor to dash LED,OILS,OILED,16,white/blue,0.02,12.6,0.0,0.0,Deutsch DT,"1/4 in female spade, sealed",Stock sled oil level sensor. Confirm it closes on low oil.
+W61,Low oil sensor return,OILS,TB2,16,black,0.02,12.4,0.0,0.0,Deutsch DT,"Ring terminal, sealed",
 W62,Accessory bus to low oil LED,TB2,OILED,16,purple,0.02,0.7,0.0,0.0,"Ring terminal, sealed","1/4 in female spade, sealed","Red 12 V panel LED with built-in resistor, between the temperature and exhaust gauges."

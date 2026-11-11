@@ -44,7 +44,7 @@ const ITEMS = [
   ['Dash', 4.4, 103, -13, 26, 30, 2],
   ['Phone holder', 0.8, 100, 0, 26, 30, 2],
   ['Console frame and pod', 2.9, 105, -18, 2, 30, ALU],
-  ['Harness, switch, solenoid, conduit', 12.2, 62, 0, 3, 8, 3],
+  ['Harness, switch, solenoid, conduit', 12.4, 62, 0, 3, 8, 3],
   ['Belt guard', 3, 13, 0, 22, 52, ALU],
   ['Radiator brackets, overflow bottle', 3, 25, 0, 30, 56, ALU],
   ['Brackets, rivnuts, bolts', 5, 40, 0, 2, 20, STEEL],

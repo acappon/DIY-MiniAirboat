@@ -27,7 +27,10 @@ COLORS = {'red': '#d11919', 'black': '#111111', 'orange': '#f07a0a', 'purple': '
           'dark gray': '#4a5058', 'yellow/red': '#e0912a', 'brown/white': '#a98660', 'gray/blue': '#5f7fa8', 'gray/red': '#a0605e'}
 
 P = {  # device terminals
-    'BAT+': (86, 2, 8), 'BAT-': (86, -3, 8), 'HUB': (85.5, 0, 9), 'K': (88, 3.6, 6), 'SWITCH': (89.7, 8, 9),
+    # Seat-module dry box (v1.0.1.3, Minimal_cockpit.fs): X 77.5-85.5, Y +/-5, Z 3.75-11. Battery X 81.9-85.3, Y -4.2 to 2.7, top Z 9.05;
+    # fuse block over it (X 82.1-85.1, Y +/-2.5, Z 9.3-10.8) with the fuses facing the lid; relays K1-K5 at the aft end (X 78-81.5, Y 1-4.7).
+    # Battery switch terminals behind its plate on the forward strut (plate X 86.5, Y 8, Z 7.5), outside the box.
+    'BAT+': (84.9, 2.2, 9.1), 'BAT-': (84.9, -3.6, 9.1), 'HUB': (83.6, 0, 10.85), 'K': (79.75, 2.85, 5.4), 'SWITCH': (86, 8, 7.5),
     'SOL': (31, -10.6, 15.2), 'GND': (29, -7.4, 19), 'J1': (31, -10.6, 18.2),
     'LED': (8, 0, 88.7), 'SEARCH': (5, 3, 88.7), 'STERN': (9, 11, 88.7), 'NAVP': (108, 31, 17), 'NAVS': (108, -31, 17), 'OILS': (22.4, -13, 22),
     'BILGE': (8, 3, 1.1), 'PUMP': (138, -3, 25.7), 'SENDER': (143, 3, 25.5),
@@ -49,24 +52,37 @@ D = {'OUTLET': back(-19.7, 1.7), 'USB': back(-6.6, 4.75), 'GAS': back(-9.6, 4.75
 P.update(D)
 
 # Floor run in 2 in conduit, centered at Z 4 so the bundle clears a 2 in bilge level; see Minimal_cockpit.fs.
+# Box exits (v1.0.1.3): BOXA runs aft down the middle of the box (aft of the battery, above the relays) to the gland in the aft wall
+# at the conduit; BOXF leaves through a gland in the forward wall at Y 3.8, Z 8 (below the strut and clear of the battery), then
+# rises to Z 10 under the seat base (Z 11.25) and only climbs to the hull side once outboard of the seat edge (|Y| 19).
+BOXA = [(81.6, 3.8, 9.0), (81.0, 0, 7.5), (78.5, 0, 6.2), (77.5, 0, 5.3)]
+BOXF = [(85.0, 3.8, 8.0), (87.5, 3.8, 8.0), (89.7, 3.8, 10.0)]
 ROUTES = {
     'box': [],
-    'swbat': [(87, 3.4, 8.3)],  # battery post to the gland, clear of the fuse block
-    'eng': [(82.4, 0, 6), (75.3, 0, 5), (72, 0, 4), (40, 0, 4), (34.6, -4, 4.2), (34.6, -10.5, 4.8), (34, -10.5, 13)],
-    'cage': [(82.4, 0, 6), (75.3, 0, 5), (72, 0, 4), (40, 0, 4), (34.6, -4, 4.2), (34.6, -10.5, 4.8), (34, -10.5, 13), (30, -16, 14.6), (18, -29, 14.8), (15, -31.4, 16), (11.7, -31.4, 33)]
+    'swbat': [(85.0, 3.8, 8.6), (86, 4.5, 8)],  # battery post out through the forward gland to the switch
+    'eng': BOXA + [(75.3, 0, 5), (72, 0, 4), (40, 0, 4), (34.6, -4, 4.2), (34.6, -10.5, 4.8), (34, -10.5, 13)],
+    'cage': BOXA + [(75.3, 0, 5), (72, 0, 4), (40, 0, 4), (34.6, -4, 4.2), (34.6, -10.5, 4.8), (34, -10.5, 13), (30, -16, 14.6), (18, -29, 14.8), (15, -31.4, 16), (11.7, -31.4, 33)]
     + [(11.7, 36.8 * math.cos(math.radians(a)), 52 + 36.8 * math.sin(math.radians(a))) for a in (-150, -170, 170, 150, 130, 110, 95)],
-    'bilge': [(82.4, 0, 6), (75.3, 0, 5), (72, 0, 4), (40, 0, 4), (34, -1, 2.1), (13, -1, 1.5)],
-    'dash': [(89.7, -2, 10.5), (90, -20, 10), (96, -21.8, 10), (102.8, -21.8, 23.6), (103.2, -20, 26)],
+    'bilge': BOXA + [(75.3, 0, 5), (72, 0, 4), (40, 0, 4), (34, -1, 2.1), (13, -1, 1.5)],
+    'dash': BOXF + [(89.7, -2, 10), (90, -20, 10), (96, -21.8, 10), (102.8, -21.8, 23.6), (103.2, -20, 26)],
     # Side lights on the hull sides at X 108, more than 2 ft from the tank and its fittings (E-11 11.5.1.3.3).
-    'navp': [(89.7, 2, 10.5), (90.5, 24, 12), (92, 27, 13.6), (106, 27, 14.3)],
-    'navpr': [(106, 27, 14.3), (92, 27, 13.6), (90.5, 24, 12), (89.7, 2, 10.5)],
-    'navs': [(89.7, -2, 10.5), (90, -20, 10), (96, -21.8, 10), (103, -24, 17)],  # over the fuel line and clear of the extinguisher
-    'navsr': [(103, -24, 17), (96, -21.8, 10), (90, -20, 10), (89.7, -2, 10.5)],
-    'bow': [(89.7, 2, 10.5), (90.5, 24, 12), (92, 27, 13.6), (120, 27, 15), (128, 24, 16.2), (131.3, 10, 17), (134, 7, 17)],
+    'navp': BOXF + [(90, 20, 10), (90.5, 24, 12), (92, 27, 13.6), (106, 27, 14.3)],
+    'navs': BOXF + [(89.7, -2, 10), (90, -20, 10), (96, -21.8, 10), (103, -24, 17)],  # over the fuel line and clear of the extinguisher
+    'bow': BOXF + [(90, 20, 10), (90.5, 24, 12), (92, 27, 13.6), (120, 27, 15), (128, 24, 16.2), (131.3, 10, 17), (134, 7, 17)],
 }
+# Battery negative: aft of the battery along its starboard side, so neither cable folds back across the box.
+ROUTES['engn'] = ROUTES['eng'][1:]
+ROUTES['negbox'] = [(81.6, 3.8, 9.3)]
+ROUTES['navpr'] = list(reversed(ROUTES['navp']))
+ROUTES['navsr'] = list(reversed(ROUTES['navs']))
 
 # Last points before a device, in order out from the device, to clear the rail, engine and tank.
-WAY = {'SWITCH': [(89.7, 4.6, 9.5), (88.5, 4.6, 9.5)],  # switch on the bench forward panel, port of the dry box
+WAY = {'SWITCH': [(86, 6.3, 7.8)],  # switch on its plate on the forward strut, port of the dry box
+       # In the box: battery posts reached past the battery's sides, fuse block studs from above and off its port side.
+       # No route may fold back on itself: a near-180 degree turn fails the CAD union.
+       'BAT+': [(84.9, 3.3, 9.3)], 'BAT-': [(84.9, -4.6, 9.3), (81.6, -4.6, 9.3)],
+       'HUB': [(83.6, 3.0, 10.85), (83.6, 3.8, 9.5)],
+       'K': [(80.5, 3.8, 8.6)],  # up off the relay strip before turning aft or forward
        'GND': [(30, -10.6, 17.2)], 'CTS': [(30.5, -10.2, 20)], 'EGT': [(30.5, 6, 34), (30.5, -6.5, 34), (30.5, -10.2, 20)],
        'PUMP': [(134, 7, 26)], 'SENDER': [(134, 7, 26)], 'OILS': [(27, -13, 17), (32, -13, 14.5)], 'NAVP': [(108, 29.8, 17)], 'NAVS': [(108, -29.8, 17)]}
 
@@ -79,9 +95,9 @@ def w(id_, name, a, b, awg, color, amps, route, ca, cb, note=''):
 
 
 w('W01', 'Battery switch to starter solenoid', 'SWITCH', 'SOL', '2', 'red', 150, 'swe', 'ring', 'ring', 'Regulator output lands on the solenoid stud.')
-w('W02', 'Battery negative to engine ground', 'BAT-', 'GND', '2', 'black', 150, 'eng', 'ring', 'ring', 'The only tie between the battery and chassis ground.')
+w('W02', 'Battery negative to engine ground', 'BAT-', 'GND', '2', 'black', 150, 'engn', 'ring', 'ring', 'The only tie between the battery and chassis ground.')
 w('W03', 'Battery switch to hub', 'SWITCH', 'HUB', '6', 'red', 45, 'box', 'ring', 'ring', 'Through MF1, 60 A, on the switch output stud.')
-w('W04', 'Battery negative to hub', 'BAT-', 'HUB', '6', 'black', 45, 'box', 'ring', 'ring')
+w('W04', 'Battery negative to hub', 'BAT-', 'HUB', '6', 'black', 45, 'negbox', 'ring', 'ring')
 w('W05', 'F1 to 12 V outlet', 'HUB', 'OUTLET', '12', 'red', 20, 'dash', 'fork', 'ring', 'F1 20 A, always on. Ring terminal on a stud-type outlet: E-11 limits friction terminals at 20 A.')
 w('W06', '12 V outlet return', 'OUTLET', 'HUB', '12', 'black', 20, 'dash', 'ring', 'ring')
 w('W07', 'K3 to LED bar', 'K', 'LED', '12', 'red', 7.2, 'cage', 'spade', 'dt', 'F2 10 A through K3. 12 AWG keeps the drop under 3%.')
@@ -135,13 +151,13 @@ w('W62', 'Accessory bus to low oil LED', 'TB2', 'OILED', '16', 'purple', 0.02, '
 
 ROUTE_ALIAS = {
     'pod': lambda a, b: [],
-    'swe': lambda a, b: [(83.2, 3.6, 9.5)] + ROUTES['eng'],  # back through the box to its aft gland; a shallower kink fails the CAD union
-    'keyeng': lambda a, b: list(reversed(ROUTES['dash'])) + [(84, -1, 11)] + ROUTES['eng'],
+    'swe': lambda a, b: [(86, 4.5, 8), (85.0, 3.8, 8.2)] + ROUTES['eng'],  # in through the forward gland, aft through the box to the aft gland
+    'keyeng': lambda a, b: list(reversed(ROUTES['dash'])) + ROUTES['eng'],
     'dashr': lambda a, b: list(reversed(ROUTES['dash'])),
     'engr': lambda a, b: list(reversed(ROUTES['eng'])),
-    'engdash': lambda a, b: list(reversed(ROUTES['eng'])) + [(84, -1, 11)] + ROUTES['dash'],
-    'bowdash': lambda a, b: list(reversed(ROUTES['bow'])) + ROUTES['dash'],
-    'joy': lambda a, b: list(reversed(ROUTES['dash'])) + [(84, -1, 11)] + ROUTES['cage'],
+    'engdash': lambda a, b: list(reversed(ROUTES['eng'])) + ROUTES['dash'],
+    'bowdash': lambda a, b: list(reversed(ROUTES['bow'][len(BOXF):])) + [(89.7, 3.8, 10.0)] + ROUTES['dash'][len(BOXF):],  # joins the dash run under the seat
+    'joy': lambda a, b: list(reversed(ROUTES['dash'])) + ROUTES['cage'],
 }
 
 
@@ -246,7 +262,7 @@ def sheet1():
     s += text(70, 135, '+', 18, 'start', 'bold') + text(190, 135, '-', 18, 'start', 'bold')
     # Starter and engine
     s += line(95, 110, 95, 88, 'red', 5) + line(95, 88, 860, 88, 'red', 5) + tag(120, 88, 'W57', '2') + box(150, 78, 96, 20, 'fusible link', '', '#ffe2e2')
-    s += box(262, 66, 130, 44, 'BATTERY SWITCH', 'bench forward panel', '#fff4cf') + tag(600, 88, 'W01', '2')
+    s += box(262, 66, 130, 44, 'BATTERY SWITCH', 'forward seat strut', '#fff4cf') + tag(600, 88, 'W01', '2')
     s += box(860, 76, 170, 56, 'STARTER SOLENOID', 'B+ stud, engine', '#e9eefc')
     s += line(1030, 104, 1110, 104, 'gray') + box(1110, 76, 180, 56, 'Engine charging', 'regulator output, confirm', '#e9eefc')
     s += line(175, 220, 175, 248, 'black', 5) + line(175, 248, 860, 248, 'black', 5) + tag(420, 248, 'W02', '2')
@@ -438,7 +454,7 @@ const CONNECTORS = [
 ];
 
 const DEVICES = [
-    ["K1 to K5 relays", [88, 3.6, 6], 0.7],
+    ["K1 to K5 relay terminals", [79.75, 2.85, 5.5], 0.3],
     ["Starter solenoid", [31, -10.6, 15.2], 0.75],
     ["Engine J1, Deutsch DT 12-pin", [31, -10.6, 18.2], 0.5],
     ["Port side light", [108, 31, 17], 0.3],
@@ -446,7 +462,7 @@ const DEVICES = [
     ["Bilge pump", [8, 3, 1.1], 1.1],
     ["Temperature sender", [28, -6.5, 29], 0.4],
     ["Exhaust probe", [25.5, 9.3, 31], 0.3],
-    ["Battery switch, bench forward panel", [89.7, 8, 9], 0.9],
+    ["Battery switch terminals, behind the strut plate", [86, 8, 7.5], 0.35],
     ["Starboard side light", [108, -31, 17], 0.3],
     ["Low oil indicator LED, red", [101.81, -17.9, 29.59], 0.13, [0.9, 0.05, 0.05]]
 ];
@@ -490,7 +506,11 @@ export const minimalWiring = defineFeature(function(context is Context, id is Id
                 joins = append(joins, qCreatedBy(sid, EntityType.BODY));
                 joins = append(joins, qCreatedBy(wid + ("j" ~ k), EntityType.BODY));
             }}
-            opBoolean(context, wid + "u", {{ "tools" : qUnion(joins), "operationType" : BooleanOperationType.UNION }});
+            // A union that fails (a tight kink) leaves the wire as separate segments instead of failing the whole feature.
+            try silent
+            {{
+                opBoolean(context, wid + "u", {{ "tools" : qUnion(joins), "operationType" : BooleanOperationType.UNION }});
+            }}
             paintBody(context, qCreatedBy(wid, EntityType.BODY), w[0], color(w[2][0], w[2][1], w[2][2]));
         }}
         for (var i = 0; i < size(CONNECTORS); i += 1)

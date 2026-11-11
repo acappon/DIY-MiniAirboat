@@ -149,8 +149,10 @@ const OUTFIT = [
   ['Flotation foam, two aft corner blocks', 3.1, 8, 0, 6],
   ['Flotation foam, seat compartment bottoms', 1.4, 81.5, 0, 3.3],
   ['Flotation foam, footwell side blocks, with straps', 4.1, 113, 0, 7.3],
-  // electrical/wire_list.py: wire 8.3 (2 AWG cable 2.8, 16 AWG per the E-11 review), connectors and glands 0.8, relays 0.5, fuse block 0.6, main fuse, inline fuse and bus strips 0.3, battery switch 0.5, marine starter solenoid 0.6, floor conduit and bench sleeve 0.6.
-  ['Harness: all wire, connectors, relays, fuse block, battery switch, solenoid, conduit', 12.2, 62, 0, 7],
+  // electrical/wire_list.py (v1.0.1.3 wiring pass for the seat-module dry box, 2026-11-10): wire 8.7 (2 AWG cable 2.8, 16 AWG per the E-11 review;
+  // was 8.3 before the forward runs were rerouted under the strut and seat base), connectors and glands 0.8, relays 0.5, fuse block 0.6, main fuse,
+  // inline fuse and bus strips 0.3, battery switch 0.5, marine starter solenoid 0.6, floor conduit 0.4 (the bench sleeve is gone).
+  ['Harness: all wire, connectors, relays, fuse block, battery switch, solenoid, conduit', 12.4, 62, 0, 7],
   ['Belt guard', 3, 13, 0, 37],
   ['Radiator brackets and coolant overflow bottle', 3, 25, 0, 40],
   ['Brackets, rivnuts and bolts not counted in other items', 5, 40, 0, 10],
