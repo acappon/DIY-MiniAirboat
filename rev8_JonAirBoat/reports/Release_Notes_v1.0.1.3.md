@@ -57,13 +57,14 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
      - Rudders and linkage: 12 → 8.5 lb, against about 7.8 lb itemized.
      - Stick, pedal and cables: 10 → 8.5 lb, against 6.1 lb itemized.
    - **Weighing:** step 2.13 now weighs both sets before fitting. If either set comes in over its allowance, the load label comes down.
-10. **Totals now** (oars as gear, carbon struts, sandwich seat base, honeycomb rudders, allowances cut): equipment **489.9 lb**, payload **335 lb**, **15 lb short** of 350: about **135 lb of gear** with a 200 lb driver, oars included if they come along.
+10. **Totals now** (oars as gear, carbon struts, sandwich seat base, honeycomb rudders, allowances cut): equipment **489.9 lb**, payload **335 lb**, which **meets the new design load** (below) with 0.1 lb to spare: a 200 lb driver and **135 lb of gear**, oars included if they come along.
     - Dash load label now **MAXIMUM LOAD 380 LB** ... **LEAVES 335 LB**.
     - Capsized flotation **3.9 in** clear, **190 lb** reserve, now counting the folding seatback's closed-cell foam as the float it is (0.35 ft³; it had been booked as nearly neutral). GM 43.6 in, dock trim 0.6°.
+11. **Design load changed** (user, 2026-11-10): **200 lb operator + 135 lb of gear = 335 lb** (was 200 + 150 = 350). Payload is **335.1 lb**, so the requirement is met with only **0.1 lb of margin**: any part that weighs in heavy at build takes the label down. `minimal_1448.js` and `stability_upright.js` now use 135 lb of gear (top speed 34.25 mph and hump margin 259 lbf with the design load; GM 39.8 in tied down, 3.9° list with the loose gear slid to one side). The capsize check keeps its heavier 200 lb of strapped gear as a conservative case.
 
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
-- **Payload is 15 lb short** of the 350 lb design load (driver + 150 lb gear): about 135 lb of gear with a 200 lb driver, including the oars (about 7.2 lb) when they come along. The rudder and controls allowances now keep only about 3 lb of margin over the itemized parts; weigh them in step 2.13.
+- **Payload margin is 0.1 lb** over the 335 lb design load (200 lb operator + 135 lb gear, oars included when aboard). The rudder and controls allowances (8.5 lb each) and the brackets allowance (5 lb) are the only cushion: weigh in step 2.13 and at the end of the build, and lower the label if the boat comes in heavy.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - **Wiring:** the wire routes in `CAD/FeatureScript/Minimal_wiring.fs` (from `electrical/wire_list.py`) still end at the old dry box points; the new box keeps the battery, fuse block, relays and switch within about 1–4 in of them, but the routes, the wire list and the schematic need a pass for the new box exits and the switch plate.
 - Capsized float height is about 3.9 in (v1.0.1.2: 4.0 in), with the seatback foam counted. It depends on the seatback being closed-cell foam and staying attached.

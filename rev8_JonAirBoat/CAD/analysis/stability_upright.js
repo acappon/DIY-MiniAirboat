@@ -73,9 +73,9 @@ function caseRun(name, crew) {
 }
 
 const GEAR_Y = 150;
-const tied = [['Gear tied down behind the driver', 150, 60, 0, 10]];
+const tied = [['Gear tied down behind the driver', 135, 60, 0, 10]];   // design gear load, 2026-11-10 (was 150)
 // Scattered loose: six bundles on the floor and benches.
-const scatter = [['Loose 1', 30, 110, 12, 6], ['Loose 2', 25, 95, -14, 6], ['Loose 3', 30, 60, 14, 6], ['Loose 4', 25, 50, -16, 6], ['Loose 5', 20, 82, 18, 16], ['Loose 6', 20, 25, -18, 17]];
+const scatter = [['Loose 1', 27, 110, 12, 6], ['Loose 2', 22.5, 95, -14, 6], ['Loose 3', 27, 60, 14, 6], ['Loose 4', 22.5, 50, -16, 6], ['Loose 5', 18, 82, 18, 16], ['Loose 6', 18, 25, -18, 17]];
 // Loose gear after it slides. Floor half width about 23 in.
 const slidPort = scatter.map(s => [s[0], s[1], s[2], 23, 6]);
 const slidBow = scatter.map(s => [s[0], s[1], 118, s[3] / 2, 8]);
@@ -83,8 +83,8 @@ const slidAft = scatter.map(s => [s[0], s[1], 42, s[3], 6]);
 
 const cases = [
   ['1. Driver only', [DRIVER]],
-  ['2. Driver + 150 lb tied down', [DRIVER, ...tied]],
-  ['3a. Driver + 150 lb loose, scattered', [DRIVER, ...scatter]],
+  ['2. Driver + 135 lb tied down', [DRIVER, ...tied]],
+  ['3a. Driver + 135 lb loose, scattered', [DRIVER, ...scatter]],
   ['3b. Loose gear slid to one side', [DRIVER, ...slidPort]],
   ['3c. Loose gear slid forward', [DRIVER, ...slidBow]],
   ['3d. Loose gear slid aft', [DRIVER, ...slidAft]],

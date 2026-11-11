@@ -174,7 +174,7 @@ const ENGINES = [
 const CREW = {
   solo: [['Driver', 200, 83.5, 0, 27]],
   soloGear60: [['Driver', 200, 83.5, 0, 27], ['Gear between the benches', 60, 60, 0, 10]],
-  soloGear150: [['Driver', 200, 83.5, 0, 27], ['Gear between the benches', 150, 60, 0, 10]],
+  soloGear135: [['Driver', 200, 83.5, 0, 27], ['Gear between the benches', 135, 60, 0, 10]],   // design load, 2026-11-10 (was 150)
   plus1: [['Driver', 200, 83.5, 11, 27], ['Passenger on the seat', 200, 83.5, -11, 27]],
 };
 const hullItem = ['Hull, Lowe 1448 with its benches', h.hullLb, h.hullX, 0, 7];
@@ -197,13 +197,13 @@ for (const [ek, en, hp, lb, propLb, T0, Vp] of ENGINES) {
 console.table(out);
 
 // ---------------- Engine budget (2026-11-03 targets) ----------------
-// Targets: driver + 150 lb gear within the 825 lb plate; planes easily; at least 33 mph.
+// Targets: driver + 135 lb gear within the 825 lb plate (was 150 lb until 2026-11-10); planes easily; at least 33 mph.
 // (The driver + passenger case was dropped 2026-11-03; plus1 is still reported above for reference.)
 // Sweep the engine system weight (engine, reduction, radiator, exhaust, extra stand over the 45 lb in OUTFIT;
 // prop 15 lb) and the power used at the prop. Each cell: worst-case top mph / worst hump margin (lbf).
 // Top speed depends almost only on power; the plate sets the weight limit.
 const CASES = {
-  soloGear150: [['Driver', 200, 83.5, 0, 27], ['Gear amidships', 150, 60, 0, 10]],
+  soloGear135: [['Driver', 200, 83.5, 0, 27], ['Gear amidships', 135, 60, 0, 10]],
 };
 const outfitLb = OUTFIT.reduce((s, r) => s + r[1], 0);
 const budget = [];
@@ -222,7 +222,7 @@ for (const sysLb of [100, 125, 150, 175, 200]) {
   }
   budget.push(row);
 }
-console.log('Engine budget: worst-case top mph / hump margin lbf (payload must be at least 350 lb)');
+console.log('Engine budget: worst-case top mph / hump margin lbf (payload must be at least 335 lb: 200 lb driver + 135 lb gear)');
 console.table(budget);
 
 module.exports = { h, OUTFIT, ENGINES, hullItem, mass, floatAt, top, humpMargin };
