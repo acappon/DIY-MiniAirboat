@@ -26,9 +26,33 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 5. **Flotation restored.** The middle bench foam (about 4.8 ft³) was most of the capsized boat's forward flotation; without it the boat sank stern first. Now: seat pad, compartment floors and **two 6 in footwell side blocks** (X 98–128, Z 1.5–13; the starboard one has a gap for the console foot). Capsized: level (list −0.3°, pitch −0.4°), hull bottom about **3.0 in** clear (was 4.0), **169 lb** reserve (was 258). The fire extinguisher moves to the top of the starboard block (about X 99.5), and the throttle cable climbs over it.
 6. **Totals.** Equipment **496.0 lb** (v1.0.1.2: 471.9), payload **329 lb**, **21 lb short** of the 350 lb for a 200 lb driver and 150 lb of gear: the driver can carry about 129 lb of gear. The dash load label now reads **MAXIMUM LOAD 370 LB** ... **LEAVES 325 LB** (was 395 and 350). Upright stability barely changes (GM 43.3 in, prop-torque heel 3.9°, dock trim 0.63°); top speed about 34.75 mph. New structural checks: struts factor 1.5 at 4 g with two people, end clips 3.5–4.8, seat base 2.5, seatback brackets 1.5. BOM total about **$15,745**.
 
+7. **Oars and oarlocks** (new Build Guide step **2.18**, BOM lines 88–89, `CAD/analysis/oars.js`). For rowing facing aft on the folded seatback with the engine off, and carrying the oars in their locks.
+   - **Oarlocks:** closed-ring oarlocks in top-mount sockets on **4 in 6061 risers** bolted through each rail at **X 66**, 10-1/2 in aft of the seat's aft edge. The pins sit about 9 in above the folded seatback. 7 ft oars with 24 in inboard leave the handle ends 30 in apart at the finish, and the hands pass about 3-1/2 in beside the knees. The shaft dips about 24° to the water, and the blades stay far outboard of the cage.
+   - **Rowing clearances:** at the finish, the rower's port elbow clears the stick grip by about 5 in with the stick at neutral (tie it there while rowing), and the starboard elbow clears the dash by about 9-1/2 in.
+   - **Shipping: yes, it works.** Each oar swings blade forward in its ring and lies just inside the rail on a padded rest with a rubber strap at X 118, from the handle at X 42 to the blade tip at X 126. Without the risers, the starboard oar would lie on the console arm where it meets the gunwale; with them it passes **about 4 in above** it. Clearances to the other parts:
+     - extinguisher: 5 in
+     - dash: 10 in
+     - the stick: 10 in
+     - the driver's elbow on the stick: about 8 in
+     - opened storage lids: 4 in
+     - sidelights: 7 in
+     - fuel line: 8 in
+     - stand: 6 in
+   - **Structural:** a 100 lbf pull on the handle puts about 150 lbf on the pin, giving these factors:
+     - riser: 31
+     - bolts: 5.0
+     - rail bearing with the doubler: 4.3
+   - **Weight:** oars 7.2 lb plus hardware 4.0 lb is **11.2 lb**.
+     - Equipment **507.2 lb**, payload **318 lb**, **32 lb short** of 350: about 118 lb of gear with a 200 lb driver.
+     - Dash load label now **MAXIMUM LOAD 360 LB** ... **LEAVES 315 LB**.
+     - Flotation unchanged: 3.0 in clear, 171 lb reserve (the oars float).
+     - GM 42.9 in.
+   - **Cost and hours:** BOM total about **$15,950**. Build Guide about 212 DIY h and 101 pro h.
+
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
-- **Payload is 21 lb short** of the 350 lb design load (driver + 150 lb gear): about 129 lb of gear with a 200 lb driver.
+- **Payload is 32 lb short** of the 350 lb design load (driver + 150 lb gear): about 118 lb of gear with a 200 lb driver (the oars count against it).
+- Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - **Wiring:** the wire routes in `CAD/FeatureScript/Minimal_wiring.fs` (from `electrical/wire_list.py`) still end at the old dry box points; the new box keeps the battery, fuse block, relays and switch within about 1–4 in of them, but the routes, the wire list and the schematic need a pass for the new box exits and the switch plate.
 - Capsized float height is about 3.0 in, down from 4.0 in; 8 in side blocks would restore 4 in but leave the footwell too narrow for a passenger's feet.
 - `reports/Structural_Analysis_v1.0.1.2.md` and `reports/Drivetrain_800R_ETEC.md` still describe the grab rail; they are the v1.0.1.2 record and will be superseded at release.
@@ -38,7 +62,8 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 - "Lowe 1448 Boat (reference mesh)": new feature "Remove middle bench (v1.0.1.3 seat module)" deletes the "Bench - Middle" composite. (The Main assembly uses only the gunwale rail and handles from this studio.)
 - "Crew mannequins": hip point X 83.5, Z 14.
 - "Main assembly": the whole cockpit Part Studio re-inserted and the 71 old cockpit instances deleted (18 of them were left dangling by the removed grab rail, bench sleeve and dry box case). No mates were affected.
-- **Not yet:** the dash load label ("Minimal dash (FeatureScript)", 370 / 325 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
+- "Minimal cockpit (FeatureScript)" uploaded again with the oarlocks, rests and shipped oars; the Part Studio regenerates with 123 parts. Preview: `renderedImages/wip_oars_shipped.png`.
+- **Not yet:** the dash load label ("Minimal dash (FeatureScript)", now 360 / 315 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
 
 ## Still to do before release
 - Update the electrical documents for the new dry box, rewrite the stability and flotation reports for v1.0.1.3, re-render the build step images, and regenerate the Build Guide PDF.

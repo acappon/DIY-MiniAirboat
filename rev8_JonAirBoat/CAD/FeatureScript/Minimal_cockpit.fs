@@ -13,6 +13,9 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 //   - Fuel tank on the front deck step with its gauge sender, straps and fuel line
 //   - Floor conduit on the centerline from the dry box aft wall to the engine
 //   - Sled oil tank upright on the starboard side frame of the stand, away from the exhaust; envelope until it is measured
+//   - Oarlocks for rowing facing aft on the folded seatback: closed rings in top-mount sockets on 4 in risers on the rails
+//     at X 66, 7 ft oars shipped in the locks along inside each rail, blades forward, on a strapped rest at X 118, clear
+//     above the console arm (CAD/analysis/oars.js has the rowing and stowing clearances)
 //   - Capsize flotation foam: bow wedge under the shelf, two aft corner blocks, the seat compartment bottoms and two
 //     footwell side blocks, sized in CAD/analysis/flotation_inverted.js; the closed-cell seat pad counts too
 // Sizes are placeholders until the real parts are bought, and the cable and line routes are provisional.
@@ -28,6 +31,8 @@ const STRUT_X = [76.5, 85.5];   // aft faces of the two 1 x 2 seat struts; the d
 const STRUT_Z = [9, 11];        // old bench-top level
 const BOX = [77.5, 85.5, 5, 3.75, 11]; // dry box X0, X1, half width, Z0, Z1 (outside)
 const SEAT = [76.5, 91.5, 19, 11.625, 14.125]; // seat pad X0, X1, half width, Z0, Z1
+const OARLOCK = [66, 34.5, 19.5, 4]; // X, |Y| of the pin, rail top Z, riser height
+const OAR_Z = 25.5;                 // shaft center in the ring, shipped and rowing
 const PIVOT = [75.9, 14.6];     // seatback hinge axis, just above the foam
 
 // Inside half width of the hull skin, from rays on the reference mesh: sides flare out about 0.5 in per inch of
@@ -282,6 +287,52 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
         paintBody(context, qCreatedBy(id + "oilTank", EntityType.BODY), "Envelope - sled oil tank", color(0.85, 0.7, 0.3, 0.55));
         mkCyl(context, id + "oilFiller", vector(17.5, -13.75, 26), vector(17.5, -13.75, 26.8), 1);
         paintBody(context, qCreatedBy(id + "oilFiller", EntityType.BODY), "Oil tank filler cap", dark);
+
+        // ---- Oars: oarlocks on 4 in risers at X 66, oars shipped in the locks along inside each rail ----
+        // The rower sits facing aft on the folded seatback (top about Z 16.4), so the pins are about 9 in above the seat and
+        // the hands pass beside the knees. Shipped, each oar swings blade forward in its ring and lies on a rest at X 118,
+        // inside the rail and about 4 in above the console arm where it meets the starboard gunwale.
+        const oarC = color(0.75, 0.77, 0.8);
+        const bladeC = color(0.1, 0.1, 0.1);
+        const ringC = color(0.6, 0.6, 0.62);
+        for (var os in [1, -1])
+        {
+            const sn = os > 0 ? "port" : "starboard";
+            const oy = function(x) { return os * (OARLOCK[1] - (x - OARLOCK[0]) * 3 / 52); };
+            const rz = OARLOCK[2] + 0.125;
+            mkBox(context, id + ("oarDoubler" ~ sn), OARLOCK[0] - 2, OARLOCK[0] + 2, os * (OARLOCK[1] - 0.75), os * (OARLOCK[1] + 0.75), OARLOCK[2], rz);
+            paintBody(context, qCreatedBy(id + ("oarDoubler" ~ sn), EntityType.BODY), "Oarlock doubler 1/8 6061 - " ~ sn, alu);
+            mkBox(context, id + ("oarRiser" ~ sn), OARLOCK[0] - 1.5, OARLOCK[0] + 1.5, os * (OARLOCK[1] - 0.75), os * (OARLOCK[1] + 0.75), rz, rz + OARLOCK[3]);
+            paintBody(context, qCreatedBy(id + ("oarRiser" ~ sn), EntityType.BODY), "Oarlock riser 1-1/2 x 3 x 4 6061, pocketed - " ~ sn, alu);
+            const sz = rz + OARLOCK[3];
+            mkCyl(context, id + ("oarSocket" ~ sn), vector(OARLOCK[0], os * OARLOCK[1], sz), vector(OARLOCK[0], os * OARLOCK[1], sz + 0.15), 0.9);
+            paintBody(context, qCreatedBy(id + ("oarSocket" ~ sn), EntityType.BODY), "Oarlock socket, top mount - " ~ sn, ringC);
+            mkCyl(context, id + ("oarPin" ~ sn), vector(OARLOCK[0], os * OARLOCK[1], sz + 0.15), vector(OARLOCK[0], os * OARLOCK[1], OAR_Z - 1.05), 0.25);
+            paintBody(context, qCreatedBy(id + ("oarPin" ~ sn), EntityType.BODY), "Oarlock shank - " ~ sn, ringC);
+            var ringPts = [];
+            for (var k = 0; k <= 8; k += 1)
+                ringPts = append(ringPts, vector(OARLOCK[0], os * OARLOCK[1] + 1.1 * cos(k * 45 * degree), OAR_Z + 1.1 * sin(k * 45 * degree)));
+            mkPipe(context, id + ("oarRing" ~ sn), ringPts, 0.15);
+            paintBody(context, qCreatedBy(id + ("oarRing" ~ sn), EntityType.BODY), "Oarlock, closed ring - " ~ sn, ringC);
+
+            // Forward rest: an angle clip on the rail with a padded cradle and a rubber strap over the shaft.
+            const rx = 118;
+            mkBox(context, id + ("oarRestPost" ~ sn), rx - 0.5, rx + 0.5, os * 32.2, os * 32.325, OARLOCK[2] - 1.5, OAR_Z - 0.8);
+            paintBody(context, qCreatedBy(id + ("oarRestPost" ~ sn), EntityType.BODY), "Oar rest clip 1/8 6061 on the rail - " ~ sn, alu);
+            mkBox(context, id + ("oarRest" ~ sn), rx - 0.75, rx + 0.75, os * 30.2, os * 32.325, OAR_Z - 1, OAR_Z - 0.8);
+            paintBody(context, qCreatedBy(id + ("oarRest" ~ sn), EntityType.BODY), "Oar rest cradle, padded, with rubber strap - " ~ sn, dark);
+
+            // Shipped oar, 84 in: grip 42-47, shaft to the blade at 104, blade 104-126 lying flat; stop just aft of the ring.
+            mkCyl(context, id + ("oarGrip" ~ sn), vector(42, oy(42), OAR_Z), vector(47, oy(47), OAR_Z), 0.65);
+            paintBody(context, qCreatedBy(id + ("oarGrip" ~ sn), EntityType.BODY), "Oar 7 ft, grip - " ~ sn, bladeC);
+            mkCyl(context, id + ("oarShaft" ~ sn), vector(47, oy(47), OAR_Z), vector(104, oy(104), OAR_Z), 0.8);
+            paintBody(context, qCreatedBy(id + ("oarShaft" ~ sn), EntityType.BODY), "Oar 7 ft, aluminum shaft - " ~ sn, oarC);
+            mkCyl(context, id + ("oarStop" ~ sn), vector(64.2, oy(64.2), OAR_Z), vector(64.8, oy(64.8), OAR_Z), 1.05);
+            paintBody(context, qCreatedBy(id + ("oarStop" ~ sn), EntityType.BODY), "Oar rubber stop, 24 in inboard - " ~ sn, bladeC);
+            const yb = oy(115);
+            mkBox(context, id + ("oarBlade" ~ sn), 104, 126, yb - 3, yb + 3, OAR_Z - 0.3, OAR_Z + 0.3);
+            paintBody(context, qCreatedBy(id + ("oarBlade" ~ sn), EntityType.BODY), "Oar 7 ft, blade 6 x 22 - " ~ sn, bladeC);
+        }
 
         // ---- Capsize flotation foam, added to the foam in the rear bench. CAD/analysis/flotation_inverted.js has the sizing. ----
         // Footwell side blocks, 6 in thick against the hull side, Z 1.5 to 13, forward of the stick; the starboard one stops

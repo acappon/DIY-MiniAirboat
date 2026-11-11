@@ -99,6 +99,12 @@ row('Seat', 'Strut end clip, bolt bearing in the 0.080 hull side', `Two people, 
 const ply = t => 15 * t * t / 6;   // seat base section modulus, 15 in wide
 row('Seat', 'Seat base 3/8 marine plywood, 5 in past the forward strut', '200 lb standing on the front edge', 200 * 5 / ply(0.375), 7000, 'psi', 'Fir marine plywood, about 7,000 psi to break; 6 mm would be 7,200 psi');
 row('Seat', 'Seatback bracket 1/8 x 1-1/4 6061, one side', 'Driver leaning back, 150 lbf at 10 in', 150 * 10 / 2 / (0.125 * 1.25 ** 2 / 6), FY, 'psi');
+// ---- Oarlocks (v1.0.1.3): 7 ft oars, 24 in inboard, blade center about 49 in outboard of the pin; pin 6 in above the rail top ----
+// A hard pull of 100 lbf on the handle puts 100 x (24 + 49) / 49 = 149 lbf on the pin, fore and aft.
+const OAR_PIN = 100 * (24 + 49) / 49, OAR_ARM = 6, OAR_BOLTS = 2.25;
+row('Oarlock', 'Riser 1-1/2 x 3 6061, bending at the base (pocketed to 1/8 in walls)', 'Hard pull, 100 lbf at the handle', OAR_PIN * OAR_ARM / ((1.5 * 27 - 1.25 * 2.75 ** 3) / 18), FY, 'psi');
+row('Oarlock', 'Riser, two 5/16-18 through the rail and doubler, 2-1/4 in apart', 'Hard pull, tension in one bolt', OAR_PIN * OAR_ARM / OAR_BOLTS, 2000, 'lbf', '316 stainless 5/16-18 about 2,000 lbf working');
+row('Oarlock', 'Rail bearing under the riser, 1/8 in doubler 1-1/2 x 4', 'Hard pull, prying on the rail lip', OAR_PIN * OAR_ARM / OAR_BOLTS, 0.3125 * 0.08 * 1.5 * F5052 * 2, 'lbf', 'Two bolt holes in the 0.080 rail, doubler under it');
 row('Seat', 'Dry box hanging from the struts, rivets', `${G_SLAM} g hard landing`, G_SLAM * (4.5 + 3.9 + 2) / 8, 150, 'lbf each', 'Eight 3/16 aluminum rivets; battery, box and fuse block');
 
 // ---- Hull, assumed bottom 0.100 and sides 0.080 in 5052; confirm by measuring ----

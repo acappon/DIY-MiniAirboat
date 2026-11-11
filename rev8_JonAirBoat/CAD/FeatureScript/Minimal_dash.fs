@@ -23,7 +23,7 @@ const KEY_Y = -17;
 const FLAP_DEG = 55;    // how far the weather flaps are shown open
 const SHELF_Y = [-14.7, -4.9];
 // Text of the load label and its letter height. The numbers come from CAD/analysis/minimal_1448.js.
-const LOAD_LABEL = [["MAXIMUM LOAD 370 LB", 0.33], ["PEOPLE + GEAR + FUEL", 0.24], ["FULL TANK 45 LB (EMPTY 8 LB) LEAVES 325 LB", 0.19],
+const LOAD_LABEL = [["MAXIMUM LOAD 360 LB", 0.33], ["PEOPLE + GEAR + FUEL", 0.24], ["FULL TANK 45 LB (EMPTY 8 LB) LEAVES 315 LB", 0.19],
     ["KEEPS YOU WITHIN THE 825 LB CAPACITY PLATE", 0.19], ["SHIFT GEAR TO CENTER BUBBLE. TIE DOWN", 0.19]];
 
 function mkCyl(context is Context, id is Id, a is Vector, b is Vector, r is number)
