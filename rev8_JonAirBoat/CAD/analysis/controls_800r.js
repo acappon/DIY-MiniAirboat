@@ -50,7 +50,9 @@ const crank = 3.4, pedalDeg = 20;
 console.log(`Pedal ${pedalDeg} deg of swing gives ${(crank * Math.sin(pedalDeg * Math.PI / 180)).toFixed(2)} in of cable travel`);
 
 const weights = [
-  ['Rudders, 8 x 30 in, two skins of 0.040 with ribs, 2', 4.4],
+  // Honeycomb blades (v1.0.1.3 weight pass; skins of 0.040 over ribs were 4.4 lb the pair): per blade, two 0.020 in 5052 skins
+  // 2 x 240 x 0.020 x 0.097 = 0.93 lb, 1/2 in aluminum hex core at 3.1 lb/ft^3 0.22 lb, edge closures, hard points and adhesive 0.25 lb.
+  ['Rudders, 8 x 30 in, aluminum honeycomb: 0.020 skins over 1/2 in hex core, 2', 2 * (2 * 240 * 0.020 * 0.097 + 240 * 0.5 * 3.1 / 1728 + 0.25)],
   ['Rudder shafts 1 x 0.125, 2', 2 * tube(1, 0.125).lbPerIn * 34.7],
   ['Upper arms 1 x 0.065, 23 in, 2', 2 * tube(1, 0.065).lbPerIn * 23],
   ['Lower brackets, bearings, horns, cable arm', 1.2],
@@ -63,7 +65,7 @@ const stick = [
   ['Heel rests', 0.3],
   ['Throttle cable, about 16 ft at 0.1 lb/ft', 1.6],
 ];
-for (const [label, list, allowance] of [['Rudders and linkage', weights, 12], ['Stick, pedal and cables', stick, 10]]) {
+for (const [label, list, allowance] of [['Rudders and linkage', weights, 8.5], ['Stick, pedal and cables', stick, 8.5]]) {
   const lb = list.reduce((t, [, w]) => t + w, 0);
   console.log(`${label}: ${lb.toFixed(1)} lb itemized against the ${allowance} lb allowance`);
 }

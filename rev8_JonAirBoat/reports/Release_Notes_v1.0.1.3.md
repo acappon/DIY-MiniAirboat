@@ -50,14 +50,20 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
    - **Galvanic isolation:** carbon touching aluminum corrodes the aluminum. Each strut gets one ply of glass. Every fastener through the carbon gets a 6061 crush sleeve, a G10 shim at the aluminum, and stainless bolts in Tef-Gel. That covers the end clips, dry box, compartment walls, switch plate, seatback brackets and seat base. The dry box and compartment walls are now bolted to the struts, not riveted.
    - **Seat base:** now a 3/8 in sandwich (5/16 in PVC foam core, 0.020 in E-glass skins, potted bolt inserts), down from 4.3 lb of plywood to **2.3 lb**. With 200 lb on the front edge: skins factor 3.0, core shear 3.5 (the plywood was 2.5).
    - **Weight:** **5.1 lb saved.**
-9. **Totals now** (oars as gear, carbon struts, sandwich seat base): equipment **494.9 lb**, payload **330 lb**, **20 lb short** of 350: about **130 lb of gear** with a 200 lb driver, oars included if they come along.
-   - Dash load label now **MAXIMUM LOAD 375 LB** ... **LEAVES 330 LB**.
-   - Capsized flotation 3.0 in clear, 171 lb reserve. GM 43.3 in, dock trim 0.64°.
    - **Cost and hours:** about **+$240** (BOM total about **$16,190**) and +3 DIY h (step 2.17 now 19 h).
+9. **Honeycomb rudder blades; rudder and controls allowances cut** (BOM line 44, step 2.13, `CAD/analysis/controls_800r.js`).
+   - **Rudder blades:** aluminum honeycomb, 0.020 in 5052 skins over 1/2 in hex core, with closed edges and potted hard points at the shaft and horn bolts. About 2.8 lb the pair, down from 4.4 lb for 0.040 skins over ribs. About +$80 (BOM total about **$16,270**).
+   - **Allowances:** both cut to **8.5 lb** (5 lb off in all), keeping a margin over the itemized parts.
+     - Rudders and linkage: 12 → 8.5 lb, against about 7.8 lb itemized.
+     - Stick, pedal and cables: 10 → 8.5 lb, against 6.1 lb itemized.
+   - **Weighing:** step 2.13 now weighs both sets before fitting. If either set comes in over its allowance, the load label comes down.
+10. **Totals now** (oars as gear, carbon struts, sandwich seat base, honeycomb rudders, allowances cut): equipment **489.9 lb**, payload **335 lb**, **15 lb short** of 350: about **135 lb of gear** with a 200 lb driver, oars included if they come along.
+    - Dash load label now **MAXIMUM LOAD 380 LB** ... **LEAVES 335 LB**.
+    - Capsized flotation 3.0 in clear, 174 lb reserve. GM 43.6 in, dock trim 0.6°.
 
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
-- **Payload is 20 lb short** of the 350 lb design load (driver + 150 lb gear): about 130 lb of gear with a 200 lb driver, including the oars (about 7.2 lb) when they come along. The rudder set (12 lb allowance, 9.4 lb itemized) and the stick, pedal and cables (10 lb, 6.1 lb itemized) carry about 6.5 lb of allowance that should come back once the parts are weighed.
+- **Payload is 15 lb short** of the 350 lb design load (driver + 150 lb gear): about 135 lb of gear with a 200 lb driver, including the oars (about 7.2 lb) when they come along. The rudder and controls allowances now keep only about 3 lb of margin over the itemized parts; weigh them in step 2.13.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - **Wiring:** the wire routes in `CAD/FeatureScript/Minimal_wiring.fs` (from `electrical/wire_list.py`) still end at the old dry box points; the new box keeps the battery, fuse block, relays and switch within about 1–4 in of them, but the routes, the wire list and the schematic need a pass for the new box exits and the switch plate.
 - Capsized float height is about 3.0 in, down from 4.0 in; 8 in side blocks would restore 4 in but leave the footwell too narrow for a passenger's feet.
@@ -69,7 +75,7 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 - "Crew mannequins": hip point X 83.5, Z 14.
 - "Main assembly": the whole cockpit Part Studio re-inserted and the 71 old cockpit instances deleted (18 of them were left dangling by the removed grab rail, bench sleeve and dry box case). No mates were affected.
 - "Minimal cockpit (FeatureScript)" uploaded again with the oarlocks, rests and shipped oars; the Part Studio regenerates with 123 parts. Preview: `renderedImages/wip_oars_shipped.png`.
-- **Not yet:** the carbon strut and sandwich seat base part names and colors (repo master only; geometry unchanged), and the dash load label ("Minimal dash (FeatureScript)", now 375 / 330 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
+- **Not yet:** the carbon strut and sandwich seat base part names and colors, and the honeycomb rudder envelope name in "Minimal 800R layout" (repo masters only; geometry unchanged), and the dash load label ("Minimal dash (FeatureScript)", now 380 / 335 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
 
 ## Still to do before release
 - Update the electrical documents for the new dry box, rewrite the stability and flotation reports for v1.0.1.3, re-render the build step images, and regenerate the Build Guide PDF.

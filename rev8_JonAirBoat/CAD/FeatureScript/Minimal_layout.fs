@@ -405,7 +405,7 @@ export const minimal800RLayout = defineFeature(function(context is Context, id i
             {
                 const rid = id + ("rudder" ~ (s > 0 ? "P" : "S"));
                 mkBox(context, rid, -10, -2, s * 14 - 0.25, s * 14 + 0.25, 21, 51);
-                paintBody(context, qCreatedBy(rid, EntityType.BODY), "Envelope - rudder", plateC);
+                paintBody(context, qCreatedBy(rid, EntityType.BODY), "Envelope - rudder, aluminum honeycomb blade", plateC);
             }
             const topCage = PROP_Z + CAGE_R + 0.625;
             mkBox(context, id + "lightBar", 7, 9, -10, 10, topCage, topCage + 3);

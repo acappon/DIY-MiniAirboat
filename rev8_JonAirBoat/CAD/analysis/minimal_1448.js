@@ -97,9 +97,11 @@ const OUTFIT = [
   // 41.5 lb stand on four separate shoes, plus 7.6 lb of hull fastening (stand_800r.js, 2026-11-03).
   ['Engine stand (bolted aluminum) on four shoes, with doublers, clips, cage foot pads and their bolts', 49.1, 18, 0, 22],
   ['Prop cage, thin-wall aluminum tube, with mesh guard', 45, 4, 0, 38],
-  ['Twin rudders and linkage', 12, -6, 0, 36],
+  // Rudders and controls: allowances cut 2026-11-10 (user) to 8.5 lb each, keeping a margin over the itemized parts in
+  // controls_800r.js (honeycomb rudder blades: about 7.8 lb; stick, pedal and cables 6.1 lb). Build Guide 2.13 weighs them.
+  ['Twin rudders and linkage (honeycomb blades)', 8.5, -6, 0, 36],
   // Cockpit, 2026-11-03 (seat module 2026-11-10): driver on the seat module where the middle bench was, stick to port on the rib at X 95, throttle pedal with heel rests, push-pull cables along the hull sides.
-  ['Stick, rudder cable, throttle pedal and cable, heel rests', 10, 70, 8, 8],
+  ['Stick, rudder cable, throttle pedal and cable, heel rests', 8.5, 70, 8, 8],
   ['Small lithium battery', 4.5, 83.6, 0, 6.5],
   // Seat module, v1.0.1.3 (Minimal_cockpit.fs), replacing the middle bench and its dry box case. Estimates until weighed:
   // struts (carbon, v1.0.1.3 weight pass) 2 x 58.8 in of 1 x 2 x 1/8 roll-wrapped carbon tube 4.5, glass isolation ply 0.2, sleeves and G10 shims 0.1,

@@ -17,8 +17,8 @@ const ITEMS = [
   ['Hull upper sides, benches, decks, transom', 138, 65, 0, 2, 19, ALU],
   ['Stand, shoes, doublers, clips, pads', 49.1, 18, 0, 3, 56, ALU],
   ['Prop cage and mesh', 45, 4, 0, 18, 88, ALU],
-  ['Twin rudders and linkage', 12, -6, 0, 20, 50, ALU],
-  ['Stick, cables, pedal, heel rests', 10, 70, 8, 1, 30, 3],
+  ['Twin rudders and linkage', 8.5, -6, 0, 20, 50, ALU],
+  ['Stick, cables, pedal, heel rests', 8.5, 70, 8, 1, 30, 3],
   ['Battery', 4.5, 83.6, 0, 4, 9, 2.5],
   // Seat module, v1.0.1.3. The closed-cell seat pad and the compartment foam are counted as foam below, not here.
   ['Seat struts (carbon) and clips', 5.6, 81.5, 0, 9, 11, 1.8],
