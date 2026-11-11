@@ -73,7 +73,7 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 13. **Reports for v1.0.1.3:** `Stability_Analysis_v1.0.1.3.md`, `Flotation_Inverted_v1.0.1.3.md`, `Structural_Analysis_v1.0.1.3.md` and `Electrical_Compliance_v1.0.1.3.md` supersede the v1.0.1.2 reports (kept as the record).
 
 ## Known issues and open items
-- The **passenger handhold** went with the grab rail; nothing replaces it yet.
+- **No passenger handhold:** it went with the grab rail and is no longer a requirement (user, 2026-11-10). A passenger holds the seat edge or the console arm.
 - **Payload is 1.9 lb over** the 335 lb design load (200 lb operator + 135 lb gear, oars and dock lines included when aboard). The label reads 380 / 335. The rudder and controls allowances (8.5 lb each) and the brackets allowance (5 lb) are the only cushion: weigh in step 2.13 and at the end of the build.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - Capsized float height is about 3.9 in (v1.0.1.2: 4.0 in), with the seatback foam counted. It depends on the seatback being closed-cell foam and staying attached.
@@ -96,7 +96,7 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 ## Still to do before release
 - Re-render the build step images (add the seat module, oars and oarlocks to the Build steps assembly), regenerate the schematic PDF and the Build Guide PDF.
 - Upload "Minimal 800R layout" (rudder name), create version v1.0.1.3, export the STEP files and re-render (add the cockpit to Render stages).
-- Decide the passenger handhold and whether `Fuel_tank.fs` (older C: copy only; a "Fuel tank" Feature Studio also exists in the Onshape "1652 hull" workspace) is kept.
+- `Fuel_tank.fs` (in the older C: copy only) is the tank and hold-down for the abandoned 1652 hull study (6.6 gal tank across the beam on floor rails). Its Onshape counterpart is in the "1652 hull" workspace. It is not used by the 1448 design, whose 6 gal tank, straps, sender and line are in `Minimal_cockpit.fs`. Not needed for this release.
 - New renders (user, 2026-11-10):
   - **Night snake hunting:** operator rowing facing aft along a bank, searchlight aimed at the bank. Gear aboard (cooler, duffel bag, life jackets) so the oars read as carried gear, plus a snake tong / noose pole.
   - **25 mph:** one render with the oars and gear aboard, one without.
