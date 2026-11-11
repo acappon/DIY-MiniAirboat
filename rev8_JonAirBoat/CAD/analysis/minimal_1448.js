@@ -111,10 +111,9 @@ const OUTFIT = [
   ['Seat: 3/8 in fiberglass/foam sandwich base, 2-1/2 in closed-cell pad, vinyl, bolts', 5.2, 84, 0, 12.9],
   ['Folding seatback, padded both sides, hinge brackets and pivot', 3, 75, 0, 21],
   ['Seat module small parts: rivets, sealing strips, battery switch plate', 0.4, 81.5, 0, 9],
-  // Oars, v1.0.1.3 (Minimal_cockpit.fs): for rowing facing aft on the folded seatback, shipped along inside each rail in the locks.
-  // Two 7 ft oars, aluminum shaft and plastic blade, with rubber stops 7.2 (3.6 each). Closed-ring oarlocks 0.7, top-mount sockets 0.5,
+  // Oarlocks, v1.0.1.3 (Minimal_cockpit.fs): for rowing facing aft on the folded seatback, oars shipped along inside each rail in the locks.
+  // The oars themselves (7 ft pair, about 7.2 lb) are operator gear: they come out of the payload, like any other gear. Closed-ring oarlocks 0.7, top-mount sockets 0.5,
   // 4 in 6061 risers, pocketed 1.8, 1/8 in doublers and bolts 0.4, two forward oar rests with rubber straps 0.6. Estimates until weighed.
-  ['Oars, 7 ft pair, shipped along the rails (blades forward)', 7.2, 90, 0, 25.5],
   ['Oarlocks: closed rings, sockets, 4 in risers, doublers, two forward oar rests', 4, 73.5, 0, 22.5],
   // On the front deck step (top at Z 16.55).
   ['Fuel, 6 gal portable tank, full', 45, 143, 0, 21],

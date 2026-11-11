@@ -27,8 +27,7 @@ const ITEMS = [
   ['Seat base sandwich and vinyl', 3.4, 84, 0, 11.25, 14.1, 0.45],
   ['Folding seatback', 3, 75, 0, 14.5, 29, 0.5],
   ['Seat module small parts', 0.4, 81.5, 0, 3, 11, ALU],
-  // Oars (sealed aluminum shafts, plastic blades: they float) strapped in their rests; oarlocks, risers and rests.
-  ['Oars, shipped and strapped', 7.2, 90, 0, 24.5, 26.5, 0.6],
+  // Oarlocks, risers and rests. The oars are operator gear, part of the gear load below (and they float).
   ['Oarlocks, risers, rests', 4, 73.5, 0, 19.5, 27, ALU],
   ['Fuel gauge sender, gauge, straps, line', 2, 110, -10, 4, 26, 1.5],
   ['PFDs and dock lines', 6, 85, 0, 3, 12, 1],
