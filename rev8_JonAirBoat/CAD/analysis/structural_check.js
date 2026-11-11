@@ -87,6 +87,20 @@ const arm1 = round(1, 0.095);
 row('Controls', 'Console arm 1 x 0.095', '150 lb pull on the dash', 150 * 8 / arm1.S, FY, 'psi', 'Was 1 x 0.065, factor 1.2');
 row('Controls', 'Console post, buckling', '150 lb on the dash', 150, euler(arm1, 22), 'lbf');
 
+// ---- Seat module (v1.0.1.3, Minimal_cockpit.fs): replaces the middle bench as the thwart and the seat ----
+// Struts 1 x 2 x 1/8, 58.8 in between the hull sides, taken as simply supported (the bolted end clips add margin).
+// Two people side by side at Y +/-10, shared by the two struts.
+const STRUT = box(1, 2, 0.125), STRUT_SPAN = 58.8, PEOPLE = 400;
+const strutM = g => g * PEOPLE / 2 / 2 * (STRUT_SPAN / 2 - 10);
+row('Seat', 'Strut 1 x 2 x 1/8, bending', 'Two people seated, at rest', strutM(1) / STRUT.S, FY, 'psi');
+row('Seat', 'Strut 1 x 2 x 1/8, bending', `Two people seated, ${G_SLAM} g hard landing`, strutM(G_SLAM) / STRUT.S, FY, 'psi', 'Simply supported; the end clips make it stiffer');
+row('Seat', 'Strut end clip, two 1/4-20 through the hull side', `Two people, ${G_SLAM} g`, G_SLAM * PEOPLE / 4 / 2, 950, 'lbf each');
+row('Seat', 'Strut end clip, bolt bearing in the 0.080 hull side', `Two people, ${G_SLAM} g`, G_SLAM * PEOPLE / 4 / 2, 0.25 * 0.08 * 1.5 * F5052, 'lbf each', 'Hull side gauge assumed; fender washer inside');
+const ply = t => 15 * t * t / 6;   // seat base section modulus, 15 in wide
+row('Seat', 'Seat base 3/8 marine plywood, 5 in past the forward strut', '200 lb standing on the front edge', 200 * 5 / ply(0.375), 7000, 'psi', 'Fir marine plywood, about 7,000 psi to break; 6 mm would be 7,200 psi');
+row('Seat', 'Seatback bracket 1/8 x 1-1/4 6061, one side', 'Driver leaning back, 150 lbf at 10 in', 150 * 10 / 2 / (0.125 * 1.25 ** 2 / 6), FY, 'psi');
+row('Seat', 'Dry box hanging from the struts, rivets', `${G_SLAM} g hard landing`, G_SLAM * (4.5 + 3.9 + 2) / 8, 150, 'lbf each', 'Eight 3/16 aluminum rivets; battery, box and fuse block');
+
 // ---- Hull, assumed bottom 0.100 and sides 0.080 in 5052; confirm by measuring ----
 const sideI = 2 * 0.08 * 19 ** 3 / 12, Ab = 48 * 0.1, As = 2 * 19 * 0.08, Ag = 0.6;
 const na = (As * 9.5 + Ag * 19) / (Ab + As + Ag);

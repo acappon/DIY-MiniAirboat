@@ -98,18 +98,25 @@ const OUTFIT = [
   ['Engine stand (bolted aluminum) on four shoes, with doublers, clips, cage foot pads and their bolts', 49.1, 18, 0, 22],
   ['Prop cage, thin-wall aluminum tube, with mesh guard', 45, 4, 0, 38],
   ['Twin rudders and linkage', 12, -6, 0, 36],
-  // Cockpit, 2026-11-03: driver on the middle bench, stick to port on the rib at X 95, throttle pedal with heel rests, push-pull cables along the hull sides.
+  // Cockpit, 2026-11-03 (seat module 2026-11-10): driver on the seat module where the middle bench was, stick to port on the rib at X 95, throttle pedal with heel rests, push-pull cables along the hull sides.
   ['Stick, rudder cable, throttle pedal and cable, heel rests', 10, 70, 8, 8],
-  ['Small lithium battery', 4.5, 86, 0, 5],
-  // Waterproof case set into the middle bench 2.1, panel trim 0.3.
-  ['Dry box in the middle bench, with panel trim', 2.4, 86, 0, 7],
+  ['Small lithium battery', 4.5, 83.6, 0, 6.5],
+  // Seat module, v1.0.1.3 (Minimal_cockpit.fs), replacing the middle bench and its dry box case. Estimates until weighed:
+  // struts 2 x 58.8 in of 1 x 2 x 1/8 tube 7.9, clips 0.4, bolts 0.4; box 0.063 sheet 2.1, flange 0.6, 0.080 lid 0.7, brackets, gasket, rivnuts 0.5;
+  // walls 0.032 sheet 2.5, lids 2 x 1.05; seat base 3/8 in ply 4.3, PE pad 1.8, vinyl 0.9, strips and bolts 0.2; seatback 3.0.
+  ['Seat struts 1 x 2 x 1/8 6061, end clips and bolts (thwart)', 8.7, 81.5, 0, 10],
+  ['Electrical dry box 0.063 5052 with lid, gasket, rivnuts, battery and fuse brackets', 3.9, 81.5, 0, 7.5],
+  ['Storage compartment walls 0.032 5052 and two aft-hinged lids with hinges and latches', 4.6, 81.5, 0, 6.5],
+  ['Seat: 3/8 in plywood base, 2-1/2 in closed-cell pad, vinyl, bolts', 7.2, 84, 0, 12.9],
+  ['Folding seatback, padded both sides, hinge brackets and pivot', 3, 75, 0, 21],
+  ['Seat module small parts: rivets, sealing strips, battery switch plate', 0.4, 81.5, 0, 9],
   // On the front deck step (top at Z 16.55).
   ['Fuel, 6 gal portable tank, full', 45, 143, 0, 21],
   // Sender 0.3, gauge 0.3, tie-down straps 0.4, 10 ft of extra fuel line 1.
   ['Fuel gauge sender and gauge, tank straps, longer fuel line', 2, 110, -10, 15],
   // Safety and regulatory gear, itemized 2026-11-03 (was one 15 lb line):
   ['Inflatable PFDs (2) and dock lines', 6, 85, 0, 8],
-  ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver', 4, 98, -24, 12],
+  ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver', 4, 99.5, -25, 20],
   ['Compact can air horn in a clip, at the console', 0.5, 105, -14, 25],
   ['Florida airboat flag (10 x 12 in orange) on a fiberglass whip at least 10 ft above the bottom, with mount', 2, -4, 0, 100],
   ['Navigation lights: two LED sidelights and an all-round white', 1.5, 60, 0, 50],
@@ -130,9 +137,11 @@ const OUTFIT = [
   ['Adjustable marine phone or tablet holder, without the device', 0.8, 100, 0, 28],
   // 1 in x 0.095 tube frame 1.5, rib foot 0.2, sheet pod 1.2.
   ['Console frame and pod, starboard, clear above two sets of knees', 2.9, 105, -18, 24],
-  // Capsize flotation (flotation_inverted.js): 1.94 ft^3 of 2 lb/ft^3 foam, added to the foam in the benches.
+  // Capsize flotation (flotation_inverted.js): 2 lb/ft^3 closed-cell foam, added to the foam in the rear bench; the seat pad counts too.
   ['Flotation foam, bow wedge', 0.8, 155, 0, 12],
   ['Flotation foam, two aft corner blocks', 3.1, 8, 0, 6],
+  ['Flotation foam, seat compartment bottoms', 1.4, 81.5, 0, 3.3],
+  ['Flotation foam, footwell side blocks, with straps', 4.1, 113, 0, 7.3],
   // electrical/wire_list.py: wire 8.3 (2 AWG cable 2.8, 16 AWG per the E-11 review), connectors and glands 0.8, relays 0.5, fuse block 0.6, main fuse, inline fuse and bus strips 0.3, battery switch 0.5, marine starter solenoid 0.6, floor conduit and bench sleeve 0.6.
   ['Harness: all wire, connectors, relays, fuse block, battery switch, solenoid, conduit', 12.2, 62, 0, 7],
   ['Belt guard', 3, 13, 0, 37],
@@ -156,10 +165,10 @@ const ENGINES = [
   ['etec800', 'Rotax 800R E-TEC snowmobile two-stroke + 3:1 belt reduction (120 hp used)', 120, 166.8, 15, T(120), 82],
 ];
 const CREW = {
-  solo: [['Driver', 200, 82, 0, 26]],
-  soloGear60: [['Driver', 200, 82, 0, 26], ['Gear between the benches', 60, 60, 0, 10]],
-  soloGear150: [['Driver', 200, 82, 0, 26], ['Gear between the benches', 150, 60, 0, 10]],
-  plus1: [['Driver', 200, 82, 11, 26], ['Passenger on the middle bench', 200, 82, -11, 26]],
+  solo: [['Driver', 200, 82, 0, 27]],
+  soloGear60: [['Driver', 200, 82, 0, 27], ['Gear between the benches', 60, 60, 0, 10]],
+  soloGear150: [['Driver', 200, 82, 0, 27], ['Gear between the benches', 150, 60, 0, 10]],
+  plus1: [['Driver', 200, 82, 11, 27], ['Passenger on the seat', 200, 82, -11, 27]],
 };
 const hullItem = ['Hull, Lowe 1448 with its benches', h.hullLb, h.hullX, 0, 7];
 const out = [];
@@ -187,7 +196,7 @@ console.table(out);
 // prop 15 lb) and the power used at the prop. Each cell: worst-case top mph / worst hump margin (lbf).
 // Top speed depends almost only on power; the plate sets the weight limit.
 const CASES = {
-  soloGear150: [['Driver', 200, 82, 0, 26], ['Gear amidships', 150, 60, 0, 10]],
+  soloGear150: [['Driver', 200, 82, 0, 27], ['Gear amidships', 150, 60, 0, 10]],
 };
 const outfitLb = OUTFIT.reduce((s, r) => s + r[1], 0);
 const budget = [];

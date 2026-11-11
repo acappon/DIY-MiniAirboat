@@ -19,11 +19,17 @@ const ITEMS = [
   ['Prop cage and mesh', 45, 4, 0, 18, 88, ALU],
   ['Twin rudders and linkage', 12, -6, 0, 20, 50, ALU],
   ['Stick, cables, pedal, heel rests', 10, 70, 8, 1, 30, 3],
-  ['Battery', 4.5, 86, 0, 3, 8, 2.5],
-  ['Dry box and trim, no credit for the sealed air', 2.4, 86, 0, 2, 12, 1],
+  ['Battery', 4.5, 83.6, 0, 4, 9, 2.5],
+  // Seat module, v1.0.1.3. The closed-cell seat pad and the compartment foam are counted as foam below, not here.
+  ['Seat struts and clips', 8.7, 81.5, 0, 9, 11, ALU],
+  ['Dry box, lid, brackets, no credit for the sealed air', 3.9, 81.5, 0, 3.75, 11, ALU],
+  ['Storage compartment walls and lids', 4.6, 81.5, 0, 1.5, 11, ALU],
+  ['Seat base plywood and vinyl', 5.4, 84, 0, 11.25, 14.1, 0.7],
+  ['Folding seatback', 3, 75, 0, 14.5, 29, 0.5],
+  ['Seat module small parts', 0.4, 81.5, 0, 3, 11, ALU],
   ['Fuel gauge sender, gauge, straps, line', 2, 110, -10, 4, 26, 1.5],
   ['PFDs and dock lines', 6, 85, 0, 3, 12, 1],
-  ['Fire extinguisher', 4, 98, -24, 8, 22, 3],
+  ['Fire extinguisher', 4, 99.5, -25, 13, 27, 3],
   ['Air horn', 0.5, 105, -14, 24, 26, 2],
   ['Flag and whip', 2, -4, 0, 20, 132, 1.8],
   ['Navigation lights', 1.5, 60, 0, 17, 50, 1.5],
@@ -41,7 +47,6 @@ const ITEMS = [
   ['Bilge pump and hose', 2, 20, 0, 1, 3, 2],
   ['LED light bar', 6, 8, 0, 88, 91, 2.5],
   ['Searchlight', 8, 6, 0, 88, 96, 2.5],
-  ['Grab rail and sling', 6.8, 66, 0, 2.5, 32, ALU],
   ['800R engine, bare', 79, 20, 0, 15, 36, 4],
   ['Exhaust', 20, 16, 12, 30, 56, STEEL],
   ['Radiator, flooded', 16.5, 16, -10, 34, 56, ALU],
@@ -196,21 +201,30 @@ if (require.main === module) {
   for (const [t, o] of cases) rows.push(report(t, o));
   for (const r of rows) console.log(JSON.stringify(r));
 }
-// Chosen design, 2026-11-04: both benches inspected, full and sound. Dry box and harness sleeve cut out of the middle bench,
-// a small bow wedge from X 154 and two equal corner blocks to Z 10. Reports float height, list and pitch.
+// Chosen design, v1.0.1.3 (2026-11-10): rear bench inspected, full and sound; the middle bench is gone. Its flotation is
+// replaced by the closed-cell seat pad, foam in the bottom of the two seat storage compartments and two footwell side
+// blocks (Minimal_cockpit.fs), with the small bow wedge from X 154 and two equal corner blocks to Z 10.
+// Reports float height, list and pitch.
+const hullHalf = (x, z) => 24.4 + 0.5 * z - Math.max(0, x - 75) * 0.045;   // as in Minimal_cockpit.fs
+function seatFoamVox() {
+  const v = [];
+  const add = (x0, x1, z0, z1, inside) => {
+    for (let x = x0 + 0.5; x < x1; x++) for (let z = z0 + 0.5; z < z1; z++) for (let y = -31.5; y < 32; y++) if (inside(x, y, z)) v.push([x, y, z, 1]);
+  };
+  add(76.5, 91.5, 11.625, 14.125, (x, y) => Math.abs(y) < 19);                                                // seat pad
+  add(77.6, 85.4, 1.5, 5, (x, y, z) => Math.abs(y) > 5.1 && Math.abs(y) < hullHalf(85.5, z) - 0.3);   // compartment bottoms
+  for (const [sd, x0, x1] of [[1, 98, 113], [1, 113, 128], [-1, 98, 106], [-1, 110, 119], [-1, 119, 128]])  // footwell side blocks
+    add(x0, x1, 1.5, 13, (x, y, z) => y * sd > 0 && Math.abs(y) < hullHalf(x1, z) - 0.3 && Math.abs(y) > hullHalf(x1, z) - 6.3);
+  return v;
+}
 function chosen() {
   const items = [...ITEMS, fuelItem(0.74), gearItem(1e9, 57)];
   const B = [];
-  for (const [x0, x1, z0, z1] of [[13, 33, 2.4, 13.7], [75.7, 89.5, 1, 12.5]])
-    for (let x = x0 + 0.5; x < x1; x++) for (let z = z0 + 0.5; z < z1; z++) {
-      const w = 24.5 + 0.5 * z;
-      for (let y = -w + 0.5; y < w; y++) {
-        if (x > 82.6 && x < 89.5 && Math.abs(y) < 5.3 && z > 2 && z < 11.7) continue;
-        if (x > 75.3 && x < 82.6 && Math.hypot(y, z - 5.5) < 1.1) continue;
-        B.push([x, y, z, 1]);
-      }
-    }
-  const vox = [...B, ...wedgeVox(154), ...cornerVox(1, 10), ...cornerVox(-1, 10)];
+  for (let x = 13.5; x < 33; x++) for (let z = 2.9; z < 13.7; z++) {
+    const w = 24.5 + 0.5 * z;
+    for (let y = -w + 0.5; y < w; y++) B.push([x, y, z, 1]);
+  }
+  const vox = [...B, ...seatFoamVox(), ...wedgeVox(154), ...cornerVox(1, 10), ...cornerVox(-1, 10)];
   const d = { items, vox }, G = weightCG(d), P = points(d);
   let lo = -5, hi = 30;
   for (let k = 0; k < 40; k++) { const m = (lo + hi) / 2; P.reduce((s, p) => s + (p[2] >= m ? p[3] : 0), 0) > G.W ? lo = m : hi = m; }
