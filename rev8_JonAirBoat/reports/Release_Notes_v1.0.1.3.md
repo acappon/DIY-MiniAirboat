@@ -59,14 +59,14 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
    - **Weighing:** step 2.13 now weighs both sets before fitting. If either set comes in over its allowance, the load label comes down.
 10. **Totals now** (oars as gear, carbon struts, sandwich seat base, honeycomb rudders, allowances cut): equipment **489.9 lb**, payload **335 lb**, **15 lb short** of 350: about **135 lb of gear** with a 200 lb driver, oars included if they come along.
     - Dash load label now **MAXIMUM LOAD 380 LB** ... **LEAVES 335 LB**.
-    - Capsized flotation 3.0 in clear, 174 lb reserve. GM 43.6 in, dock trim 0.6°.
+    - Capsized flotation **3.9 in** clear, **190 lb** reserve, now counting the folding seatback's closed-cell foam as the float it is (0.35 ft³; it had been booked as nearly neutral). GM 43.6 in, dock trim 0.6°.
 
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
 - **Payload is 15 lb short** of the 350 lb design load (driver + 150 lb gear): about 135 lb of gear with a 200 lb driver, including the oars (about 7.2 lb) when they come along. The rudder and controls allowances now keep only about 3 lb of margin over the itemized parts; weigh them in step 2.13.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - **Wiring:** the wire routes in `CAD/FeatureScript/Minimal_wiring.fs` (from `electrical/wire_list.py`) still end at the old dry box points; the new box keeps the battery, fuse block, relays and switch within about 1–4 in of them, but the routes, the wire list and the schematic need a pass for the new box exits and the switch plate.
-- Capsized float height is about 3.0 in, down from 4.0 in; 8 in side blocks would restore 4 in but leave the footwell too narrow for a passenger's feet.
+- Capsized float height is about 3.9 in (v1.0.1.2: 4.0 in), with the seatback foam counted. It depends on the seatback being closed-cell foam and staying attached.
 - `reports/Structural_Analysis_v1.0.1.2.md` and `reports/Drivetrain_800R_ETEC.md` still describe the grab rail; they are the v1.0.1.2 record and will be superseded at release.
 
 ## Onshape (Main workspace)

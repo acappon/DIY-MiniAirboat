@@ -25,7 +25,9 @@ const ITEMS = [
   ['Dry box, lid, brackets, no credit for the sealed air', 3.9, 81.5, 0, 3.75, 11, ALU],
   ['Storage compartment walls and lids', 4.6, 81.5, 0, 1.5, 11, ALU],
   ['Seat base sandwich and vinyl', 3.4, 84, 0, 11.25, 14.1, 0.45],
-  ['Folding seatback', 3, 75, 0, 14.5, 29, 0.5],
+  // Seatback: 18 x 15 in, 1/4 ply with 1-1/2 in closed-cell foam in front and 1/2 in behind, 2-1/4 in in all: 608 in^3 (0.35 ft^3) for 3 lb,
+  // so SG about 0.14: it is a float, not a near-neutral part (was SG 0.5, which counted only 3 lb of its lift).
+  ['Folding seatback', 3, 75, 0, 14.5, 29, 3 / (18 * 15 * 2.25 / 1728 * 62.4)],
   ['Seat module small parts', 0.4, 81.5, 0, 3, 11, ALU],
   // Oarlocks, risers and rests. The oars are operator gear, part of the gear load below (and they float).
   ['Oarlocks, risers, rests', 4, 73.5, 0, 19.5, 27, ALU],
