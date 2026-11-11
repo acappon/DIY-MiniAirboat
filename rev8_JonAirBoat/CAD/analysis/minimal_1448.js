@@ -122,7 +122,8 @@ const OUTFIT = [
   // Sender 0.3, gauge 0.3, tie-down straps 0.4, 10 ft of extra fuel line 1.
   ['Fuel gauge sender and gauge, tank straps, longer fuel line', 2, 110, -10, 15],
   // Safety and regulatory gear, itemized 2026-11-03 (was one 15 lb line):
-  ['Inflatable PFDs (2) and dock lines', 6, 85, 0, 8],
+  // Dock lines (about 2 lb) are operator gear since 2026-11-10 (user), like the oars: they count in the payload, not here.
+  ['Inflatable PFDs (2), USCG approved', 4, 85, 0, 8],
   ['Fire extinguisher, USCG B-I / UL 5-B, with bracket, within reach of the driver', 4, 99.5, -25, 20],
   ['Compact can air horn in a clip, at the console', 0.5, 105, -14, 25],
   ['Florida airboat flag (10 x 12 in orange) on a fiberglass whip at least 10 ft above the bottom, with mount', 2, -4, 0, 100],

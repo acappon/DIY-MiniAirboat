@@ -32,7 +32,7 @@ The primary structure still holds up: the stand, cage, drive line and hull girde
 
 It is in the Build Guide, step 2.17.
 
-**Weight:** equipment is 490.1 lb and payload 334.9 lb, against the 335 lb design load (200 lb driver + 135 lb gear).
+**Weight:** equipment is 488.1 lb and payload 336.9 lb, against the 335 lb design load (200 lb driver + 135 lb gear).
 
 ## How the checks were done
 

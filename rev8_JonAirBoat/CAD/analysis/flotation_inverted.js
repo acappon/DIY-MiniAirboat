@@ -32,7 +32,7 @@ const ITEMS = [
   // Oarlocks, risers and rests. The oars are operator gear, part of the gear load below (and they float).
   ['Oarlocks, risers, rests', 4, 73.5, 0, 19.5, 27, ALU],
   ['Fuel gauge sender, gauge, straps, line', 2, 110, -10, 4, 26, 1.5],
-  ['PFDs and dock lines', 6, 85, 0, 3, 12, 1],
+  ['PFDs (dock lines are gear)', 4, 85, 0, 3, 12, 1],
   ['Fire extinguisher', 4, 99.5, -25, 13, 27, 3],
   ['Air horn', 0.5, 105, -14, 24, 26, 2],
   ['Flag and whip', 2, -4, 0, 20, 132, 1.8],

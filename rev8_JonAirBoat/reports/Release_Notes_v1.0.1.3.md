@@ -69,11 +69,12 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
     - **Weight:** wire 8.7 lb (was 8.3); harness 12.4 lb (was 12.2), net of the bench sleeve.
     - **Totals:** equipment **490.1 lb**, payload **334.9 lb**, **0.1 lb under** the 335 lb design load. By the rounding rule the dash label drops to **MAXIMUM LOAD 375 LB** ... **LEAVES 330 LB**.
     - **CAD:** in Onshape, W57 (battery to switch, 2 AWG) shows as 10 separate segments, because its short bends in the box fail the CAD union. Wiring feature unions are now tolerant of that, instead of failing the whole feature.
+14. **Dock lines are operator gear** (user, 2026-11-10), like the oars: the PFD line in the weight model drops from 6 to 4 lb. Equipment **488.1 lb**, payload **336.9 lb**, **1.9 lb over** the 335 lb design load. Dash label back to **MAXIMUM LOAD 380 LB** ... **LEAVES 335 LB**. Flotation and stability unchanged (3.9 in clear, 190 lb reserve; GM 39.7 in tied down).
 13. **Reports for v1.0.1.3:** `Stability_Analysis_v1.0.1.3.md`, `Flotation_Inverted_v1.0.1.3.md`, `Structural_Analysis_v1.0.1.3.md` and `Electrical_Compliance_v1.0.1.3.md` supersede the v1.0.1.2 reports (kept as the record).
 
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
-- **Payload is 0.1 lb under** the 335 lb design load (200 lb operator + 135 lb gear, oars included when aboard), after the wiring pass added 0.2 lb. The label reads 375 / 330. The rudder and controls allowances (8.5 lb each) and the brackets allowance (5 lb) are the only cushion: weigh in step 2.13 and at the end of the build.
+- **Payload is 1.9 lb over** the 335 lb design load (200 lb operator + 135 lb gear, oars and dock lines included when aboard). The label reads 380 / 335. The rudder and controls allowances (8.5 lb each) and the brackets allowance (5 lb) are the only cushion: weigh in step 2.13 and at the end of the build.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - Capsized float height is about 3.9 in (v1.0.1.2: 4.0 in), with the seatback foam counted. It depends on the seatback being closed-cell foam and staying attached.
 - `reports/Drivetrain_800R_ETEC.md` still describes the grab rail and the middle bench in places; the v1.0.1.3 reports supersede it on those points.
@@ -85,10 +86,11 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 - "Main assembly": the whole cockpit Part Studio re-inserted and the 71 old cockpit instances deleted (18 of them were left dangling by the removed grab rail, bench sleeve and dry box case). No mates were affected.
 - "Minimal cockpit (FeatureScript)" uploaded again with the oarlocks, rests and shipped oars; the Part Studio regenerates with 123 parts. Preview: `renderedImages/wip_oars_shipped.png`.
 - **Group-1 close-out (2026-11-10):**
-  - **Uploads:** cockpit (123 parts: carbon strut and sandwich seat base names), dash (load label 375 / 330, 179 parts) and wiring (the v1.0.1.3 routes, 113 bodies).
+  - **Uploads:** cockpit (123 parts: carbon strut and sandwich seat base names), dash (load label 380 / 335 after the dock-lines change, 179 parts) and wiring (the v1.0.1.3 routes, 113 bodies).
   - **Main assembly:** the cockpit, wiring and dash studios re-inserted whole, and the 370 old instances deleted. 2 of them were dangling load-label text, and the oars, oarlocks and extra W57 segments had never been added. 543 instances, none dangling, no mates affected.
   - **Build steps assembly:** 20 dangling instances deleted (grab rail, old dry box case, bench sleeve, 2 label text bodies). It does not yet show the seat module, oars or oarlocks; that comes with the build-step re-render.
   - **Render stages assembly:** no dangling instances. It holds only the reference mesh and the 800R layout, so the cockpit has to be added for the new scenes.
+  - **Label text and assemblies:** every load-label text change regenerates the label glyph parts, which leaves a few dangling instances in assemblies that insert the dash part by part. After the 380 / 335 upload the dash was re-inserted whole in the Main assembly. The Build steps assembly will have 4 dangling label-glyph instances until the build-step re-render.
   - **Not uploaded:** "Minimal 800R layout" (only the rudder envelope name changed, to honeycomb). Upload it with the release.
 
 ## Still to do before release

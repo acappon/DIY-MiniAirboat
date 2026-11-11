@@ -27,7 +27,7 @@ The boat is very stiff at rest in every load case and passes every steady check,
 | Top speed, mph | 34.75 | 34.25 | 34 |
 | Thrust margin at the hump, lbf | 278 | 259 | 260 |
 
-**Against the plate:** load case 2 is the design case and sits on the 825 lb plate. Equipment is 490.1 lb (fuel included), plus 335 lb of driver and gear, is 825.1 lb. The weight model gives 334.9 lb of payload, so the design load is met only to within 0.1 lb. Weigh the boat at the end of the build.
+**Against the plate:** load case 2 is the design case and sits on the 825 lb plate. Equipment is 488.1 lb (fuel included; the oars and dock lines count as gear), plus 335 lb of driver and gear, is 823.1 lb. The weight model gives 336.9 lb of payload, 1.9 lb over the design load. Weigh the boat at the end of the build.
 
 **Dock trim:** about 0.2° less stern-down than v1.0.1.2. The seat module and driver sit a little further forward than the old bench.
 
@@ -92,9 +92,9 @@ A flat hull skids on open water long before this, at a few tenths of a g. **The 
 
 1. Tie all gear down, low and on the centerline, behind the driver.
 2. **Keep total load under the 825 lb plate.**
-   - Equipment is 490.1 lb including a full 45 lb fuel tank.
-   - The dash label reads **MAXIMUM LOAD 375 LB** for people, gear and fuel, and **330 lb** for people and gear with a full tank.
-   - The oars, when carried, count in that load.
+   - Equipment is 488.1 lb including a full 45 lb fuel tank.
+   - The dash label reads **MAXIMUM LOAD 380 LB** for people, gear and fuel, and **335 lb** for people and gear with a full tank.
+   - The oars and dock lines, when carried, count in that load.
    - Two 200 lb adults with a full tank are over the plate. That is for short trips with little else aboard.
 3. Trim at rest with the round bubble level on the dash: move gear until the bubble is centered, then tie it down.
 4. Don't step on the gunwale with gear piled on that side. Board over the centerline.
@@ -103,7 +103,7 @@ A flat hull skids on open water long before this, at a few tenths of a g. **The 
 
 ## Limits of this analysis
 
-- **Weights and CGs** are estimates until parts are weighed. The design load is met by only 0.1 lb.
+- **Weights and CGs** are estimates until parts are weighed. The design load is met by 1.9 lb.
 - **Hull shape** is the analytic model, close to the mesh but not a measured hull.
 - **Bilge:** water on the floor would sit on the low side and reduce stability. Keep the bilge pump working.
 - **Waves:** this is calm-water, static stability only.
