@@ -21,10 +21,10 @@ const ITEMS = [
   ['Stick, cables, pedal, heel rests', 10, 70, 8, 1, 30, 3],
   ['Battery', 4.5, 83.6, 0, 4, 9, 2.5],
   // Seat module, v1.0.1.3. The closed-cell seat pad and the compartment foam are counted as foam below, not here.
-  ['Seat struts and clips', 8.7, 81.5, 0, 9, 11, ALU],
+  ['Seat struts (carbon) and clips', 5.6, 81.5, 0, 9, 11, 1.8],
   ['Dry box, lid, brackets, no credit for the sealed air', 3.9, 81.5, 0, 3.75, 11, ALU],
   ['Storage compartment walls and lids', 4.6, 81.5, 0, 1.5, 11, ALU],
-  ['Seat base plywood and vinyl', 5.4, 84, 0, 11.25, 14.1, 0.7],
+  ['Seat base sandwich and vinyl', 3.4, 84, 0, 11.25, 14.1, 0.45],
   ['Folding seatback', 3, 75, 0, 14.5, 29, 0.5],
   ['Seat module small parts', 0.4, 81.5, 0, 3, 11, ALU],
   // Oars (sealed aluminum shafts, plastic blades: they float) strapped in their rests; oarlocks, risers and rests.

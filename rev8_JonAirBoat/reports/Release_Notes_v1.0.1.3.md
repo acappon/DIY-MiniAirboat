@@ -49,9 +49,19 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
      - GM 42.9 in.
    - **Cost and hours:** BOM total about **$15,950**. Build Guide about 212 DIY h and 101 pro h.
 
+8. **Weight pass: carbon seat struts and a fiberglass/foam seat base** (BOM lines 84 and 86, step 2.17).
+   - **Struts:** now 1 x 2 x 1/8 in roll-wrapped carbon tube, the same section, so about the same stiffness (sag 0.27 in with two people, was about 0.2). They go from 8.7 lb to **5.6 lb**. Factor at 4 g is **2.1**, up from 1.5.
+   - **Galvanic isolation:** carbon touching aluminum corrodes the aluminum. Each strut gets one ply of glass. Every fastener through the carbon gets a 6061 crush sleeve, a G10 shim at the aluminum, and stainless bolts in Tef-Gel. That covers the end clips, dry box, compartment walls, switch plate, seatback brackets and seat base. The dry box and compartment walls are now bolted to the struts, not riveted.
+   - **Seat base:** now a 3/8 in sandwich (5/16 in PVC foam core, 0.020 in E-glass skins, potted bolt inserts), down from 4.3 lb of plywood to **2.3 lb**. With 200 lb on the front edge: skins factor 3.0, core shear 3.5 (the plywood was 2.5).
+   - **Weight:** **5.1 lb saved.** Equipment **502.1 lb**, payload **323 lb**, **27 lb short** of 350: about 123 lb of gear with a 200 lb driver.
+     - Dash load label now **MAXIMUM LOAD 365 LB** ... **LEAVES 320 LB**.
+     - Flotation: 3.0 in clear, 176 lb reserve.
+     - GM 43.1 in.
+   - **Cost and hours:** about **+$240** (BOM total about **$16,190**) and +3 DIY h (step 2.17 now 19 h).
+
 ## Known issues and open items
 - The **passenger handhold** went with the grab rail; nothing replaces it yet.
-- **Payload is 32 lb short** of the 350 lb design load (driver + 150 lb gear): about 118 lb of gear with a 200 lb driver (the oars count against it).
+- **Payload is 27 lb short** of the 350 lb design load (driver + 150 lb gear): about 123 lb of gear with a 200 lb driver (the oars count against it; leaving them ashore gives back 7.2 lb). The rudder set (12 lb allowance, 9.4 lb itemized) and the stick, pedal and cables (10 lb, 6.1 lb itemized) carry about 6.5 lb of allowance that should come back once the parts are weighed.
 - Never row, or unstrap the oars, with the engine running; the rower faces the prop cage.
 - **Wiring:** the wire routes in `CAD/FeatureScript/Minimal_wiring.fs` (from `electrical/wire_list.py`) still end at the old dry box points; the new box keeps the battery, fuse block, relays and switch within about 1–4 in of them, but the routes, the wire list and the schematic need a pass for the new box exits and the switch plate.
 - Capsized float height is about 3.0 in, down from 4.0 in; 8 in side blocks would restore 4 in but leave the footwell too narrow for a passenger's feet.
@@ -63,7 +73,7 @@ The middle bench and the grab rail give way to a purpose-built seat over three b
 - "Crew mannequins": hip point X 83.5, Z 14.
 - "Main assembly": the whole cockpit Part Studio re-inserted and the 71 old cockpit instances deleted (18 of them were left dangling by the removed grab rail, bench sleeve and dry box case). No mates were affected.
 - "Minimal cockpit (FeatureScript)" uploaded again with the oarlocks, rests and shipped oars; the Part Studio regenerates with 123 parts. Preview: `renderedImages/wip_oars_shipped.png`.
-- **Not yet:** the dash load label ("Minimal dash (FeatureScript)", now 360 / 315 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
+- **Not yet:** the carbon strut and sandwich seat base part names and colors (repo master only; geometry unchanged), and the dash load label ("Minimal dash (FeatureScript)", now 365 / 320 lb) is changed in the repo master only; upload it before the v1.0.1.3 version. The "Render stages" and "Build steps" assemblies still need checking for dangling cockpit instances.
 
 ## Still to do before release
 - Update the electrical documents for the new dry box, rewrite the stability and flotation reports for v1.0.1.3, re-render the build step images, and regenerate the Build Guide PDF.

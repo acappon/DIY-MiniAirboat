@@ -3,7 +3,7 @@ import(path : "onshape/std/geometry.fs", version : "3112.0");
 
 // Cockpit of the minimal 1448, in the airboat assembly frame: X forward from the transom, Y + to port,
 // Z up from the hull bottom. The middle bench is gone; the driver sits on the seat module (Crew mannequins).
-//   - Seat module where the middle bench was: two struts hull side to hull side at the old bench-top level, a small
+//   - Seat module where the middle bench was: two carbon struts hull side to hull side at the old bench-top level, a small
 //     electrical dry box hung between them (battery, fuse block, relays), a dry storage compartment each side with
 //     flotation foam in its bottom and an aft-hinged lid, a closed-cell foam seat across all three, bolted down over the
 //     dry box lid, and a folding seatback hinged just above the foam on brackets bolted to the aft strut
@@ -136,7 +136,7 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
             const yEnd = hullHalf(st[0] + 0.5, STRUT_Z[0] + 1) - 0.4;
             const sid = id + ("strut" ~ st[1]);
             mkBox(context, sid, st[0], st[0] + 1, -yEnd, yEnd, STRUT_Z[0], STRUT_Z[1]);
-            paintBody(context, qCreatedBy(sid, EntityType.BODY), "Seat strut 1 x 2 x 1/8 6061 tube, hull side to hull side - " ~ st[1], strutC);
+            paintBody(context, qCreatedBy(sid, EntityType.BODY), "Seat strut 1 x 2 x 1/8 roll-wrapped carbon tube, one ply of glass over it (isolation from the aluminum), hull side to hull side - " ~ st[1], color(0.12, 0.12, 0.13));
             for (var sd in [1, -1])
             {
                 const cid = id + ("strutClip" ~ st[1] ~ (sd > 0 ? "P" : "S"));
@@ -188,10 +188,10 @@ export const minimalCockpit = defineFeature(function(context is Context, id is I
             mkBox(context, lid, STRUT_X[0], STRUT_X[1] + 1, sd * (SEAT[2] + 0.5), sd * (hullHalf(STRUT_X[1], STRUT_Z[1]) - 1), STRUT_Z[1], STRUT_Z[1] + 0.063);
             paintBody(context, qCreatedBy(lid, EntityType.BODY), "Storage lid 0.063 5052, piano hinge on the aft edge, gasketed, two latches - " ~ sn, strutC);
         }
-        // Seat: 3/8 in marine plywood base (stiff enough to stand on its front edge) on closed-cell strips on the struts, bolted down through the struts over the dry box
+        // Seat: 3/8 in fiberglass/foam sandwich base (stiff enough to stand on its front edge) on closed-cell strips on the struts, bolted down through the struts over the dry box
         // lid, with a 2-1/2 in closed-cell polyethylene pad (flotation) in marine vinyl. Room for the driver and a passenger.
         mkBox(context, id + "seatBase", SEAT[0], SEAT[1], -SEAT[2], SEAT[2], STRUT_Z[1] + 0.25, SEAT[3]);
-        paintBody(context, qCreatedBy(id + "seatBase", EntityType.BODY), "Seat base 3/8 marine plywood, epoxy sealed, bolted to the struts", color(0.78, 0.66, 0.45));
+        paintBody(context, qCreatedBy(id + "seatBase", EntityType.BODY), "Seat base 3/8 fiberglass/foam sandwich (5/16 PVC core, 0.020 E-glass skins), potted bolt inserts, bolted to the struts", color(0.9, 0.9, 0.85));
         mkBox(context, id + "seatPad", SEAT[0], SEAT[1], -SEAT[2], SEAT[2], SEAT[3], SEAT[4]);
         paintBody(context, qCreatedBy(id + "seatPad", EntityType.BODY), "Seat pad 38 x 15 x 2-1/2 closed-cell polyethylene, marine vinyl cover", seatC);
         // Folding seatback: hinged just above the foam on two brackets bolted to the aft strut, 12 degree recline against

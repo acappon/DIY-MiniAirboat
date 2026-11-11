@@ -102,12 +102,13 @@ const OUTFIT = [
   ['Stick, rudder cable, throttle pedal and cable, heel rests', 10, 70, 8, 8],
   ['Small lithium battery', 4.5, 83.6, 0, 6.5],
   // Seat module, v1.0.1.3 (Minimal_cockpit.fs), replacing the middle bench and its dry box case. Estimates until weighed:
-  // struts 2 x 58.8 in of 1 x 2 x 1/8 tube 7.9, clips 0.4, bolts 0.4; box 0.063 sheet 2.1, flange 0.6, 0.080 lid 0.7, brackets, gasket, rivnuts 0.5;
-  // walls 0.032 sheet 2.5, lids 2 x 1.05; seat base 3/8 in ply 4.3, PE pad 1.8, vinyl 0.9, strips and bolts 0.2; seatback 3.0.
-  ['Seat struts 1 x 2 x 1/8 6061, end clips and bolts (thwart)', 8.7, 81.5, 0, 10],
+  // struts (carbon, v1.0.1.3 weight pass) 2 x 58.8 in of 1 x 2 x 1/8 roll-wrapped carbon tube 4.5, glass isolation ply 0.2, sleeves and G10 shims 0.1,
+  // aluminum clips 0.4, bolts 0.4 (was 6061 tube 7.9: 8.7 in all); box 0.063 sheet 2.1, flange 0.6, 0.080 lid 0.7, brackets, gasket, rivnuts 0.5;
+  // walls 0.032 sheet 2.5, lids 2 x 1.05; seat base 3/8 in fiberglass/foam sandwich 2.3 (was 3/8 ply 4.3), PE pad 1.8, vinyl 0.9, strips and bolts 0.2; seatback 3.0.
+  ['Seat struts 1 x 2 x 1/8 carbon tube, glass-isolated, 6061 end clips and bolts (thwart)', 5.6, 81.5, 0, 10],
   ['Electrical dry box 0.063 5052 with lid, gasket, rivnuts, battery and fuse brackets', 3.9, 81.5, 0, 7.5],
   ['Storage compartment walls 0.032 5052 and two aft-hinged lids with hinges and latches', 4.6, 81.5, 0, 6.5],
-  ['Seat: 3/8 in plywood base, 2-1/2 in closed-cell pad, vinyl, bolts', 7.2, 84, 0, 12.9],
+  ['Seat: 3/8 in fiberglass/foam sandwich base, 2-1/2 in closed-cell pad, vinyl, bolts', 5.2, 84, 0, 12.9],
   ['Folding seatback, padded both sides, hinge brackets and pivot', 3, 75, 0, 21],
   ['Seat module small parts: rivets, sealing strips, battery switch plate', 0.4, 81.5, 0, 9],
   // Oars, v1.0.1.3 (Minimal_cockpit.fs): for rowing facing aft on the folded seatback, shipped along inside each rail in the locks.

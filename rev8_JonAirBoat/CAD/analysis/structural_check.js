@@ -88,24 +88,32 @@ row('Controls', 'Console arm 1 x 0.095', '150 lb pull on the dash', 150 * 8 / ar
 row('Controls', 'Console post, buckling', '150 lb on the dash', 150, euler(arm1, 22), 'lbf');
 
 // ---- Seat module (v1.0.1.3, Minimal_cockpit.fs): replaces the middle bench as the thwart and the seat ----
-// Struts 1 x 2 x 1/8, 58.8 in between the hull sides, taken as simply supported (the bolted end clips add margin).
+// Struts 1 x 2 x 1/8 roll-wrapped carbon tube, 58.8 in between the hull sides, taken as simply supported (the bolted end clips add margin).
+// Carbon: design allowable 50 ksi in bending (about 80-100 ksi to break, knocked down for bolt holes and wet service), bearing 35 ksi,
+// flexural modulus about 8 Msi. Fiberglass/foam seat base: E-glass skins 30 ksi in compression, PVC foam core (5 lb/ft^3) 140 psi in shear.
 // Two people side by side at Y +/-10, shared by the two struts.
-const STRUT = box(1, 2, 0.125), STRUT_SPAN = 58.8, PEOPLE = 400;
+const STRUT = box(1, 2, 0.125), STRUT_SPAN = 58.8, PEOPLE = 400, F_CF = 50000, F_CF_BRG = 35000, E_CF = 8e6;
 const strutM = g => g * PEOPLE / 2 / 2 * (STRUT_SPAN / 2 - 10);
-row('Seat', 'Strut 1 x 2 x 1/8, bending', 'Two people seated, at rest', strutM(1) / STRUT.S, FY, 'psi');
-row('Seat', 'Strut 1 x 2 x 1/8, bending', `Two people seated, ${G_SLAM} g hard landing`, strutM(G_SLAM) / STRUT.S, FY, 'psi', 'Simply supported; the end clips make it stiffer');
+row('Seat', 'Strut 1 x 2 x 1/8 carbon, bending', 'Two people seated, at rest', strutM(1) / STRUT.S, F_CF, 'psi');
+{ const P = PEOPLE / 4, a = STRUT_SPAN / 2 - 10, L = STRUT_SPAN, d = P * a * (3 * L * L - 4 * a * a) / (24 * E_CF * STRUT.I);
+  row('Seat', 'Strut 1 x 2 x 1/8 carbon, sag at mid span', 'Two people seated, at rest', d, 0.5, 'in', 'Limit 1/2 in; the 6061 tube sagged about 0.2 in'); }
+row('Seat', 'Strut 1 x 2 x 1/8 carbon, bending', `Two people seated, ${G_SLAM} g hard landing`, strutM(G_SLAM) / STRUT.S, F_CF, 'psi', 'Simply supported; the end clips make it stiffer. The 6061 tube was factor 1.5');
+row('Seat', 'Strut to end clip, two 1/4-20 in crush sleeves, bearing in the carbon walls', `Two people, ${G_SLAM} g`, G_SLAM * PEOPLE / 4 / 2, 0.25 * 0.125 * 2 * F_CF_BRG, 'lbf each');
 row('Seat', 'Strut end clip, two 1/4-20 through the hull side', `Two people, ${G_SLAM} g`, G_SLAM * PEOPLE / 4 / 2, 950, 'lbf each');
 row('Seat', 'Strut end clip, bolt bearing in the 0.080 hull side', `Two people, ${G_SLAM} g`, G_SLAM * PEOPLE / 4 / 2, 0.25 * 0.08 * 1.5 * F5052, 'lbf each', 'Hull side gauge assumed; fender washer inside');
-const ply = t => 15 * t * t / 6;   // seat base section modulus, 15 in wide
-row('Seat', 'Seat base 3/8 marine plywood, 5 in past the forward strut', '200 lb standing on the front edge', 200 * 5 / ply(0.375), 7000, 'psi', 'Fir marine plywood, about 7,000 psi to break; 6 mm would be 7,200 psi');
+// Seat base: 3/8 in sandwich, 5/16 core, 0.020 skins, 15 in wide; 200 lb on the front edge, 5 in past the forward strut.
+const SW = { core: 0.3125, tf: 0.02, w: 15 }, swD = SW.core + SW.tf;
+row('Seat', 'Seat base sandwich, skin stress', '200 lb standing on the front edge', 200 * 5 / (swD * SW.tf * SW.w), 30000, 'psi', 'E-glass skins; 3/8 ply was factor 2.5');
+row('Seat', 'Seat base sandwich, core shear', '200 lb standing on the front edge', 200 / (swD * SW.w), 140, 'psi', 'The 2-1/2 in seat pad spreads a heel load');
 row('Seat', 'Seatback bracket 1/8 x 1-1/4 6061, one side', 'Driver leaning back, 150 lbf at 10 in', 150 * 10 / 2 / (0.125 * 1.25 ** 2 / 6), FY, 'psi');
+row('Seat', 'Seatback bracket bolts, 1/4-20 in crush sleeves 1-1/2 in apart, bearing in the carbon strut', 'Driver leaning back, 150 lbf at 10 in', 150 * 10 / 2 / 1.5, 0.25 * 0.125 * 2 * F_CF_BRG, 'lbf');
 // ---- Oarlocks (v1.0.1.3): 7 ft oars, 24 in inboard, blade center about 49 in outboard of the pin; pin 6 in above the rail top ----
 // A hard pull of 100 lbf on the handle puts 100 x (24 + 49) / 49 = 149 lbf on the pin, fore and aft.
 const OAR_PIN = 100 * (24 + 49) / 49, OAR_ARM = 6, OAR_BOLTS = 2.25;
 row('Oarlock', 'Riser 1-1/2 x 3 6061, bending at the base (pocketed to 1/8 in walls)', 'Hard pull, 100 lbf at the handle', OAR_PIN * OAR_ARM / ((1.5 * 27 - 1.25 * 2.75 ** 3) / 18), FY, 'psi');
 row('Oarlock', 'Riser, two 5/16-18 through the rail and doubler, 2-1/4 in apart', 'Hard pull, tension in one bolt', OAR_PIN * OAR_ARM / OAR_BOLTS, 2000, 'lbf', '316 stainless 5/16-18 about 2,000 lbf working');
 row('Oarlock', 'Rail bearing under the riser, 1/8 in doubler 1-1/2 x 4', 'Hard pull, prying on the rail lip', OAR_PIN * OAR_ARM / OAR_BOLTS, 0.3125 * 0.08 * 1.5 * F5052 * 2, 'lbf', 'Two bolt holes in the 0.080 rail, doubler under it');
-row('Seat', 'Dry box hanging from the struts, rivets', `${G_SLAM} g hard landing`, G_SLAM * (4.5 + 3.9 + 2) / 8, 150, 'lbf each', 'Eight 3/16 aluminum rivets; battery, box and fuse block');
+row('Seat', 'Dry box hanging from the struts, #10 stainless bolts', `${G_SLAM} g hard landing`, G_SLAM * (4.5 + 3.9 + 2) / 8, 0.19 * 0.063 * 1.5 * F5052, 'lbf each', 'Eight #10 bolts, bearing in the 0.063 box flange; no aluminum rivets into the carbon');
 
 // ---- Hull, assumed bottom 0.100 and sides 0.080 in 5052; confirm by measuring ----
 const sideI = 2 * 0.08 * 19 ** 3 / 12, Ab = 48 * 0.1, As = 2 * 19 * 0.08, Ag = 0.6;
